@@ -45,10 +45,10 @@ const FormikLogin = withRouter(withFormik({
         password: yup.string().required('Password is required'),
     }),
     handleSubmit(user, { props }){
-        axios.post('https://lifegpa-api.herokuapp.com/auth/login', user)
+        axios.post('localhost:5000/api/auth/login', user)
         .then(res => {
             localStorage.setItem('token', res.data.token);
-            const user_id = res.data.id;
+            const user_id = res.data.user_id;
             props.history.push(`/dashboard/${user_id}`);
         })
         .catch(err => console.log(err))
