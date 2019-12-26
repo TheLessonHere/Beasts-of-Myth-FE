@@ -41,8 +41,8 @@ const FormikLogin = withRouter(withFormik({
         username: yup.string()
         .min(2, "Username must be at least 2 characters")
         .max(20, "Username can not be longer than 20 characters")
-        .required('Username is required'),
-        password: yup.string().required('Password is required'),
+        .required("Username is required"),
+        password: yup.string().required("Password is required"),
     }),
     handleSubmit(user, { props }){
         axios.post('localhost:5000/api/auth/login', user)
