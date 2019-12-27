@@ -72,7 +72,9 @@ const FormikRegister = withRouter(withFormik({
         .oneOf([true], "Users must accept the Terms of Service"),
   }),
   handleSubmit(values, { props }) {
-    axios.post("localhost:5000/api/auth/register", values)
+    const credentials = {"username": values.username,
+                         "password": values.password}
+    axios.post("http://localhost:5000/api/auth/register", credentials)
       .then(res => {
         console.log(res.data);
         props.history.push("/");

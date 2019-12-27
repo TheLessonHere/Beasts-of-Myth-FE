@@ -45,7 +45,7 @@ const FormikLogin = withRouter(withFormik({
         password: yup.string().required("Password is required"),
     }),
     handleSubmit(user, { props }){
-        axios.post('localhost:5000/api/auth/login', user)
+        axios.post('http://localhost:5000/api/auth/login', user)
         .then(res => {
             localStorage.setItem('token', res.data.token);
             const user_id = res.data.user_id;
