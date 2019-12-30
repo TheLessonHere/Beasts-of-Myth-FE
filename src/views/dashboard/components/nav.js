@@ -8,6 +8,7 @@ import {
   CircularProgress
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import Account from "../../account";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -86,9 +87,7 @@ export default function Nav(props) {
                 </Typography>
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <Typography align="center">
-                        View your account stats here!
-                </Typography>
+                <Account accountData={props.accountData} />
             </TabPanel>
         </div>
 )}
