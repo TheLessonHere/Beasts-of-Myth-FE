@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     tabs: {
       flexGrow: 1,
       backgroundColor: theme.palette.background.paper,
-      marginTop: 50
+      marginTop: 10
     },
 
     circleProgress: {
@@ -90,5 +90,5 @@ export default function Nav(props) {
                         View your account stats here!
                 </Typography>
             </TabPanel>
-          </div>
+        </div>
 )}

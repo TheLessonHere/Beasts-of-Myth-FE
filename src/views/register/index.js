@@ -22,12 +22,12 @@ const Register = ({ errors, touched, values }) => {
           </div>
           <div className="signup-form-password">
             <div className="signup-form-field">
-            {touched.password && errors.password && <p>{errors.password}</p>}
+              {touched.password && errors.password && <p>{errors.password}</p>}
               Password:
               <Field type="password" name="password" placeholder="Password" />
             </div>
             <div className="signup-form-field">
-            {touched.confirmPassword && errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+              {touched.confirmPassword && errors.confirmPassword && <p>{errors.confirmPassword}</p>}
               Confirm Password:
               <Field type="password" name="confirmPassword" placeholder="Password" />
             </div>
