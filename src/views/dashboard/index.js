@@ -13,7 +13,8 @@ function Dashboard(props) {
       setAccount({ user_id: res.data.user_id,
                    username: res.data.username,
                    profile_img: res.data.profile_img,
-                   record: res.data.record,
+                   wins: res.data.wins,
+                   losses: res.data.losses,
                    connections: res.data.connections});
     })
     .catch(err => {

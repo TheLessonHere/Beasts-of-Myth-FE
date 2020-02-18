@@ -14,7 +14,7 @@ function App() {
     <Router>
       {/* Public Routes */}
       <Route exact path ="/" component={FormikLogin} />
-      <Route exact path ="/register" component= {FormikRegister} />
+      <Route exact path ="/register" component={FormikRegister} />
       {/* Private Routes */}
       <PrivateRoute exact path="/dashboard/:user_id" component={Dashboard} />
     </Router>

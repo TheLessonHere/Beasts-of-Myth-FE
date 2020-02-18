@@ -3,47 +3,97 @@ import axios from "axios";
 import { Form, Field, withFormik} from "formik";
 import { Link, withRouter } from "react-router-dom";
 import * as yup from "yup";
+import styled from 'styled-components';
 
+const LPContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+    background: grey;
+    border-radius: 5px;
+`;
+
+const Header = styled.h2`
+    justify-self: center;
+    text-align: center;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 2rem;
+`;
+
+const FormField = styled.div`
+    justify-self: center;
+    padding: 15px;
+`;
+
+const SubmitButton = styled.button`
+    display: flex;
+    box-shadow: inset 0px 34px 0px -15px red;
+    background-color: darkred;
+    border: 1px solid #241d13;
+    border-radius: 5px;
+    margin: auto;
+    margin-top: 20px;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 9px 23px;
+    text-decoration: none;
+    text-shadow: 0px -1px 0px #7a2a1d;
+    &&:hover {
+        box-shadow: inset 0px 34px 0px -15px #FF3C3C;
+        background-color: #b34332;
+    }
+    &&:active {
+        position: relative;
+	    top: 1px;
+    }
+`;
 
 const Register = ({ errors, touched, values }) => {
   return (
 
-    <div className= "sign-up-page-container">
+    <LPContainer>
       <div className="sign-up-page-body">
         <div className="form-intro">
-          <h1>Become a Beastmaster!</h1>
+          <Header>Become a Beastmaster!</Header>
         </div>
       <div className="signup-form">
         <Form>
-          <div className="signup-form-field">
+          <FormField>
             {touched.username && errors.username && <p>{errors.username}</p>}
             Username:
-            <Field type="text" name="username" placeholder="Username" />
-          </div>
+            <Field className="field" type="text" name="username" placeholder="Username" />
+          </FormField>
           <div className="signup-form-password">
-            <div className="signup-form-field">
+            <FormField>
               {touched.password && errors.password && <p>{errors.password}</p>}
               Password:
-              <Field type="password" name="password" placeholder="Password" />
-            </div>
-            <div className="signup-form-field">
+              <Field className="field" type="password" name="password" placeholder="Password" />
+            </FormField>
+            <FormField>
               {touched.confirmPassword && errors.confirmPassword && <p>{errors.confirmPassword}</p>}
               Confirm Password:
-              <Field type="password" name="confirmPassword" placeholder="Password" />
-            </div>
+              <Field className="field" type="password" name="confirmPassword" placeholder="Password" />
+            </FormField>
           </div>
           <label className="checkbox-container">
             <Field type="checkbox" name="tos" checked={values.tos} />
-            I accept the Beasts of Myth <a href="https://www.w3schools.com">terms of service</a> and <a href="https://www.w3schools.com">privacy policy.</a>
+            {" "}I accept the Beasts of Myth <a href="https://www.w3schools.com">terms of service</a> and <a href="https://www.w3schools.com">privacy policy.</a>
           </label>
-          <button className="sign-up-button" type="submit">Sign Up</button>
-          <Link to="/">
+          <SubmitButton type="submit">Sign Up</SubmitButton>
+          <Link className="link-text" to="/">
             <p>Have an account already? Log in here!</p>
           </Link>
         </Form>
         </div>
       </div>
-    </div>
+    </LPContainer>
   );
 };
 
@@ -76,7 +126,7 @@ const FormikRegister = withRouter(withFormik({
                          "password": values.password}
     axios.post("http://localhost:5000/api/auth/register", credentials)
       .then(res => {
-        console.log(res.data);
+        console.log("User successfully added.");
         props.history.push("/");
       })
       .catch(err => console.log(err.response));

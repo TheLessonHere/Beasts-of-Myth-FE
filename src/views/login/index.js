@@ -3,30 +3,80 @@ import axios from 'axios';
 import { Form, Field, withFormik } from 'formik';
 import { Link, withRouter } from 'react-router-dom';
 import * as yup from 'yup';
+import styled from 'styled-components';
+
+const LPContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 30px;
+    background: grey;
+    border-radius: 5px;
+`;
+
+const Header = styled.h2`
+    justify-self: center;
+    text-align: center;
+    font-family: "Noto Sans JP", sans-serif;
+    font-size: 2rem;
+`;
+
+const FormField = styled.div`
+    justify-self: center;
+    padding: 15px;
+`;
+
+const SubmitButton = styled.button`
+    display: flex;
+    box-shadow: inset 0px 34px 0px -15px red;
+    background-color: darkred;
+    border: 1px solid #241d13;
+    border-radius: 5px;
+    margin: auto;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 9px 23px;
+    text-decoration: none;
+    text-shadow: 0px -1px 0px #7a2a1d;
+    &&:hover {
+        box-shadow: inset 0px 34px 0px -15px #FF3C3C;
+        background-color: #b34332;
+    }
+    &&:active {
+        position: relative;
+	    top: 1px;
+    }
+`;
 
 function Login({ errors, touched }) {
     return(
-        <div className='login-page-container'>
+        <LPContainer>
             <div className='login-page'>
-                <h2 className='login-header'>Welcome Back!</h2>
+                <Header>Welcome back!</Header>
                 <Form className='login-form-field' >
-                    <div className='form-field'>
+                    <FormField>
                         {touched.username && errors.username && <p>{errors.username}</p>}
                         Username:
-                        <Field type= 'username' name='username' placeholder='Username' />
-                    </div>
-                    <div className='form-field'>
+                        <Field className="field" type= 'username' name='username' placeholder='Username' />
+                    </FormField>
+                    <FormField>
                         {touched.password && errors.password && <p>{errors.password}</p>}
                         Password:
-                        <Field type= 'password' name='password' placeholder='Password' />
-                        </div>
-                    <button className='button' type='submit'>Submit</button>
-                    <Link to="/register">
+                        <Field className="field" type= 'password' name='password' placeholder='Password' />
+                    </FormField>
+                    <SubmitButton type='submit'>Submit</SubmitButton>
+                    <Link className="link-text" to="/register">
                         <p>Don't have an account? Create one here!</p>
                     </Link>
                 </Form>
             </div>
-        </div>
+        </LPContainer>
     )
 }
 

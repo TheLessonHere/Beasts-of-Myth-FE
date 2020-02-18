@@ -20,3 +20,31 @@
 .App-link {
   color: #09d3ac;
 }
+
+a {
+  color: black;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.link-text {
+  color: black;
+  text-decoration: none;
+  text-align: center;
+}
+
+.link-text:hover {
+  cursor: pointer;
+}
+
+.field {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
