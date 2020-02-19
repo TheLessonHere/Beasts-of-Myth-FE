@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import {
     Typography,
     Container,
@@ -8,27 +9,34 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
   container: {
-    background: "lightgrey",
+    backgroundColor: "lightgrey",
+    height: "800px",
+    padding: "20px",
     borderRadius: "5px"
   },
 }));
 
 function Account(props) {
   const classes = useStyles();
-  const { accountData } = props;
 
   return (
     <React.Fragment>
       <CssBaseline />
       <Container className={classes.container} maxWidth="lg">
         <Typography align="center">
-            {accountData.username}
+            {props.username}
             <br/>
-            Record: {accountData.wins} - {accountData.losses}
+            Record: {props.wins} - {props.losses}
         </Typography>
       </Container>
     </React.Fragment>
   );
 }
 
-export default Account;
+const mapStateToProps = state => {
+  return {
+      ...state
+  }
+}
+
+export default connect(mapStateToProps, {})(Account)
