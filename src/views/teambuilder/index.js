@@ -17,13 +17,13 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function Battle(props) {
+function TeamBuilder(props) {
   const classes = useStyles();
 
   return (
     <Container className={classes.container}>
         <Typography align="center">
-            Find a battle here!
+            Build your teams here!
         </Typography>
     </Container>
   );
@@ -35,4 +35,4 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, {})(Battle)
+export default connect(mapStateToProps, {})(TeamBuilder)

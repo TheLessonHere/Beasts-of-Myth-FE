@@ -9,6 +9,8 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Account from "../../account";
+import Battle from "../../battle";
+import TeamBuilder from "../../teambuilder";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -71,14 +73,10 @@ export default function Nav(props) {
             </Tabs>
 
             <TabPanel value={value} index={0}>
-                <Typography align="center">
-                        Find a battle here!
-                </Typography>
+                <Battle accountData={props.accountData} />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <Typography align="center">
-                        Build your teams here!
-                </Typography>
+                <TeamBuilder accountData={props.accountData} />
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <Account accountData={props.accountData} />
