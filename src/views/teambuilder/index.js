@@ -7,6 +7,7 @@ import {
     Box,
     CircularProgress
     } from "@material-ui/core";
+import Searchbar from './components/Searchbar';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -22,9 +23,7 @@ function TeamBuilder(props) {
 
   return (
     <Container className={classes.container}>
-        <Typography align="center">
-            Build your teams here!
-        </Typography>
+        <Searchbar />
     </Container>
   );
 }
