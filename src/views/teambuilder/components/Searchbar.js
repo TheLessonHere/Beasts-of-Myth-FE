@@ -6,7 +6,7 @@ import { moves } from '../libraries/MoveLibrary';
 import { items } from '../libraries/ItemLibrary';
 import { abilities } from '../libraries/AbilityLibrary';
 
-const allLibraries = beasts.concat(moves, items, abilities);
+const allLibraries = beasts.concat(moves, abilities);
 
 export default function Searchbar(props){
     const [suggestions, setSuggestions] = useState([]);
@@ -44,9 +44,6 @@ export default function Searchbar(props){
                 }
                 else if (obj.data_type == "Ability"){
                     return <li key={obj.search_id}>{obj.ability_name}</li>;
-                }
-                else if (obj.data_type == "Item"){
-                    return <li key={obj.search_id}>{obj.item_name}</li>;
                 } else {
                     return <li>No Matching Data</li>;
                 }
