@@ -13,6 +13,11 @@ const beasts = [
         data_type: "Beast",
         beast_name: "Meowth",
         search_id: "meowth"
+    },
+    {
+        data_type: "Beast",
+        beast_name: "Arbok",
+        search_id: "arbok"
     }
 ];
 
