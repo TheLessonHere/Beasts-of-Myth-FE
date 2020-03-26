@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -7,7 +7,12 @@ import {
     Box,
     CircularProgress
     } from "@material-ui/core";
-import Searchbar from './components/Searchbar';
+
+// Libraries
+import { beasts } from '../libraries/BeastLibrary';
+import { moves } from '../libraries/MoveLibrary';
+import { items } from '../libraries/ItemLibrary';
+import { abilities } from '../libraries/AbilityLibrary';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -18,12 +23,15 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
+const allLibraries = beasts.concat(moves, abilities);
+
 function TeamBuilder(props) {
   const classes = useStyles();
+  const [isBuilding, setIsBuilding] = useState(false);
 
   return (
     <Container className={classes.container}>
-        <Searchbar />
+        <Searchbar allLibraries={allLibraries} items={items}/>
     </Container>
   );
 }

@@ -1,14 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-// Libraries
-import { beasts } from '../libraries/BeastLibrary';
-import { moves } from '../libraries/MoveLibrary';
-import { items } from '../libraries/ItemLibrary';
-import { abilities } from '../libraries/AbilityLibrary';
-
-const allLibraries = beasts.concat(moves, abilities);
-
 export default function Searchbar(props){
+    const { allLibraries, items } = props;
     const [suggestions, setSuggestions] = useState([]);
     const [defaultRender, setDefaultRender] = useState(true);
 
