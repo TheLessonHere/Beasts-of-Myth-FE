@@ -8,11 +8,14 @@ import {
     CircularProgress
     } from "@material-ui/core";
 
+// Components
+import Searchbar from './components/Searchbar';
+
 // Libraries
-import { beasts } from '../libraries/BeastLibrary';
-import { moves } from '../libraries/MoveLibrary';
-import { items } from '../libraries/ItemLibrary';
-import { abilities } from '../libraries/AbilityLibrary';
+import { beasts } from './libraries/BeastLibrary';
+import { moves } from './libraries/MoveLibrary';
+import { items } from './libraries/ItemLibrary';
+import { abilities } from './libraries/AbilityLibrary';
 
 const useStyles = makeStyles(theme => ({
     container: {
