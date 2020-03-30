@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Searchbar(props){
+export default function LibrarySearchbar(props){
     const { allLibraries, items } = props;
     const [suggestions, setSuggestions] = useState([]);
     const [defaultRender, setDefaultRender] = useState(true);

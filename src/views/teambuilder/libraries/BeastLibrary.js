@@ -13,7 +13,12 @@ const beasts = [
         md: 3,
         sc: 3,
         item: null,
-        moves: [],
+        moves: {
+            move1: "",
+            move2: "",
+            move3: "",
+            move4: ""
+        },
         status: null
     },
     {
@@ -30,7 +35,12 @@ const beasts = [
         md: 3,
         sc: 3,
         item: null,
-        moves: [],
+        moves: {
+            move1: "",
+            move2: "",
+            move3: "",
+            move4: ""
+        },
         status: null
     },
     {
@@ -47,7 +57,12 @@ const beasts = [
         md: 3,
         sc: 3,
         item: null,
-        moves: [],
+        moves: {
+            move1: "",
+            move2: "",
+            move3: "",
+            move4: ""
+        },
         status: null
     },
     {
@@ -64,7 +79,12 @@ const beasts = [
         md: 3,
         sc: 3,
         item: null,
-        moves: [],
+        moves: {
+            move1: "",
+            move2: "",
+            move3: "",
+            move4: ""
+        },
         status: null
     }
 ];
