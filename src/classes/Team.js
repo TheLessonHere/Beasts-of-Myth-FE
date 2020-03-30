@@ -22,35 +22,11 @@ export default class Team {
         };
     }
 
-    addMove(move, move_slot){
+    addBeast(beast){
 
     }
 
-    addItem(item){
-
-    }
-
-    addStatus(status){
-
-    }
-
-    increaseStat(stat, multiplier){
-
-    }
-
-    decreaseStat(stat, divisor){
-
-    }
-
-    resetStats(){
-
-    }
-
-    disableMove(move){
-
-    }
-
-    resetMoves(){
+    removeBeast(){
 
     }
 }

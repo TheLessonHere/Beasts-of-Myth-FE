@@ -3,15 +3,7 @@ export default class Game {
 
     }
 
-    selectMove(move){
-
-    }
-
-    changeBeast(activeBeast, benchedBeast){
-
-    }
-
-    activateSuper(beast){
+    executeActions(p1action, p2action){
 
     }
 
