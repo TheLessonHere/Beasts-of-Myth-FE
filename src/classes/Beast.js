@@ -15,12 +15,12 @@ export default class Beast {
         this.curr_ma = ma;
         this.curr_md = md;
         this.curr_sc = sc;
-        this.item = "";
+        this.item = null;
         this.moves = {
-            move1: "",
-            move2: "",
-            move3: "",
-            move4: ""
+            move1: null,
+            move2: null,
+            move3: null,
+            move4: null
         };
         this.status = null;
         this.disabled_moves = [];
@@ -35,6 +35,10 @@ export default class Beast {
     }
 
     addStatus(status){
+
+    }
+
+    removeStatus(){
 
     }
 
