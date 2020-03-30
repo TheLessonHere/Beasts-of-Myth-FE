@@ -1,5 +1,6 @@
 export default class Beast {
-    constructor(name, domain1, domain2, ability, hp, pa, pd, ma, md, sc){
+    constructor(beastId, name, domain1, domain2, ability, hp, pa, pd, ma, md, sc){
+        this.beast_id = beastId;
         this.name = name;
         this.domain1 = domain1;
         this.domain2 = domain2;

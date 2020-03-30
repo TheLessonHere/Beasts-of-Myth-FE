@@ -12,7 +12,7 @@ const initialState = {
     profile_img: '',
     wins: '',
     losses: '',
-    connections: '',
+    connections: [],
   };
 
 export const reducer = (state = initialState, action) => {
