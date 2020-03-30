@@ -9,7 +9,7 @@ import {
     } from "@material-ui/core";
 
 // Components
-import Searchbar from './components/Searchbar';
+import LibrarySearchbar from './components/LibrarySearchbar';
 
 // Libraries
 import { beasts } from './libraries/BeastLibrary';
@@ -34,7 +34,7 @@ function TeamBuilder(props) {
 
   return (
     <Container className={classes.container}>
-        <Searchbar allLibraries={allLibraries} items={items}/>
+        <LibrarySearchbar allLibraries={allLibraries} items={items}/>
     </Container>
   );
 }

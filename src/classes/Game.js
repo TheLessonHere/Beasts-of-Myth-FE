@@ -19,7 +19,11 @@ export default class Game {
 
     }
 
-    damageCalculation(move, attacking, defending){
-        
+    damageCalculation(move, attackingBeast, defendingBeast){
+
+    }
+
+    activateDomain(domain){
+
     }
 }
