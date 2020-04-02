@@ -6,6 +6,8 @@ export default class Game {
         this.player2_team = player2.team;
         this.player1_active_beasts = this.player1_team.total_beasts;
         this.player2_active_beasts = this.player2_team.total_beasts;
+        this.player1_curr_active_beast = this.player1_team.active_slot.beast;
+        this.player2_curr_active_beast = this.player2_team.active_slot.beast;
         this.fresher_active_beast = null;
         this.turn_counter = 0;
         this.curr_domain = null;

@@ -1,17 +1,15 @@
 export default class GameLog {
-    constructor(player1, player2){
-        this.game_log = [];
+    constructor(game){
+        this.game = game;
+        this.game_log = new Map();
+        this.turn_counter = this.game.turn_counter
     }
 
     updateTurnCounter(){
 
     }
 
-    updateFreshness(){
-
-    }
-
-    updateGameLog(action){
+    updateGameLog(player1Action, player2Action){
 
     }
 }

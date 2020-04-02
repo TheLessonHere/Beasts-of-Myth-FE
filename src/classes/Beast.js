@@ -25,7 +25,7 @@ export default class Beast {
             move4: null
         };
         this.status = null;
-        this.active = false;
+        this.isActive = false;
         this.disabled_moves = [];
         this.moveList = moveList;
     }
