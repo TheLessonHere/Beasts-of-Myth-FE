@@ -4,6 +4,9 @@ export default class Player {
         this.username = username;
         this.profile_img = profileImg;
         this.team = team;
+        this.available_crit_rolls = 4;
+        this.spent_crit_rolls = 0;
+        this.activated_crit_rolls = 0;
         this.connection = "";
     }
 
@@ -16,6 +19,14 @@ export default class Player {
     }
 
     changeBeast(activeBeast, benchedBeast){
+
+    }
+
+    activateCritRoll(){
+
+    }
+
+    updateCritRolls(spentRolls){
 
     }
 
