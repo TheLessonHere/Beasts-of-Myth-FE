@@ -1,5 +1,5 @@
 export default class Beast {
-    constructor(beastId, name, domain1, domain2, ability, hp, pa, pd, ma, md, sc){
+    constructor(beastId, name, domain1, domain2, ability, hp, pa, pd, ma, md, sc, moveList){
         this.beast_id = beastId;
         this.name = name;
         this.domain1 = domain1;
@@ -16,6 +16,7 @@ export default class Beast {
         this.curr_ma = ma;
         this.curr_md = md;
         this.curr_sc = sc;
+        this.turnsIn = 0;
         this.item = null;
         this.moves = {
             move1: null,
@@ -24,7 +25,9 @@ export default class Beast {
             move4: null
         };
         this.status = null;
+        this.active = false;
         this.disabled_moves = [];
+        this.moveList = moveList;
     }
 
     addMove(move, move_slot){
@@ -60,6 +63,14 @@ export default class Beast {
     }
 
     resetMoves(){
+
+    }
+
+    makeActive(){
+
+    }
+
+    makeInactive(){
 
     }
 }

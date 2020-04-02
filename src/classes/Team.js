@@ -1,3 +1,5 @@
+import Beast from './Beast';
+
 export default class Team {
     constructor(){
         this.slot1 = {
@@ -20,6 +22,17 @@ export default class Team {
             beast: null,
             adjacentSlots: [this.slot4]
         };
+        this.super_beast = {
+            beast: null,
+            slot: null,
+            adjacentSlots: []
+        }
+        this.active_slot = {
+            beast: null,
+            adjacentSlots: [],
+            turnsActive: 0
+        }
+        this.total_beasts = 0;
     }
 
     addBeast(beast){
@@ -27,6 +40,22 @@ export default class Team {
     }
 
     removeBeast(){
+
+    }
+
+    fillInTeamFromString(team_datastring){
+
+    }
+
+    updateSuperSlot(){
+
+    }
+
+    makeActive(slot){
+
+    }
+
+    validateTeam(){
 
     }
 }
