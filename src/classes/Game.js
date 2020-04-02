@@ -3,6 +3,10 @@ export default class Game {
 
     }
 
+    updateTurnCounter(){
+
+    }
+
     executeActions(p1action, p2action){
 
     }
@@ -16,6 +20,10 @@ export default class Game {
     }
 
     activateDomain(domain){
+
+    }
+
+    updateFreshness(){
 
     }
 }

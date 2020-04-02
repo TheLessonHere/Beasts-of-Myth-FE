@@ -29,4 +29,8 @@ export default class Team {
     removeBeast(){
 
     }
+
+    validateTeam(){
+
+    }
 }
