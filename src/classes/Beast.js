@@ -25,6 +25,7 @@ export default class Beast {
             move4: null
         };
         this.status = null;
+        this.active = false;
         this.disabled_moves = [];
         this.moveList = moveList;
     }
@@ -62,6 +63,14 @@ export default class Beast {
     }
 
     resetMoves(){
+
+    }
+
+    makeActive(){
+
+    }
+
+    makeInactive(){
 
     }
 }
