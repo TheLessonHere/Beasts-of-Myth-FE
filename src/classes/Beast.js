@@ -34,7 +34,19 @@ export default class Beast {
 
     }
 
+    removeMove(move_slot){
+
+    }
+
     addItem(item){
+
+    }
+
+    removeItem(){
+
+    }
+
+    consumeItem(){
 
     }
 

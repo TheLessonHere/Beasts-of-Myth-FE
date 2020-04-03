@@ -8,6 +8,8 @@ export default class Game {
         this.player2_active_beasts = this.player2_team.total_beasts;
         this.player1_curr_active_beast = this.player1_team.active_slot.beast;
         this.player2_curr_active_beast = this.player2_team.active_slot.beast;
+        this.player1_active_moves = this.player1_curr_active_beast.moves;
+        this.player2_active_moves = this.player2_curr_active_beast.moves;
         this.fresher_active_beast = null;
         this.turn_counter = 0;
         this.curr_domain = null;
@@ -16,7 +18,7 @@ export default class Game {
     }
 
     updateTurnCounter(){
-
+        this.turn_counter = this.turn_counter + 1;
     }
 
     executeActions(p1action, p2action){

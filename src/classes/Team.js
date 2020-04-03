@@ -1,7 +1,9 @@
 import Beast from './Beast';
 
 export default class Team {
-    constructor(){
+    constructor(format, teamName){
+        this.format = format;
+        this.team_name = teamName;
         this.slot1 = {
             beast: null,
             adjacentSlots: [this.slot2]
