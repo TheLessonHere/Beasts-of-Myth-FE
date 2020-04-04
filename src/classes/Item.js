@@ -8,6 +8,6 @@ export default class Item {
     }
 
     useItem(){
-
+        this.effect();
     }
 }

@@ -26,6 +26,7 @@ export default class Beast {
         this.isActive = false;
         this.disabled_moves = [];
         this.moveList = moveList;
+        this.slot = null;
     }
 
     addMove(move, move_slot){
@@ -147,5 +148,13 @@ export default class Beast {
 
     resetTurnsIn(){
         this.turnsIn = 0;
+    }
+
+    isSuper(){
+        if(this.item == 'Super Crystal'){
+            return true;
+        } else {
+            return false;
+        }
     }
 }

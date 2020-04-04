@@ -26,7 +26,6 @@ export default class Team {
         };
         this.super_beast = {
             beast: null,
-            slot: null,
             adjacentSlots: []
         }
         this.active_slot = {
@@ -51,6 +50,27 @@ export default class Team {
 
     updateSuperSlot(){
 
+    }
+
+    getSuperBeastInfo(){
+        return this.super_beast;
+    }
+
+    getSlot(slot){
+        switch(slot){
+            case 'slot1':
+                return this.slot1;
+            case 'slot2':
+                return this.slot2;
+            case 'slot3':
+                return this.slot3;
+            case 'slot4':
+                return this.slot4;
+            case 'slot5':
+                return this.slot5;
+            default:
+                return null;
+        }
     }
 
     makeActive(slot){
