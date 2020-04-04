@@ -6,4 +6,8 @@ export default class Item {
         this.description = description;
         this.short_description = shortDescription;
     }
+
+    useItem(){
+        this.effect();
+    }
 }
