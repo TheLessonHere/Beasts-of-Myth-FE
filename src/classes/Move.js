@@ -10,5 +10,6 @@ export default class Move {
         this.status = status;
         this.description = description;
         this.short_description = shortDescription;
+        this.move_slot = null;
     }
 }
