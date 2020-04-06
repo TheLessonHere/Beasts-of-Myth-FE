@@ -1,5 +1,6 @@
 const beasts = [
     {
+        beast_id: 1,
         data_type: "Beast",
         beast_name: "Jessie",
         search_id: "jessie",
@@ -19,9 +20,10 @@ const beasts = [
             move3: "",
             move4: ""
         },
-        status: null
+        move_list: []
     },
     {
+        beast_id: 2,
         data_type: "Beast",
         beast_name: "James",
         search_id: "james",
@@ -35,15 +37,10 @@ const beasts = [
         md: 3,
         sc: 3,
         item: null,
-        moves: {
-            move1: "",
-            move2: "",
-            move3: "",
-            move4: ""
-        },
-        status: null
+        move_list: []
     },
     {
+        beast_id: 3,
         data_type: "Beast",
         beast_name: "Meowth",
         search_id: "meowth",
@@ -57,15 +54,10 @@ const beasts = [
         md: 3,
         sc: 3,
         item: null,
-        moves: {
-            move1: "",
-            move2: "",
-            move3: "",
-            move4: ""
-        },
-        status: null
+        move_list: []
     },
     {
+        beast_id: 4,
         data_type: "Beast",
         beast_name: "Arbok",
         search_id: "arbok",
@@ -79,13 +71,7 @@ const beasts = [
         md: 3,
         sc: 3,
         item: null,
-        moves: {
-            move1: "",
-            move2: "",
-            move3: "",
-            move4: ""
-        },
-        status: null
+        move_list: []
     }
 ];
 
