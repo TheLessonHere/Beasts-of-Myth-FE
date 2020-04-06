@@ -12,10 +12,10 @@ import {
 import LibrarySearchbar from './components/LibrarySearchbar';
 
 // Libraries
-import { beasts } from './libraries/BeastLibrary';
-import { moves } from './libraries/MoveLibrary';
-import { items } from './libraries/ItemLibrary';
-import { abilities } from './libraries/AbilityLibrary';
+import { beasts } from '../../data/libraries/BeastLibrary';
+import { moves } from '../../data/libraries/MoveLibrary';
+import { items } from '../../data/libraries/ItemLibrary';
+import { abilities } from '../../data/libraries/AbilityLibrary';
 
 const useStyles = makeStyles(theme => ({
     container: {
