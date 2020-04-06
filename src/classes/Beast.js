@@ -23,6 +23,7 @@ export default class Beast {
                         .set('move3', null)
                         .set('move4', null);
         this.status = null;
+        this.turnsInflamed = 0;
         this.isActive = false;
         this.disabled_moves = [];
         this.moveList = moveList;
