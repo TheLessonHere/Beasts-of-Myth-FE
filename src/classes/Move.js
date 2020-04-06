@@ -1,8 +1,9 @@
 export default class Move {
-    constructor(moveId, name, domain, basePower, me, effect, status, description, shortDescription){
+    constructor(moveId, name, domain, type, basePower, me, effect, status, description, shortDescription){
         this.move_id = moveId;
         this.name = name;
         this.domain = domain;
+        this.type = type;
         this.base_power = basePower;
         this.init_me = me;
         this.curr_me = me;
