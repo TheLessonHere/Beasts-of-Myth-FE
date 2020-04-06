@@ -1,18 +1,41 @@
 export default function serializeTeamDatastring(team){
-    const teamObject = {
-        format: team.format,
-        team_name: team.team_name,
-        slot1: team.slot1,
-        slot2: team.slot2,
-        slot3: team.slot3,
-        slot4: team.slot4,
-        slot5: team.slot5,
-        super_beast: team.super_beast,
-        active_slot: team.active_slot,
-        total_beasts: team.total_beasts
-    }
-
-    const teamDatastring = JSON.serialize(teamObject);
+    const { format, team_name, slot1, slot2, slot3, slot4, slot5 } = team;
+    const teamDatastring = `${format}]f]
+    ${team_name}/tn/
+    ${slot1.beast.beast_name}>bn>
+    ${slot1.beast.item})i)
+    ${slot1.beast.moves.move1},
+    ${slot1.beast.moves.move2},
+    ${slot1.beast.moves.move3},
+    ${slot1.beast.moves.move4}
+    |s|
+    ${slot2.beast.beast_name}>bn>
+    ${slot2.beast.item})i)
+    ${slot2.beast.moves.move1},
+    ${slot2.beast.moves.move2},
+    ${slot2.beast.moves.move3},
+    ${slot2.beast.moves.move4}
+    |s|
+    ${slot3.beast.beast_name}>bn>
+    ${slot3.beast.item})i)
+    ${slot3.beast.moves.move1},
+    ${slot3.beast.moves.move2},
+    ${slot3.beast.moves.move3},
+    ${slot3.beast.moves.move4}
+    |s|
+    ${slot4.beast.beast_name}>bn>
+    ${slot4.beast.item})i)
+    ${slot4.beast.moves.move1},
+    ${slot4.beast.moves.move2},
+    ${slot4.beast.moves.move3},
+    ${slot4.beast.moves.move4}
+    |s|
+    ${slot5.beast.beast_name}>bn>
+    ${slot5.beast.item})i)
+    ${slot5.beast.moves.move1},
+    ${slot5.beast.moves.move2},
+    ${slot5.beast.moves.move3},
+    ${slot5.beast.moves.move4}`
 
     return teamDatastring;
 }
