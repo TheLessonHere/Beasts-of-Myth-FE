@@ -1,12 +1,20 @@
+// Libraries
 import { beasts } from '../data/libraries/BeastLibrary';
+import { moves } from '../../data/libraries/MoveLibrary';
+import { items } from '../../data/libraries/ItemLibrary';
+import { abilities } from '../../data/libraries/AbilityLibrary';
+// Classes
 import Beast from './Beast';
+import Item from './Item';
+import Move from './Move';
+// Functions
 import parseTeamDatastring from '../utils/parseTeamDatastring';
 import serializeTeamDatastring from '../utils/serializeTeamDatastring';
 
 export default class Team {
-    constructor(format, teamName){
+    constructor(format, name){
         this.format = format;
-        this.team_name = teamName;
+        this.team_name = name;
         this.slot1 = {
             beast: null,
             adjacentSlots: [this.slot2]
@@ -106,7 +114,64 @@ export default class Team {
     }
 
     fillInTeamFromString(team_datastring){
+        const teamData = parseTeamDatastring(team_datastring);
+        this.format = teamData.format;
+        this.team_name = teamData.team_name;
 
+        teamData.beasts.forEach(beast => {
+            const beastStringData = beast;
+            const beastLibraryData = beasts.find(beast => {
+                beast.beast_name == beastStringData.beast_name;
+            });
+            const newBeast = new Beast(beastLibraryData.beast_id,
+                beastLibraryData.beast_name,
+                beastLibraryData.domain1,
+                beastLibraryData.domain2,
+                beastLibraryData.ability,
+                beastLibraryData.hp,
+                beastLibraryData.pa,
+                beastLibraryData.pd,
+                beastLibraryData.ma,
+                beastLibraryData.md,
+                beastLibraryData.sc,
+                beastLibraryData.move_list);
+            this.addBeast(newBeast, beastStringData.slot);
+            const currSlot = this.getSlot(beastStringData.slot);
+            const itemData = items.find(item => {
+                item.item_name == beastStringData.item;
+            });
+            const equippedItem = new Item(itemData.item_id,
+                                    itemData.item_name,
+                                    itemData.effect,
+                                    itemData.description,
+                                    itemData.short_description);
+            currSlot.beast.addItem(equippedItem);
+            const beastMoves = beastStringData.moves.map(move => {
+                const moveData = moves.find(moveData => {
+                    moveData.move_name = move;
+                });
+                return moveData;
+            });
+            let slotCounter = 1;
+            beastMoves.forEach(move => {
+                const newMove = new Move(move.moveId,
+                                        move.moveName,
+                                        move.domain,
+                                        move.type,
+                                        move.basePower,
+                                        move.me,
+                                        move.effect,
+                                        move.status,
+                                        move.description,
+                                        move.shortDescription);
+                currSlot.beast.moves.set(`move${slotCounter}`, newMove);
+                if(slotCounter == 4){
+                    slotCounter = 1;
+                } else {
+                    slotCounter += 1;
+                }
+            });
+        });
     }
 
     convertToString(){
@@ -265,6 +330,10 @@ export default class Team {
             default:
                 console.log("Invalid slot number.")
         }
+    }
+
+    changeTeamName(teamName){
+        this.team_name = teamName;
     }
 
     validateTeam(){
