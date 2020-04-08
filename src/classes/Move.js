@@ -1,5 +1,5 @@
 export default class Move {
-    constructor(moveId, name, domain, type, basePower, me, effect, status, description, shortDescription){
+    constructor(moveId, name, domain, type, basePower, me, priority, effect, description, shortDescription){
         this.move_id = moveId;
         this.move_name = name;
         this.domain = domain;
@@ -7,8 +7,8 @@ export default class Move {
         this.base_power = basePower;
         this.init_me = me;
         this.curr_me = me;
+        this.priority = priority;
         this.effect = effect;
-        this.status = status;
         this.description = description;
         this.short_description = shortDescription;
         this.move_slot = null;

@@ -1,5 +1,4 @@
-export default function serializeTeamDatastring(team){
-    const { format, team_name, slot1, slot2, slot3, slot4, slot5 } = team;
+export default function serializeTeamDatastring(format, team_name, slot1, slot2, slot3, slot4, slot5){
     const teamDatastring = `${format}]f]
     ${team_name}/tn/
     ${slot1.beast.beast_name}>bn>

@@ -2,7 +2,6 @@
 import { beasts } from '../data/libraries/BeastLibrary';
 import { moves } from '../../data/libraries/MoveLibrary';
 import { items } from '../../data/libraries/ItemLibrary';
-import { abilities } from '../../data/libraries/AbilityLibrary';
 // Classes
 import Beast from './Beast';
 import Item from './Item';
@@ -35,16 +34,14 @@ export default class Team {
             beast: null,
             adjacentSlots: [this.slot4]
         };
-        this.super_beast = {
-            beast: null,
-            adjacentSlots: []
-        }
+        this.super_beast = null;
         this.active_slot = {
             beast: null,
             adjacentSlots: [],
             turnsActive: 0
         }
         this.total_beasts = 0;
+        this.isValid = false;
     }
 
     addBeast(beast, slot){
@@ -113,6 +110,63 @@ export default class Team {
         }
     }
 
+    changeToSuper(superBeast, slot){
+        switch(slot){
+            case 'slot1':
+                const nonSuper = this.slot1.beast;
+                superBeast.addStatus(nonSuper.status);
+                const prevStatStages = nonSuper.getStatStages();
+                superBeast.matchStatStages(prevStatStages);
+                superBeast.updateAllStats();
+                const nonSuperHPPercentage = nonSuper.getHPPercentage();
+                superBeast.matchHPPercentage(nonSuperHPPercentage);
+                this.slot1.beast = superBeast;
+                break;
+            case 'slot2':
+                const nonSuper = this.slot1.beast;
+                superBeast.addStatus(nonSuper.status);
+                const prevStatStages = nonSuper.getStatStages();
+                superBeast.matchStatStages(prevStatStages);
+                superBeast.updateAllStats();
+                const nonSuperHPPercentage = nonSuper.getHPPercentage();
+                superBeast.matchHPPercentage(nonSuperHPPercentage);
+                this.slot2.beast = superBeast;
+                break;
+            case 'slot3':
+                const nonSuper = this.slot1.beast;
+                superBeast.addStatus(nonSuper.status);
+                const prevStatStages = nonSuper.getStatStages();
+                superBeast.matchStatStages(prevStatStages);
+                superBeast.updateAllStats();
+                const nonSuperHPPercentage = nonSuper.getHPPercentage();
+                superBeast.matchHPPercentage(nonSuperHPPercentage);
+                this.slot3.beast = superBeast;
+                break;
+            case 'slot4':
+                const nonSuper = this.slot1.beast;
+                superBeast.addStatus(nonSuper.status);
+                const prevStatStages = nonSuper.getStatStages();
+                superBeast.matchStatStages(prevStatStages);
+                superBeast.updateAllStats();
+                const nonSuperHPPercentage = nonSuper.getHPPercentage();
+                superBeast.matchHPPercentage(nonSuperHPPercentage);
+                this.slot4.beast = superBeast;
+                break;
+            case 'slot5':
+                const nonSuper = this.slot1.beast;
+                superBeast.addStatus(nonSuper.status);
+                const prevStatStages = nonSuper.getStatStages();
+                superBeast.matchStatStages(prevStatStages);
+                superBeast.updateAllStats();
+                const nonSuperHPPercentage = nonSuper.getHPPercentage();
+                superBeast.matchHPPercentage(nonSuperHPPercentage);
+                this.slot5.beast = superBeast;
+                break;
+            default:
+                console.log("Error activating Super.");
+        }
+    }
+
     fillInTeamFromString(team_datastring){
         const teamData = parseTeamDatastring(team_datastring);
         this.format = teamData.format;
@@ -175,7 +229,14 @@ export default class Team {
     }
 
     convertToString(){
-
+        const teamDatastring = serializeTeamDatastring(this.format,
+                                                    this.team_name,
+                                                    this.slot1,
+                                                    this.slot2,
+                                                    this.slot3,
+                                                    this.slot4,
+                                                    this.slot5);
+        return teamDatastring;
     }
 
     updateSuperSlot(){
@@ -195,8 +256,8 @@ export default class Team {
                                         superBeastData.md,
                                         superBeastData.sc,
                                         superBeastData.move_list);
-            this.super_beast.beast = superBeast;
-            this.super_beast.adjacentSlots = this.slot1.adjacentSlots;
+            superBeast.updateSlot('slot1');
+            this.super_beast = superBeast;
         }
         else if(this.slot2.beast.item == 'Super Crystal'){
             const superBeastData = beasts.find(beast => {
@@ -214,8 +275,8 @@ export default class Team {
                                         superBeastData.md,
                                         superBeastData.sc,
                                         superBeastData.move_list);
-            this.super_beast.beast = superBeast;
-            this.super_beast.adjacentSlots = this.slot2.adjacentSlots;
+            superBeast.updateSlot('slot2');
+            this.super_beast = superBeast;
         }
         else if(this.slot3.beast.item == 'Super Crystal'){
             const superBeastData = beasts.find(beast => {
@@ -233,8 +294,8 @@ export default class Team {
                                         superBeastData.md,
                                         superBeastData.sc,
                                         superBeastData.move_list);
-            this.super_beast.beast = superBeast;
-            this.super_beast.adjacentSlots = this.slot3.adjacentSlots;
+            superBeast.updateSlot('slot3');
+            this.super_beast = superBeast;
         }
         else if(this.slot4.beast.item == 'Super Crystal'){
             const superBeastData = beasts.find(beast => {
@@ -252,8 +313,8 @@ export default class Team {
                                         superBeastData.md,
                                         superBeastData.sc,
                                         superBeastData.move_list);
-            this.super_beast.beast = superBeast;
-            this.super_beast.adjacentSlots = this.slot4.adjacentSlots;
+            superBeast.updateSlot('slot4');
+            this.super_beast = superBeast;
         }
         else if(this.slot5.beast.item == 'Super Crystal'){
             const superBeastData = beasts.find(beast => {
@@ -271,11 +332,10 @@ export default class Team {
                                         superBeastData.md,
                                         superBeastData.sc,
                                         superBeastData.move_list);
-            this.super_beast.beast = superBeast;
-            this.super_beast.adjacentSlots = this.slot5.adjacentSlots;
+            superBeast.updateSlot('slot5');
+            this.super_beast = superBeast;
         } else {
-            this.super_beast.beast = null;
-            this.super_beast.adjacentSlots = [];
+            this.super_beast = null;
         }
     }
 
@@ -332,11 +392,27 @@ export default class Team {
         }
     }
 
-    changeTeamName(teamName){
+    incrementTurnsActive(){
+        this.active_slot.turnsActive += 1;
+    }
+
+    changeTeamName(newTeamName){
         this.team_name = teamName;
     }
 
-    validateTeam(){
+    changeFormat(newFormat){
+        this.format = newFormat;
+    }
 
+    validateTeam(){
+        if(this.slot1.beast == null &&
+            this.slot2.beast == null &&
+            this.slot3.beast == null &&
+            this.slot4.beast == null &&
+            this.slot5.beast == null){
+                this.isValid = false;
+            } else {
+                this.isValid = true;
+            }
     }
 }
