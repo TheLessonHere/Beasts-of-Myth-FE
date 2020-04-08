@@ -1,3 +1,5 @@
+import { domainEffectivenessMap } from '../utils/domainEffectivenessMap';
+
 export default class Game {
     constructor(player1, player2){
         this.player1 = player1;
@@ -11,7 +13,7 @@ export default class Game {
         this.fresher_active_beast = null;
         this.faster_active_beast = null;
         this.turn_counter = 0;
-        this.curr_domain = null;
+        this.curr_domain = 'Neutral';
         this.player1_hazards = [];
         this.player2_hazards = [];
         this.winner = null;
@@ -232,7 +234,75 @@ export default class Game {
     }
 
     damageCalculation(move, attackingBeast, defendingBeast){
+        let domainModifier = 1;
+        const moveType = move.type;
+        const basePower = move.basePower;
+        const moveDomain = move.domain;
+        const attackingDomain1 = attackingBeast.domain1;
+        const attackingDomain2 = attackingBeast.domain2;
+        const defendingDomain = `${defendingBeast.domain1}-${defendingBeast.domain2}`;
+        const effectiveness = domainEffectivenessMap[moveType][defendingDomain];
+        let sameTypeBonus = 0;
+        if(attackingDomain1 == moveDomain || attackingDomain2 == moveDomain){
+            sameTypeBonus = Math.round(basePower / 2);
+        }
+        switch(this.curr_domain){
+            case 'Lightfield':
+                if(moveDomain == 'light'){
+                    domainModifier = 1.5;
+                }
+                break;
+            case 'Darkfield':
+                if(moveDomain == 'dark'){
+                    domainModifier = 1.5;
+                }
+                break;
+            case 'Mindfield':
+                if(moveDomain == 'mind'){
+                    domainModifier = 1.5;
+                }
+                break;
+            case 'Chaosfield':
+                if(moveDomain == 'chaos'){
+                    domainModifier = 1.5;
+                }
+                break;
+            case 'Flamefield':
+                if(moveDomain == 'flame'){
+                    domainModifier = 1.5;
+                }
+                break;
+            case 'Terrafield':
+                if(moveDomain == 'terra'){
+                    domainModifier = 1.5;
+                }
+                break;
+            case 'Seafield':
+                if(moveDomain == 'sea'){
+                    domainModifier = 1.5;
+                }
+                break;
+            case 'Skyfield':
+                if(moveDomain == 'sky'){
+                    domainModifier = 1.5;
+                }
+                break;
+            case 'Neutral':
+                break;
+            default:
+                console.log('Error calculating domain modifier.');
+        }
 
+        move.decrementME();
+
+        let damage = 0;
+        if(moveType == 'physical'){
+            damage = ((((basePower + sameTypeBonus) * domainModifier) + attackingBeast.curr_pa) - defendingBeast.curr_pd) * effectiveness;
+        } else {
+            damage = ((((basePower + sameTypeBonus) * domainModifier) + attackingBeast.curr_ma) - defendingBeast.curr_md) * effectiveness;
+        }
+
+        defendingBeast.updateHP(damage);
     }
 
     activateDomain(domain){
@@ -240,7 +310,7 @@ export default class Game {
     }
 
     clearDomain(){
-        this.curr_domain = null;
+        this.curr_domain = 'neutral';
     }
 
     putUpHazards(hazard, defendingPlayer){

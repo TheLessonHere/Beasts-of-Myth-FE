@@ -365,26 +365,41 @@ export default class Team {
             case 'slot1':
                 this.active_slot.beast = this.slot1.beast;
                 this.active_slot.adjacentSlots = this.slot1.adjacentSlots;
+                if(this.active_slot.beast.item.type == 'static'){
+                    this.active_slot.beast.item.effect();
+                }
                 this.active_slot.turnsActive = 0;
                 break;
             case 'slot2':
                 this.active_slot.beast = this.slot2.beast;
                 this.active_slot.adjacentSlots = this.slot2.adjacentSlots;
+                if(this.active_slot.beast.item.type == 'static'){
+                    this.active_slot.beast.item.effect();
+                }
                 this.active_slot.turnsActive = 0;
                 break;
             case 'slot3':
                 this.active_slot.beast = this.slot3.beast;
                 this.active_slot.adjacentSlots = this.slot3.adjacentSlots;
+                if(this.active_slot.beast.item.type == 'static'){
+                    this.active_slot.beast.item.effect();
+                }
                 this.active_slot.turnsActive = 0;
                 break;
             case 'slot4':
                 this.active_slot.beast = this.slot4.beast;
                 this.active_slot.adjacentSlots = this.slot4.adjacentSlots;
+                if(this.active_slot.beast.item.type == 'static'){
+                    this.active_slot.beast.item.effect();
+                }
                 this.active_slot.turnsActive = 0;
                 break;
             case 'slot5':
                 this.active_slot.beast = this.slot5.beast;
                 this.active_slot.adjacentSlots = this.slot5.adjacentSlots;
+                if(this.active_slot.beast.item.type == 'static'){
+                    this.active_slot.beast.item.effect();
+                }
                 this.active_slot.turnsActive = 0;
                 break;
             default:
