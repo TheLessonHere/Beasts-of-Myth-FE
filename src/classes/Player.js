@@ -8,7 +8,7 @@ export default class Player {
         this.spent_crit_rolls = 0;
         this.activated_crit_rolls = 0;
         this.connection = null;
-        this.selected_move = null;
+        this.selected_action = null;
         this.hasWon = false;
         this.hasLost = false;
     }
@@ -17,12 +17,32 @@ export default class Player {
         this.connection = gameId;
     }
 
-    selectMove(move){
-        this.selected_move = move;
+    selectAction(action){
+        this.selected_action = action;
     }
 
-    clearSelectedMove(){
-        this.selected_move = null;
+    clearAction(){
+        this.selected_action = null;
+    }
+
+    selectMove(move, superActivated){
+        const selectMoveAction = {
+            actionType: 'select-move',
+            move: move,
+            superActivated: superActivated
+        }
+
+        return selectMoveAction;
+    }
+
+    selectBeastChange(benchedBeast){
+        const changeBeastAction = {
+            actionType: 'change-beast',
+            activeBeast: this.team.active_slot.beast,
+            benchedBeast: benchedBeast
+        }
+
+        return changeBeastAction;
     }
 
     changeBeast(activeBeast, benchedBeast){
@@ -41,8 +61,8 @@ export default class Player {
     }
 
     activateSuper(activeBeast){
-        const superBeastInfo = this.team.getSuperBeastInfo();
-        const superBeast = superBeastInfo.beast;
+        const superBeast = this.team.getSuperBeastInfo();
+        this.team.changeToSuper(superBeast, superBeast.slot);
         this.changeBeast(activeBeast, superBeast);
     }
 

@@ -5,7 +5,9 @@ export default class Beast {
         this.domain1 = domain1;
         this.domain2 = domain2;
         this.ability = ability;
-        this.hp = hp;
+        this.init_hp = hp;
+        this.curr_hp = hp;
+        this.hp_percentage = Math.round((this.curr_hp / this.init_hp) * 100);
         this.init_pa = pa;
         this.init_pd = pd;
         this.init_ma = ma;
@@ -16,6 +18,13 @@ export default class Beast {
         this.curr_ma = ma;
         this.curr_md = md;
         this.curr_sc = sc;
+        this.stat_stages = {
+            pa: 1,
+            pd: 1,
+            ma: 1,
+            md: 1,
+            sc: 1
+        };
         this.turnsIn = 0;
         this.item = null;
         this.moves = new Map().set('move1', null)
@@ -56,52 +65,100 @@ export default class Beast {
     }
 
     removeStatus(){
+        const prevStatus = this.status;
         this.status = null;
+        if(prevStatus != 'Blinded'){
+            this.curr_pa *= 2;
+            this.stat_stages.pa *= 2;
+        }
+        else if(prevStatus != 'Vinebound'){
+            this.curr_pd *= 2;
+            this.stat_stages.pd *= 2;
+        }
+        else if(prevStatus != 'Tormented'){
+            this.curr_ma *= 2;
+            this.stat_stages.ma *= 2;
+        }
+        else if(prevStatus != 'Hypnotized'){
+            this.curr_md *= 2;
+            this.stat_stages.md *= 2;
+        }
+        else if(prevStatus != 'Inundated'){
+            this.curr_sc *= 2;
+            this.stat_stages.sc *= 2;
+        };
     }
 
-    increaseStat(stat, multiplier){
+    updateHP(damage){
+        this.curr_hp -= damage;
+        this.hp_percentage = Math.round((this.curr_hp / this.init_hp) * 100);
+    }
+
+    matchHPPercentage(hp_percentage){
+        this.curr_hp = Math.round(this.curr_hp * hp_percentage);
+        this.hp_percentage = Math.round((this.curr_hp / this.init_hp) * 100);
+    }
+
+    getHPPercentage(){
+        return this.hp_percentage;
+    }
+
+    updateAllStats(){
+        const roundedPA = Math.round(this.curr_pa * this.stat_stages.pa);
+        this.curr_pa = roundedPA;
+        const roundedPD = Math.round(this.curr_pd * this.stat_stages.pd);
+        this.curr_pd = roundedPD;
+        const roundedMA = Math.round(this.curr_ma * this.stat_stages.ma);
+        this.curr_ma = roundedMA;
+        const roundedMD = Math.round(this.curr_md * this.stat_stages.md);
+        this.curr_md = roundedMD;
+        const roundedSC = Math.round(this.curr_sc * this.stat_stages.sc);
+        this.curr_sc = roundedSC;
+    }
+
+    updateStat(stat){
         switch(stat){
             case 'pa':
-                this.curr_pa = this.curr_pa * multiplier;
+                const roundedStat = Math.round(this.curr_pa * this.stat_stages.pa);
+                this.curr_pa = roundedStat;
                 break;
             case 'pd':
-                this.curr_pd = this.curr_pd * multiplier;
+                const roundedStat = Math.round(this.curr_pd * this.stat_stages.pd);
+                this.curr_pd = roundedStat;
                 break;
             case 'ma':
-                this.curr_ma = this.curr_ma * multiplier;
+                const roundedStat = Math.round(this.curr_ma * this.stat_stages.ma);
+                this.curr_ma = roundedStat;
                 break;
             case 'md':
-                this.curr_md = this.curr_md * multiplier;
+                const roundedStat = Math.round(this.curr_md * this.stat_stages.md);
+                this.curr_md = roundedStat;
                 break;
             case 'sc':
-                this.curr_sc = this.curr_sc * multiplier;
+                const roundedStat = Math.round(this.curr_sc * this.stat_stages.sc);
+                this.curr_sc = roundedStat;
                 break;
             default:
                 return;
         }
     }
 
-    decreaseStat(stat, divisor){
+    updateStatStage(stat, multiplier){
         switch(stat){
             case 'pa':
-                const decreasedStat = this.curr_pa / divisor;
-                this.curr_pa = Math.round(decreasedStat);
+                this.stat_stages.pa = this.stat_stages.pa * multiplier;
                 break;
             case 'pd':
-                const decreasedStat = this.curr_pd / divisor;
-                this.curr_pd = Math.round(decreasedStat);
+                this.stat_stages.pd = this.stat_stages.pd * multiplier;
                 break;
             case 'ma':
-                const decreasedStat = this.curr_ma / divisor;
-                this.curr_ma = Math.round(decreasedStat);
+                this.stat_stages.ma = this.stat_stages.ma * multiplier;
                 break;
             case 'md':
-                const decreasedStat = this.curr_md / divisor;
-                this.curr_md = Math.round(decreasedStat);
+                this.stat_stages.md = this.stat_stages.md * multiplier;
                 break;
             case 'sc':
-                const decreasedStat = this.curr_sc / divisor;
-                this.curr_sc = Math.round(decreasedStat);
+                this.stat_stages.sc = this.stat_stages.sc * multiplier;
                 break;
             default:
                 return;
@@ -111,19 +168,32 @@ export default class Beast {
     resetStats(){
         if(this.status != 'Blinded'){
             this.curr_pa = this.init_pa;
+            this.stat_stages.pa = 1;
         }
         else if(this.status != 'Vinebound'){
             this.curr_pd = this.init_pd;
+            this.stat_stages.pd = 1;
         }
         else if(this.status != 'Tormented'){
             this.curr_ma = this.init_ma;
+            this.stat_stages.ma = 1;
         }
         else if(this.status != 'Hypnotized'){
             this.curr_md = this.init_md;
+            this.stat_stages.md = 1;
         }
         else if(this.status != 'Inundated'){
             this.curr_sc = this.init_sc;
+            this.stat_stages.sc = 1;
         };
+    }
+
+    getStatStages(){
+        return this.stat_stages;
+    }
+
+    matchStatStages(statStages){
+        this.stat_stages = statStages;
     }
 
     disableMove(move){
@@ -141,6 +211,8 @@ export default class Beast {
 
     makeInactive(){
         this.isActive = false;
+        this.resetStats();
+        this.resetTurnsIn();
     }
 
     incrementTurnsIn(){
@@ -151,11 +223,7 @@ export default class Beast {
         this.turnsIn = 0;
     }
 
-    isSuper(){
-        if(this.item == 'Super Crystal'){
-            return true;
-        } else {
-            return false;
-        }
+    updateSlot(slot){
+        this.slot = slot;
     }
 }
