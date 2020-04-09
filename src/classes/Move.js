@@ -13,4 +13,8 @@ export default class Move {
         this.short_description = shortDescription;
         this.move_slot = null;
     }
+
+    decrementME(){
+        this.curr_me -= 1;
+    }
 }

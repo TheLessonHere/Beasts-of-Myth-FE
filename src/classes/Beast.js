@@ -119,24 +119,39 @@ export default class Beast {
     updateStat(stat){
         switch(stat){
             case 'pa':
-                const roundedStat = Math.round(this.curr_pa * this.stat_stages.pa);
-                this.curr_pa = roundedStat;
+                const computeStatPA = () => {
+                    const roundedStat = Math.round(this.curr_pa * this.stat_stages.pa);
+                    this.curr_pa = roundedStat;
+                }
+                computeStatPA();
                 break;
             case 'pd':
+                const computeStatPD = () => {
                 const roundedStat = Math.round(this.curr_pd * this.stat_stages.pd);
                 this.curr_pd = roundedStat;
+                }
+                computeStatPD();
                 break;
             case 'ma':
+                const computeStatMA = () => {
                 const roundedStat = Math.round(this.curr_ma * this.stat_stages.ma);
                 this.curr_ma = roundedStat;
+                }
+                computeStatMA();
                 break;
             case 'md':
+                const computeStatMD = () => {
                 const roundedStat = Math.round(this.curr_md * this.stat_stages.md);
                 this.curr_md = roundedStat;
+                }
+                computeStatMD();
                 break;
             case 'sc':
+                const computeStatSC = () => {
                 const roundedStat = Math.round(this.curr_sc * this.stat_stages.sc);
                 this.curr_sc = roundedStat;
+                }
+                computeStatSC();
                 break;
             default:
                 return;
