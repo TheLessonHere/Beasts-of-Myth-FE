@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { fetchTeams } from '../../actions';
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Container,
@@ -36,8 +37,12 @@ function TeamBuilder(props) {
   const [isImporting, setIsImporting] = useState(false);
 
   useEffect(() => {
+    props.fetchTeams(props.id)
+  }, [])
+
+  useEffect(() => {
     return;
-  }, [ isBuilding, isImporting, props ])
+  }, [ isBuilding, isImporting ])
 
   const startBuilding = (event) => {
     event.preventDefault();
@@ -90,4 +95,4 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, {})(TeamBuilder)
+export default connect(mapStateToProps, { fetchTeams })(TeamBuilder)

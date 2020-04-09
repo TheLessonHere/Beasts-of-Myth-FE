@@ -2,6 +2,9 @@ import {
     FETCH_USER_START,
     FETCH_USER_SUCCESS,
     FETCH_USER_FAILURE,
+    FETCH_TEAMS_START,
+    FETCH_TEAMS_SUCCESS,
+    FETCH_TEAMS_FAILURE,
   } from '../actions';
 
 const initialState = {
@@ -13,6 +16,7 @@ const initialState = {
     wins: '',
     losses: '',
     connections: [],
+    user_teams: [],
   };
 
 export const reducer = (state = initialState, action) => {
@@ -37,6 +41,25 @@ export const reducer = (state = initialState, action) => {
           connections: action.payload.connections
         };
       case FETCH_USER_FAILURE:
+        return {
+          ...state,
+          isFetching: false,
+          error: action.payload
+        };
+      case FETCH_TEAMS_START:
+        return {
+          ...state,
+          error: '',
+          isFetching: true
+        };
+      case FETCH_TEAMS_SUCCESS:
+        return {
+          ...state,
+          isFetching: false,
+          error: '',
+          user_teams: action.payload
+        };
+      case FETCH_TEAMS_FAILURE:
         return {
           ...state,
           isFetching: false,
