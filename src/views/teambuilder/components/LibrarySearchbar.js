@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 export default function LibrarySearchbar(props){
-    const { allLibraries, items } = props;
+    const { allLibraries } = props;
     const [suggestions, setSuggestions] = useState([]);
     const [defaultRender, setDefaultRender] = useState(true);
 

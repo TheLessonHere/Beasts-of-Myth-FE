@@ -55,11 +55,6 @@ export default class Beast {
         this.item = null;
     }
 
-    consumeItem(){
-        this.item.useItem();
-        this.removeItem();
-    }
-
     addStatus(status){
         this.status = status;
     }
@@ -228,6 +223,7 @@ export default class Beast {
         this.isActive = false;
         this.resetStats();
         this.resetTurnsIn();
+        this.resetTurnsInflamed();
     }
 
     incrementTurnsIn(){
@@ -236,6 +232,10 @@ export default class Beast {
 
     resetTurnsIn(){
         this.turnsIn = 0;
+    }
+
+    resetTurnsInflamed(){
+        this.turnsInflamed = 0;
     }
 
     updateSlot(slot){
