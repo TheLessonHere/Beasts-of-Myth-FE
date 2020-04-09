@@ -1,14 +1,109 @@
 const moves = [
     {
         data_type: "Move",
+        move_id: 1,
         move_name: "Punch",
-        search_id: "punch"
+        search_id: "punch",
+        domain: "terra",
+        type: "physical",
+        base_power: 20,
+        me: 20,
+        priority: 0,
+        effect: (attacking, defending) => (null),
+        description: "Does something.",
+        short_description: "Does thing.",
+        beast_list: ["Kore"]
     },
     {
         data_type: "Move",
-        move_name: "Jump Kick",
-        search_id: "jump kick"
-    }
+        move_id: 2,
+        move_name: "Kick",
+        search_id: "kick",
+        domain: "terra",
+        type: "physical",
+        base_power: 20,
+        me: 20,
+        priority: 0,
+        effect: (attacking, defending) => (null),
+        description: "Does something.",
+        short_description: "Does thing.",
+        beast_list: ["Kore", "Impacabra", "Angwool"]
+    },
+    {
+        data_type: "Move",
+        move_id: 3,
+        move_name: "Light Ablaze",
+        search_id: "light ablaze",
+        domain: "flame",
+        type: "status",
+        base_power: null,
+        me: 20,
+        priority: 0,
+        effect: (attacking, defending) => {defending.team.active_slot.beast.addStatus('Inflamed')},
+        description: "Does something.",
+        short_description: "Does thing.",
+        beast_list: ["Scorchion"]
+    },
+    {
+        data_type: "Move",
+        move_id: 4,
+        move_name: "Healing Wave",
+        search_id: "healing wave",
+        domain: "light",
+        type: "status",
+        base_power: null,
+        me: 20,
+        priority: 0,
+        effect: (attacking, defending) => (null),
+        description: "Does something.",
+        short_description: "Does thing.",
+        beast_list: ["Angwool", "Mothebo", "Vilefly"]
+    },
+    {
+        data_type: "Move",
+        move_id: 5,
+        move_name: "Bite",
+        search_id: "bite",
+        domain: "dark",
+        type: "physical",
+        base_power: 20,
+        me: 20,
+        priority: 0,
+        effect: (attacking, defending) => (null),
+        description: "Does something.",
+        short_description: "Does thing.",
+        beast_list: ["Canight", "Impacabra", "Vilefly", "Scorchion"]
+    },
+    {
+        data_type: "Move",
+        move_id: 6,
+        move_name: "Mindwave",
+        search_id: "mindwave",
+        domain: "mind",
+        type: "mental",
+        base_power: 20,
+        me: 20,
+        priority: 0,
+        effect: (attacking, defending) => (null),
+        description: "Does something.",
+        short_description: "Does thing.",
+        beast_list: ["Outfox", "Surphin", "Mothebo"]
+    },
+    {
+        data_type: "Move",
+        move_id: 7,
+        move_name: "Dive-Bomb",
+        search_id: "dive-bomb",
+        domain: "sky",
+        type: "physical",
+        base_power: 20,
+        me: 20,
+        priority: 0,
+        effect: (attacking, defending) => (null),
+        description: "Does something.",
+        short_description: "Does thing.",
+        beast_list: ["Empyreagle", "Mothebo", "Vilefly"]
+    },
 ];
 
 export { moves };
