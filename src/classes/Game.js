@@ -310,7 +310,7 @@ export default class Game {
     }
 
     clearDomain(){
-        this.curr_domain = 'neutral';
+        this.curr_domain = 'Neutral';
     }
 
     putUpHazards(hazard, defendingPlayer){

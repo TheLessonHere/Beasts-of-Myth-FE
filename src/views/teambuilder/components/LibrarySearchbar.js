@@ -29,13 +29,13 @@ export default function LibrarySearchbar(props){
     const renderResult = () => {
         if (suggestions.length > 0){
             const matchingObjs = suggestions.map(obj => {
-                if (obj.data_type == "Beast"){
+                if (obj.data_type === "Beast"){
                     return <li key={obj.search_id}>{obj.beast_name}</li>;
                 }
-                else if (obj.data_type == "Move"){
+                else if (obj.data_type === "Move"){
                     return <li key={obj.search_id}>{obj.move_name}</li>;
                 }
-                else if (obj.data_type == "Ability"){
+                else if (obj.data_type === "Ability"){
                     return <li key={obj.search_id}>{obj.ability_name}</li>;
                 } else {
                     return <li>No Matching Data</li>;
@@ -53,7 +53,7 @@ export default function LibrarySearchbar(props){
                 <input onChange={onSearchChange} type="text" />
                 <ul>
                     {allLibraries.map(obj => {
-                        if (obj.data_type == "Beast"){
+                        if (obj.data_type === "Beast"){
                             return <li key={obj.search_id}>{obj.beast_name}</li>
                         }
                     })}
