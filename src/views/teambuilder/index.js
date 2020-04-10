@@ -13,6 +13,7 @@ import {
 // Components
 import TeamNav from './components/TeamNav';
 import ImportFromText from './components/ImportFromText';
+import { SubmitButton } from '../../utils/components/SubmitButton';
 
 // Libraries
 import { beasts } from '../../data/libraries/BeastLibrary';
@@ -68,7 +69,7 @@ function TeamBuilder(props) {
     return (
       <Container className={classes.container}>
         <TeamNav allLibraries={allLibraries} items={items} />
-        <button onClick={stopBuilding}>Stop Building</button>
+        <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
       </Container>
     )
   }
@@ -83,8 +84,8 @@ function TeamBuilder(props) {
 
   return (
     <Container className={classes.container}>
-      <button onClick={startBuilding}>Build New Team</button>
-      <button onClick={startImporting}>Import Team From Text</button>
+      <SubmitButton onClick={startBuilding}>Build New Team</SubmitButton>
+      <SubmitButton onClick={startImporting}>Import Team From Text</SubmitButton>
     </Container>
   );
 }

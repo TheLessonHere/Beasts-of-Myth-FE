@@ -1,6 +1,7 @@
 const beasts = [
     {
         beast_id: 1,
+        format: "Unrestricted",
         data_type: "Beast",
         beast_name: "Angwool",
         search_id: "angwool",
@@ -20,10 +21,11 @@ const beasts = [
             move3: "",
             move4: ""
         },
-        move_list: []
+        move_list: ["Kick", "Healing Wave"]
     },
     {
         beast_id: 2,
+        format: "Unrestricted",
         data_type: "Beast",
         beast_name: "Canight",
         search_id: "canight",
@@ -43,10 +45,11 @@ const beasts = [
             move3: "",
             move4: ""
         },
-        move_list: []
+        move_list: ["Bite"]
     },
     {
         beast_id: 3,
+        format: "Unrestricted",
         data_type: "Beast",
         beast_name: "Outfox",
         search_id: "outfox",
@@ -66,10 +69,11 @@ const beasts = [
             move3: "",
             move4: ""
         },
-        move_list: []
+        move_list: ["Mindwave"]
     },
     {
         beast_id: 4,
+        format: "Unrestricted",
         data_type: "Beast",
         beast_name: "Impacabra",
         search_id: "impacabra",
@@ -89,10 +93,11 @@ const beasts = [
             move3: "",
             move4: ""
         },
-        move_list: []
+        move_list: ["Bite", "Kick"]
     },
     {
         beast_id: 5,
+        format: "Unrestricted",
         data_type: "Beast",
         beast_name: "Scorchion",
         search_id: "scorchion",
@@ -112,10 +117,11 @@ const beasts = [
             move3: "",
             move4: ""
         },
-        move_list: []
+        move_list: ["Light Ablaze", "Bite"]
     },
     {
         beast_id: 6,
+        format: "Unrestricted",
         data_type: "Beast",
         beast_name: "Kore",
         search_id: "kore",
@@ -135,10 +141,11 @@ const beasts = [
             move3: "",
             move4: ""
         },
-        move_list: []
+        move_list: ["Punch", "Kick"]
     },
     {
         beast_id: 7,
+        format: "Unrestricted",
         data_type: "Beast",
         beast_name: "Surphin",
         search_id: "surphin",
@@ -158,10 +165,11 @@ const beasts = [
             move3: "",
             move4: ""
         },
-        move_list: []
+        move_list: ["Mindwave"]
     },
     {
         beast_id: 8,
+        format: "Unrestricted",
         data_type: "Beast",
         beast_name: "Empyreagle",
         search_id: "empyreagle",
@@ -181,10 +189,11 @@ const beasts = [
             move3: "",
             move4: ""
         },
-        move_list: []
+        move_list: ["Dive-Bomb"]
     },
     {
         beast_id: 9,
+        format: "Unrestricted",
         data_type: "Beast",
         beast_name: "Vilefly",
         search_id: "vilefly",
@@ -204,10 +213,11 @@ const beasts = [
             move3: "",
             move4: ""
         },
-        move_list: []
+        move_list: ["Bite", "Dive-Bomb"]
     },
     {
         beast_id: 10,
+        format: "Unrestricted",
         data_type: "Beast",
         beast_name: "Mothebo",
         search_id: "mothebo",
@@ -227,7 +237,7 @@ const beasts = [
             move3: "",
             move4: ""
         },
-        move_list: []
+        move_list: ["Healing Wave", "Mindwave", "Dive-Bomb"]
     },
 ];
 
