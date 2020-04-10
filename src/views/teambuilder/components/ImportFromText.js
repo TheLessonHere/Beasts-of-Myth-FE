@@ -8,6 +8,8 @@ import {
     TextField
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+// Components
+import { SubmitButton } from '../../../utils/components/SubmitButton';
 // Classes
 import Team from '../../../classes/Team';
 
@@ -43,10 +45,9 @@ function ImportFromText(props){
     return (
         <div className="container">
             <form>
-                <TextField value={value} onChange={handleChange} multiline={true} rows={25}/>
-                <button type="submit" onClick={runImport}>Import Team</button>
-                <button onClick={saveTeam}>Save Team</button>
-                <button onClick={stopImporting}>Cancel</button>
+                <TextField value={value} onChange={handleChange} variant="filled" multiline={true} rows={25}/>
+                <SubmitButton type="submit" onClick={runImport}>Import Team</SubmitButton>
+                <SubmitButton onClick={stopImporting}>Cancel</SubmitButton>
             </form>
         </div>
     )

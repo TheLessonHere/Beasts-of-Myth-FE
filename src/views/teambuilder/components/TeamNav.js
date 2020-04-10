@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import {
-  Grid,
+  Container,
   Typography,
   Tabs,
   Tab,
   Box,
+  TextField,
+  Select,
+  MenuItem,
   CircularProgress
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -58,42 +61,69 @@ const useStyles = makeStyles(theme => ({
 export default function TeamNav(props) {
     const { allLibraries, items } = props;
     const classes = useStyles();
-    const [value, setValue] = useState(0);
-    const [slot1, setSlot1] = useState({});
-    const [slot2, setSlot2] = useState({});
-    const [slot3, setSlot3] = useState({});
-    const [slot4, setSlot4] = useState({});
-    const [slot5, setSlot5] = useState({});
-    const [activeSlot, setActiveSlot] = useState(slot1);
+    const [tabValue, setTabValue] = useState(0);
+    const [format, setFormat] = useState('');
+    const [teamName, setTeamName] = useState('');
+    const [slot1, setSlot1] = useState(null);
+    const [slot2, setSlot2] = useState(null);
+    const [slot3, setSlot3] = useState(null);
+    const [slot4, setSlot4] = useState(null);
+    const [slot5, setSlot5] = useState(null);
+    const [activeSlot, setActiveSlot] = useState('slot1');
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+    const handleTabChange = (event, newValue) => {
+        event.preventDefault();
+        setTabValue(newValue);
         switch(newValue){
             case 0:
-                setActiveSlot(slot1);
+                setActiveSlot('slot1');
                 break;
             case 1:
-                setActiveSlot(slot2);
+                setActiveSlot('slot2');
                 break;
             case 2:
-                setActiveSlot(slot3);
+                setActiveSlot('slot3');
                 break;
             case 3:
-                setActiveSlot(slot4);
+                setActiveSlot('slot4');
                 break;
             case 4:
-                setActiveSlot(slot5);
+                setActiveSlot('slot5');
                 break;
             default:
                 console.log("Error with shifting tabs.")
         };
     };
 
+    const handleFormatChange = (event) => {
+      setFormat(event.target.value);
+    };
+
+    const handleTeamNameChange = (event) => {
+      setTeamName(event.target.value);
+    };
+
     return(
         <div className={classes.tabs}>
+            <Container>
+              <TextField
+                value={teamName}
+                onChange={handleTeamNameChange}
+                label="Team Name"
+                variant="filled"
+              />
+              <Select
+                labelId="simple-select-label"
+                id="format-select"
+                value={format}
+                onChange={handleFormatChange}
+              >
+                <MenuItem value={'Unrestricted'}>Unrestricted</MenuItem>
+              </Select>
+            </Container>
             <Tabs
-              value={value}
-              onChange={handleChange}
+              value={tabValue}
+              onChange={handleTabChange}
               aria-label="simple tabs example"
               variant="fullWidth"
             >
@@ -104,25 +134,20 @@ export default function TeamNav(props) {
               <Tab label="Slot 5" {...a11yProps(4)} />
             </Tabs>
 
-            <TabPanel value={value} index={0}>
-                <LibrarySearchbar allLibraries={allLibraries} items={items}/>
-                Slot 1
+            <TabPanel value={tabValue} index={0}>
+                <LibrarySearchbar allLibraries={allLibraries} />
             </TabPanel>
-            <TabPanel value={value} index={1}>
-                <LibrarySearchbar allLibraries={allLibraries} items={items}/>
-                Slot 2
+            <TabPanel value={tabValue} index={1}>
+                <LibrarySearchbar allLibraries={allLibraries} />
             </TabPanel>
-            <TabPanel value={value} index={2}>
-                <LibrarySearchbar allLibraries={allLibraries} items={items}/>
-                Slot 3
+            <TabPanel value={tabValue} index={2}>
+                <LibrarySearchbar allLibraries={allLibraries} />
             </TabPanel>
-            <TabPanel value={value} index={3}>
-                <LibrarySearchbar allLibraries={allLibraries} items={items}/>
-                Slot 4
+            <TabPanel value={tabValue} index={3}>
+                <LibrarySearchbar allLibraries={allLibraries} />
             </TabPanel>
-            <TabPanel value={value} index={4}>
-                <LibrarySearchbar allLibraries={allLibraries} items={items}/>
-                Slot 5
+            <TabPanel value={tabValue} index={4}>
+                <LibrarySearchbar allLibraries={allLibraries} />
             </TabPanel>
         </div>
 )}
