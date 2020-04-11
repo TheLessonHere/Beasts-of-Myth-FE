@@ -5,9 +5,11 @@ import {
   Tabs,
   Tab,
   Box,
+  FormControl,
   TextField,
   Select,
   MenuItem,
+  InputLabel,
   CircularProgress
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -49,7 +51,16 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: theme.palette.background.paper,
       marginTop: 10
     },
-
+    formControl: {
+      margin: theme.spacing(1),
+      display: "flex",
+      flexFlow: "column",
+      minWidth: 150,
+    },
+    topInputs: {
+      maxWidth: "600px",
+      width: "100%"
+    },
     circleProgress: {
       display: "flex",
       "& > * + *": {
@@ -103,23 +114,33 @@ export default function TeamNav(props) {
       setTeamName(event.target.value);
     };
 
+    const onBeastClick = (event) => {
+      
+    }
+
     return(
         <div className={classes.tabs}>
             <Container>
-              <TextField
-                value={teamName}
-                onChange={handleTeamNameChange}
-                label="Team Name"
-                variant="filled"
-              />
-              <Select
-                labelId="simple-select-label"
-                id="format-select"
-                value={format}
-                onChange={handleFormatChange}
-              >
-                <MenuItem value={'Unrestricted'}>Unrestricted</MenuItem>
-              </Select>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="simple-select-label">Format</InputLabel>
+                <Select
+                    labelId="simple-select-label"
+                    id="format-select"
+                    value={format}
+                    autoWidth={true}
+                    className={classes.topInputs}
+                    onChange={handleFormatChange}
+                  >
+                    <MenuItem value={'Unrestricted'}>Unrestricted</MenuItem>
+                  </Select>
+                  <TextField
+                    value={teamName}
+                    onChange={handleTeamNameChange}
+                    label="Team Name"
+                    variant="filled"
+                    className={classes.topInputs}
+                  />
+              </FormControl>
             </Container>
             <Tabs
               value={tabValue}

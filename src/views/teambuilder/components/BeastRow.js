@@ -9,10 +9,10 @@ import {
 import { getBeastImage } from '../../../utils/getBeastImage';
 
 export default function BeastRow(props){
-    const { listItemClass,
-            searchId,
+    const { listItemClass, beast } = props;
+    const { search_id,
             format,
-            name,
+            beast_name,
             domain1,
             domain2,
             ability,
@@ -21,9 +21,9 @@ export default function BeastRow(props){
             pd,
             ma,
             md,
-            sc } = props;
+            sc } = beast;
 
-    const returnDomains = () => {
+    const returnDomains = (domain1, domain2) => {
         if(domain2){
             const capDomain1 = domain1.charAt(0).toUpperCase() + domain1.slice(1);
             const capDomain2 = domain2.charAt(0).toUpperCase() + domain2.slice(1);
@@ -39,12 +39,12 @@ export default function BeastRow(props){
             <ListItemText primary={`${format}`} />
             <ListItemAvatar>
                 <Avatar
-                    alt={`${name}-image`}
+                    alt={`${beast_name}-image`}
                     variant="square"
-                    src={getBeastImage(searchId)} />
+                    src={getBeastImage(search_id)} />
             </ListItemAvatar>
-            <ListItemText primary={`${name}`} />
-            <ListItemText primary={returnDomains()} />
+            <ListItemText primary={`${beast_name}`} />
+            <ListItemText primary={returnDomains(domain1, domain2)} />
             <ListItemText primary={`${ability}`} />
             <ListItemText primary={`${hp}`} />
             <ListItemText primary={`${pa}`} />
