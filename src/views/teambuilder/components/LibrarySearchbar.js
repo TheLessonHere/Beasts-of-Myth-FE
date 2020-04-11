@@ -14,12 +14,18 @@ import SortRow from './SortRow';
 import BeastRow from './BeastRow';
 
 const useStyles = makeStyles(theme => ({
+    container: {
+        height: "450px"
+    },
     list: {
         maxHeight: "100%",
-        overflow: 'auto'
+        overflow: 'scroll'
     },
     listItem: {
         background: "lightgrey"
+    },
+    listItemHeader: {
+        background: "darkgrey"
     }
 }));
 
@@ -56,38 +62,67 @@ export default function LibrarySearchbar(props){
 
     const renderResult = () => {
         if (suggestions.length > 0){
+            let beastCounter = 0;
+            let moveCounter = 0;
+            let abilityCounter = 0;
             const matchingObjs = suggestions.map(obj => {
                 if (obj.data_type === "Beast"){
-                    return (<BeastRow
-                            key={obj.search_id}
-                            listItemClass={classes.listItem}
-                            searchId={obj.search_id}
-                            format={obj.format}
-                            name={obj.beast_name}
-                            domain1={obj.domain1}
-                            domain2={obj.domain2}
-                            ability={obj.ability}
-                            hp={obj.hp}
-                            pa={obj.pa}
-                            pd={obj.pd}
-                            ma={obj.ma}
-                            md={obj.md}
-                            sc={obj.sc} />
-                    )}
+                    if(beastCounter === 0){
+                        beastCounter++;
+                        return(
+                            <>
+                                <ListItem key="beast-header" className={classes.listItemHeader} divider={true}>
+                                    <ListItemText primary="Beasts" />
+                                </ListItem>
+                                <BeastRow
+                                key={obj.search_id}
+                                listItemClass={classes.listItem}
+                                listItemClass={classes.listItem}
+                                beast={obj} />
+                            </>
+                        )} else {
+                            return (<BeastRow
+                                key={obj.search_id}
+                                listItemClass={classes.listItem}
+                                listItemClass={classes.listItem}
+                                beast={obj} />
+                        )}}
                 else if (obj.data_type === "Move"){
-                    return (<ListItem key={obj.search_id} className={classes.listItem} divider={true}>
+                    if(moveCounter === 0){
+                        moveCounter++;
+                        return (
+                        <>
+                            <ListItem key="move-header" className={classes.listItemHeader} divider={true}>
+                                <ListItemText primary="Moves" />
+                            </ListItem>
+                            <ListItem key={obj.search_id} className={classes.listItem} divider={true}>
                                 <ListItemText primary={obj.move_name} />
                             </ListItem>
-                    )}
+                        </>
+                        )} else {
+                        return (
+                        <ListItem key={obj.search_id} className={classes.listItem} divider={true}>
+                            <ListItemText primary={obj.move_name} />
+                        </ListItem>
+                        )}}
                 else if (obj.data_type === "Ability"){
-                    return (<ListItem key={obj.search_id} className={classes.listItem} divider={true}>
+                    if(abilityCounter === 0){
+                        abilityCounter++;
+                        return (
+                        <>
+                            <ListItem key="ability-header" className={classes.listItemHeader} divider={true}>
+                                <ListItemText primary="Abilities" />
+                            </ListItem>
+                            <ListItem key={obj.search_id} className={classes.listItem} divider={true}>
                                 <ListItemText primary={obj.ability_name} />
                             </ListItem>
-                    )} else {
-                    return (<ListItem className={classes.listItem} divider={true}>
-                                <ListItemText primary={"No Matching Data"} />
-                            </ListItem>
-                    )}
+                        </>
+                        )} else {
+                        return (
+                        <ListItem key={obj.search_id} className={classes.listItem} divider={true}>
+                            <ListItemText primary={obj.ability_name} />
+                        </ListItem>
+                        )}}
             })
             return matchingObjs;
         } else {
@@ -99,7 +134,7 @@ export default function LibrarySearchbar(props){
 
     if(defaultRender){
         return (
-            <Container>
+            <Container className={classes.container}>
                 <TextField onChange={onSearchChange} label="Beast/Move/Ability" />
                 <SortRow sortDomain={fakeFunction}
                     sortHP={fakeFunction}
@@ -114,18 +149,7 @@ export default function LibrarySearchbar(props){
                             return (<BeastRow
                                 key={obj.search_id}
                                 listItemClass={classes.listItem}
-                                searchId={obj.search_id}
-                                format={obj.format}
-                                name={obj.beast_name}
-                                domain1={obj.domain1}
-                                domain2={obj.domain2}
-                                ability={obj.ability}
-                                hp={obj.hp}
-                                pa={obj.pa}
-                                pd={obj.pd}
-                                ma={obj.ma}
-                                md={obj.md}
-                                sc={obj.sc} />
+                                beast={obj} />
                             )}
                     })}
                 </List>
@@ -134,8 +158,15 @@ export default function LibrarySearchbar(props){
     }
 
     return (
-        <Container>
+        <Container className={classes.container}>
             <TextField onChange={onSearchChange} label="Beast/Move/Ability" />
+            <SortRow sortDomain={fakeFunction}
+                    sortHP={fakeFunction}
+                    sortPA={fakeFunction}
+                    sortPD={fakeFunction}
+                    sortMA={fakeFunction}
+                    sortMD={fakeFunction}
+                    sortSC={fakeFunction} />
             <List className={classes.list}>
                 {renderResult()}
             </List>

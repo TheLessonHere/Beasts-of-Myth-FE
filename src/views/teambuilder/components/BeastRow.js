@@ -1,18 +1,56 @@
 import React from 'react';
-import styled from 'styled-components';
 import {
     ListItem,
     ListItemText,
     ListItemAvatar,
     Avatar
 } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import { getBeastImage } from '../../../utils/getBeastImage';
 
+const useStyles = makeStyles(theme => ({
+    format: {
+        flex: "initial",
+        width: "100px",
+        marginLeft: "0",
+        marginRight: "0"
+    },
+    avi: {
+        marginLeft: "10px",
+        marginRight: "10px"
+    },
+    name: {
+        width: "120px",
+        textAlign: "left",
+        marginLeft: "5px",
+        marginRight: "30px"
+    },
+    domains: {
+        textAlign: "left",
+        width: "80px",
+        marginLeft: "10px",
+        marginRight: "40px"
+    },
+    ability: {
+        textAlign: "left",
+        width: "120px",
+        marginLeft: "10px",
+        marginRight: "55px"
+    },
+    stat: {
+        width: "10px",
+        textAlign: "right",
+        marginLeft: "5px",
+        marginRight: "10px"
+    },
+}))
+
 export default function BeastRow(props){
-    const { listItemClass,
-            searchId,
+    const { listItemClass, beast } = props;
+    const classes = useStyles();
+    const { search_id,
             format,
-            name,
+            beast_name,
             domain1,
             domain2,
             ability,
@@ -21,9 +59,9 @@ export default function BeastRow(props){
             pd,
             ma,
             md,
-            sc } = props;
+            sc } = beast;
 
-    const returnDomains = () => {
+    const returnDomains = (domain1, domain2) => {
         if(domain2){
             const capDomain1 = domain1.charAt(0).toUpperCase() + domain1.slice(1);
             const capDomain2 = domain2.charAt(0).toUpperCase() + domain2.slice(1);
@@ -36,22 +74,23 @@ export default function BeastRow(props){
 
     return (
         <ListItem className={listItemClass} divider={true}>
-            <ListItemText primary={`${format}`} />
+            <ListItemText className={classes.format} primary={`${format}`} />
             <ListItemAvatar>
                 <Avatar
-                    alt={`${name}-image`}
+                    alt={`${beast_name}-image`}
                     variant="square"
-                    src={getBeastImage(searchId)} />
+                    className={classes.avi}
+                    src={getBeastImage(search_id)} />
             </ListItemAvatar>
-            <ListItemText primary={`${name}`} />
-            <ListItemText primary={returnDomains()} />
-            <ListItemText primary={`${ability}`} />
-            <ListItemText primary={`${hp}`} />
-            <ListItemText primary={`${pa}`} />
-            <ListItemText primary={`${pd}`} />
-            <ListItemText primary={`${ma}`} />
-            <ListItemText primary={`${md}`} />
-            <ListItemText primary={`${sc}`} />
+            <ListItemText className={classes.name} primary={`${beast_name}`} />
+            <ListItemText className={classes.domains} primary={returnDomains(domain1, domain2)} />
+            <ListItemText className={classes.ability} primary={`${ability}`} />
+            <ListItemText className={classes.stat} primary={`${hp}`} />
+            <ListItemText className={classes.stat} primary={`${pa}`} />
+            <ListItemText className={classes.stat} primary={`${pd}`} />
+            <ListItemText className={classes.stat} primary={`${ma}`} />
+            <ListItemText className={classes.stat} primary={`${md}`} />
+            <ListItemText className={classes.stat} primary={`${sc}`} />
         </ListItem>
     )
 };

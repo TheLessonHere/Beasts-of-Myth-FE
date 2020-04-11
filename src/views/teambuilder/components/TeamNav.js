@@ -5,14 +5,17 @@ import {
   Tabs,
   Tab,
   Box,
+  FormControl,
   TextField,
   Select,
   MenuItem,
+  InputLabel,
   CircularProgress
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // Components
 import LibrarySearchbar from './LibrarySearchbar';
+import { SubmitButton } from '../../../utils/components/SubmitButton';
 // Classes
 import Team from '../../../classes/Team';
 import Beast from '../../../classes/Beast';
@@ -20,7 +23,7 @@ import Move from '../../../classes/Move';
 import Item from '../../../classes/Item';
 
 function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+    const { children, value, index, classes, ...other } = props;
 
     return (
       <Typography
@@ -29,9 +32,8 @@ function TabPanel(props) {
         hidden={value !== index}
         id={`simple-tabpanel-${index}`}
         aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        <Box p={3}>{children}</Box>
+        {...other}>
+        <Box p={3} className={classes.boxes}>{children}</Box>
       </Typography>
     );
   }
@@ -47,9 +49,20 @@ const useStyles = makeStyles(theme => ({
     tabs: {
       flexGrow: 1,
       backgroundColor: theme.palette.background.paper,
-      marginTop: 10
     },
-
+    boxes: {
+      height: "550px"
+    },
+    formControl: {
+      margin: theme.spacing(1),
+      display: "flex",
+      flexFlow: "column",
+      minWidth: 150,
+    },
+    topInputs: {
+      maxWidth: "600px",
+      width: "100%"
+    },
     circleProgress: {
       display: "flex",
       "& > * + *": {
@@ -59,7 +72,7 @@ const useStyles = makeStyles(theme => ({
   }));
 
 export default function TeamNav(props) {
-    const { allLibraries, items } = props;
+    const { allLibraries, items, stopBuilding } = props;
     const classes = useStyles();
     const [tabValue, setTabValue] = useState(0);
     const [format, setFormat] = useState('');
@@ -103,23 +116,33 @@ export default function TeamNav(props) {
       setTeamName(event.target.value);
     };
 
+    const onBeastClick = (event) => {
+
+    }
+
     return(
         <div className={classes.tabs}>
             <Container>
-              <TextField
-                value={teamName}
-                onChange={handleTeamNameChange}
-                label="Team Name"
-                variant="filled"
-              />
-              <Select
-                labelId="simple-select-label"
-                id="format-select"
-                value={format}
-                onChange={handleFormatChange}
-              >
-                <MenuItem value={'Unrestricted'}>Unrestricted</MenuItem>
-              </Select>
+              <FormControl className={classes.formControl}>
+                <InputLabel id="simple-select-label">Format</InputLabel>
+                <Select
+                    labelId="simple-select-label"
+                    id="format-select"
+                    value={format}
+                    autoWidth={true}
+                    className={classes.topInputs}
+                    onChange={handleFormatChange}
+                  >
+                    <MenuItem value={'Unrestricted'}>Unrestricted</MenuItem>
+                  </Select>
+                  <TextField
+                    value={teamName}
+                    onChange={handleTeamNameChange}
+                    label="Team Name"
+                    variant="filled"
+                    className={classes.topInputs}
+                  />
+              </FormControl>
             </Container>
             <Tabs
               value={tabValue}
@@ -133,21 +156,25 @@ export default function TeamNav(props) {
               <Tab label="Slot 4" {...a11yProps(3)} />
               <Tab label="Slot 5" {...a11yProps(4)} />
             </Tabs>
-
-            <TabPanel value={tabValue} index={0}>
+            <TabPanel classes={classes} value={tabValue} index={0}>
                 <LibrarySearchbar allLibraries={allLibraries} />
+                <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
-            <TabPanel value={tabValue} index={1}>
+            <TabPanel classes={classes} value={tabValue} index={1}>
                 <LibrarySearchbar allLibraries={allLibraries} />
+                <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
-            <TabPanel value={tabValue} index={2}>
+            <TabPanel classes={classes} value={tabValue} index={2}>
                 <LibrarySearchbar allLibraries={allLibraries} />
+                <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
-            <TabPanel value={tabValue} index={3}>
+            <TabPanel classes={classes} value={tabValue} index={3}>
                 <LibrarySearchbar allLibraries={allLibraries} />
+                <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
-            <TabPanel value={tabValue} index={4}>
+            <TabPanel classes={classes} value={tabValue} index={4}>
                 <LibrarySearchbar allLibraries={allLibraries} />
+                <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
         </div>
 )}
