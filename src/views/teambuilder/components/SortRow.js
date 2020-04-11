@@ -58,6 +58,18 @@ const StatButton = styled.button`
     color: black;
 `;
 
+const SCButton = styled.button`
+    justify-self: flex-end;
+    margin-right: 0;
+    margin-left: 0;
+    padding-right: 40px;
+    padding-left: 20px;
+    background: lightgrey;
+    border: none;
+    height: 100%;
+    color: black;
+`;
+
 export default function SortRow(props){
     const { sortDomain, sortHP, sortPA, sortPD, sortMA, sortMD, sortSC } = props;
 
@@ -72,7 +84,7 @@ export default function SortRow(props){
             <StatButton className="sortcol statcol" onClick={sortPD}>PD</StatButton>
             <StatButton className="sortcol statcol" onClick={sortMA}>MA</StatButton>
             <StatButton className="sortcol statcol" onClick={sortMD}>MD</StatButton>
-            <StatButton className="sortcol statcol" onClick={sortSC}>SC</StatButton>
+            <SCButton className="sortcol statcol" onClick={sortSC}>SC</SCButton>
         </SortRowContainer>
     )
 };

@@ -14,7 +14,6 @@ import {
 import TeamNav from './components/TeamNav';
 import ImportFromText from './components/ImportFromText';
 import { SubmitButton } from '../../utils/components/SubmitButton';
-
 // Libraries
 import { beasts } from '../../data/libraries/BeastLibrary';
 import { moves } from '../../data/libraries/MoveLibrary';
@@ -27,7 +26,7 @@ const useStyles = makeStyles(theme => ({
         height: "800px",
         padding: "20px",
         borderRadius: "5px"
-    }
+    },
 }))
 
 const allLibraries = beasts.concat(moves, abilities);
@@ -68,8 +67,7 @@ function TeamBuilder(props) {
   if(isBuilding){
     return (
       <Container className={classes.container}>
-        <TeamNav allLibraries={allLibraries} items={items} />
-        <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
+        <TeamNav allLibraries={allLibraries} items={items} stopBuilding={stopBuilding}/>
       </Container>
     )
   }

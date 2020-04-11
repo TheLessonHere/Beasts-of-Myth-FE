@@ -14,9 +14,12 @@ import SortRow from './SortRow';
 import BeastRow from './BeastRow';
 
 const useStyles = makeStyles(theme => ({
+    container: {
+        height: "450px"
+    },
     list: {
         maxHeight: "100%",
-        overflow: 'auto'
+        overflow: 'scroll'
     },
     listItem: {
         background: "lightgrey"
@@ -131,7 +134,7 @@ export default function LibrarySearchbar(props){
 
     if(defaultRender){
         return (
-            <Container>
+            <Container className={classes.container}>
                 <TextField onChange={onSearchChange} label="Beast/Move/Ability" />
                 <SortRow sortDomain={fakeFunction}
                     sortHP={fakeFunction}
@@ -155,7 +158,7 @@ export default function LibrarySearchbar(props){
     }
 
     return (
-        <Container>
+        <Container className={classes.container}>
             <TextField onChange={onSearchChange} label="Beast/Move/Ability" />
             <SortRow sortDomain={fakeFunction}
                     sortHP={fakeFunction}
