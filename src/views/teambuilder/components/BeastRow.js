@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function BeastRow(props){
-    const { listItemClass, beast } = props;
+    const { listItemClass, returnDomains, beast, onBeastClick } = props;
     const classes = useStyles();
     const { search_id,
             format,
@@ -61,19 +61,8 @@ export default function BeastRow(props){
             md,
             sc } = beast;
 
-    const returnDomains = (domain1, domain2) => {
-        if(domain2){
-            const capDomain1 = domain1.charAt(0).toUpperCase() + domain1.slice(1);
-            const capDomain2 = domain2.charAt(0).toUpperCase() + domain2.slice(1);
-            return `${capDomain1}-${capDomain2}`;
-        } else {
-            const capDomain1 = domain1.charAt(0).toUpperCase() + domain1.slice(1);
-            return `${capDomain1}`;
-        }
-    }
-
     return (
-        <ListItem className={listItemClass} divider={true}>
+        <ListItem className={listItemClass} divider={true} onClick={onBeastClick(beast)}>
             <ListItemText className={classes.format} primary={`${format}`} />
             <ListItemAvatar>
                 <Avatar

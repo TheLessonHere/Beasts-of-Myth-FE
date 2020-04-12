@@ -188,18 +188,19 @@ export default class Team {
                 const beastLibraryData = beasts.find(beast =>
                     beast.beast_name === beastStringData.beast_name
                 );
-                const newBeast = new Beast(beastLibraryData.beast_id,
-                    beastLibraryData.beast_name,
-                    beastLibraryData.domain1,
-                    beastLibraryData.domain2,
-                    beastLibraryData.ability,
-                    beastLibraryData.hp,
-                    beastLibraryData.pa,
-                    beastLibraryData.pd,
-                    beastLibraryData.ma,
-                    beastLibraryData.md,
-                    beastLibraryData.sc,
-                    beastLibraryData.move_list);
+                const newBeast = new Beast(beastLibraryData.format,
+                                            beastLibraryData.beast_id,
+                                            beastLibraryData.beast_name,
+                                            beastLibraryData.domain1,
+                                            beastLibraryData.domain2,
+                                            beastLibraryData.ability,
+                                            beastLibraryData.hp,
+                                            beastLibraryData.pa,
+                                            beastLibraryData.pd,
+                                            beastLibraryData.ma,
+                                            beastLibraryData.md,
+                                            beastLibraryData.sc,
+                                            beastLibraryData.move_list);
                 this.addBeast(newBeast, beastStringData.slot);
                 const currSlot = this.getSlot(beastStringData.slot);
                 const itemData = items.find(item =>
@@ -237,6 +238,7 @@ export default class Team {
                     }
                 });
             });
+            this.updateSuperSlot();
             console.log("Team successfully imported.")
         }
         catch(err){
@@ -260,7 +262,8 @@ export default class Team {
             const superBeastData = beasts.find(beast =>
                 beast.beast_name === `${this.slot1.beast.beast_name}-Super`
             );
-            const superBeast = new Beast(superBeastData.beast_id,
+            const superBeast = new Beast(superBeastData.format,
+                                        superBeastData.beast_id,
                                         superBeastData.beast_name,
                                         superBeastData.domain1,
                                         superBeastData.domain2,
@@ -279,7 +282,8 @@ export default class Team {
             const superBeastData = beasts.find(beast =>
                 beast.beast_name === `${this.slot1.beast.beast_name}-Super`
             );
-            const superBeast = new Beast(superBeastData.beast_id,
+            const superBeast = new Beast(superBeastData.format,
+                                        superBeastData.beast_id,
                                         superBeastData.beast_name,
                                         superBeastData.domain1,
                                         superBeastData.domain2,
@@ -298,7 +302,8 @@ export default class Team {
             const superBeastData = beasts.find(beast =>
                 beast.beast_name === `${this.slot1.beast.beast_name}-Super`
             );
-            const superBeast = new Beast(superBeastData.beast_id,
+            const superBeast = new Beast(superBeastData.format,
+                                        superBeastData.beast_id,
                                         superBeastData.beast_name,
                                         superBeastData.domain1,
                                         superBeastData.domain2,
@@ -317,7 +322,8 @@ export default class Team {
             const superBeastData = beasts.find(beast =>
                 beast.beast_name === `${this.slot1.beast.beast_name}-Super`
             );
-            const superBeast = new Beast(superBeastData.beast_id,
+            const superBeast = new Beast(superBeastData.format,
+                                        superBeastData.beast_id,
                                         superBeastData.beast_name,
                                         superBeastData.domain1,
                                         superBeastData.domain2,
@@ -336,7 +342,8 @@ export default class Team {
             const superBeastData = beasts.find(beast =>
                 beast.beast_name === `${this.slot1.beast.beast_name}-Super`
             );
-            const superBeast = new Beast(superBeastData.beast_id,
+            const superBeast = new Beast(superBeastData.format,
+                                        superBeastData.beast_id,
                                         superBeastData.beast_name,
                                         superBeastData.domain1,
                                         superBeastData.domain2,
@@ -443,7 +450,9 @@ export default class Team {
             this.slot5.beast == null){
                 this.isValid = false;
             } else {
+                // Add validation so that two supers can't be added
                 this.isValid = true;
-            }
+            };
+        return this.isValid;
     }
 }

@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function LibrarySearchbar(props){
-    const { allLibraries } = props;
+    const { allLibraries, returnDomains, onBeastClick } = props;
     const classes = useStyles();
     const [suggestions, setSuggestions] = useState([]);
     const [defaultRender, setDefaultRender] = useState(true);
@@ -77,15 +77,17 @@ export default function LibrarySearchbar(props){
                                 <BeastRow
                                 key={obj.search_id}
                                 listItemClass={classes.listItem}
-                                listItemClass={classes.listItem}
-                                beast={obj} />
+                                returnDomains={returnDomains}
+                                beast={obj}
+                                onBeastClick={onBeastClick} />
                             </>
                         )} else {
                             return (<BeastRow
                                 key={obj.search_id}
                                 listItemClass={classes.listItem}
-                                listItemClass={classes.listItem}
-                                beast={obj} />
+                                returnDomains={returnDomains}
+                                beast={obj}
+                                onBeastClick={onBeastClick} />
                         )}}
                 else if (obj.data_type === "Move"){
                     if(moveCounter === 0){
@@ -149,7 +151,9 @@ export default function LibrarySearchbar(props){
                             return (<BeastRow
                                 key={obj.search_id}
                                 listItemClass={classes.listItem}
-                                beast={obj} />
+                                returnDomains={returnDomains}
+                                beast={obj}
+                                onBeastClick={onBeastClick} />
                             )}
                     })}
                 </List>
