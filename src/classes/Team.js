@@ -206,7 +206,8 @@ export default class Team {
                 const itemData = items.find(item =>
                     item.item_name === beastStringData.item
                 );
-                const equippedItem = new Item(itemData.item_id,
+                const equippedItem = new Item(itemData.format,
+                                        itemData.item_id,
                                         itemData.item_name,
                                         itemData.effect,
                                         itemData.description,

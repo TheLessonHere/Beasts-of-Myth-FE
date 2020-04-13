@@ -6,7 +6,7 @@ export default function MoveSearchSuggestions(props){
     return (
         <div>
             {suggestions.map(suggestion =>
-                <h3 key={suggestion.move_id}>{suggestion.move_name}</h3>
+                <h3 key={suggestion}>{suggestion}</h3>
             )}
         </div>
     )

@@ -92,6 +92,8 @@ export default function TeamNav(props) {
     const [activeMoveSlot, setActiveMoveSlot] = useState('move1');
     const [isChoosingMove, setIsChoosingMove] = useState(false);
     const [isChoosingItem, setIsChoosingItem] = useState(true);
+    const [item, setItem] = useState("");
+    const [move, setMove] = useState("");
     const [itemSuggestions, setItemSuggestions] = useState([]);
     const [moveSuggestions, setMoveSuggestions] = useState([]);
 
@@ -135,7 +137,6 @@ export default function TeamNav(props) {
     };
 
     const onBeastClick = (beast) => {
-      // Fills in active slot with beast info and renders SlotForm
       const data = beasts.find(beastData => beastData.search_id === beast);
       const currBeast = new Beast(data.format,
                                   data.beast_id,
@@ -149,7 +150,7 @@ export default function TeamNav(props) {
                                   data.ma,
                                   data.md,
                                   data.sc,
-                                  data.moveList);
+                                  data.move_list);
 
       switch(activeSlot){
         case 'slot1':
@@ -173,19 +174,18 @@ export default function TeamNav(props) {
           setNewBeastAdded(!newBeastAdded);
           break;
         default:
-          console.log("Error setting move suggestions.");
+          console.log("Error setting Beast to slot.");
       }
     }
 
     const chooseItem = (event) => {
-      // renders item search results under form
-      console.log(event.target);
       setIsChoosingMove(false);
       setIsChoosingItem(true);
     }
 
     const onItemSearch = (event) => {
       const value = event.target.value;
+      setItem(event.target.value);
       let currSuggestions = [];
       if (value.length > 0){
           const regex = new RegExp(`${value}`, 'i');
@@ -197,14 +197,47 @@ export default function TeamNav(props) {
       setItemSuggestions(currSuggestions);
     }
 
-    const onItemClick = (event) => {
-      // Sets the item of the beast in the active slot to the clicked item
+    const onItemClick = (item) => {
+      const data = items.find(itemData => itemData.search_id === item);
+      const currItem = new Item(data.format,
+        data.item_id,
+        data.item_name,
+        data.type,
+        data.effect,
+        data.description,
+        data.short_description,
+        data.removable);
+
+      switch(activeSlot){
+        case 'slot1':
+          slot1.addItem(currItem);
+          setItem(currItem.item_name);
+          break;
+        case 'slot2':
+          slot2.addItem(currItem);
+          setItem(currItem.item_name);
+          break;
+        case 'slot3':
+          slot3.addItem(currItem);
+          setItem(currItem.item_name);
+          break;
+        case 'slot4':
+          slot4.addItem(currItem);
+          setItem(currItem.item_name);
+          break;
+        case 'slot5':
+          slot5.addItem(currItem);
+          setItem(currItem.item_name);
+          break;
+        default:
+          console.log("Error setting item to slot.");
+      }
+
+      setIsChoosingItem(false);
+      setIsChoosingMove(true);
     }
 
     const fillInMove = (event) => {
-      // renders move search results under form and sets active move slot to
-      // the clicked one based on its id
-      console.log(event.target.id);
       setActiveMoveSlot(event.target.id);
       setIsChoosingItem(false);
       setIsChoosingMove(true);
@@ -212,37 +245,38 @@ export default function TeamNav(props) {
 
     const onMoveSearch = (event) => {
       const value = event.target.value;
+      setMove(event.target.value);
       let currSuggestions = [];
       if (value.length > 0){
           const regex = new RegExp(`${value}`, 'i');
           switch(activeSlot){
             case 'slot1':
-              currSuggestions = slot1.moveList.sort().filter(obj => {
-                const searchId = obj.search_id;
+              currSuggestions = slot1.moveList.sort().filter(move => {
+                const searchId = move;
                 return regex.test(searchId);
               });
               break;
             case 'slot2':
-              currSuggestions = slot2.moveList.sort().filter(obj => {
-                const searchId = obj.search_id;
+              currSuggestions = slot2.moveList.sort().filter(move => {
+                const searchId = move;
                 return regex.test(searchId);
               });
               break;
             case 'slot3':
-              currSuggestions = slot3.moveList.sort().filter(obj => {
-                const searchId = obj.search_id;
+              currSuggestions = slot3.moveList.sort().filter(move => {
+                const searchId = move;
                 return regex.test(searchId);
               });
               break;
             case 'slot4':
-              currSuggestions = slot4.moveList.sort().filter(obj => {
-                const searchId = obj.search_id;
+              currSuggestions = slot4.moveList.sort().filter(move => {
+                const searchId = move;
                 return regex.test(searchId);
               });
               break;
             case 'slot5':
-              currSuggestions = slot5.moveList.sort().filter(obj => {
-                const searchId = obj.search_id;
+              currSuggestions = slot5.moveList.sort().filter(move => {
+                const searchId = move;
                 return regex.test(searchId);
               });
               break;
@@ -270,6 +304,10 @@ export default function TeamNav(props) {
     }
 
     const saveTeam = () => {
+      // Create an iteration of the team class based on the beasts in the slots
+      // upload that team to the server in the string format
+      // Redirect user back to the teams page where the users teams are rendered
+      // Should have some form of validation before saving
       console.log('Team Saved')
     }
 
@@ -321,8 +359,11 @@ export default function TeamNav(props) {
                             chooseItem={chooseItem}
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
-                  <ItemSearchSuggestions suggestions={itemSuggestions} />
+                            onMoveSearch={onMoveSearch}
+                            item={item}
+                            move={move}
+                            activeMoveSlot={activeMoveSlot} />
+                  <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot1 !== null && isChoosingMove ?
                 <>
@@ -331,15 +372,21 @@ export default function TeamNav(props) {
                             chooseItem={chooseItem}
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
+                            onMoveSearch={onMoveSearch}
+                            item={item}
+                            move={move}
+                            activeMoveSlot={activeMoveSlot} />
                   <MoveSearchSuggestions suggestions={moveSuggestions} />
                 </> :
                   <SlotForm beast={slot1}
-                            returnDomains={returnDomains}
-                            chooseItem={chooseItem}
-                            onItemSearch={onItemSearch}
-                            fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
+                  returnDomains={returnDomains}
+                  chooseItem={chooseItem}
+                  onItemSearch={onItemSearch}
+                  fillInMove={fillInMove}
+                  onMoveSearch={onMoveSearch}
+                  item={item}
+                  move={move}
+                  activeMoveSlot={activeMoveSlot} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
@@ -355,8 +402,11 @@ export default function TeamNav(props) {
                             chooseItem={chooseItem}
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
-                  <ItemSearchSuggestions suggestions={itemSuggestions} />
+                            onMoveSearch={onMoveSearch}
+                            item={item}
+                            move={move}
+                            activeMoveSlot={activeMoveSlot} />
+                  <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot2 !== null && isChoosingMove ?
                 <>
@@ -365,15 +415,21 @@ export default function TeamNav(props) {
                             chooseItem={chooseItem}
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
+                            onMoveSearch={onMoveSearch}
+                            item={item}
+                            move={move}
+                            activeMoveSlot={activeMoveSlot} />
                   <MoveSearchSuggestions suggestions={moveSuggestions} />
                 </> :
                   <SlotForm beast={slot2}
-                            returnDomains={returnDomains}
-                            chooseItem={chooseItem}
-                            onItemSearch={onItemSearch}
-                            fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
+                  returnDomains={returnDomains}
+                  chooseItem={chooseItem}
+                  onItemSearch={onItemSearch}
+                  fillInMove={fillInMove}
+                  onMoveSearch={onMoveSearch}
+                  item={item}
+                  move={move}
+                  activeMoveSlot={activeMoveSlot} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
@@ -389,8 +445,11 @@ export default function TeamNav(props) {
                             chooseItem={chooseItem}
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
-                  <ItemSearchSuggestions suggestions={itemSuggestions} />
+                            onMoveSearch={onMoveSearch}
+                            item={item}
+                            move={move}
+                            activeMoveSlot={activeMoveSlot} />
+                  <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot3 !== null && isChoosingMove ?
                 <>
@@ -399,15 +458,21 @@ export default function TeamNav(props) {
                             chooseItem={chooseItem}
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
+                            onMoveSearch={onMoveSearch}
+                            item={item}
+                            move={move}
+                            activeMoveSlot={activeMoveSlot} />
                   <MoveSearchSuggestions suggestions={moveSuggestions} />
                 </> :
                   <SlotForm beast={slot3}
-                            returnDomains={returnDomains}
-                            chooseItem={chooseItem}
-                            onItemSearch={onItemSearch}
-                            fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
+                  returnDomains={returnDomains}
+                  chooseItem={chooseItem}
+                  onItemSearch={onItemSearch}
+                  fillInMove={fillInMove}
+                  onMoveSearch={onMoveSearch}
+                  item={item}
+                  move={move}
+                  activeMoveSlot={activeMoveSlot} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
@@ -423,8 +488,11 @@ export default function TeamNav(props) {
                             chooseItem={chooseItem}
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
-                  <ItemSearchSuggestions suggestions={itemSuggestions} />
+                            onMoveSearch={onMoveSearch}
+                            item={item}
+                            move={move}
+                            activeMoveSlot={activeMoveSlot} />
+                  <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot4 !== null && isChoosingMove ?
                 <>
@@ -433,15 +501,21 @@ export default function TeamNav(props) {
                             chooseItem={chooseItem}
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
+                            onMoveSearch={onMoveSearch}
+                            item={item}
+                            move={move}
+                            activeMoveSlot={activeMoveSlot} />
                   <MoveSearchSuggestions suggestions={moveSuggestions} />
                 </> :
                   <SlotForm beast={slot4}
-                            returnDomains={returnDomains}
-                            chooseItem={chooseItem}
-                            onItemSearch={onItemSearch}
-                            fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
+                  returnDomains={returnDomains}
+                  chooseItem={chooseItem}
+                  onItemSearch={onItemSearch}
+                  fillInMove={fillInMove}
+                  onMoveSearch={onMoveSearch}
+                  item={item}
+                  move={move}
+                  activeMoveSlot={activeMoveSlot} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
@@ -457,8 +531,11 @@ export default function TeamNav(props) {
                             chooseItem={chooseItem}
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
-                  <ItemSearchSuggestions suggestions={itemSuggestions} />
+                            onMoveSearch={onMoveSearch}
+                            item={item}
+                            move={move}
+                            activeMoveSlot={activeMoveSlot} />
+                  <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot5 !== null && isChoosingMove ?
                 <>
@@ -467,15 +544,21 @@ export default function TeamNav(props) {
                             chooseItem={chooseItem}
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
+                            onMoveSearch={onMoveSearch}
+                            item={item}
+                            move={move}
+                            activeMoveSlot={activeMoveSlot} />
                   <MoveSearchSuggestions suggestions={moveSuggestions} />
                 </> :
                   <SlotForm beast={slot5}
-                            returnDomains={returnDomains}
-                            chooseItem={chooseItem}
-                            onItemSearch={onItemSearch}
-                            fillInMove={fillInMove}
-                            onMoveSearch={onMoveSearch} />
+                  returnDomains={returnDomains}
+                  chooseItem={chooseItem}
+                  onItemSearch={onItemSearch}
+                  fillInMove={fillInMove}
+                  onMoveSearch={onMoveSearch}
+                  item={item}
+                  move={move}
+                  activeMoveSlot={activeMoveSlot} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
