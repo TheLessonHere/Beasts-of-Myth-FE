@@ -22,7 +22,10 @@ const useStyles = makeStyles(theme => ({
         overflow: 'scroll'
     },
     listItem: {
-        background: "lightgrey"
+        background: "lightgrey",
+        "&:hover": {
+            cursor: "pointer"
+        }
     },
     listItemHeader: {
         background: "darkgrey"

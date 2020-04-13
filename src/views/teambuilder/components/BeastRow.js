@@ -61,8 +61,10 @@ export default function BeastRow(props){
             md,
             sc } = beast;
 
+    const searchId = beast.beast_name.toLowerCase();
+
     return (
-        <ListItem className={listItemClass} divider={true} onClick={onBeastClick(beast)}>
+        <ListItem className={listItemClass} divider={true} onClick={() => onBeastClick(searchId)}>
             <ListItemText className={classes.format} primary={`${format}`} />
             <ListItemAvatar>
                 <Avatar

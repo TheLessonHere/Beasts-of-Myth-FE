@@ -4,12 +4,20 @@ import {
     Typography,
     Box,
     TextField,
+    FormLabel,
     FormControlLabel,
     FormGroup,
     Switch
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { getBeastImage } from '../../../utils/getBeastImage';
+
+const useStyles = makeStyles(theme => ({
+    image: {
+        height: "120px",
+        width: "120px"
+    }
+}))
 
 export default function SlotForm(props){
     const { beast,
@@ -18,35 +26,39 @@ export default function SlotForm(props){
             onItemSearch,
             fillInMove,
             onMoveSearch } = props;
-
+    const classes = useStyles();
     const [lusterChecked, setLusterChecked] = useState(false);
+
+    const searchId = beast.beast_name.toLowerCase();
+
+    const beastImage = getBeastImage(searchId);
 
     return (
         <Container>
             <Box>
-                <Typography variant="h3">{currBeast.beast_name}</Typography>
-                <img src={getBeastImage(beast.search_id)} alt={`${currBeast.beast_name}-image`}/>
-                <Typography variant="h5">{currBeast.format}</Typography>
+                <Typography variant="h3">{beast.beast_name}</Typography>
+                <img className={classes.image} src={beastImage} alt={`${beast.beast_name}-image`}/>
+                <Typography variant="h5">{beast.format}</Typography>
             </Box>
             <Box>
                 <FormGroup>
-                    <Typography variant="h4">{returnDomains(currBeast.domain1, currBeast.domain2)}</Typography>
+                    <Typography variant="h4">{returnDomains(beast.domain1, beast.domain2)}</Typography>
                     <TextField onClick={chooseItem} onChange={onItemSearch} label="Item"/>
                     {/* Add info window on hover for the ability */}
-                    <Typography variant="h4">{currBeast.ability}</Typography>
+                    <Typography variant="h4">{beast.ability}</Typography>
                     <FormControlLabel control={
                         <Switch size="small"
                         checked={lusterChecked}
-                        onChange={setLusterChecked(!lusterChecked)}
+                        onChange={() => setLusterChecked(!lusterChecked)}
                         disabled={true} />}
                         label="Luster" />
                     <Box>
-                        <Typography variant="subtitle1">HP: {currBeast.init_hp}</Typography>
-                        <Typography variant="subtitle1">PA: {currBeast.init_pa}</Typography>
-                        <Typography variant="subtitle1">PD: {currBeast.init_pd}</Typography>
-                        <Typography variant="subtitle1">MA: {currBeast.init_ma}</Typography>
-                        <Typography variant="subtitle1">MD: {currBeast.init_md}</Typography>
-                        <Typography variant="subtitle1">SC: {currBeast.init_sc}</Typography>
+                        <Typography variant="subtitle1">HP: {beast.init_hp}</Typography>
+                        <Typography variant="subtitle1">PA: {beast.init_pa}</Typography>
+                        <Typography variant="subtitle1">PD: {beast.init_pd}</Typography>
+                        <Typography variant="subtitle1">MA: {beast.init_ma}</Typography>
+                        <Typography variant="subtitle1">MD: {beast.init_md}</Typography>
+                        <Typography variant="subtitle1">SC: {beast.init_sc}</Typography>
                     </Box>
                 </FormGroup>
             </Box>
