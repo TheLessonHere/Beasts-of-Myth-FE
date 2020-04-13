@@ -1,6 +1,7 @@
 const items = [
     {
         item_id: 1,
+        format: "Unrestricted",
         item_name: "Super Crystal",
         search_id: "super crystal",
         type: "activated",
@@ -11,6 +12,7 @@ const items = [
     },
     {
         item_id: 2,
+        format: "Unrestricted",
         item_name: "Focus Vest",
         search_id: "focus vest",
         type: "static",
@@ -22,6 +24,7 @@ const items = [
     },
     {
         item_id: 3,
+        format: "Unrestricted",
         item_name: "Focus Cap",
         search_id: "focus cap",
         type: "static",
@@ -33,6 +36,7 @@ const items = [
     },
     {
         item_id: 4,
+        format: "Unrestricted",
         item_name: "Focus Brace",
         search_id: "focus brace",
         type: "static",
@@ -44,6 +48,7 @@ const items = [
     },
     {
         item_id: 5,
+        format: "Unrestricted",
         item_name: "Berry",
         search_id: "berry",
         type: "consumable",
