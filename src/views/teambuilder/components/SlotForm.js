@@ -31,6 +31,12 @@ const useStyles = makeStyles(theme => ({
         alignItems: "center",
         padding: "10px",
         border: "1px solid darkgrey",
+        background: "lightgrey"
+    },
+    item: {
+        marginTop: "10px",
+        marginBottom: "10px",
+        background: "whitesmoke"
     },
     statBox: {
         display: "flex",
@@ -42,12 +48,17 @@ const useStyles = makeStyles(theme => ({
         justifyContent: "center",
         alignItems: "center"
     },
+    move: {
+        background: "whitesmoke",
+        border: "1px solid darkgrey",
+        borderRadius: "5px"
+    },
     text: {
         textAlign: "center"
     },
     image: {
-        height: "120px",
-        width: "120px"
+        height: "170px",
+        width: "170px"
     },
     switch: {
         alignSelf: "center"
@@ -81,7 +92,7 @@ export default function SlotForm(props){
             <Box className={classes.formColumn}>
                 <FormGroup>
                     <Typography className={classes.text} variant="h6">Domain: {returnDomains(beast.domain1, beast.domain2)}</Typography>
-                    <TextField value={item} onClick={chooseItem} onChange={onItemSearch} label="Item"/>
+                    <TextField className={classes.item} value={item} onClick={chooseItem} onChange={onItemSearch} label="Item"/>
                     {/* Add info window on hover for the ability */}
                     <Typography className={classes.text} variant="h6">Ability: {beast.ability}</Typography>
                     <FormControlLabel control={
@@ -109,50 +120,38 @@ export default function SlotForm(props){
             <Box className={classes.formColumn}>
                 <FormGroup>
                     <FormLabel>Moves</FormLabel>
-                    <TextField value={() => {
-                                    if(activeMoveSlot === "move1"){
-                                        return move;
-                                    } else {
-                                        return ""
-                                    }
-                                }}
+                    <TextField value={activeMoveSlot === "move1" ?
+                                    move :
+                                    ""}
                                 id="move1"
+                                variant="outlined"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
-                                label="1" />
-                    <TextField value={() => {
-                                    if(activeMoveSlot === "move2"){
-                                        return move;
-                                    } else {
-                                        return ""
-                                    }
-                                }}
+                                className={classes.move} />
+                    <TextField value={activeMoveSlot === "move2" ?
+                                    move :
+                                    ""}
                                 id="move2"
+                                variant="outlined"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
-                                label="2" />
-                    <TextField value={() => {
-                                    if(activeMoveSlot === "move3"){
-                                        return move;
-                                    } else {
-                                        return ""
-                                    }
-                                }}
+                                className={classes.move} />
+                    <TextField value={activeMoveSlot === "move3" ?
+                                    move :
+                                    ""}
                                 id="move3"
+                                variant="outlined"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
-                                label="3" />
-                    <TextField value={() => {
-                                    if(activeMoveSlot === "move4"){
-                                        return move;
-                                    } else {
-                                        return ""
-                                    }
-                                }}
+                                className={classes.move} />
+                    <TextField value={activeMoveSlot === "move4" ?
+                                    move :
+                                    ""}
                                 id="move4"
+                                variant="outlined"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
-                                label="4" />
+                                className={classes.move} />
                 </FormGroup>
             </Box>
         </Container>
