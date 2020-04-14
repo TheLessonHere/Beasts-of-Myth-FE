@@ -93,9 +93,31 @@ export default function TeamNav(props) {
     const [activeMoveSlot, setActiveMoveSlot] = useState('move1');
     const [isChoosingMove, setIsChoosingMove] = useState(false);
     const [isChoosingItem, setIsChoosingItem] = useState(true);
-    // Each slot needs an active move and item state
-    const [item, setItem] = useState("");
-    const [move, setMove] = useState("");
+    const [itemSlot1, setItemSlot1] = useState("");
+    const [itemSlot2, setItemSlot2] = useState("");
+    const [itemSlot3, setItemSlot3] = useState("");
+    const [itemSlot4, setItemSlot4] = useState("");
+    const [itemSlot5, setItemSlot5] = useState("");
+    const [slot1Move1, setSlot1Move1] = useState("");
+    const [slot1Move2, setSlot1Move2] = useState("");
+    const [slot1Move3, setSlot1Move3] = useState("");
+    const [slot1Move4, setSlot1Move4] = useState("");
+    const [slot2Move1, setSlot2Move1] = useState("");
+    const [slot2Move2, setSlot2Move2] = useState("");
+    const [slot2Move3, setSlot2Move3] = useState("");
+    const [slot2Move4, setSlot2Move4] = useState("");
+    const [slot3Move1, setSlot3Move1] = useState("");
+    const [slot3Move2, setSlot3Move2] = useState("");
+    const [slot3Move3, setSlot3Move3] = useState("");
+    const [slot3Move4, setSlot3Move4] = useState("");
+    const [slot4Move1, setSlot4Move1] = useState("");
+    const [slot4Move2, setSlot4Move2] = useState("");
+    const [slot4Move3, setSlot4Move3] = useState("");
+    const [slot4Move4, setSlot4Move4] = useState("");
+    const [slot5Move1, setSlot5Move1] = useState("");
+    const [slot5Move2, setSlot5Move2] = useState("");
+    const [slot5Move3, setSlot5Move3] = useState("");
+    const [slot5Move4, setSlot5Move4] = useState("");
     const [itemSuggestions, setItemSuggestions] = useState([]);
     const [moveSuggestions, setMoveSuggestions] = useState([]);
 
@@ -112,18 +134,28 @@ export default function TeamNav(props) {
         switch(newValue){
             case 0:
                 setActiveSlot('slot1');
+                setItemSuggestions([]);
+                setMoveSuggestions([]);
                 break;
             case 1:
                 setActiveSlot('slot2');
+                setItemSuggestions([]);
+                setMoveSuggestions([]);
                 break;
             case 2:
                 setActiveSlot('slot3');
+                setItemSuggestions([]);
+                setMoveSuggestions([]);
                 break;
             case 3:
                 setActiveSlot('slot4');
+                setItemSuggestions([]);
+                setMoveSuggestions([]);
                 break;
             case 4:
                 setActiveSlot('slot5');
+                setItemSuggestions([]);
+                setMoveSuggestions([]);
                 break;
             default:
                 console.log("Error with shifting tabs.")
@@ -187,7 +219,25 @@ export default function TeamNav(props) {
 
     const onItemSearch = (event) => {
       const value = event.target.value;
-      setItem(event.target.value);
+      switch(activeSlot){
+        case 'slot1':
+          setItemSlot1(value);
+          break;
+        case 'slot2':
+          setItemSlot2(value);
+          break;
+        case 'slot3':
+          setItemSlot3(value);
+          break;
+        case 'slot4':
+          setItemSlot4(value);
+          break;
+        case 'slot5':
+          setItemSlot5(value);
+          break;
+        default:
+          console.log("Error getting active slot for item.")
+      }
       let currSuggestions = [];
       if (value.length > 0){
           const regex = new RegExp(`${value}`, 'i');
@@ -200,36 +250,35 @@ export default function TeamNav(props) {
     }
 
     const onItemClick = (item) => {
-      const data = items.find(itemData => itemData.search_id === item);
-      const currItem = new Item(data.format,
-        data.item_id,
-        data.item_name,
-        data.type,
-        data.effect,
-        data.description,
-        data.short_description,
-        data.removable);
+      const currItem = new Item(item.format,
+        item.item_id,
+        item.item_name,
+        item.type,
+        item.effect,
+        item.description,
+        item.short_description,
+        item.removable);
 
       switch(activeSlot){
         case 'slot1':
           slot1.addItem(currItem);
-          setItem(currItem.item_name);
+          setItemSlot1(currItem.item_name);
           break;
         case 'slot2':
           slot2.addItem(currItem);
-          setItem(currItem.item_name);
+          setItemSlot2(currItem.item_name);
           break;
         case 'slot3':
           slot3.addItem(currItem);
-          setItem(currItem.item_name);
+          setItemSlot3(currItem.item_name);
           break;
         case 'slot4':
           slot4.addItem(currItem);
-          setItem(currItem.item_name);
+          setItemSlot4(currItem.item_name);
           break;
         case 'slot5':
           slot5.addItem(currItem);
-          setItem(currItem.item_name);
+          setItemSlot5(currItem.item_name);
           break;
         default:
           console.log("Error setting item to slot.");
@@ -247,7 +296,6 @@ export default function TeamNav(props) {
 
     const onMoveSearch = (event) => {
       const value = event.target.value;
-      setMove(event.target.value);
       let currSuggestions = [];
       if (value.length > 0){
           const regex = new RegExp(`${value}`, 'i');
@@ -255,149 +303,267 @@ export default function TeamNav(props) {
             case 'slot1':
               const allMoves1 = slot1.moveList.map(move => {
                 const data = moves.find(moveData => moveData.move_name === move);
-                const newMove = new Move(data.move_id,
-                                        data.move_name,
-                                        data.domain,
-                                        data.type,
-                                        data.base_power,
-                                        data.me,
-                                        data.priority,
-                                        data.effect,
-                                        data.description,
-                                        data.short_description);
-                return newMove;
+                return data;
               })
               currSuggestions = allMoves1.sort().filter(move => {
                 const searchId = move.move_name;
                 return regex.test(searchId);
               });
-              break;
+              switch(activeMoveSlot){
+                case 'move1':
+                  setSlot1Move1(value);
+                  break;
+                case 'move2':
+                  setSlot1Move2(value);
+                  break;
+                case 'move3':
+                  setSlot1Move3(value);
+                  break;
+                case 'move4':
+                  setSlot1Move4(value);
+                  break;
+                default:
+                  console.log("Error setting moves for slot1.")
+              } break;
             case 'slot2':
               const allMoves2 = slot2.moveList.map(move => {
                 const data = moves.find(moveData => moveData.move_name === move);
-                const newMove = new Move(data.move_id,
-                                        data.move_name,
-                                        data.domain,
-                                        data.type,
-                                        data.base_power,
-                                        data.me,
-                                        data.priority,
-                                        data.effect,
-                                        data.description,
-                                        data.short_description);
-                return newMove;
+                return data;
               })
               currSuggestions = allMoves2.sort().filter(move => {
                 const searchId = move.move_name;
                 return regex.test(searchId);
               });
-              break;
+              switch(activeMoveSlot){
+                case 'move1':
+                  setSlot2Move1(value);
+                  break;
+                case 'move2':
+                  setSlot2Move2(value);
+                  break;
+                case 'move3':
+                  setSlot2Move3(value);
+                  break;
+                case 'move4':
+                  setSlot2Move4(value);
+                  break;
+                default:
+                  console.log("Error setting moves for slot2.")
+              } break;
             case 'slot3':
               const allMoves3 = slot3.moveList.map(move => {
                 const data = moves.find(moveData => moveData.move_name === move);
-                const newMove = new Move(data.move_id,
-                                        data.move_name,
-                                        data.domain,
-                                        data.type,
-                                        data.base_power,
-                                        data.me,
-                                        data.priority,
-                                        data.effect,
-                                        data.description,
-                                        data.short_description);
-                return newMove;
+                return data;
               })
               currSuggestions = allMoves3.sort().filter(move => {
                 const searchId = move.move_name;
                 return regex.test(searchId);
               });
-              break;
+              switch(activeMoveSlot){
+                case 'move1':
+                  setSlot3Move1(value);
+                  break;
+                case 'move2':
+                  setSlot3Move2(value);
+                  break;
+                case 'move3':
+                  setSlot3Move3(value);
+                  break;
+                case 'move4':
+                  setSlot3Move4(value);
+                  break;
+                default:
+                  console.log("Error setting moves for slot3.")
+              } break;
             case 'slot4':
               const allMoves4 = slot4.moveList.map(move => {
                 const data = moves.find(moveData => moveData.move_name === move);
-                const newMove = new Move(data.move_id,
-                                        data.move_name,
-                                        data.domain,
-                                        data.type,
-                                        data.base_power,
-                                        data.me,
-                                        data.priority,
-                                        data.effect,
-                                        data.description,
-                                        data.short_description);
-                return newMove;
+                return data;
               })
               currSuggestions = allMoves4.sort().filter(move => {
                 const searchId = move.move_name;
                 return regex.test(searchId);
               });
-              break;
+              switch(activeMoveSlot){
+                case 'move1':
+                  setSlot4Move1(value);
+                  break;
+                case 'move2':
+                  setSlot4Move2(value);
+                  break;
+                case 'move3':
+                  setSlot4Move3(value);
+                  break;
+                case 'move4':
+                  setSlot4Move4(value);
+                  break;
+                default:
+                  console.log("Error setting moves for slot4.")
+              } break;
             case 'slot5':
               const allMoves5 = slot5.moveList.map(move => {
                 const data = moves.find(moveData => moveData.move_name === move);
-                const newMove = new Move(data.move_id,
-                                        data.move_name,
-                                        data.domain,
-                                        data.type,
-                                        data.base_power,
-                                        data.me,
-                                        data.priority,
-                                        data.effect,
-                                        data.description,
-                                        data.short_description);
-                return newMove;
+                return data;
               })
               currSuggestions = allMoves5.sort().filter(move => {
                 const searchId = move.move_name;
                 return regex.test(searchId);
               });
-              break;
-            default:
-              console.log("Error setting move suggestions.");
-          }
-      }
+              switch(activeMoveSlot){
+                case 'move1':
+                  setSlot5Move1(value);
+                  break;
+                case 'move2':
+                  setSlot5Move2(value);
+                  break;
+                case 'move3':
+                  setSlot5Move3(value);
+                  break;
+                case 'move4':
+                  setSlot5Move4(value);
+                  break;
+                default:
+                  console.log("Error setting moves for slot5.")
+              } break;
+              default:
+                console.log("Error getting active slot.")
+          }}
       setMoveSuggestions(currSuggestions);
     }
 
-    const onMoveClick = (event) => {
-      // Sets the clicked move to the active move slot
-      const data = items.find(itemData => itemData.search_id === item);
-      const currItem = new Item(data.format,
-        data.item_id,
-        data.item_name,
-        data.type,
-        data.effect,
-        data.description,
-        data.short_description,
-        data.removable);
+    const onMoveClick = (move) => {
+      const newMove = new Move(move.move_id,
+        move.move_name,
+        move.domain,
+        move.type,
+        move.base_power,
+        move.me,
+        move.priority,
+        move.effect,
+        move.description,
+        move.short_description);
 
       switch(activeSlot){
         case 'slot1':
-          slot1.addItem(currItem);
-          setItem(currItem.item_name);
+          switch(activeMoveSlot){
+            case 'move1':
+              slot1.addMove('move1', newMove);
+              setSlot1Move1(newMove.move_name);
+              break;
+            case 'move2':
+              slot1.addMove('move2', newMove);
+              setSlot1Move2(newMove.move_name);
+              break;
+            case 'move3':
+              slot1.addMove('move3', newMove);
+              setSlot1Move3(newMove.move_name);
+              break;
+            case 'move4':
+              slot1.addMove('move4', newMove);
+              setSlot1Move4(newMove.move_name);
+              break;
+            default:
+              console.log("Error adding move to slot 1.")
+          }
           break;
         case 'slot2':
-          slot2.addItem(currItem);
-          setItem(currItem.item_name);
+          switch(activeMoveSlot){
+            case 'move1':
+              slot2.addMove('move1', newMove);
+              setSlot2Move1(newMove.move_name);
+              break;
+            case 'move2':
+              slot2.addMove('move2', newMove);
+              setSlot2Move2(newMove.move_name);
+              break;
+            case 'move3':
+              slot2.addMove('move3', newMove);
+              setSlot2Move3(newMove.move_name);
+              break;
+            case 'move4':
+              slot2.addMove('move4', newMove);
+              setSlot2Move4(newMove.move_name);
+              break;
+            default:
+              console.log("Error adding move to slot 2.")
+          }
           break;
         case 'slot3':
-          slot3.addItem(currItem);
-          setItem(currItem.item_name);
+          switch(activeMoveSlot){
+            case 'move1':
+              slot3.addMove('move1', newMove);
+              setSlot3Move1(newMove.move_name);
+              break;
+            case 'move2':
+              slot3.addMove('move2', newMove);
+              setSlot3Move2(newMove.move_name);
+              break;
+            case 'move3':
+              slot3.addMove('move3', newMove);
+              setSlot3Move3(newMove.move_name);
+              break;
+            case 'move4':
+              slot3.addMove('move4', newMove);
+              setSlot3Move4(newMove.move_name);
+              break;
+            default:
+              console.log("Error adding move to slot 3.")
+          }
           break;
         case 'slot4':
-          slot4.addItem(currItem);
-          setItem(currItem.item_name);
+          switch(activeMoveSlot){
+            case 'move1':
+              slot4.addMove('move1', newMove);
+              setSlot4Move1(newMove.move_name);
+              break;
+            case 'move2':
+              slot4.addMove('move2', newMove);
+              setSlot4Move2(newMove.move_name);
+              break;
+            case 'move3':
+              slot4.addMove('move3', newMove);
+              setSlot4Move3(newMove.move_name);
+              break;
+            case 'move4':
+              slot4.addMove('move4', newMove);
+              setSlot4Move4(newMove.move_name);
+              break;
+            default:
+              console.log("Error adding move to slot 4.")
+          }
           break;
         case 'slot5':
-          slot5.addItem(currItem);
-          setItem(currItem.item_name);
+          switch(activeMoveSlot){
+            case 'move1':
+              slot5.addMove('move1', newMove);
+              setSlot5Move1(newMove.move_name);
+              break;
+            case 'move2':
+              slot5.addMove('move2', newMove);
+              setSlot5Move2(newMove.move_name);
+              break;
+            case 'move3':
+              slot5.addMove('move3', newMove);
+              setSlot5Move3(newMove.move_name);
+              break;
+            case 'move4':
+              slot5.addMove('move4', newMove);
+              setSlot5Move4(newMove.move_name);
+              break;
+            default:
+              console.log("Error adding move to slot 5.")
+          }
           break;
         default:
-          console.log("Error setting item to slot.");
+          console.log("Error setting move to slot.");
       }
 
-      setIsChoosingItem(false);
-      setIsChoosingMove(true);
+      setIsChoosingMove(false);
+      setIsChoosingItem(true);
+    }
+
+    const logTeam = () => {
+      console.log(slot1, slot2, slot3, slot4, slot5);
     }
 
     const returnDomains = (domain1, domain2) => {
@@ -468,9 +634,11 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={item}
-                            move={move}
-                            activeMoveSlot={activeMoveSlot} />
+                            item={itemSlot1}
+                            move1={slot1Move1}
+                            move2={slot1Move2}
+                            move3={slot1Move3}
+                            move4={slot1Move4} />
                   <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot1 !== null && isChoosingMove ?
@@ -481,10 +649,12 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={item}
-                            move={move}
-                            activeMoveSlot={activeMoveSlot} />
-                  <MoveSearchSuggestions suggestions={moveSuggestions} />
+                            item={itemSlot1}
+                            move1={slot1Move1}
+                            move2={slot1Move2}
+                            move3={slot1Move3}
+                            move4={slot1Move4} />
+                  <MoveSearchSuggestions suggestions={moveSuggestions} onMoveClick={onMoveClick} />
                 </> :
                   <SlotForm beast={slot1}
                   returnDomains={returnDomains}
@@ -492,11 +662,14 @@ export default function TeamNav(props) {
                   onItemSearch={onItemSearch}
                   fillInMove={fillInMove}
                   onMoveSearch={onMoveSearch}
-                  item={item}
-                  move={move}
-                  activeMoveSlot={activeMoveSlot} />
+                  item={itemSlot1}
+                  move1={slot1Move1}
+                  move2={slot1Move2}
+                  move3={slot1Move3}
+                  move4={slot1Move4} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
+                <button onClick={logTeam}>Log Team</button>
             </TabPanel>
             <TabPanel classes={classes} value={tabValue} index={1}>
                 {slot2 === null ?
@@ -511,9 +684,11 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={item}
-                            move={move}
-                            activeMoveSlot={activeMoveSlot} />
+                            item={itemSlot2}
+                            move1={slot2Move1}
+                            move2={slot2Move2}
+                            move3={slot2Move3}
+                            move4={slot2Move4} />
                   <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot2 !== null && isChoosingMove ?
@@ -524,10 +699,12 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={item}
-                            move={move}
-                            activeMoveSlot={activeMoveSlot} />
-                  <MoveSearchSuggestions suggestions={moveSuggestions} />
+                            item={itemSlot2}
+                            move1={slot2Move1}
+                            move2={slot2Move2}
+                            move3={slot2Move3}
+                            move4={slot2Move4} />
+                  <MoveSearchSuggestions suggestions={moveSuggestions} onMoveClick={onMoveClick} />
                 </> :
                   <SlotForm beast={slot2}
                   returnDomains={returnDomains}
@@ -535,11 +712,14 @@ export default function TeamNav(props) {
                   onItemSearch={onItemSearch}
                   fillInMove={fillInMove}
                   onMoveSearch={onMoveSearch}
-                  item={item}
-                  move={move}
-                  activeMoveSlot={activeMoveSlot} />
+                  item={itemSlot2}
+                  move1={slot2Move1}
+                  move2={slot2Move2}
+                  move3={slot2Move3}
+                  move4={slot2Move4} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
+                <button onClick={logTeam}>Log Team</button>
             </TabPanel>
             <TabPanel classes={classes} value={tabValue} index={2}>
                 {slot3 === null ?
@@ -554,9 +734,11 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={item}
-                            move={move}
-                            activeMoveSlot={activeMoveSlot} />
+                            item={itemSlot3}
+                            move1={slot3Move1}
+                            move2={slot3Move2}
+                            move3={slot3Move3}
+                            move4={slot3Move4} />
                   <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot3 !== null && isChoosingMove ?
@@ -567,10 +749,12 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={item}
-                            move={move}
-                            activeMoveSlot={activeMoveSlot} />
-                  <MoveSearchSuggestions suggestions={moveSuggestions} />
+                            item={itemSlot3}
+                            move1={slot3Move1}
+                            move2={slot3Move2}
+                            move3={slot3Move3}
+                            move4={slot3Move4} />
+                  <MoveSearchSuggestions suggestions={moveSuggestions} onMoveClick={onMoveClick} />
                 </> :
                   <SlotForm beast={slot3}
                   returnDomains={returnDomains}
@@ -578,11 +762,14 @@ export default function TeamNav(props) {
                   onItemSearch={onItemSearch}
                   fillInMove={fillInMove}
                   onMoveSearch={onMoveSearch}
-                  item={item}
-                  move={move}
-                  activeMoveSlot={activeMoveSlot} />
+                  item={itemSlot3}
+                  move1={slot3Move1}
+                  move2={slot3Move2}
+                  move3={slot3Move3}
+                  move4={slot3Move4} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
+                <button onClick={logTeam}>Log Team</button>
             </TabPanel>
             <TabPanel classes={classes} value={tabValue} index={3}>
                 {slot4 === null ?
@@ -597,9 +784,11 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={item}
-                            move={move}
-                            activeMoveSlot={activeMoveSlot} />
+                            item={itemSlot4}
+                            move1={slot4Move1}
+                            move2={slot4Move2}
+                            move3={slot4Move3}
+                            move4={slot4Move4} />
                   <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot4 !== null && isChoosingMove ?
@@ -610,10 +799,12 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={item}
-                            move={move}
-                            activeMoveSlot={activeMoveSlot} />
-                  <MoveSearchSuggestions suggestions={moveSuggestions} />
+                            item={itemSlot4}
+                            move1={slot4Move1}
+                            move2={slot4Move2}
+                            move3={slot4Move3}
+                            move4={slot4Move4} />
+                  <MoveSearchSuggestions suggestions={moveSuggestions} onMoveClick={onMoveClick} />
                 </> :
                   <SlotForm beast={slot4}
                   returnDomains={returnDomains}
@@ -621,11 +812,14 @@ export default function TeamNav(props) {
                   onItemSearch={onItemSearch}
                   fillInMove={fillInMove}
                   onMoveSearch={onMoveSearch}
-                  item={item}
-                  move={move}
-                  activeMoveSlot={activeMoveSlot} />
+                  item={itemSlot4}
+                  move1={slot4Move1}
+                  move2={slot4Move2}
+                  move3={slot4Move3}
+                  move4={slot4Move4} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
+                <button onClick={logTeam}>Log Team</button>
             </TabPanel>
             <TabPanel classes={classes} value={tabValue} index={4}>
                 {slot5 === null ?
@@ -640,9 +834,11 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={item}
-                            move={move}
-                            activeMoveSlot={activeMoveSlot} />
+                            item={itemSlot5}
+                            move1={slot5Move1}
+                            move2={slot5Move2}
+                            move3={slot5Move3}
+                            move4={slot5Move4} />
                   <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot5 !== null && isChoosingMove ?
@@ -653,10 +849,12 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={item}
-                            move={move}
-                            activeMoveSlot={activeMoveSlot} />
-                  <MoveSearchSuggestions suggestions={moveSuggestions} />
+                            item={itemSlot5}
+                            move1={slot5Move1}
+                            move2={slot5Move2}
+                            move3={slot5Move3}
+                            move4={slot5Move4} />
+                  <MoveSearchSuggestions suggestions={moveSuggestions} onMoveClick={onMoveClick} />
                 </> :
                   <SlotForm beast={slot5}
                   returnDomains={returnDomains}
@@ -664,11 +862,14 @@ export default function TeamNav(props) {
                   onItemSearch={onItemSearch}
                   fillInMove={fillInMove}
                   onMoveSearch={onMoveSearch}
-                  item={item}
-                  move={move}
-                  activeMoveSlot={activeMoveSlot} />
+                  item={itemSlot5}
+                  move1={slot5Move1}
+                  move2={slot5Move2}
+                  move3={slot5Move3}
+                  move4={slot5Move4} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
+                <button onClick={logTeam}>Log Team</button>
             </TabPanel>
         </div>
 )}

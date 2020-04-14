@@ -1,12 +1,9 @@
 import React from 'react';
 import {
     ListItem,
-    ListItemText,
-    ListItemAvatar,
-    Avatar
+    ListItemText
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { getItemImage } from '../../../utils/getItemImage';
 
 const useStyles = makeStyles(theme => ({
     listItem: {
@@ -15,15 +12,35 @@ const useStyles = makeStyles(theme => ({
             cursor: "pointer"
         }
     },
-    avi: {
-        marginLeft: "10px",
-        marginRight: "10px"
-    },
     name: {
         width: "120px",
         textAlign: "left",
         marginLeft: "5px",
         marginRight: "30px"
+    },
+    domain: {
+        textAlign: "left",
+        width: "80px",
+        marginLeft: "10px",
+        marginRight: "40px"
+    },
+    type: {
+        textAlign: "left",
+        width: "80px",
+        marginLeft: "10px",
+        marginRight: "40px"
+    },
+    basePower: {
+        textAlign: "left",
+        width: "80px",
+        marginLeft: "10px",
+        marginRight: "40px"
+    },
+    me: {
+        textAlign: "left",
+        width: "80px",
+        marginLeft: "10px",
+        marginRight: "40px"
     },
     description: {
         textAlign: "left",
@@ -33,18 +50,18 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export default function ItemRow(props){
+export default function MoveRow(props){
     const { move, onMoveClick } = props;
     const classes = useStyles();
-    const { search_id,
-            format,
-            item_name,
-            short_description } = move;
 
     return (
-        <ListItem className={classes.listItem} divider={true} onClick={() => onMoveClick(search_id)}>
-            <ListItemText className={classes.name} primary={`${item_name}`} />
-            <ListItemText className={classes.description} primary={`${short_description}`} />
+        <ListItem className={classes.listItem} divider={true} onClick={() => onMoveClick(move)}>
+            <ListItemText className={classes.name} primary={`${move.move_name}`} />
+            <ListItemText className={classes.domain} primary={`${move.domain}`} />
+            <ListItemText className={classes.type} primary={`${move.type}`} />
+            <ListItemText className={classes.basePower} primary={`${move.base_power}`} />
+            <ListItemText className={classes.me} primary={`${move.me}`} />
+            <ListItemText className={classes.description} primary={`${move.description}`} />
         </ListItem>
     )
 };
