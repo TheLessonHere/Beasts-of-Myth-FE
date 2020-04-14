@@ -93,7 +93,6 @@ export default function TeamNav(props) {
     const [activeMoveSlot, setActiveMoveSlot] = useState('move1');
     const [isChoosingMove, setIsChoosingMove] = useState(false);
     const [isChoosingItem, setIsChoosingItem] = useState(true);
-    // Each slot needs an active move and item state
     const [itemSlot1, setItemSlot1] = useState("");
     const [itemSlot2, setItemSlot2] = useState("");
     const [itemSlot3, setItemSlot3] = useState("");
@@ -333,20 +332,20 @@ export default function TeamNav(props) {
               });
               switch(activeMoveSlot){
                 case 'move1':
-                  setMoveSlot1({...moveSlot1,
-                                move1: value})
+                  const s1ms1 = {...moveSlot1, move1: value};
+                  setMoveSlot1(s1ms1);
                                 break;
                 case 'move2':
-                  setMoveSlot1({...moveSlot1,
-                                move2: value})
+                  const s1ms2 = {...moveSlot1, move2: value};
+                  setMoveSlot1(s1ms2);
                                 break;
                 case 'move3':
-                  setMoveSlot1({...moveSlot1,
-                                move3: value})
+                  const s1ms3 = {...moveSlot1, move3: value};
+                  setMoveSlot1(s1ms3);
                                 break;
                 case 'move4':
-                  setMoveSlot1({...moveSlot1,
-                                move4: value})
+                  const s1ms4 = {...moveSlot1, move4: value};
+                  setMoveSlot1(s1ms4);
                                 break;
                 default:
                   console.log("Error setting moves for slot1.")
@@ -372,20 +371,20 @@ export default function TeamNav(props) {
               });
               switch(activeMoveSlot){
                 case 'move1':
-                  setMoveSlot2({...moveSlot2,
-                                move1: value})
+                  const s2ms1 = {...moveSlot2, move1: value};
+                  setMoveSlot2(s2ms1);
                                 break;
                 case 'move2':
-                  setMoveSlot2({...moveSlot2,
-                                move2: value})
+                  const s2ms2 = {...moveSlot2, move2: value};
+                  setMoveSlot2(s2ms2);
                                 break;
                 case 'move3':
-                  setMoveSlot2({...moveSlot2,
-                                move3: value})
+                  const s2ms3 = {...moveSlot2, move3: value};
+                  setMoveSlot2(s2ms3);
                                 break;
                 case 'move4':
-                  setMoveSlot2({...moveSlot2,
-                                move4: value})
+                  const s2ms4 = {...moveSlot2, move4: value};
+                  setMoveSlot2(s2ms4);
                                 break;
                 default:
                   console.log("Error setting moves for slot2.")
@@ -411,20 +410,20 @@ export default function TeamNav(props) {
               });
               switch(activeMoveSlot){
                 case 'move1':
-                  setMoveSlot3({...moveSlot3,
-                                move1: value})
+                  const s3ms1 = {...moveSlot3, move1: value};
+                  setMoveSlot3(s3ms1);
                                 break;
                 case 'move2':
-                  setMoveSlot3({...moveSlot3,
-                                move2: value})
+                  const s3ms2 = {...moveSlot3, move2: value};
+                  setMoveSlot3(s3ms2);
                                 break;
                 case 'move3':
-                  setMoveSlot3({...moveSlot3,
-                                move3: value})
+                  const s3ms3 = {...moveSlot3, move3: value};
+                  setMoveSlot3(s3ms3);
                                 break;
                 case 'move4':
-                  setMoveSlot3({...moveSlot3,
-                                move4: value})
+                  const s3ms4 = {...moveSlot3, move4: value};
+                  setMoveSlot3(s3ms4);
                                 break;
                 default:
                   console.log("Error setting moves for slot3.")
@@ -450,20 +449,20 @@ export default function TeamNav(props) {
               });
               switch(activeMoveSlot){
                 case 'move1':
-                  setMoveSlot4({...moveSlot4,
-                                move1: value})
+                  const s4ms1 = {...moveSlot4, move1: value};
+                  setMoveSlot4(s4ms1);
                                 break;
                 case 'move2':
-                  setMoveSlot4({...moveSlot4,
-                                move2: value})
+                  const s4ms2 = {...moveSlot4, move2: value};
+                  setMoveSlot4(s4ms2);
                                 break;
                 case 'move3':
-                  setMoveSlot4({...moveSlot4,
-                                move3: value})
+                  const s4ms3 = {...moveSlot4, move3: value};
+                  setMoveSlot4(s4ms3);
                                 break;
                 case 'move4':
-                  setMoveSlot4({...moveSlot4,
-                                move4: value})
+                  const s4ms4 = {...moveSlot4, move4: value};
+                  setMoveSlot4(s4ms4);
                                 break;
                 default:
                   console.log("Error setting moves for slot4.")
@@ -489,20 +488,20 @@ export default function TeamNav(props) {
               });
               switch(activeMoveSlot){
                 case 'move1':
-                  setMoveSlot5({...moveSlot5,
-                                move1: value})
+                  const s5ms1 = {...moveSlot5, move1: value};
+                  setMoveSlot5(s5ms1);
                                 break;
                 case 'move2':
-                  setMoveSlot5({...moveSlot5,
-                                move2: value})
+                  const s5ms2 = {...moveSlot5, move2: value};
+                  setMoveSlot5(s5ms2);
                                 break;
                 case 'move3':
-                  setMoveSlot5({...moveSlot5,
-                                move3: value})
+                  const s5ms3 = {...moveSlot5, move3: value};
+                  setMoveSlot5(s5ms3);
                                 break;
                 case 'move4':
-                  setMoveSlot5({...moveSlot5,
-                                move4: value})
+                  const s5ms4 = {...moveSlot5, move4: value};
+                  setMoveSlot5(s5ms4);
                                 break;
                 default:
                   console.log("Error setting moves for slot5.")
@@ -657,8 +656,7 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={itemSlot1}
-                            moveSlot={moveSlot1} />
+                            item={itemSlot1} />
                   <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot1 !== null && isChoosingMove ?
@@ -669,8 +667,7 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={itemSlot1}
-                            moveSlot={moveSlot1} />
+                            item={itemSlot1} />
                   <MoveSearchSuggestions suggestions={moveSuggestions} />
                 </> :
                   <SlotForm beast={slot1}
@@ -679,8 +676,7 @@ export default function TeamNav(props) {
                   onItemSearch={onItemSearch}
                   fillInMove={fillInMove}
                   onMoveSearch={onMoveSearch}
-                  item={itemSlot1}
-                  moveSlot={moveSlot1} />
+                  item={itemSlot1} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
@@ -697,8 +693,7 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={itemSlot2}
-                            moveSlot={moveSlot2} />
+                            item={itemSlot2} />
                   <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot2 !== null && isChoosingMove ?
@@ -709,8 +704,7 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={itemSlot2}
-                            moveSlot={moveSlot2} />
+                            item={itemSlot2} />
                   <MoveSearchSuggestions suggestions={moveSuggestions} />
                 </> :
                   <SlotForm beast={slot2}
@@ -719,8 +713,7 @@ export default function TeamNav(props) {
                   onItemSearch={onItemSearch}
                   fillInMove={fillInMove}
                   onMoveSearch={onMoveSearch}
-                  item={itemSlot2}
-                  moveSlot={moveSlot2} />
+                  item={itemSlot2} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
@@ -737,8 +730,7 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={itemSlot3}
-                            moveSlot={moveSlot3} />
+                            item={itemSlot3} />
                   <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot3 !== null && isChoosingMove ?
@@ -749,8 +741,7 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={itemSlot3}
-                            moveSlot3={moveSlot3} />
+                            item={itemSlot3} />
                   <MoveSearchSuggestions suggestions={moveSuggestions} />
                 </> :
                   <SlotForm beast={slot3}
@@ -759,8 +750,7 @@ export default function TeamNav(props) {
                   onItemSearch={onItemSearch}
                   fillInMove={fillInMove}
                   onMoveSearch={onMoveSearch}
-                  item={itemSlot3}
-                  moveSlot={moveSlot3} />
+                  item={itemSlot3} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
@@ -777,8 +767,7 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={itemSlot4}
-                            moveSlot={moveSlot4} />
+                            item={itemSlot4} />
                   <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot4 !== null && isChoosingMove ?
@@ -789,8 +778,7 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={itemSlot4}
-                            moveSlot={moveSlot4} />
+                            item={itemSlot4} />
                   <MoveSearchSuggestions suggestions={moveSuggestions} />
                 </> :
                   <SlotForm beast={slot4}
@@ -799,8 +787,7 @@ export default function TeamNav(props) {
                   onItemSearch={onItemSearch}
                   fillInMove={fillInMove}
                   onMoveSearch={onMoveSearch}
-                  item={itemSlot4}
-                  moveSlot={moveSlot4} />
+                  item={itemSlot4} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
@@ -817,8 +804,7 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={itemSlot5}
-                            moveSlot={moveSlot5} />
+                            item={itemSlot5} />
                   <ItemSearchSuggestions suggestions={itemSuggestions} onItemClick={onItemClick} />
                 </> :
                 slot5 !== null && isChoosingMove ?
@@ -829,8 +815,7 @@ export default function TeamNav(props) {
                             onItemSearch={onItemSearch}
                             fillInMove={fillInMove}
                             onMoveSearch={onMoveSearch}
-                            item={itemSlot5}
-                            moveSlot={moveSlot5} />
+                            item={itemSlot5} />
                   <MoveSearchSuggestions suggestions={moveSuggestions} />
                 </> :
                   <SlotForm beast={slot5}
@@ -839,8 +824,7 @@ export default function TeamNav(props) {
                   onItemSearch={onItemSearch}
                   fillInMove={fillInMove}
                   onMoveSearch={onMoveSearch}
-                  item={itemSlot5}
-                  moveSlot={moveSlot5} />
+                  item={itemSlot5} />
                 }
                 <SubmitButton onClick={stopBuilding}>Stop Building</SubmitButton>
             </TabPanel>
