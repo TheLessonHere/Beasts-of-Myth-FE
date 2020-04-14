@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ItemRow from './ItemRow';
 import {
     Container
@@ -18,7 +18,7 @@ export default function ItemSearchSuggestions(props){
     return (
         <Container className={classes.container}>
             {suggestions.map(suggestion =>
-                <ItemRow key={suggestion.item_id} item={suggestion} onItemClick={onItemClick}/>
+                <ItemRow key={suggestion.item_id} item={suggestion} onItemClick={onItemClick} />
             )}
         </Container>
     )

@@ -36,23 +36,19 @@ const useStyles = makeStyles(theme => ({
 export default function ItemRow(props){
     const { item, onItemClick } = props;
     const classes = useStyles();
-    const { search_id,
-            format,
-            item_name,
-            short_description } = item;
 
     return (
-        <ListItem className={classes.listItem} divider={true} onClick={() => onItemClick(search_id)}>
-            <ListItemText className={classes.format} primary={`${format}`} />
+        <ListItem className={classes.listItem} divider={true} onClick={() => onItemClick(item)}>
+            <ListItemText className={classes.format} primary={`${item.format}`} />
             <ListItemAvatar>
                 <Avatar
-                    alt={`${item_name}-image`}
+                    alt={`${item.item_name}-image`}
                     variant="square"
                     className={classes.avi}
-                    src={getItemImage(search_id)} />
+                    src={getItemImage(item.search_id)} />
             </ListItemAvatar>
-            <ListItemText className={classes.name} primary={`${item_name}`} />
-            <ListItemText className={classes.description} primary={`${short_description}`} />
+            <ListItemText className={classes.name} primary={`${item.item_name}`} />
+            <ListItemText className={classes.description} primary={`${item.short_description}`} />
         </ListItem>
     )
 };

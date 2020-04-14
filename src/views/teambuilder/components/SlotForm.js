@@ -72,7 +72,11 @@ export default function SlotForm(props){
             onItemSearch,
             fillInMove,
             onMoveSearch,
-            item } = props;
+            item,
+            move1,
+            move2,
+            move3,
+            move4 } = props;
     const classes = useStyles();
     const [lusterChecked, setLusterChecked] = useState(false);
 
@@ -118,25 +122,25 @@ export default function SlotForm(props){
             <Box className={classes.formColumn}>
                 <FormGroup>
                     <FormLabel>Moves</FormLabel>
-                    <TextField
+                    <TextField  value={move1}
                                 id="move1"
                                 variant="outlined"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
                                 className={classes.move} />
-                    <TextField
+                    <TextField  value={move2}
                                 id="move2"
                                 variant="outlined"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
                                 className={classes.move} />
-                    <TextField
+                    <TextField  value={move3}
                                 id="move3"
                                 variant="outlined"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
                                 className={classes.move} />
-                    <TextField
+                    <TextField  value={move4}
                                 id="move4"
                                 variant="outlined"
                                 onClick={fillInMove}

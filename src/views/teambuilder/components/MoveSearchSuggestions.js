@@ -1,13 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import MoveRow from './MoveRow';
+import {
+    Container
+  } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => ({
+    container: {
+        height: "50%"
+    }
+}));
 
 export default function MoveSearchSuggestions(props){
-    const { suggestions } = props;
+    const { suggestions, onMoveClick } = props;
+    const classes = useStyles();
 
     return (
-        <div>
+        <Container className={classes.container}>
             {suggestions.map(suggestion =>
-                <h3 key={suggestion.move_id}>{suggestion.move_name}</h3>
+                <MoveRow key={suggestion.move_id} move={suggestion} onMoveClick={onMoveClick} />
             )}
-        </div>
+        </Container>
     )
 }
