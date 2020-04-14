@@ -26,6 +26,7 @@ import Item from '../../../classes/Item';
 import SlotForm from "./SlotForm";
 // Libraries
 import { beasts } from '../../../data/libraries/BeastLibrary';
+import { moves } from '../../../data/libraries/MoveLibrary';
 
 function TabPanel(props) {
     const { children, value, index, classes, ...other } = props;
@@ -92,6 +93,7 @@ export default function TeamNav(props) {
     const [activeMoveSlot, setActiveMoveSlot] = useState('move1');
     const [isChoosingMove, setIsChoosingMove] = useState(false);
     const [isChoosingItem, setIsChoosingItem] = useState(true);
+    // Each slot needs an active move and item state
     const [item, setItem] = useState("");
     const [move, setMove] = useState("");
     const [itemSuggestions, setItemSuggestions] = useState([]);
@@ -251,32 +253,102 @@ export default function TeamNav(props) {
           const regex = new RegExp(`${value}`, 'i');
           switch(activeSlot){
             case 'slot1':
-              currSuggestions = slot1.moveList.sort().filter(move => {
-                const searchId = move;
+              const allMoves1 = slot1.moveList.map(move => {
+                const data = moves.find(moveData => moveData.move_name === move);
+                const newMove = new Move(data.move_id,
+                                        data.move_name,
+                                        data.domain,
+                                        data.type,
+                                        data.base_power,
+                                        data.me,
+                                        data.priority,
+                                        data.effect,
+                                        data.description,
+                                        data.short_description);
+                return newMove;
+              })
+              currSuggestions = allMoves1.sort().filter(move => {
+                const searchId = move.move_name;
                 return regex.test(searchId);
               });
               break;
             case 'slot2':
-              currSuggestions = slot2.moveList.sort().filter(move => {
-                const searchId = move;
+              const allMoves2 = slot2.moveList.map(move => {
+                const data = moves.find(moveData => moveData.move_name === move);
+                const newMove = new Move(data.move_id,
+                                        data.move_name,
+                                        data.domain,
+                                        data.type,
+                                        data.base_power,
+                                        data.me,
+                                        data.priority,
+                                        data.effect,
+                                        data.description,
+                                        data.short_description);
+                return newMove;
+              })
+              currSuggestions = allMoves2.sort().filter(move => {
+                const searchId = move.move_name;
                 return regex.test(searchId);
               });
               break;
             case 'slot3':
-              currSuggestions = slot3.moveList.sort().filter(move => {
-                const searchId = move;
+              const allMoves3 = slot3.moveList.map(move => {
+                const data = moves.find(moveData => moveData.move_name === move);
+                const newMove = new Move(data.move_id,
+                                        data.move_name,
+                                        data.domain,
+                                        data.type,
+                                        data.base_power,
+                                        data.me,
+                                        data.priority,
+                                        data.effect,
+                                        data.description,
+                                        data.short_description);
+                return newMove;
+              })
+              currSuggestions = allMoves3.sort().filter(move => {
+                const searchId = move.move_name;
                 return regex.test(searchId);
               });
               break;
             case 'slot4':
-              currSuggestions = slot4.moveList.sort().filter(move => {
-                const searchId = move;
+              const allMoves4 = slot4.moveList.map(move => {
+                const data = moves.find(moveData => moveData.move_name === move);
+                const newMove = new Move(data.move_id,
+                                        data.move_name,
+                                        data.domain,
+                                        data.type,
+                                        data.base_power,
+                                        data.me,
+                                        data.priority,
+                                        data.effect,
+                                        data.description,
+                                        data.short_description);
+                return newMove;
+              })
+              currSuggestions = allMoves4.sort().filter(move => {
+                const searchId = move.move_name;
                 return regex.test(searchId);
               });
               break;
             case 'slot5':
-              currSuggestions = slot5.moveList.sort().filter(move => {
-                const searchId = move;
+              const allMoves5 = slot5.moveList.map(move => {
+                const data = moves.find(moveData => moveData.move_name === move);
+                const newMove = new Move(data.move_id,
+                                        data.move_name,
+                                        data.domain,
+                                        data.type,
+                                        data.base_power,
+                                        data.me,
+                                        data.priority,
+                                        data.effect,
+                                        data.description,
+                                        data.short_description);
+                return newMove;
+              })
+              currSuggestions = allMoves5.sort().filter(move => {
+                const searchId = move.move_name;
                 return regex.test(searchId);
               });
               break;
@@ -289,7 +361,43 @@ export default function TeamNav(props) {
 
     const onMoveClick = (event) => {
       // Sets the clicked move to the active move slot
+      const data = items.find(itemData => itemData.search_id === item);
+      const currItem = new Item(data.format,
+        data.item_id,
+        data.item_name,
+        data.type,
+        data.effect,
+        data.description,
+        data.short_description,
+        data.removable);
 
+      switch(activeSlot){
+        case 'slot1':
+          slot1.addItem(currItem);
+          setItem(currItem.item_name);
+          break;
+        case 'slot2':
+          slot2.addItem(currItem);
+          setItem(currItem.item_name);
+          break;
+        case 'slot3':
+          slot3.addItem(currItem);
+          setItem(currItem.item_name);
+          break;
+        case 'slot4':
+          slot4.addItem(currItem);
+          setItem(currItem.item_name);
+          break;
+        case 'slot5':
+          slot5.addItem(currItem);
+          setItem(currItem.item_name);
+          break;
+        default:
+          console.log("Error setting item to slot.");
+      }
+
+      setIsChoosingItem(false);
+      setIsChoosingMove(true);
     }
 
     const returnDomains = (domain1, domain2) => {
