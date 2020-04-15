@@ -35,39 +35,45 @@ function TeamBuilder(props) {
   const classes = useStyles();
   const [isBuilding, setIsBuilding] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
+  const [isReturning, setIsReturning] = useState(false);
 
   useEffect(() => {
     props.fetchTeams(props.id)
   }, [])
 
   useEffect(() => {
+    props.fetchTeams(props.id)
+  }, [ isReturning, props.id ])
+
+  useEffect(() => {
     return;
   }, [ isBuilding, isImporting ])
 
-  const startBuilding = (event) => {
-    event.preventDefault();
+  const startBuilding = () => {
     setIsBuilding(true);
   }
 
-  const stopBuilding = (event) => {
-    event.preventDefault();
+  const stopBuilding = () => {
     setIsBuilding(false);
   }
 
-  const startImporting = (event) => {
-    event.preventDefault();
+  const startImporting = () => {
     setIsImporting(true);
   }
 
-  const stopImporting = (event) => {
-    event.preventDefault();
+  const stopImporting = () => {
     setIsImporting(false);
   }
 
   if(isBuilding){
     return (
       <Container className={classes.container}>
-        <TeamNav allLibraries={allLibraries} items={items} stopBuilding={stopBuilding}/>
+        <TeamNav
+        allLibraries={allLibraries}
+        items={items}
+        stopBuilding={stopBuilding}
+        isReturning={isReturning}
+        setIsReturning={setIsReturning} />
       </Container>
     )
   }
@@ -75,7 +81,10 @@ function TeamBuilder(props) {
   if(isImporting){
     return (
       <Container className={classes.container}>
-        <ImportFromText stopImporting={stopImporting} />
+        <ImportFromText
+        stopImporting={stopImporting}
+        isReturning={isReturning}
+        setIsReturning={setIsReturning} />
       </Container>
     )
   }

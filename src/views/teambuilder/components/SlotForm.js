@@ -5,10 +5,11 @@ import {
     Box,
     TextField,
     FormLabel,
+    FormControl,
     FormControlLabel,
-    FormGroup,
     Switch
 } from "@material-ui/core";
+import ClearIcon from '@material-ui/icons/Clear';
 import { makeStyles } from "@material-ui/core/styles";
 import { getBeastImage } from '../../../utils/getBeastImage';
 
@@ -62,6 +63,18 @@ const useStyles = makeStyles(theme => ({
     },
     switch: {
         alignSelf: "center"
+    },
+    clearButton: {
+        color: "darkred",
+        border: "1px solid darkred",
+        borderRadius: "5px",
+        marginLeft: "5px",
+        "&:hover": {
+            color: "lightgrey",
+            border: "1px solid lightgrey",
+            background: "darkred",
+            cursor: "pointer"
+        }
     }
 }))
 
@@ -76,7 +89,9 @@ export default function SlotForm(props){
             move1,
             move2,
             move3,
-            move4 } = props;
+            move4,
+            clearItem,
+            clearMove } = props;
     const classes = useStyles();
     const [lusterChecked, setLusterChecked] = useState(false);
 
@@ -92,9 +107,19 @@ export default function SlotForm(props){
                 <Typography variant="h6">{beast.format}</Typography>
             </Box>
             <Box className={classes.formColumn}>
-                <FormGroup>
                     <Typography className={classes.text} variant="h6">Domain: {returnDomains(beast.domain1, beast.domain2)}</Typography>
-                    <TextField className={classes.item} value={item} onClick={chooseItem} onChange={onItemSearch} label="Item"/>
+                    <Box className={classes.stats}>
+                        <FormControl autoComplete="new-password">
+                        <TextField
+                        className={classes.item}
+                        value={item}
+                        autoComplete="off"
+                        onClick={chooseItem}
+                        onChange={onItemSearch}
+                        label="Item"/>
+                        </FormControl>
+                        <ClearIcon className={classes.clearButton} onClick={clearItem} />
+                    </Box>
                     {/* Add info window on hover for the ability */}
                     <Typography className={classes.text} variant="h6">Ability: {beast.ability}</Typography>
                     <FormControlLabel control={
@@ -117,36 +142,51 @@ export default function SlotForm(props){
                         <Typography variant="subtitle2">| SC: {beast.init_sc} |</Typography>
                         </div>
                     </Box>
-                </FormGroup>
             </Box>
             <Box className={classes.formColumn}>
-                <FormGroup>
+                <FormControl autoComplete="new-password">
                     <FormLabel>Moves</FormLabel>
+                    <Box className={classes.stats}>
                     <TextField  value={move1}
                                 id="move1"
                                 variant="outlined"
+                                autoComplete="off"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
                                 className={classes.move} />
+                    <ClearIcon className={classes.clearButton} onClick={() => clearMove('move1')} />
+                    </Box>
+                    <Box className={classes.stats}>
                     <TextField  value={move2}
                                 id="move2"
                                 variant="outlined"
+                                autoComplete="off"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
                                 className={classes.move} />
+                    <ClearIcon className={classes.clearButton} onClick={() => clearMove('move2')} />
+                    </Box>
+                    <Box className={classes.stats}>
                     <TextField  value={move3}
                                 id="move3"
                                 variant="outlined"
+                                autoComplete="off"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
                                 className={classes.move} />
+                    <ClearIcon className={classes.clearButton} onClick={() => clearMove('move3')} />
+                    </Box>
+                    <Box className={classes.stats}>
                     <TextField  value={move4}
                                 id="move4"
                                 variant="outlined"
+                                autoComplete="off"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
                                 className={classes.move} />
-                </FormGroup>
+                    <ClearIcon className={classes.clearButton} onClick={() => clearMove('move4')} />
+                    </Box>
+                </FormControl>
             </Box>
         </Container>
     )
