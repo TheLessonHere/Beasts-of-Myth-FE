@@ -5,6 +5,7 @@ import {
     Box,
     TextField,
     FormLabel,
+    FormControl,
     FormControlLabel,
     Switch
 } from "@material-ui/core";
@@ -108,7 +109,15 @@ export default function SlotForm(props){
             <Box className={classes.formColumn}>
                     <Typography className={classes.text} variant="h6">Domain: {returnDomains(beast.domain1, beast.domain2)}</Typography>
                     <Box className={classes.stats}>
-                        <TextField className={classes.item} value={item} onClick={chooseItem} onChange={onItemSearch} label="Item"/>
+                        <FormControl autoComplete="new-password">
+                        <TextField
+                        className={classes.item}
+                        value={item}
+                        autoComplete="off"
+                        onClick={chooseItem}
+                        onChange={onItemSearch}
+                        label="Item"/>
+                        </FormControl>
                         <ClearIcon className={classes.clearButton} onClick={clearItem} />
                     </Box>
                     {/* Add info window on hover for the ability */}
@@ -135,11 +144,13 @@ export default function SlotForm(props){
                     </Box>
             </Box>
             <Box className={classes.formColumn}>
+                <FormControl autoComplete="new-password">
                     <FormLabel>Moves</FormLabel>
                     <Box className={classes.stats}>
                     <TextField  value={move1}
                                 id="move1"
                                 variant="outlined"
+                                autoComplete="off"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
                                 className={classes.move} />
@@ -149,6 +160,7 @@ export default function SlotForm(props){
                     <TextField  value={move2}
                                 id="move2"
                                 variant="outlined"
+                                autoComplete="off"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
                                 className={classes.move} />
@@ -158,6 +170,7 @@ export default function SlotForm(props){
                     <TextField  value={move3}
                                 id="move3"
                                 variant="outlined"
+                                autoComplete="off"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
                                 className={classes.move} />
@@ -167,11 +180,13 @@ export default function SlotForm(props){
                     <TextField  value={move4}
                                 id="move4"
                                 variant="outlined"
+                                autoComplete="off"
                                 onClick={fillInMove}
                                 onChange={onMoveSearch}
                                 className={classes.move} />
                     <ClearIcon className={classes.clearButton} onClick={() => clearMove('move4')} />
                     </Box>
+                </FormControl>
             </Box>
         </Container>
     )

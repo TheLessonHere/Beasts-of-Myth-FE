@@ -324,137 +324,136 @@ function TeamNav(props) {
     const onMoveSearch = (event) => {
       const value = event.target.value;
       let currSuggestions = [];
-      if (value.length > 0){
-          const regex = new RegExp(`${value}`, 'i');
-          switch(activeSlot){
-            case 'slot1':
-              const allMoves1 = slot1.moveList.map(move => {
-                const data = moves.find(moveData => moveData.move_name === move);
-                return data;
-              })
-              currSuggestions = allMoves1.sort().filter(move => {
-                const searchId = move.move_name;
-                return regex.test(searchId);
-              });
-              switch(activeMoveSlot){
-                case 'move1':
-                  setSlot1Move1(value);
-                  break;
-                case 'move2':
-                  setSlot1Move2(value);
-                  break;
-                case 'move3':
-                  setSlot1Move3(value);
-                  break;
-                case 'move4':
-                  setSlot1Move4(value);
-                  break;
-                default:
-                  console.log("Error setting moves for slot1.")
-              } break;
-            case 'slot2':
-              const allMoves2 = slot2.moveList.map(move => {
-                const data = moves.find(moveData => moveData.move_name === move);
-                return data;
-              })
-              currSuggestions = allMoves2.sort().filter(move => {
-                const searchId = move.move_name;
-                return regex.test(searchId);
-              });
-              switch(activeMoveSlot){
-                case 'move1':
-                  setSlot2Move1(value);
-                  break;
-                case 'move2':
-                  setSlot2Move2(value);
-                  break;
-                case 'move3':
-                  setSlot2Move3(value);
-                  break;
-                case 'move4':
-                  setSlot2Move4(value);
-                  break;
-                default:
-                  console.log("Error setting moves for slot2.")
-              } break;
-            case 'slot3':
-              const allMoves3 = slot3.moveList.map(move => {
-                const data = moves.find(moveData => moveData.move_name === move);
-                return data;
-              })
-              currSuggestions = allMoves3.sort().filter(move => {
-                const searchId = move.move_name;
-                return regex.test(searchId);
-              });
-              switch(activeMoveSlot){
-                case 'move1':
-                  setSlot3Move1(value);
-                  break;
-                case 'move2':
-                  setSlot3Move2(value);
-                  break;
-                case 'move3':
-                  setSlot3Move3(value);
-                  break;
-                case 'move4':
-                  setSlot3Move4(value);
-                  break;
-                default:
-                  console.log("Error setting moves for slot3.")
-              } break;
-            case 'slot4':
-              const allMoves4 = slot4.moveList.map(move => {
-                const data = moves.find(moveData => moveData.move_name === move);
-                return data;
-              })
-              currSuggestions = allMoves4.sort().filter(move => {
-                const searchId = move.move_name;
-                return regex.test(searchId);
-              });
-              switch(activeMoveSlot){
-                case 'move1':
-                  setSlot4Move1(value);
-                  break;
-                case 'move2':
-                  setSlot4Move2(value);
-                  break;
-                case 'move3':
-                  setSlot4Move3(value);
-                  break;
-                case 'move4':
-                  setSlot4Move4(value);
-                  break;
-                default:
-                  console.log("Error setting moves for slot4.")
-              } break;
-            case 'slot5':
-              const allMoves5 = slot5.moveList.map(move => {
-                const data = moves.find(moveData => moveData.move_name === move);
-                return data;
-              })
-              currSuggestions = allMoves5.sort().filter(move => {
-                const searchId = move.move_name;
-                return regex.test(searchId);
-              });
-              switch(activeMoveSlot){
-                case 'move1':
-                  setSlot5Move1(value);
-                  break;
-                case 'move2':
-                  setSlot5Move2(value);
-                  break;
-                case 'move3':
-                  setSlot5Move3(value);
-                  break;
-                case 'move4':
-                  setSlot5Move4(value);
-                  break;
-                default:
-                  console.log("Error setting moves for slot5.")
-              } break;
-              default:
-                console.log("Error getting active slot.")
-          }}
+      const regex = new RegExp(`${value}`, 'i');
+      switch(activeSlot){
+        case 'slot1':
+          const allMoves1 = slot1.moveList.map(move => {
+            const data = moves.find(moveData => moveData.move_name === move);
+            return data;
+          })
+          currSuggestions = allMoves1.sort().filter(move => {
+            const searchId = move.move_name;
+            return regex.test(searchId);
+          });
+          switch(activeMoveSlot){
+            case 'move1':
+              setSlot1Move1(value);
+              break;
+            case 'move2':
+              setSlot1Move2(value);
+              break;
+            case 'move3':
+              setSlot1Move3(value);
+              break;
+            case 'move4':
+              setSlot1Move4(value);
+              break;
+            default:
+              console.log("Error setting moves for slot1.")
+          } break;
+        case 'slot2':
+          const allMoves2 = slot2.moveList.map(move => {
+            const data = moves.find(moveData => moveData.move_name === move);
+            return data;
+          })
+          currSuggestions = allMoves2.sort().filter(move => {
+            const searchId = move.move_name;
+            return regex.test(searchId);
+          });
+          switch(activeMoveSlot){
+            case 'move1':
+              setSlot2Move1(value);
+              break;
+            case 'move2':
+              setSlot2Move2(value);
+              break;
+            case 'move3':
+              setSlot2Move3(value);
+              break;
+            case 'move4':
+              setSlot2Move4(value);
+              break;
+            default:
+              console.log("Error setting moves for slot2.")
+          } break;
+        case 'slot3':
+          const allMoves3 = slot3.moveList.map(move => {
+            const data = moves.find(moveData => moveData.move_name === move);
+            return data;
+          })
+          currSuggestions = allMoves3.sort().filter(move => {
+            const searchId = move.move_name;
+            return regex.test(searchId);
+          });
+          switch(activeMoveSlot){
+            case 'move1':
+              setSlot3Move1(value);
+              break;
+            case 'move2':
+              setSlot3Move2(value);
+              break;
+            case 'move3':
+              setSlot3Move3(value);
+              break;
+            case 'move4':
+              setSlot3Move4(value);
+              break;
+            default:
+              console.log("Error setting moves for slot3.")
+          } break;
+        case 'slot4':
+          const allMoves4 = slot4.moveList.map(move => {
+            const data = moves.find(moveData => moveData.move_name === move);
+            return data;
+          })
+          currSuggestions = allMoves4.sort().filter(move => {
+            const searchId = move.move_name;
+            return regex.test(searchId);
+          });
+          switch(activeMoveSlot){
+            case 'move1':
+              setSlot4Move1(value);
+              break;
+            case 'move2':
+              setSlot4Move2(value);
+              break;
+            case 'move3':
+              setSlot4Move3(value);
+              break;
+            case 'move4':
+              setSlot4Move4(value);
+              break;
+            default:
+              console.log("Error setting moves for slot4.")
+          } break;
+        case 'slot5':
+          const allMoves5 = slot5.moveList.map(move => {
+            const data = moves.find(moveData => moveData.move_name === move);
+            return data;
+          })
+          currSuggestions = allMoves5.sort().filter(move => {
+            const searchId = move.move_name;
+            return regex.test(searchId);
+          });
+          switch(activeMoveSlot){
+            case 'move1':
+              setSlot5Move1(value);
+              break;
+            case 'move2':
+              setSlot5Move2(value);
+              break;
+            case 'move3':
+              setSlot5Move3(value);
+              break;
+            case 'move4':
+              setSlot5Move4(value);
+              break;
+            default:
+              console.log("Error setting moves for slot5.")
+          } break;
+          default:
+            console.log("Error getting active slot.")
+      }
       setMoveSuggestions(currSuggestions);
     }
 
@@ -884,10 +883,10 @@ function TeamNav(props) {
                 </FormControl>
               </Box>
               <Box className={classes.buttonBox}>
-                <SubmitButton onClick={props.stopBuilding}>Stop Building</SubmitButton>
                 <SubmitButton onClick={clearSlot}>Clear Slot</SubmitButton>
                 <SubmitButton type="submit" onClick={validateTeam}>Validate Team</SubmitButton>
                 <SubmitButton onClick={saveTeam} disabled={!isValid}>Save Team</SubmitButton>
+                <SubmitButton onClick={props.stopBuilding}>Cancel</SubmitButton>
               </Box>
             </Container>
             <Tabs
