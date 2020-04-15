@@ -5,6 +5,9 @@ import {
     FETCH_TEAMS_START,
     FETCH_TEAMS_SUCCESS,
     FETCH_TEAMS_FAILURE,
+    POST_TEAM_START,
+    POST_TEAM_SUCCESS,
+    POST_TEAM_FAILURE
   } from '../actions';
 
 const initialState = {
@@ -17,6 +20,7 @@ const initialState = {
     losses: '',
     connections: [],
     user_teams: [],
+    last_created_team: ''
   };
 
 export const reducer = (state = initialState, action) => {
@@ -33,7 +37,7 @@ export const reducer = (state = initialState, action) => {
           ...state,
           isFetching: false,
           error: '',
-          id: action.payload.id,
+          id: action.payload.user_id,
           username: action.payload.username,
           profile_img: action.payload.profile_img,
           wins: action.payload.wins,
@@ -65,6 +69,24 @@ export const reducer = (state = initialState, action) => {
           isFetching: false,
           error: action.payload
         };
+      case POST_TEAM_START:
+        return {
+          ...state,
+          error: '',
+          isFetching: true
+        };
+      case POST_TEAM_SUCCESS:
+        return {
+          ...state,
+          last_created_team: action.payload,
+          isFetching: false,
+        };
+      case POST_TEAM_FAILURE:
+        return {
+          ...state,
+          isFetching: false,
+          error: action.payload
+        }
       default:
         return state;
     }

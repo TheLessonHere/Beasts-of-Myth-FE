@@ -23,4 +23,11 @@ export const SubmitButton = styled.button`
         position: relative;
 	    top: 1px;
     }
+    &&:disabled {
+        background-color: darkgrey;
+        box-shadow: inset 0px 34px 0px -15px grey;
+        &&:hover {
+            cursor: default;
+        }
+    }
 `;
