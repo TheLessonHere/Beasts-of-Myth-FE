@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 // Components
 import FormikRegister from './views/register';
 import FormikLogin from './views/login';
-import PrivateRoute from './utils/PrivateRoute';
+import PrivateRoute from './utils/components/PrivateRoute';
 import Dashboard from './views/dashboard';
 // Styling
 import './App.css';

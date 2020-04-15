@@ -7,8 +7,8 @@ import Beast from './Beast';
 import Item from './Item';
 import Move from './Move';
 // Functions
-import parseTeamDatastring from '../utils/parseTeamDatastring';
-import serializeTeamDatastring from '../utils/serializeTeamDatastring';
+import parseTeamDatastring from '../utils/functions/parseTeamDatastring';
+import serializeTeamDatastring from '../utils/functions/serializeTeamDatastring';
 
 export default class Team {
     constructor(format, name){
@@ -180,6 +180,7 @@ export default class Team {
     fillInTeamFromString(team_datastring){
         try{
             const teamData = parseTeamDatastring(team_datastring);
+            console.log(teamData);
             this.format = teamData.format;
             this.team_name = teamData.team_name;
 
@@ -203,39 +204,69 @@ export default class Team {
                                             beastLibraryData.move_list);
                 this.addBeast(newBeast, beastStringData.slot);
                 const currSlot = this.getSlot(beastStringData.slot);
-                const itemData = items.find(item =>
-                    item.item_name === beastStringData.item
-                );
-                const equippedItem = new Item(itemData.format,
-                                        itemData.item_id,
-                                        itemData.item_name,
-                                        itemData.effect,
-                                        itemData.description,
-                                        itemData.short_description);
-                currSlot.beast.addItem(equippedItem);
-                const beastMoves = beastStringData.moves.map(move => {
-                    const moveData = moves.find(moveData =>
-                        moveData.move_name === move
+
+                let itemData = {};
+                if(beastStringData.item !== "null"){
+                    itemData = items.find(item =>
+                        item.item_name === beastStringData.item
                     );
-                    return moveData;
+                } else {
+                    itemData = null;
+                }
+                console.log("itemData:", itemData);
+                let equippedItem = null;
+                if(itemData !== null){
+                    equippedItem = new Item(itemData.format,
+                        itemData.item_id,
+                        itemData.item_name,
+                        itemData.effect,
+                        itemData.description,
+                        itemData.short_description);
+                    currSlot.beast.addItem(equippedItem);
+                } else {
+                    currSlot.beast.addItem(equippedItem);
+                }
+                console.log("equippedItem:", equippedItem);
+
+                const beastMoves = beastStringData.moves.map(move => {
+                    if(move !== "null"){
+                        const moveData = moves.find(moveData =>
+                            moveData.move_name === move
+                        );
+                        return moveData;
+                    } else {
+                        return null;
+                    }
                 });
+                console.log("beastMoves:", beastMoves);
                 let slotCounter = 1;
                 beastMoves.forEach(move => {
-                    const newMove = new Move(move.moveId,
-                                            move.moveName,
-                                            move.domain,
-                                            move.type,
-                                            move.basePower,
-                                            move.me,
-                                            move.effect,
-                                            move.status,
-                                            move.description,
-                                            move.shortDescription);
-                    currSlot.beast.moves.set(`move${slotCounter}`, newMove);
-                    if(slotCounter === 4){
-                        slotCounter = 1;
+                    if(move !== null){
+                        const newMove = new Move(move.move_id,
+                            move.move_name,
+                            move.domain,
+                            move.type,
+                            move.base_power,
+                            move.me,
+                            move.priority,
+                            move.effect,
+                            move.status,
+                            move.description,
+                            move.short_description);
+                        newMove.addMoveSlot(`move${slotCounter}`);
+                        currSlot.beast.moves.set(`move${slotCounter}`, newMove);
+                        if(slotCounter === 4){
+                            slotCounter = 1;
+                        } else {
+                            slotCounter += 1;
+                        }
                     } else {
-                        slotCounter += 1;
+                        currSlot.beast.moves.set(`move${slotCounter}`, null);
+                        if(slotCounter === 4){
+                            slotCounter = 1;
+                        } else {
+                            slotCounter += 1;
+                        }
                     }
                 });
             });
@@ -244,6 +275,7 @@ export default class Team {
         }
         catch(err){
             console.log(err, "Team Datastring Formatted Incorrectly.")
+            alert("TeamDatastring improperly formatted.")
         }
     }
 
@@ -443,6 +475,7 @@ export default class Team {
         this.format = newFormat;
     }
 
+    // This might end up being unnecessary
     validateTeam(){
         if(this.slot1.beast == null &&
             this.slot2.beast == null &&

@@ -39,10 +39,6 @@ function TeamBuilder(props) {
 
   useEffect(() => {
     props.fetchTeams(props.id)
-  }, [])
-
-  useEffect(() => {
-    props.fetchTeams(props.id)
   }, [ isReturning, props.id ])
 
   useEffect(() => {
