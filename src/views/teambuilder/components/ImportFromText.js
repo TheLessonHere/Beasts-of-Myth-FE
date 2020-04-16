@@ -58,41 +58,34 @@ const useStyles = makeStyles(theme => ({
 }))
 
 function ImportFromText(props){
-    const { stopImporting, setIsEditing, isEditing, setTeamToEdit } = props;
+    const { stopImporting, startEditing } = props;
     const classes = useStyles();
     const [value, setValue] = useState("");
-    const [currentTeam, setCurrentTeam] = useState({});
+    const [team, setTeam] = useState({})
     const [isValid, setIsValid] = useState(false);
+
+    useEffect(() => {
+        if(isValid){
+            startEditing(team);
+            stopImporting()
+        }
+    }, [ isValid ])
 
     const handleChange = (event) => {
         setValue(event.target.value);
-        console.log(event.target.value);
     }
 
-    const runImport = () => {
-        const team = new Team("Unrestricted", "Team1");
-        team.fillInTeamFromString(value);
-        setCurrentTeam(team);
-        validateTeam(team.format,
-                    team.slot1.beast,
-                    team.slot2.beast,
-                    team.slot3.beast,
-                    team.slot4.beast,
-                    team.slot5.beast,
+    const runEditor = () => {
+        const newTeam = new Team("Unrestricted", "Team1");
+        newTeam.fillInTeamFromString(value);
+        setTeam(newTeam);
+        validateTeam(newTeam.format,
+                    newTeam.slot1.beast,
+                    newTeam.slot2.beast,
+                    newTeam.slot3.beast,
+                    newTeam.slot4.beast,
+                    newTeam.slot5.beast,
                     setIsValid);
-        console.log(team);
-    }
-
-    const saveTeam = () => {
-        const teamDatastring = currentTeam.convertToString();
-        axiosWithAuth()
-        .post(`http://localhost:5000/api/teams/${props.user_id}`, teamDatastring)
-        .then(res => {
-            console.log(res.data, "Team Saved.");
-        })
-        .catch(err => {
-            console.log(err);
-        })
     }
 
     // Add in a link to a page explaining the teamstring format at the bottom
@@ -112,8 +105,7 @@ function ImportFromText(props){
                 </FormControl>
             </Box>
             <Box className={classes.buttonBox}>
-                <SubmitButton type="submit" onClick={runImport}>Import Team</SubmitButton>
-                <SubmitButton onClick={saveTeam} disabled={!isValid}>Save Team</SubmitButton>
+                <SubmitButton type="submit" onClick={runEditor}>Import Team</SubmitButton>
                 <SubmitButton onClick={stopImporting}>Cancel</SubmitButton>
             </Box>
         </Container>
@@ -126,4 +118,4 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, { postTeam })(ImportFromText)
+export default connect(mapStateToProps, { })(ImportFromText)

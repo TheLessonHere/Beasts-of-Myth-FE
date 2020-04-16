@@ -180,7 +180,6 @@ export default class Team {
     fillInTeamFromString(team_datastring){
         try{
             const teamData = parseTeamDatastring(team_datastring);
-            console.log(teamData);
             this.format = teamData.format;
             this.team_name = teamData.team_name;
 
@@ -189,31 +188,41 @@ export default class Team {
                 const beastLibraryData = beasts.find(beast =>
                     beast.beast_name === beastStringData.beast_name
                 );
-                const newBeast = new Beast(beastLibraryData.format,
-                                            beastLibraryData.beast_id,
-                                            beastLibraryData.beast_name,
-                                            beastLibraryData.domain1,
-                                            beastLibraryData.domain2,
-                                            beastLibraryData.ability,
-                                            beastLibraryData.hp,
-                                            beastLibraryData.pa,
-                                            beastLibraryData.pd,
-                                            beastLibraryData.ma,
-                                            beastLibraryData.md,
-                                            beastLibraryData.sc,
-                                            beastLibraryData.move_list);
-                this.addBeast(newBeast, beastStringData.slot);
-                const currSlot = this.getSlot(beastStringData.slot);
+                let currSlot = {};
+                if(beastLibraryData){
+                    const newBeast = new Beast(beastLibraryData.format,
+                        beastLibraryData.beast_id,
+                        beastLibraryData.beast_name,
+                        beastLibraryData.domain1,
+                        beastLibraryData.domain2,
+                        beastLibraryData.ability,
+                        beastLibraryData.hp,
+                        beastLibraryData.pa,
+                        beastLibraryData.pd,
+                        beastLibraryData.ma,
+                        beastLibraryData.md,
+                        beastLibraryData.sc,
+                        beastLibraryData.move_list);
+                    this.addBeast(newBeast, beastStringData.slot);
+                    currSlot = this.getSlot(beastStringData.slot);
+                } else {
+                    this.addBeast(null, beastStringData.slot);
+                    currSlot = this.getSlot(beastStringData.slot);
+                }
 
                 let itemData = {};
                 if(beastStringData.item !== "null"){
-                    itemData = items.find(item =>
+                    const matchingItem = items.find(item =>
                         item.item_name === beastStringData.item
                     );
+                    if(matchingItem){
+                        itemData = matchingItem;
+                    } else {
+                        itemData = null;
+                    }
                 } else {
                     itemData = null;
                 }
-                console.log("itemData:", itemData);
                 let equippedItem = null;
                 if(itemData !== null){
                     equippedItem = new Item(itemData.format,
@@ -226,19 +235,23 @@ export default class Team {
                 } else {
                     currSlot.beast.addItem(equippedItem);
                 }
-                console.log("equippedItem:", equippedItem);
 
                 const beastMoves = beastStringData.moves.map(move => {
                     if(move !== "null"){
-                        const moveData = moves.find(moveData =>
-                            moveData.move_name === move
+                        let moveData = {};
+                        const matchingMove = moves.find(data =>
+                            data.move_name === move
                         );
+                        if(matchingMove){
+                            moveData = matchingMove;
+                        } else {
+                            moveData = null;
+                        }
                         return moveData;
                     } else {
                         return null;
                     }
                 });
-                console.log("beastMoves:", beastMoves);
                 let slotCounter = 1;
                 beastMoves.forEach(move => {
                     if(move !== null){

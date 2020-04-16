@@ -13,6 +13,7 @@ import {
 // Components
 import TeamNav from './components/TeamNav';
 import ImportFromText from './components/ImportFromText';
+import EditingTeamNav from './components/EditingTeamNav';
 import { SubmitButton } from '../../utils/components/SubmitButton';
 // Libraries
 import { beasts } from '../../data/libraries/BeastLibrary';
@@ -36,14 +37,16 @@ function TeamBuilder(props) {
   const [isBuilding, setIsBuilding] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
   const [isReturning, setIsReturning] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [teamToEdit, setTeamToEdit] = useState({});
 
   useEffect(() => {
     props.fetchTeams(props.id)
-  }, [ isReturning, props.id ])
+  }, [ isReturning, props.id, props.last_created_team ])
 
   useEffect(() => {
     return;
-  }, [ isBuilding, isImporting ])
+  }, [ isBuilding, isImporting, isEditing ])
 
   const startBuilding = () => {
     setIsBuilding(true);
@@ -61,6 +64,16 @@ function TeamBuilder(props) {
     setIsImporting(false);
   }
 
+  const startEditing = (team) => {
+    setTeamToEdit(team);
+    setIsEditing(true);
+  }
+
+  const stopEditing = () => {
+    setTeamToEdit({});
+    setIsEditing(false);
+  }
+
   if(isBuilding){
     return (
       <Container className={classes.container}>
@@ -74,13 +87,26 @@ function TeamBuilder(props) {
     )
   }
 
+  if(isEditing){
+    return (
+      <Container className={classes.container}>
+        <EditingTeamNav
+        allLibraries={allLibraries}
+        item={items}
+        stopEditing={stopEditing}
+        isReturning={isReturning}
+        setIsReturning={setIsReturning}
+        team={teamToEdit} />
+      </Container>
+    )
+  }
+
   if(isImporting){
     return (
       <Container className={classes.container}>
         <ImportFromText
         stopImporting={stopImporting}
-        isReturning={isReturning}
-        setIsReturning={setIsReturning} />
+        startEditing={startEditing} />
       </Container>
     )
   }
