@@ -103,7 +103,7 @@ export default function SlotForm(props){
         <Container className={classes.container}>
             <Box className={classes.formColumn}>
                 <Typography variant="h4">{beast.beast_name}</Typography>
-                <img className={classes.image} src={beastImage} alt={`${beast.beast_name}`}/>
+                <img className={classes.image} src={beastImage} alt={beast.beast_name}/>
                 <Typography variant="h6">{beast.format}</Typography>
             </Box>
             <Box className={classes.formColumn}>
