@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { postTeam } from '../../../actions';
-import { axiosWithAuth } from '../../../utils/functions/axiosWithAuth';
 import {
     Container,
     Typography,
