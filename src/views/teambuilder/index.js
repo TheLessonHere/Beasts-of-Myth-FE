@@ -6,20 +6,24 @@ import {
     Container,
     Typography,
     Box,
-    CircularProgress,
-    Button
+    List,
+    ListItem,
+    CircularProgress
     } from "@material-ui/core";
 
 // Components
 import TeamNav from './components/TeamNav';
 import ImportFromText from './components/ImportFromText';
 import EditingTeamNav from './components/EditingTeamNav';
+import TeamMiniBox from "./components/TeamMiniBox";
 import { SubmitButton } from '../../utils/components/SubmitButton';
 // Libraries
 import { beasts } from '../../data/libraries/BeastLibrary';
 import { moves } from '../../data/libraries/MoveLibrary';
 import { items } from '../../data/libraries/ItemLibrary';
 import { abilities } from '../../data/libraries/AbilityLibrary';
+// Classes
+import Team from '../../classes/Team';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -28,6 +32,25 @@ const useStyles = makeStyles(theme => ({
         padding: "20px",
         borderRadius: "5px"
     },
+    defaultContainer: {
+        display: "flex",
+        flexFlow: "row nowrap",
+        backgroundColor: "lightgrey",
+        height: "800px",
+        padding: "20px",
+        borderRadius: "5px"
+    },
+    miniBoxList: {
+        width: "60%",
+        height: "100%",
+        backgroundColor: "darkgrey",
+        overflow: "scroll"
+    },
+    buttonBox: {
+        display: "flex",
+        flexFlow: "column nowrap",
+        width: "40%"
+    }
 }))
 
 const allLibraries = beasts.concat(moves, abilities);
@@ -40,11 +63,28 @@ function TeamBuilder(props) {
   const [isEditing, setIsEditing] = useState(false);
   const [teamToEdit, setTeamToEdit] = useState(null);
   const [teamSelected, setTeamSelected] = useState(null);
+  const [userTeams, setUserTeams] = useState([]);
 
   useEffect(() => {
     props.fetchTeams(props.id);
     setTeamSelected(null);
   }, [ isReturning, props.id, props.last_created_team ])
+
+  useEffect(() => {
+    if(props.user_teams.length > 0){
+      const teams = props.user_teams.map(team => {
+        const teamClassObject = new Team('Unrestricted', 'Team');
+        teamClassObject.fillInTeamFromString(team.team_datastring);
+        return {
+          team_id: team.team_id,
+          team_object: teamClassObject
+        };
+      });
+      console.log(teams);
+      setUserTeams(teams);
+    }
+    setTeamSelected(null);
+  }, [ props.user_teams ])
 
   useEffect(() => {
     return;
@@ -78,6 +118,10 @@ function TeamBuilder(props) {
   const stopEditing = () => {
     setTeamToEdit(null);
     setIsEditing(false);
+  }
+
+  const onMiniBoxClick = (teamObject) => {
+    setTeamSelected(teamObject);
   }
 
   if(isBuilding){
@@ -118,11 +162,22 @@ function TeamBuilder(props) {
   }
 
   return (
-    <Container className={classes.container}>
-      <SubmitButton onClick={startBuilding}>Build New Team</SubmitButton>
-      <SubmitButton onClick={startImporting}>Import From Text</SubmitButton>
-      <SubmitButton disabled={!teamSelected} onClick={() => {startEditing(teamToEdit)}}>Edit Team</SubmitButton>
-      <SubmitButton disabled={!teamSelected} onClick={() => {props.deleteTeam(teamSelected)}}>Delete Team</SubmitButton>
+    <Container className={classes.defaultContainer}>
+      <List className={classes.miniBoxList}>
+        {userTeams.length > 0 ?
+        userTeams.map(team => {
+        return <ListItem component="div" key={`${team.team_id}`} onClick={() => {onMiniBoxClick(team)}}>
+                  <TeamMiniBox team={team} />
+               </ListItem>
+        }) :
+          <Typography>No Teams Found</Typography>}
+      </List>
+      <Box className={classes.buttonBox}>
+        <SubmitButton onClick={startBuilding}>Build New Team</SubmitButton>
+        <SubmitButton onClick={startImporting}>Import From Text</SubmitButton>
+        <SubmitButton disabled={!teamSelected} onClick={() => {startEditing(teamToEdit)}}>Edit Team</SubmitButton>
+        <SubmitButton disabled={!teamSelected} onClick={() => {props.deleteTeam(teamSelected.team_id)}}>Delete Team</SubmitButton>
+      </Box>
     </Container>
   );
 }

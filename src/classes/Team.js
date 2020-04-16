@@ -304,7 +304,8 @@ export default class Team {
     }
 
     updateSuperSlot(){
-        if(this.slot1.beast.item === 'Super Crystal'){
+        if(this.slot1.beast.item !== null &&
+            this.slot1.beast.item.item_name === 'Super Crystal'){
             const superBeastData = beasts.find(beast =>
                 beast.beast_name === `${this.slot1.beast.beast_name}-Super`
             );
@@ -324,7 +325,8 @@ export default class Team {
             superBeast.updateSlot('slot1');
             this.super_beast = superBeast;
         }
-        else if(this.slot2.beast.item === 'Super Crystal'){
+        else if(this.slot2.beast.item !== null &&
+            this.slot2.beast.item.item_name === 'Super Crystal'){
             const superBeastData = beasts.find(beast =>
                 beast.beast_name === `${this.slot1.beast.beast_name}-Super`
             );
@@ -344,7 +346,8 @@ export default class Team {
             superBeast.updateSlot('slot2');
             this.super_beast = superBeast;
         }
-        else if(this.slot3.beast.item === 'Super Crystal'){
+        else if(this.slot3.beast.item !== null &&
+            this.slot3.beast.item.item_name === 'Super Crystal'){
             const superBeastData = beasts.find(beast =>
                 beast.beast_name === `${this.slot1.beast.beast_name}-Super`
             );
@@ -364,7 +367,8 @@ export default class Team {
             superBeast.updateSlot('slot3');
             this.super_beast = superBeast;
         }
-        else if(this.slot4.beast.item === 'Super Crystal'){
+        else if(this.slot4.beast.item !== null &&
+            this.slot4.beast.item.item_name === 'Super Crystal'){
             const superBeastData = beasts.find(beast =>
                 beast.beast_name === `${this.slot1.beast.beast_name}-Super`
             );
@@ -384,7 +388,8 @@ export default class Team {
             superBeast.updateSlot('slot4');
             this.super_beast = superBeast;
         }
-        else if(this.slot5.beast.item === 'Super Crystal'){
+        else if(this.slot5.beast.item !== null &&
+            this.slot5.beast.item.item_name === 'Super Crystal'){
             const superBeastData = beasts.find(beast =>
                 beast.beast_name === `${this.slot1.beast.beast_name}-Super`
             );
