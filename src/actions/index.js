@@ -51,3 +51,20 @@ export const postTeam = (user_id, teamDatastring) => dispatch => {
       dispatch({ type: POST_TEAM_FAILURE, payload: 'Unable to save team.' });
     });
 }
+
+export const DELETE_TEAM_START = 'DELETE_TEAM_START';
+export const DELETE_TEAM_SUCCESS = 'DELETE_TEAM_SUCCESS';
+export const DELETE_TEAM_FAILURE = 'DELETE_TEAM_FAILURE';
+
+export const deleteTeam = (team_id) => dispatch => {
+  dispatch({ type: DELETE_TEAM_START });
+  axiosWithAuth()
+    .delete(`http://localhost:5000/api/teams/${team_id}`)
+    .then(res => {
+      console.log(res);
+      dispatch({ type: DELETE_TEAM_SUCCESS, payload: team_id });
+    })
+    .catch(err => {
+      dispatch({ type: DELETE_TEAM_FAILURE, payload: 'Unable to delete team.' });
+    });
+}
