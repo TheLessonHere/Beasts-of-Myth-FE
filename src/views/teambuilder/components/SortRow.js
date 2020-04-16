@@ -77,7 +77,7 @@ export default function SortRow(props){
         <SortRowContainer>
             <DeadButton className="sortcol startcol">Sort: </DeadButton>
             <DeadButton className="sortcol namecol">Name</DeadButton>
-            <DomainButton className="sortcol domcol" onClick={sortDomain}>Domains</DomainButton>
+            <DomainButton className="sortcol domcol" onClick={sortDomain}>Domain</DomainButton>
             <DeadButton className="sortcol abilitycol">Ability</DeadButton>
             <HPButton className="sortcol statcol" onClick={sortHP}>HP</HPButton>
             <StatButton className="sortcol statcol" onClick={sortPA}>PA</StatButton>

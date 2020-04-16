@@ -6,7 +6,7 @@ import {
     Avatar
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { getItemImage } from '../../../utils/getItemImage';
+import { getItemImage } from '../../../utils/functions/getItemImage';
 
 const useStyles = makeStyles(theme => ({
     listItem: {

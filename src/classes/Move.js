@@ -17,4 +17,8 @@ export default class Move {
     decrementME(){
         this.curr_me -= 1;
     }
+
+    addMoveSlot(slot){
+        this.move_slot = slot;
+    }
 }

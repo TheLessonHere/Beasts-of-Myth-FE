@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import ClearIcon from '@material-ui/icons/Clear';
 import { makeStyles } from "@material-ui/core/styles";
-import { getBeastImage } from '../../../utils/getBeastImage';
+import { getBeastImage } from '../../../utils/functions/getBeastImage';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -103,7 +103,7 @@ export default function SlotForm(props){
         <Container className={classes.container}>
             <Box className={classes.formColumn}>
                 <Typography variant="h4">{beast.beast_name}</Typography>
-                <img className={classes.image} src={beastImage} alt={`${beast.beast_name}-image`}/>
+                <img className={classes.image} src={beastImage} alt={`${beast.beast_name}`}/>
                 <Typography variant="h6">{beast.format}</Typography>
             </Box>
             <Box className={classes.formColumn}>

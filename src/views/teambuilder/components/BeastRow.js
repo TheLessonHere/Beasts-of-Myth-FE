@@ -6,7 +6,7 @@ import {
     Avatar
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { getBeastImage } from '../../../utils/getBeastImage';
+import { getBeastImage } from '../../../utils/functions/getBeastImage';
 
 const useStyles = makeStyles(theme => ({
     format: {

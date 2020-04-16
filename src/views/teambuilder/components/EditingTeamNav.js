@@ -17,6 +17,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 // Functions
 import validateTeam from '../../../utils/functions/validateTeam';
+import loadTeamIntoEditor from '../../../utils/functions/loadTeamIntoEditor';
 // Components
 import LibrarySearchbar from './LibrarySearchbar';
 import ItemSearchSuggestions from './ItemSearchSuggestions';
@@ -101,7 +102,7 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-function TeamNav(props) {
+function EditingTeamNav(props) {
     const classes = useStyles();
     const [tabValue, setTabValue] = useState(0);
     const [format, setFormat] = useState("");
@@ -146,10 +147,48 @@ function TeamNav(props) {
     const [isValid, setIsValid] = useState(false);
 
     useEffect(() => {
-      console.log("Beast slot changed.")
+        console.log(props.team);
+        loadTeamIntoEditor(props.team,
+                            setFormat,
+                            setTeamName,
+                            setSlot1,
+                            setSlot2,
+                            setSlot3,
+                            setSlot4,
+                            setSlot5,
+                            setItemSlot1,
+                            setItemSlot2,
+                            setItemSlot3,
+                            setItemSlot4,
+                            setItemSlot5,
+                            setSlot1Move1,
+                            setSlot1Move2,
+                            setSlot1Move3,
+                            setSlot1Move4,
+                            setSlot2Move1,
+                            setSlot2Move2,
+                            setSlot2Move3,
+                            setSlot2Move4,
+                            setSlot3Move1,
+                            setSlot3Move2,
+                            setSlot3Move3,
+                            setSlot3Move4,
+                            setSlot4Move1,
+                            setSlot4Move2,
+                            setSlot4Move3,
+                            setSlot4Move4,
+                            setSlot5Move1,
+                            setSlot5Move2,
+                            setSlot5Move3,
+                            setSlot5Move4);
+    }, [])
+
+    useEffect(() => {
+      return;
     }, [ beastSlotChanged ])
 
     useEffect(() => {
+        return;
     }, [ isChoosingItem, isChoosingMove ])
 
     useEffect(() => {
@@ -593,7 +632,7 @@ function TeamNav(props) {
     }
 
     const logTeam = () => {
-      console.log(slot1, slot2, slot3, slot4, slot5, props.id);
+      console.log(format, slot1, slot2, slot3, slot4, slot5, props.id);
     }
 
     const returnDomains = (domain1, domain2) => {
@@ -786,7 +825,7 @@ function TeamNav(props) {
         const teamDatastring = team.convertToString();
         console.log(teamDatastring);
         props.postTeam(props.id, teamDatastring);
-        props.stopBuilding();
+        props.stopEditing();
         props.setIsReturning(!props.isReturning)
       }
     }
@@ -820,7 +859,7 @@ function TeamNav(props) {
                 <SubmitButton onClick={clearSlot}>Clear Slot</SubmitButton>
                 <SubmitButton type="submit" onClick={() => validateTeam(format, slot1, slot2, slot3, slot4, slot5, setIsValid)}>Validate Team</SubmitButton>
                 <SubmitButton onClick={saveTeam} disabled={!isValid}>Save Team</SubmitButton>
-                <SubmitButton onClick={props.stopBuilding}>Cancel</SubmitButton>
+                <SubmitButton onClick={props.stopEditing}>Cancel</SubmitButton>
               </Box>
             </Container>
             <Tabs
@@ -1119,4 +1158,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { postTeam })(TeamNav)
+export default connect(mapStateToProps, { postTeam })(EditingTeamNav)
