@@ -7,7 +7,10 @@ import {
     FETCH_TEAMS_FAILURE,
     POST_TEAM_START,
     POST_TEAM_SUCCESS,
-    POST_TEAM_FAILURE
+    POST_TEAM_FAILURE,
+    DELETE_TEAM_START,
+    DELETE_TEAM_SUCCESS,
+    DELETE_TEAM_FAILURE
   } from '../actions';
 
 const initialState = {
@@ -82,6 +85,26 @@ export const reducer = (state = initialState, action) => {
           isFetching: false,
         };
       case POST_TEAM_FAILURE:
+        return {
+          ...state,
+          isFetching: false,
+          error: action.payload
+        };
+      case DELETE_TEAM_START:
+        return {
+          ...state,
+          error: '',
+          isFetching: true
+        };
+      case DELETE_TEAM_SUCCESS:
+        const userTeams = state.user_teams.filter(team => team.team_id !== action.payload)
+        console.log(userTeams)
+        return {
+          ...state,
+          user_teams: userTeams,
+          isFetching: false,
+        };
+      case DELETE_TEAM_FAILURE:
         return {
           ...state,
           isFetching: false,

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchTeams } from '../../actions';
+import { fetchTeams, deleteTeam } from '../../actions';
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Container,
@@ -38,10 +38,12 @@ function TeamBuilder(props) {
   const [isImporting, setIsImporting] = useState(false);
   const [isReturning, setIsReturning] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [teamToEdit, setTeamToEdit] = useState({});
+  const [teamToEdit, setTeamToEdit] = useState(null);
+  const [teamSelected, setTeamSelected] = useState(null);
 
   useEffect(() => {
-    props.fetchTeams(props.id)
+    props.fetchTeams(props.id);
+    setTeamSelected(null);
   }, [ isReturning, props.id, props.last_created_team ])
 
   useEffect(() => {
@@ -65,12 +67,16 @@ function TeamBuilder(props) {
   }
 
   const startEditing = (team) => {
-    setTeamToEdit(team);
+    if(team === null){
+      setTeamToEdit(teamSelected);
+    } else {
+      setTeamToEdit(team);
+    }
     setIsEditing(true);
   }
 
   const stopEditing = () => {
-    setTeamToEdit({});
+    setTeamToEdit(null);
     setIsEditing(false);
   }
 
@@ -114,7 +120,9 @@ function TeamBuilder(props) {
   return (
     <Container className={classes.container}>
       <SubmitButton onClick={startBuilding}>Build New Team</SubmitButton>
-      <SubmitButton onClick={startImporting}>Import Team From Text</SubmitButton>
+      <SubmitButton onClick={startImporting}>Import From Text</SubmitButton>
+      <SubmitButton disabled={!teamSelected} onClick={() => {startEditing(teamToEdit)}}>Edit Team</SubmitButton>
+      <SubmitButton disabled={!teamSelected} onClick={() => {props.deleteTeam(teamSelected)}}>Delete Team</SubmitButton>
     </Container>
   );
 }
@@ -125,4 +133,4 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, { fetchTeams })(TeamBuilder)
+export default connect(mapStateToProps, { fetchTeams, deleteTeam })(TeamBuilder)
