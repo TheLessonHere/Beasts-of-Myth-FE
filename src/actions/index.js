@@ -42,7 +42,7 @@ export const postTeam = (user_id, teamDatastring) => dispatch => {
   dispatch({ type: POST_TEAM_START });
   const teamDS = JSON.stringify({ team_datastring: teamDatastring });
   axiosWithAuth()
-    .post(`http://localhost:5000/api/teams/${user_id}`, teamDS)
+    .post(`http://localhost:8000/api/teams/${user_id}`, teamDS)
     .then(res => {
       console.log(res);
       dispatch({ type: POST_TEAM_SUCCESS, payload: res.data });
@@ -59,7 +59,7 @@ export const DELETE_TEAM_FAILURE = 'DELETE_TEAM_FAILURE';
 export const deleteTeam = (team_id) => dispatch => {
   dispatch({ type: DELETE_TEAM_START });
   axiosWithAuth()
-    .delete(`http://localhost:5000/api/teams/${team_id}`)
+    .delete(`http://localhost:8000/api/teams/${team_id}`)
     .then(res => {
       console.log(res);
       dispatch({ type: DELETE_TEAM_SUCCESS, payload: team_id });

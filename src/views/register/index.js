@@ -100,7 +100,7 @@ const FormikRegister = withRouter(withFormik({
   handleSubmit(values, { props }) {
     const credentials = {"username": values.username,
                          "password": values.password}
-    axios.post("http://localhost:5000/api/auth/register", credentials)
+    axios.post("http://localhost:8000/api/auth/register", credentials)
       .then(res => {
         console.log("User successfully added.");
         props.history.push("/");
