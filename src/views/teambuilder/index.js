@@ -166,7 +166,7 @@ function TeamBuilder(props) {
       <List className={classes.miniBoxList}>
         {userTeams.length > 0 ?
         userTeams.map(team => {
-        return <ListItem component="div" key={`${team.team_id}`} onClick={() => {onMiniBoxClick(team)}}>
+        return <ListItem component="div" key={`${team.team_id}`} onClick={() => {onMiniBoxClick(team.team_object)}}>
                   <TeamMiniBox team={team} />
                </ListItem>
         }) :

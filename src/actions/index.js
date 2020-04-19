@@ -7,7 +7,7 @@ export const FETCH_USER_FAILURE = 'FETCH_USER_FAILURE';
 export const fetchUser = user_id => dispatch => {
   dispatch({ type: FETCH_USER_START });
   axiosWithAuth()
-    .get(`http://localhost:5000/api/user/${user_id}`)
+    .get(`http://localhost:8000/api/user/${user_id}`)
     .then(res => {
       console.log(res);
       dispatch({ type: FETCH_USER_SUCCESS, payload: res.data });
@@ -24,7 +24,7 @@ export const FETCH_TEAMS_FAILURE = 'FETCH_TEAMS_FAILURE';
 export const fetchTeams = (user_id) => dispatch => {
   dispatch({ type: FETCH_TEAMS_START });
   axiosWithAuth()
-    .get(`http://localhost:5000/api/teams/${user_id}`)
+    .get(`http://localhost:8000/api/teams/${user_id}`)
     .then(res => {
       console.log(res);
       dispatch({ type: FETCH_TEAMS_SUCCESS, payload: res.data });
