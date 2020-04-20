@@ -170,7 +170,7 @@ function TeamBuilder(props) {
                   <TeamMiniBox team={team} />
                </ListItem>
         }) :
-          <Typography>No Teams Found</Typography>}
+          <Typography align="center">No Teams Found</Typography>}
       </List>
       <Box className={classes.buttonBox}>
         <SubmitButton onClick={startBuilding}>Build New Team</SubmitButton>
