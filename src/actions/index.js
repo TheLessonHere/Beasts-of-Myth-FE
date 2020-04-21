@@ -1,4 +1,5 @@
 import { axiosWithAuth } from '../utils/functions/axiosWithAuth';
+import Team from '../classes/Team';
 
 export const FETCH_USER_START = 'FETCH_USER_START';
 export const FETCH_USER_SUCCESS = 'FETCH_USER_SUCCESS';
@@ -67,4 +68,30 @@ export const deleteTeam = (team_id) => dispatch => {
     .catch(err => {
       dispatch({ type: DELETE_TEAM_FAILURE, payload: 'Unable to delete team.' });
     });
+}
+
+export const CREATE_TEAM_OBJECTS_START = 'CREATE_TEAM_OBJECTS_START';
+export const CREATE_TEAM_OBJECTS_SUCCESS = 'CREATE_TEAM_OBJECTS_SUCCESS';
+export const CREATE_TEAM_OBJECTS_FAILURE = 'CREATE_TEAM_OBJECTS_FAILURE';
+
+export const createTeamObjects = (teamsArr) => dispatch => {
+  if(teamsArr.length > 0){
+    dispatch({ type: CREATE_TEAM_OBJECTS_START });
+    const teams = teamsArr.map(team => {
+      const teamClassObject = new Team('Unrestricted', 'Team');
+      teamClassObject.fillInTeamFromString(team.team_datastring);
+      return {
+        team_id: team.team_id,
+        team_object: teamClassObject
+      };
+    });
+    if(teams.length > 0){
+      dispatch({ type: CREATE_TEAM_OBJECTS_SUCCESS, payload: teams});
+    }
+    else if(teams.length <= 0){
+      dispatch({ type: CREATE_TEAM_OBJECTS_FAILURE, payload: 'Unable to convert team strings.'});
+    }
+  } else {
+    dispatch({type: CREATE_TEAM_OBJECTS_FAILURE, payload: 'User has no teams.'})
+  }
 }

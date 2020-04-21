@@ -1,5 +1,6 @@
 import React, { useState, useEffect }from 'react';
 import { connect } from 'react-redux';
+import { createTeamObjects } from '../../actions';
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Container,
@@ -21,6 +22,10 @@ function Battle(props) {
   const classes = useStyles();
   const [isSearching, setIsSearching] = useState(false);
   const [isBattling, setIsBattling] = useState(false);
+
+  useEffect(() => {
+    props.createTeamObjects(props.user_teams);
+  }, [ props.user_teams ])
 
   if(isSearching){
       return (
@@ -51,4 +56,4 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, {})(Battle)
+export default connect(mapStateToProps, { createTeamObjects })(Battle)
