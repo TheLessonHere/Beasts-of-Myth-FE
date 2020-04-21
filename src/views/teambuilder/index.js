@@ -15,7 +15,7 @@ import {
 import TeamNav from './components/TeamNav';
 import ImportFromText from './components/ImportFromText';
 import EditingTeamNav from './components/EditingTeamNav';
-import TeamMiniBox from "./components/TeamMiniBox";
+import TeamMiniBox from "../../utils/components/TeamMiniBox";
 import { SubmitButton } from '../../utils/components/SubmitButton';
 // Libraries
 import { beasts } from '../../data/libraries/BeastLibrary';
@@ -49,7 +49,12 @@ const useStyles = makeStyles(theme => ({
     buttonBox: {
         display: "flex",
         flexFlow: "column nowrap",
-        width: "40%"
+        width: "40%",
+        height: "50%"
+    },
+    button: {
+      display: "flex",
+      marginTop: "20px"
     }
 }))
 
@@ -68,6 +73,7 @@ function TeamBuilder(props) {
   useEffect(() => {
     props.fetchTeams(props.id);
     setTeamSelected(null);
+    setTeamSelectedId(null);
   }, [ isReturning, props.id, props.last_created_team ])
 
   useEffect(() => {
@@ -158,10 +164,10 @@ function TeamBuilder(props) {
           <Typography align="center">No Teams Found</Typography>}
       </List>
       <Box className={classes.buttonBox}>
-        <SubmitButton onClick={startBuilding}>Build New Team</SubmitButton>
-        <SubmitButton onClick={startImporting}>Import From Text</SubmitButton>
-        <SubmitButton disabled={!teamSelected} onClick={() => {startEditing(teamToEdit)}}>Edit Team</SubmitButton>
-        <SubmitButton disabled={!teamSelected} onClick={() => {props.deleteTeam(teamSelectedId)}}>Delete Team</SubmitButton>
+        <SubmitButton className={classes.button} onClick={startBuilding}>Build New Team</SubmitButton>
+        <SubmitButton className={classes.button} onClick={startImporting}>Import From Text</SubmitButton>
+        <SubmitButton className={classes.button} disabled={!teamSelected} onClick={() => {startEditing(teamToEdit)}}>Edit Team</SubmitButton>
+        <SubmitButton className={classes.button} disabled={!teamSelected} onClick={() => {props.deleteTeam(teamSelectedId)}}>Delete Team</SubmitButton>
       </Box>
     </Container>
   );

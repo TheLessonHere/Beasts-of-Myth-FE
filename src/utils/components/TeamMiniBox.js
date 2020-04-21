@@ -6,7 +6,7 @@ import {
     Avatar
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { getBeastImage } from '../../../utils/functions/getBeastImage';
+import { getBeastImage } from '../functions/getBeastImage';
 
 const useStyles = makeStyles(theme => ({
     miniBox: {
@@ -20,6 +20,9 @@ const useStyles = makeStyles(theme => ({
         boxShadow: "2px 2px 5px black",
         "&:hover": {
             cursor: "pointer"
+        },
+        "&:active": {
+            border: "2px solid darkblue"
         }
     },
     teamInfo: {
@@ -55,7 +58,7 @@ const useStyles = makeStyles(theme => ({
     },
 }))
 
-export default function ItemRow(props){
+export default function TeamMiniBox(props){
     const { team } = props;
     const { team_id, team_object } = team;
     const classes = useStyles();
@@ -67,7 +70,9 @@ export default function ItemRow(props){
     const searchId5 = team_object.slot5.beast.beast_name.toLowerCase();
 
     return (
-        <Container id={`${team_id}`} className={classes.miniBox}>
+        <Container
+        id={`${team_id}`}
+        className={classes.miniBox}>
             <Box className={classes.teamInfo}>
                 <Typography className={classes.format} variant="subtitle2">({team_object.format})</Typography>
                 <Typography className={classes.teamName} variant="h6">{team_object.team_name}</Typography>
