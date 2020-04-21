@@ -10,7 +10,10 @@ import {
     POST_TEAM_FAILURE,
     DELETE_TEAM_START,
     DELETE_TEAM_SUCCESS,
-    DELETE_TEAM_FAILURE
+    DELETE_TEAM_FAILURE,
+    CREATE_TEAM_OBJECTS_START,
+    CREATE_TEAM_OBJECTS_SUCCESS,
+    CREATE_TEAM_OBJECTS_FAILURE
   } from '../actions';
 
 const initialState = {
@@ -23,6 +26,7 @@ const initialState = {
     losses: '',
     connections: [],
     user_teams: [],
+    team_objects: [],
     last_created_team: ''
   };
 
@@ -109,7 +113,26 @@ export const reducer = (state = initialState, action) => {
           ...state,
           isFetching: false,
           error: action.payload
-        }
+        };
+      case CREATE_TEAM_OBJECTS_START:
+        return {
+          ...state,
+          error: '',
+          isFetching: true,
+        };
+      case CREATE_TEAM_OBJECTS_SUCCESS:
+        return {
+          ...state,
+          team_objects: action.payload,
+          isFetching: false
+        };
+      case CREATE_TEAM_OBJECTS_FAILURE:
+        return {
+          ...state,
+          team_objects: [],
+          isFetching: false,
+          error: action.payload
+        };
       default:
         return state;
     }

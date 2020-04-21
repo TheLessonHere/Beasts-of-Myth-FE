@@ -15,7 +15,7 @@ import {
 import TeamNav from './components/TeamNav';
 import ImportFromText from './components/ImportFromText';
 import EditingTeamNav from './components/EditingTeamNav';
-import TeamMiniBox from "./components/TeamMiniBox";
+import TeamMiniBox from "../../utils/components/TeamMiniBox";
 import { SubmitButton } from '../../utils/components/SubmitButton';
 // Libraries
 import { beasts } from '../../data/libraries/BeastLibrary';
@@ -49,7 +49,12 @@ const useStyles = makeStyles(theme => ({
     buttonBox: {
         display: "flex",
         flexFlow: "column nowrap",
-        width: "40%"
+        width: "40%",
+        height: "50%"
+    },
+    button: {
+      display: "flex",
+      marginTop: "20px"
     }
 }))
 
@@ -63,28 +68,13 @@ function TeamBuilder(props) {
   const [isEditing, setIsEditing] = useState(false);
   const [teamToEdit, setTeamToEdit] = useState(null);
   const [teamSelected, setTeamSelected] = useState(null);
-  const [userTeams, setUserTeams] = useState([]);
+  const [teamSelectedId, setTeamSelectedId] = useState(null);
 
   useEffect(() => {
     props.fetchTeams(props.id);
     setTeamSelected(null);
+    setTeamSelectedId(null);
   }, [ isReturning, props.id, props.last_created_team ])
-
-  useEffect(() => {
-    if(props.user_teams.length > 0){
-      const teams = props.user_teams.map(team => {
-        const teamClassObject = new Team('Unrestricted', 'Team');
-        teamClassObject.fillInTeamFromString(team.team_datastring);
-        return {
-          team_id: team.team_id,
-          team_object: teamClassObject
-        };
-      });
-      console.log(teams);
-      setUserTeams(teams);
-    }
-    setTeamSelected(null);
-  }, [ props.user_teams ])
 
   useEffect(() => {
     return;
@@ -120,8 +110,9 @@ function TeamBuilder(props) {
     setIsEditing(false);
   }
 
-  const onMiniBoxClick = (teamObject) => {
-    setTeamSelected(teamObject);
+  const onMiniBoxClick = (team) => {
+    setTeamSelected(team.team_object);
+    setTeamSelectedId(team.team_id);
   }
 
   if(isBuilding){
@@ -164,19 +155,19 @@ function TeamBuilder(props) {
   return (
     <Container className={classes.defaultContainer}>
       <List className={classes.miniBoxList}>
-        {userTeams.length > 0 ?
-        userTeams.map(team => {
-        return <ListItem component="div" key={`${team.team_id}`} onClick={() => {onMiniBoxClick(team.team_object)}}>
+        {props.team_objects.length > 0 ?
+        props.team_objects.map(team => {
+        return <ListItem component="div" key={`${team.team_id}`} onClick={() => {onMiniBoxClick(team)}}>
                   <TeamMiniBox team={team} />
                </ListItem>
         }) :
           <Typography align="center">No Teams Found</Typography>}
       </List>
       <Box className={classes.buttonBox}>
-        <SubmitButton onClick={startBuilding}>Build New Team</SubmitButton>
-        <SubmitButton onClick={startImporting}>Import From Text</SubmitButton>
-        <SubmitButton disabled={!teamSelected} onClick={() => {startEditing(teamToEdit)}}>Edit Team</SubmitButton>
-        <SubmitButton disabled={!teamSelected} onClick={() => {props.deleteTeam(teamSelected.team_id)}}>Delete Team</SubmitButton>
+        <SubmitButton className={classes.button} onClick={startBuilding}>Build New Team</SubmitButton>
+        <SubmitButton className={classes.button} onClick={startImporting}>Import From Text</SubmitButton>
+        <SubmitButton className={classes.button} disabled={!teamSelected} onClick={() => {startEditing(teamToEdit)}}>Edit Team</SubmitButton>
+        <SubmitButton className={classes.button} disabled={!teamSelected} onClick={() => {props.deleteTeam(teamSelectedId)}}>Delete Team</SubmitButton>
       </Box>
     </Container>
   );

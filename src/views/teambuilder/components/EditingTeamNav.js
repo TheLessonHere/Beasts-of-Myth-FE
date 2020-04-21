@@ -631,10 +631,6 @@ function EditingTeamNav(props) {
       }
     }
 
-    const logTeam = () => {
-      console.log(format, slot1, slot2, slot3, slot4, slot5, props.id);
-    }
-
     const returnDomains = (domain1, domain2) => {
       if(domain2){
           const capDomain1 = domain1.charAt(0).toUpperCase() + domain1.slice(1);
@@ -842,8 +838,7 @@ function EditingTeamNav(props) {
                       value={format}
                       autoWidth={true}
                       className={classes.topInputs}
-                      onChange={handleFormatChange}
-                    >
+                      onChange={handleFormatChange}>
                       <MenuItem value={'Unrestricted'}>Unrestricted</MenuItem>
                     </Select>
                     <TextField
@@ -927,7 +922,6 @@ function EditingTeamNav(props) {
                   clearItem={clearItem}
                   clearMove={clearMove} />
                 }
-                <button onClick={logTeam}>Log Team</button>
             </TabPanel>
             <TabPanel classes={classes} value={tabValue} index={1}>
                 {slot2 === null ?
@@ -982,7 +976,6 @@ function EditingTeamNav(props) {
                   clearItem={clearItem}
                   clearMove={clearMove} />
                 }
-                <button onClick={logTeam}>Log Team</button>
             </TabPanel>
             <TabPanel classes={classes} value={tabValue} index={2}>
                 {slot3 === null ?
@@ -1037,7 +1030,6 @@ function EditingTeamNav(props) {
                   clearItem={clearItem}
                   clearMove={clearMove} />
                 }
-                <button onClick={logTeam}>Log Team</button>
             </TabPanel>
             <TabPanel classes={classes} value={tabValue} index={3}>
                 {slot4 === null ?
@@ -1092,7 +1084,6 @@ function EditingTeamNav(props) {
                   clearItem={clearItem}
                   clearMove={clearMove} />
                 }
-                <button onClick={logTeam}>Log Team</button>
             </TabPanel>
             <TabPanel classes={classes} value={tabValue} index={4}>
                 {slot5 === null ?
@@ -1147,7 +1138,6 @@ function EditingTeamNav(props) {
                   clearItem={clearItem}
                   clearMove={clearMove} />
                 }
-                <button onClick={logTeam}>Log Team</button>
             </TabPanel>
         </div>
 )}

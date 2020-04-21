@@ -1,5 +1,5 @@
-import { beasts } from '../../data/libraries/BeastLibrary';
-import { items } from '../../data/libraries/ItemLibrary';
+// import { beasts } from '../../data/libraries/BeastLibrary';
+// import { items } from '../../data/libraries/ItemLibrary';
 import { moves } from '../../data/libraries/MoveLibrary';
 
 export default function validateTeam (format, slot1, slot2, slot3, slot4, slot5, setIsValid) {
