@@ -23,12 +23,12 @@ import LibrarySearchbar from './LibrarySearchbar';
 import ItemSearchSuggestions from './ItemSearchSuggestions';
 import MoveSearchSuggestions from './MoveSearchSuggestions';
 import { SubmitButton } from '../../../utils/components/SubmitButton';
+import SlotForm from "./SlotForm";
 // Classes
 import Team from '../../../classes/Team';
 import Beast from '../../../classes/Beast';
 import Move from '../../../classes/Move';
 import Item from '../../../classes/Item';
-import SlotForm from "./SlotForm";
 // Libraries
 import { beasts } from '../../../data/libraries/BeastLibrary';
 import { moves } from '../../../data/libraries/MoveLibrary';
