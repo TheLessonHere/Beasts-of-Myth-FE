@@ -62,7 +62,7 @@ const useStyles = makeStyles(theme => ({
   }));
 
 export default function QueueForm(props) {
-    const { format, handleFormatChange, team } = props;
+    const { format, handleFormatChange, team, teamId } = props;
     const classes = useStyles();
 
     return (
@@ -83,7 +83,7 @@ export default function QueueForm(props) {
                 <Typography className={classes.teamHeader} variant="subtitle1">Team Selected:</Typography>
                 <Box className={classes.microBox}>
                     {team ?
-                    <TeamMicroBox team={team} /> :
+                    <TeamMicroBox team={team} teamId={teamId}/> :
                     <Typography variant="subtitle2" className={classes.noTeamText} align="center">No Team Selected</Typography>}
                 </Box>
                 <SubmitButton>Search</SubmitButton>

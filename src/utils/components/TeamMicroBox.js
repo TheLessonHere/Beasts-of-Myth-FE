@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
 }))
 
 export default function TeamMicroBox(props){
-    const { team } = props;
+    const { team, teamId } = props;
     const classes = useStyles();
 
     const searchId1 = team.slot1.beast.beast_name.toLowerCase();
@@ -63,7 +63,7 @@ export default function TeamMicroBox(props){
     const searchId5 = team.slot5.beast.beast_name.toLowerCase();
 
     return (
-        <Container className={classes.microBox}>
+        <Container id={teamId} className={classes.microBox}>
             <Box className={classes.teamInfo}>
                 <Typography className={classes.format} variant="subtitle2">({team.format})</Typography>
                 <Typography className={classes.teamName} variant="h6">{team.team_name}</Typography>
