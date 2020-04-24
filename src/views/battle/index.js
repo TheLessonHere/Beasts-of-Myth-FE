@@ -13,6 +13,8 @@ import {
 // Components
 import TeamMiniBox from '../../utils/components/TeamMiniBox';
 import QueueForm from './components/QueueForm';
+// Socket
+import io from 'socket.io-client';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -62,14 +64,14 @@ function Battle(props) {
   if(isSearching){
       return (
           // Loading component here
-          null
+          <Typography variant="h3">Searching...</Typography>
       )
   }
 
   if(isBattling){
       return (
           // Load BattleRoom
-          null
+          <Typography variant="h3">Battling</Typography>
       )
   }
 
@@ -78,7 +80,8 @@ function Battle(props) {
       <QueueForm
         format={format}
         handleFormatChange={handleFormatChange}
-        team={teamSelected} />
+        team={teamSelected}
+        teamId={teamSelectedId} />
       <List className={classes.miniBoxList}>
         {props.team_objects.length > 0 ?
         props.team_objects.map(team => {
