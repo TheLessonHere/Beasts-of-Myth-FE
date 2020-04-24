@@ -64,14 +64,14 @@ function Battle(props) {
   if(isSearching){
       return (
           // Loading component here
-          null
+          <Typography variant="h3">Searching...</Typography>
       )
   }
 
   if(isBattling){
       return (
           // Load BattleRoom
-          null
+          <Typography variant="h3">Battling</Typography>
       )
   }
 
