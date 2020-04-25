@@ -33,6 +33,8 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
+let socket = null;
+
 function Battle(props) {
   const classes = useStyles();
   const [isSearching, setIsSearching] = useState(false);
