@@ -61,9 +61,22 @@ function BattleRoom(props) {
         setGame(newGame);
     }, [])
 
+    useEffect(() => {
+
+    }, [ game ])
+
+    if(game){
+        return (
+            <Container className={classes.container}>
+                <Typography>{game.player1.username}</Typography>
+                <Typography>{game.player2.username}</Typography>
+            </Container>
+        )
+    }
+
     return (
         <Container className={classes.container}>
-            Battle room
+            Default
         </Container>
     )
 }
