@@ -1,6 +1,9 @@
 import React, { useState, useEffect }from 'react';
 import { connect } from 'react-redux';
-import { createTeamObjects } from '../../actions';
+import {
+  createTeamObjects,
+  addConnection
+ } from '../../actions';
 import { makeStyles } from "@material-ui/core/styles";
 import {
     Container,
@@ -13,8 +16,22 @@ import {
 // Components
 import TeamMiniBox from '../../utils/components/TeamMiniBox';
 import QueueForm from './components/QueueForm';
+import BattleRoom from './components/BattleRoom';
 // Socket
 import io from 'socket.io-client';
+// Classes
+import Game from '../../classes/Game';
+import GameLog from '../../classes/GameLog';
+import Player from '../../classes/Player';
+import Team from '../../classes/Team';
+import Beast from '../../classes/Beast';
+import Move from '../../classes/Move';
+import Item from '../../classes/Item';
+// Libraries
+import { beasts } from '../../data/libraries/BeastLibrary';
+import { abilities } from '../../data/libraries/AbilityLibrary';
+import { items } from '../../data/libraries/ItemLibrary';
+import { moves } from '../../data/libraries/MoveLibrary';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -33,7 +50,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-let socket = null;
+let socket;
 
 function Battle(props) {
   const classes = useStyles();
@@ -42,6 +59,8 @@ function Battle(props) {
   const [format, setFormat] = useState('Unrestricted');
   const [teamSelected, setTeamSelected] = useState(null);
   const [teamSelectedId, setTeamSelectedId] = useState(null);
+  const [room, setRoom] = useState(null);
+  const [opponent, setOpponent] = useState(null);
 
   useEffect(() => {
     props.createTeamObjects(props.user_teams);
@@ -54,6 +73,14 @@ function Battle(props) {
     setTeamSelectedId(null);
   }, [ format ])
 
+  useEffect(() => {
+    if(room){
+      setIsBattling(true);
+    } else {
+      setIsBattling(false);
+    }
+  }, [ room ])
+
   const onMiniBoxClick = (team) => {
     setTeamSelected(team.team_object);
     setTeamSelectedId(team.team_id);
@@ -63,12 +90,95 @@ function Battle(props) {
       setFormat(event.target.value);
   }
 
-  if(isSearching){
-      return (
-          // Loading component here
-          <Typography variant="h3">Searching...</Typography>
-      )
+  const queueTeam = (event) => {
+    event.preventDefault();
+    setIsSearching(true);
+    const team = props.user_teams.find(team => team.team_id === teamSelectedId);
+    if(team){
+      const queueObject = {
+        id: props.id,
+        username: props.username,
+        format: format,
+        team: team.team_datastring
+      }
+      console.log(queueObject);
+      socket = io('localhost:8000');
+      socket.emit('enqueue', queueObject);
+    }
   }
+
+  const cancelQueue = (event) => {
+    event.preventDefault();
+    const user = { id: props.id };
+    socket.emit('dequeue', user);
+    socket.emit('disconnect');
+    setIsSearching(false);
+  }
+
+  const joinAsPlayer = () => {
+    let credentials = {};
+    if(room.player1.player_id === props.id){
+      credentials = {
+        playerNum: "player1",
+        player: room.player1,
+        room_id: room.room_id
+      }
+    } else {
+      credentials = {
+        playerNum: "player2",
+        player: room.player2,
+        room_id: room.room_id
+      }
+    }
+    socket.emit('join as player', credentials);
+  }
+
+  const seeSpectators = () => {
+    socket.emit('see spectators', { room_id: room.room_id });
+  }
+
+  const forfeit = () => {
+    let credentials = {};
+    if(room.player1.player_id === props.id){
+      credentials = {
+        playerNum: "player1",
+        player: room.player1,
+        room_id: room.room_id
+      }
+    } else {
+      credentials = {
+        playerNum: "player2",
+        player: room.player2,
+        room_id: room.room_id
+      }
+    }
+    socket.emit('forfeit', credentials);
+  }
+
+  const sendAction = (action) => {
+    socket.emit('player action', { room: room.room_id, action: action });
+  }
+
+  socket.on('room created', (room, callback) => {
+    console.log(room);
+    props.addConnection(room);
+    setRoom(room)
+  })
+
+  socket.on('init', (player, callback) => {
+    console.log(player);
+    setOpponent(player);
+  })
+
+  socket.on('opponent action', (action, callback) => {
+    // Add game logic for handling action here
+    console.log(action);
+  })
+
+  socket.on('player exit', ({ player, action }, callback) => {
+    // Handle game loss for the player exiting.
+    console.log(`Player ${player.player_id} has forfeited.`);
+  })
 
   if(isBattling){
       return (
@@ -83,7 +193,10 @@ function Battle(props) {
         format={format}
         handleFormatChange={handleFormatChange}
         team={teamSelected}
-        teamId={teamSelectedId} />
+        teamId={teamSelectedId}
+        isSearching={isSearching}
+        queueTeam={queueTeam}
+        cancelQueue={cancelQueue} />
       <List className={classes.miniBoxList}>
         {props.team_objects.length > 0 ?
         props.team_objects.map(team => {
@@ -104,4 +217,4 @@ const mapStateToProps = state => {
     }
   }
 
-export default connect(mapStateToProps, { createTeamObjects })(Battle)
+export default connect(mapStateToProps, { createTeamObjects, addConnection })(Battle)

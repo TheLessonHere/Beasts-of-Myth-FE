@@ -95,3 +95,15 @@ export const createTeamObjects = (teamsArr) => dispatch => {
     dispatch({type: CREATE_TEAM_OBJECTS_FAILURE, payload: 'User has no teams.'})
   }
 }
+
+export const ADD_CONNECTION = 'ADD_CONNECTION';
+
+export const addConnection = (roomInfo) => dispatch => {
+  dispatch({ type: ADD_CONNECTION, payload: roomInfo });
+}
+
+export const REMOVE_CONNECTION = 'REMOVE_CONNECTION';
+
+export const removeConnection = (roomInfo) => dispatch => {
+  dispatch({ type: REMOVE_CONNECTION, payload: roomInfo });
+}
