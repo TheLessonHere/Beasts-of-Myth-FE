@@ -13,7 +13,9 @@ import {
     DELETE_TEAM_FAILURE,
     CREATE_TEAM_OBJECTS_START,
     CREATE_TEAM_OBJECTS_SUCCESS,
-    CREATE_TEAM_OBJECTS_FAILURE
+    CREATE_TEAM_OBJECTS_FAILURE,
+    ADD_CONNECTION,
+    REMOVE_CONNECTION
   } from '../actions';
 
 const initialState = {
@@ -132,6 +134,19 @@ export const reducer = (state = initialState, action) => {
           team_objects: [],
           isFetching: false,
           error: action.payload
+        };
+      case ADD_CONNECTION:
+        const newConnectionsArr = [...connections, action.payload];
+        return {
+          ...state,
+          connections: newConnectionsArr
+        };
+      case REMOVE_CONNECTION:
+        const updatedConnections = connections.filter(connection =>
+          connection.room_id !== action.payload.room_id);
+        return {
+          ...state,
+          connections: updatedConnections
         };
       default:
         return state;
