@@ -26,7 +26,7 @@ const initialState = {
     profile_img: '',
     wins: '',
     losses: '',
-    connections: [],
+    connections: 0,
     user_teams: [],
     team_objects: [],
     last_created_team: ''
@@ -136,17 +136,14 @@ export const reducer = (state = initialState, action) => {
           error: action.payload
         };
       case ADD_CONNECTION:
-        const newConnectionsArr = [...connections, action.payload];
         return {
           ...state,
-          connections: newConnectionsArr
+          connections: state.connections++
         };
       case REMOVE_CONNECTION:
-        const updatedConnections = connections.filter(connection =>
-          connection.room_id !== action.payload.room_id);
         return {
           ...state,
-          connections: updatedConnections
+          connections: state.connections--
         };
       default:
         return state;

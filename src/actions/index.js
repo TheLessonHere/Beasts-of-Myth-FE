@@ -98,12 +98,12 @@ export const createTeamObjects = (teamsArr) => dispatch => {
 
 export const ADD_CONNECTION = 'ADD_CONNECTION';
 
-export const addConnection = (roomInfo) => dispatch => {
-  dispatch({ type: ADD_CONNECTION, payload: roomInfo });
+export const addConnection = () => dispatch => {
+  dispatch({ type: ADD_CONNECTION });
 }
 
 export const REMOVE_CONNECTION = 'REMOVE_CONNECTION';
 
 export const removeConnection = (roomInfo) => dispatch => {
-  dispatch({ type: REMOVE_CONNECTION, payload: roomInfo });
+  dispatch({ type: REMOVE_CONNECTION });
 }

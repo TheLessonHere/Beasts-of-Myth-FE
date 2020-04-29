@@ -1,4 +1,4 @@
-import { domainEffectivenessMap } from '../utils/domainEffectivenessMap';
+import { domainEffectivenessMap } from '../utils/functions/domainEffectivenessMap';
 
 export default class Game {
     constructor(player1, player2){
