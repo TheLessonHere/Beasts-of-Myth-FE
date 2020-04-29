@@ -33,40 +33,28 @@ function BattleRoom(props) {
     const classes = useStyles();
     const [game, setGame] = useState(null);
     const [gameLog, setGameLog] = useState(null);
+    const [player, setPlayer] = useState(null);
+    const [opponent, setOpponent] = useState(null);
 
     useEffect(() => {
-        let p1Team;
-        let p2Team;
-        let player1;
-        let player2;
-        if(props.opponent.playerNum === "player1"){
-            p1Team = new Team('Unrestricted', 'Team1');
-            p1Team.fillInTeamFromString(props.opponent.player.team);
-            p2Team = props.teamSelected;
-            player1 = new Player(props.opponent.player.player_id,
-                                props.opponent.player.username,
+        let p1Team = new Team('Unrestricted', 'Team1');
+        let p2Team = new Team('Unrestricted', 'Team2');
+        p1Team.fillInTeamFromString(props.room.player1.team);
+        p2Team.fillInTeamFromString(props.room.player2.team);
+        let player1 = new Player(props.room.player1.player_id,
+                                props.room.player1.username,
                                 null,
-                                props.opponent.player.team);
-            const teamDatastring = props.teamSelected.convertToString();
-            player2 = new Player(props.id,
-                                props.username,
+                                p1Team);
+        let player2 = new Player(props.room.player2.player_id,
+                                props.room.player2.username,
                                 null,
-                                teamDatastring);
-            console.log(p1Team, p2Team, player1, player2);
+                                p2Team);
+        if(props.id === player1.player_id){
+            setPlayer(player1);
+            setOpponent(player2);
         } else {
-            p2Team = new Team('Unrestricted', 'Team2');
-            p2Team.fillInTeamFromString(props.opponent.player.team);
-            p1Team = props.teamSelected;
-            player1 = new Player(props.opponent.player.player_id,
-                                props.opponent.player.username,
-                                null,
-                                props.opponent.player.team);
-            const teamDatastring = props.teamSelected.convertToString();
-            player2 = new Player(props.id,
-                                props.username,
-                                null,
-                                teamDatastring);
-            console.log(p1Team, p2Team, player1, player2);
+            setPlayer(player2);
+            setOpponent(player1);
         }
         const newGame = new Game(player1, player2);
         console.log(newGame);

@@ -60,7 +60,6 @@ function Battle(props) {
   const [teamSelected, setTeamSelected] = useState(null);
   const [teamSelectedId, setTeamSelectedId] = useState(null);
   const [room, setRoom] = useState(null);
-  const [opponent, setOpponent] = useState(null);
 
   useEffect(() => {
     props.createTeamObjects(props.user_teams);
@@ -75,6 +74,7 @@ function Battle(props) {
 
   useEffect(() => {
     if(room){
+      joinAsPlayer();
       setIsBattling(true);
     } else {
       setIsBattling(false);
@@ -159,31 +159,27 @@ function Battle(props) {
     socket.emit('player action', { room: room.room_id, action: action });
   }
 
-  socket.on('room created', (room, callback) => {
-    console.log(room);
-    props.addConnection(room);
-    setRoom(room)
-  })
+  if(socket){
+    socket.on('room created', (room, callback) => {
+      console.log(room);
+      props.addConnection();
+      setRoom(room);
+    })
 
-  socket.on('init', (player, callback) => {
-    console.log(player);
-    setOpponent(player);
-  })
+    socket.on('opponent action', (action, callback) => {
+      // Add game logic for handling action here
+      console.log(action);
+    })
 
-  socket.on('opponent action', (action, callback) => {
-    // Add game logic for handling action here
-    console.log(action);
-  })
-
-  socket.on('player exit', ({ player, action }, callback) => {
-    // Handle game loss for the player exiting.
-    console.log(`Player ${player.player_id} has forfeited.`);
-  })
+    socket.on('player exit', ({ player, action }, callback) => {
+      // Handle game loss for the player exiting.
+      console.log(`Player ${player.player_id} has forfeited.`);
+    })
+  }
 
   if(isBattling){
       return (
-          // Load BattleRoom
-          <Typography variant="h3">Battling</Typography>
+          <BattleRoom room={room} />
       )
   }
 
