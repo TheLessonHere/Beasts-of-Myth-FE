@@ -38,7 +38,8 @@ export default class Team {
         this.active_slot = {
             beast: null,
             adjacentSlots: [],
-            turnsActive: 0
+            turnsActive: 0,
+            slotNumber: null,
         }
         this.total_beasts = 0;
         this.isValid = false;
@@ -439,6 +440,7 @@ export default class Team {
             case 'slot1':
                 this.active_slot.beast = this.slot1.beast;
                 this.active_slot.adjacentSlots = this.slot1.adjacentSlots;
+                this.active_slot.slotNumber = 'slot1';
                 if(this.active_slot.beast.item.type === 'static'){
                     this.active_slot.beast.item.effect(this.active_slot.beast);
                 }
@@ -447,6 +449,7 @@ export default class Team {
             case 'slot2':
                 this.active_slot.beast = this.slot2.beast;
                 this.active_slot.adjacentSlots = this.slot2.adjacentSlots;
+                this.active_slot.slotNumber = 'slot2';
                 if(this.active_slot.beast.item.type === 'static'){
                     this.active_slot.beast.item.effect(this.active_slot.beast);
                 }
@@ -455,6 +458,7 @@ export default class Team {
             case 'slot3':
                 this.active_slot.beast = this.slot3.beast;
                 this.active_slot.adjacentSlots = this.slot3.adjacentSlots;
+                this.active_slot.slotNumber = 'slot3';
                 if(this.active_slot.beast.item.type === 'static'){
                     this.active_slot.beast.item.effect(this.active_slot.beast);
                 }
@@ -463,6 +467,7 @@ export default class Team {
             case 'slot4':
                 this.active_slot.beast = this.slot4.beast;
                 this.active_slot.adjacentSlots = this.slot4.adjacentSlots;
+                this.active_slot.slotNumber = 'slot4';
                 if(this.active_slot.beast.item.type === 'static'){
                     this.active_slot.beast.item.effect(this.active_slot.beast);
                 }
@@ -471,6 +476,7 @@ export default class Team {
             case 'slot5':
                 this.active_slot.beast = this.slot5.beast;
                 this.active_slot.adjacentSlots = this.slot5.adjacentSlots;
+                this.active_slot.slotNumber = 'slot5';
                 if(this.active_slot.beast.item.type === 'static'){
                     this.active_slot.beast.item.effect(this.active_slot.beast);
                 }
