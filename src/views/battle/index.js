@@ -60,6 +60,21 @@ function Battle(props) {
   const [teamSelected, setTeamSelected] = useState(null);
   const [teamSelectedId, setTeamSelectedId] = useState(null);
   const [room, setRoom] = useState(null);
+  // Post connection state
+  const [game, setGame] = useState(null);
+  const [gameLog, setGameLog] = useState(null);
+  const [player, setPlayer] = useState(null);
+  const [opponent, setOpponent] = useState(null);
+
+  useEffect(() => {
+    socket = io('localhost:8000');
+    return () => {
+      socket.emit('disconnect');
+      socket.off();
+    }
+  }, [])
+
+
 
   useEffect(() => {
     props.createTeamObjects(props.user_teams);
@@ -102,7 +117,6 @@ function Battle(props) {
         team: team.team_datastring
       }
       console.log(queueObject);
-      socket = io('localhost:8000');
       socket.emit('enqueue', queueObject);
     }
   }
@@ -159,27 +173,36 @@ function Battle(props) {
     socket.emit('player action', { room: room.room_id, action: action });
   }
 
-  if(socket){
-    socket.on('room created', (room, callback) => {
-      console.log(room);
-      props.addConnection();
-      setRoom(room);
-    })
+  socket.on('room created', (room, callback) => {
+    console.log(room);
+    props.addConnection();
+    setRoom(room);
+  })
 
-    socket.on('opponent action', (action, callback) => {
-      // Add game logic for handling action here
-      console.log(action);
-    })
+  socket.on('opponent action', (action, callback) => {
+    // Add game logic for handling action here
+    console.log(action);
+  })
 
-    socket.on('player exit', ({ player, action }, callback) => {
-      // Handle game loss for the player exiting.
-      console.log(`Player ${player.player_id} has forfeited.`);
-    })
-  }
+  socket.on('player exit', ({ player, action }, callback) => {
+    // Handle game loss for the player exiting.
+    console.log(`Player ${player.player_id} has forfeited.`);
+  })
+
 
   if(isBattling){
       return (
-          <BattleRoom room={room} />
+          <BattleRoom
+          room={room}
+          game={game}
+          setGame={setGame}
+          player={player}
+          setPlayer={setPlayer}
+          opponent={opponent}
+          setOpponent={setOpponent}
+          seeSpectators={seeSpectators}
+          sendAction={sendAction}
+          forfeit={forfeit} />
       )
   }
 

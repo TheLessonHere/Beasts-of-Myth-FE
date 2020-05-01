@@ -1,7 +1,8 @@
 export default class Player {
-    constructor(playerId, username, profileImg, team){
+    constructor(playerId, username, playerNum, profileImg, team){
         this.player_id = playerId;
         this.username = username;
+        this.player_num = playerNum;
         this.profile_img = profileImg;
         this.team = team;
         this.available_crit_rolls = 4;
