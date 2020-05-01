@@ -74,8 +74,6 @@ function Battle(props) {
     }
   }, [])
 
-
-
   useEffect(() => {
     props.createTeamObjects(props.user_teams);
     setTeamSelected(null);
@@ -173,22 +171,23 @@ function Battle(props) {
     socket.emit('player action', { room: room.room_id, action: action });
   }
 
-  socket.on('room created', (room, callback) => {
-    console.log(room);
-    props.addConnection();
-    setRoom(room);
-  })
+  if(socket){
+    socket.on('room created', (room, callback) => {
+      console.log(room);
+      props.addConnection();
+      setRoom(room);
+    })
 
-  socket.on('opponent action', (action, callback) => {
-    // Add game logic for handling action here
-    console.log(action);
-  })
+    socket.on('opponent action', (action, callback) => {
+      // Add game logic for handling action here
+      console.log(action);
+    })
 
-  socket.on('player exit', ({ player, action }, callback) => {
-    // Handle game loss for the player exiting.
-    console.log(`Player ${player.player_id} has forfeited.`);
-  })
-
+    socket.on('player exit', ({ player, action }, callback) => {
+      // Handle game loss for the player exiting.
+      console.log(`Player ${player.player_id} has forfeited.`);
+    })
+  }
 
   if(isBattling){
       return (

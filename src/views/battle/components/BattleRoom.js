@@ -11,6 +11,8 @@ import {
     CircularProgress
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+// Components
+import BattleWindow from './BattleWindow';
 // Classes
 import Game from '../../../classes/Game';
 import GameLog from '../../../classes/GameLog';
@@ -98,20 +100,94 @@ function BattleRoom(props) {
         return;
     }, [ props.game ])
 
-    if(props.game && inTeamPreview){
-        return (
-            <Container className={classes.container}>
-                <Typography>{props.game.player1.username}</Typography>
-                <Typography>{props.game.player2.username}</Typography>
-            </Container>
-        )
-    }
+    if(props.game){
+        let opponentTeamLineup;
+        let playerTeamLineup;
+        if(props.player.player_num === "player1"){
+            opponentTeamLineup = {
+                s1: p2s1,
+                s2: p2s2,
+                s3: p2s3,
+                s4: p2s4,
+                s5: p2s5
+            };
+            playerTeamLineup = {
+                s1: p1s1,
+                s2: p1s2,
+                s3: p1s3,
+                s4: p1s4,
+                s5: p1s5
+            };
+        } else {
+            opponentTeamLineup = {
+                s1: p1s1,
+                s2: p1s2,
+                s3: p1s3,
+                s4: p1s4,
+                s5: p1s5
+            };
+            playerTeamLineup = {
+                s1: p2s1,
+                s2: p2s2,
+                s3: p2s3,
+                s4: p2s4,
+                s5: p2s5
+            };
+        }
 
-    if(props.game && !inTeamPreview){
+        let p1ActiveBeastImg = null;
+        let p2ActiveBeastImg = null;
+        if(props.game.player1.team.active_slot.slotNumber && props.game.player2.team.active_slot.slotNumber){
+            switch(props.game.player1.team.active_slot.slotNumber){
+                case 'slot1':
+                    p1ActiveBeastImg = p1s1;
+                    break;
+                case 'slot2':
+                    p1ActiveBeastImg = p1s2;
+                    break;
+                case 'slot3':
+                    p1ActiveBeastImg = p1s3;
+                    break;
+                case 'slot4':
+                    p1ActiveBeastImg = p1s4;
+                    break;
+                case 'slot5':
+                    p1ActiveBeastImg = p1s5;
+                    break;
+                default:
+                    console.log("Error setting p1activebeastimg.")
+            }
+            switch(props.game.player2.team.active_slot.slotNumber){
+                case 'slot1':
+                    p2ActiveBeastImg = p2s1;
+                    break;
+                case 'slot2':
+                    p2ActiveBeastImg = p2s2;
+                    break;
+                case 'slot3':
+                    p2ActiveBeastImg = p2s3;
+                    break;
+                case 'slot4':
+                    p2ActiveBeastImg = p2s4;
+                    break;
+                case 'slot5':
+                    p2ActiveBeastImg = p2s5;
+                    break;
+                default:
+                    console.log("Error setting p2activebeastimg.")
+            }
+        }
+
         return (
             <Container className={classes.container}>
-                <Typography>{props.game.player1.username}</Typography>
-                <Typography>{props.game.player2.username}</Typography>
+                <BattleWindow
+                inTeamPreview={inTeamPreview}
+                setInTeamPreview={setInTeamPreview}
+                opponentTeamLineup={opponentTeamLineup}
+                playerTeamLineup={playerTeamLineup}
+                p1ActiveBeastImg={p1ActiveBeastImg}
+                p2ActiveBeastImg={p2ActiveBeastImg}
+                game={props.game} />
             </Container>
         )
     }
