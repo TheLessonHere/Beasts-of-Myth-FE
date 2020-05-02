@@ -72,6 +72,14 @@ export default class Game {
         let player1ActionCompleted = false;
         let player2ActionCompleted = false;
         while(player1ActionCompleted == false || player2ActionCompleted == false){
+            if(this.player1_action.actionType == 'starting-beast'){
+                this.player1.startBeast(this.player1_action.startingBeast);
+                player1ActionCompleted = true;
+            }
+            if(this.player2_action.actionType == 'starting-beast'){
+                this.player2.startBeast(this.player2_action.startingBeast);
+                player2ActionCompleted = true;
+            }
             if(this.player1_action.actionType == 'change-beast'){
                 this.player1.changeBeast(this.player1_action.activeBeast, this.player1_action.benchedBeast);
                 this.compareFreshness();

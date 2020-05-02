@@ -65,6 +65,7 @@ function Battle(props) {
   const [gameLog, setGameLog] = useState(null);
   const [player, setPlayer] = useState(null);
   const [opponent, setOpponent] = useState(null);
+  const [inTeamPreview, setInTeamPreview] = useState(true);
 
   useEffect(() => {
     socket = io('localhost:8000');
@@ -93,6 +94,9 @@ function Battle(props) {
       setIsBattling(false);
     }
   }, [ room ])
+
+  useEffect(() => {
+  }, [ game ])
 
   const onMiniBoxClick = (team) => {
     setTeamSelected(team.team_object);
@@ -169,6 +173,15 @@ function Battle(props) {
 
   const sendAction = (action) => {
     socket.emit('player action', { room: room.room_id, action: action });
+    game.selectAction(action, player.player_id);
+    game.updateActions();
+    const result = game.actionsExecutable();
+    if(result){
+      game.executeActions();
+      if(action.actionType === "starting-beast"){
+        setInTeamPreview(false);
+      }
+    }
   }
 
   if(socket){
@@ -178,15 +191,42 @@ function Battle(props) {
       setRoom(room);
     })
 
-    socket.on('opponent action', (action, callback) => {
-      // Add game logic for handling action here
-      console.log(action);
-    })
+    if(game){
+      socket.on('opponent action', (action, callback) => {
+        game.selectAction(action, opponent.player_id);
+        game.updateActions();
+        const result = game.actionsExecutable();
+        if(result){
+          game.executeActions();
+          if(action.actionType === "starting-beast"){
+            setInTeamPreview(false);
+          }
+        }
+      })
 
-    socket.on('player exit', ({ player, action }, callback) => {
-      // Handle game loss for the player exiting.
-      console.log(`Player ${player.player_id} has forfeited.`);
-    })
+      socket.on('player exit', ({ player, action }, callback) => {
+        // Handle game loss for the player exiting.
+        console.log(`Player ${player.player_id} has forfeited.`);
+      })
+    }
+  }
+
+  // State handlers
+
+  const handleGameChange = (game) => {
+    setGame(game);
+  }
+
+  const handlePlayerChange = (player) => {
+    setPlayer(player);
+  }
+
+  const handleOpponentChange = (opponent) => {
+    setOpponent(opponent);
+  }
+
+  const logGame = () => {
+    console.log(game);
   }
 
   if(isBattling){
@@ -194,14 +234,16 @@ function Battle(props) {
           <BattleRoom
           room={room}
           game={game}
-          setGame={setGame}
+          setGame={handleGameChange}
           player={player}
-          setPlayer={setPlayer}
+          setPlayer={handlePlayerChange}
           opponent={opponent}
-          setOpponent={setOpponent}
+          setOpponent={handleOpponentChange}
           seeSpectators={seeSpectators}
           sendAction={sendAction}
-          forfeit={forfeit} />
+          forfeit={forfeit}
+          inTeamPreview={inTeamPreview}
+          logGame={logGame} />
       )
   }
 

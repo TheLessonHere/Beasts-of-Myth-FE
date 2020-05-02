@@ -11,32 +11,49 @@ const useStyles = makeStyles(theme => ({
     container: {
         display: "flex",
         flexFlow: "column nowrap",
-        backgroundColor: "lightgrey",
+        border: "10px solid darkgrey",
+        backgroundColor: "white",
         height: "400px",
-        width: "800px",
+        width: "600px",
         padding: "20px"
     },
-    teamPreviewBox: {
+    teamPreviewBoxOpponent: {
         display: "flex",
+        justifyContent: "flex-end",
         flexFlow: "row nowrap",
         width: "100%",
         height: "50%"
     },
-    gameBox: {
+    teamPreviewBoxPlayer: {
         display: "flex",
+        alignItems: "flex-end",
+        flexFlow: "row nowrap",
+        width: "100%",
+        height: "50%"
+    },
+    gameBoxOpponent: {
+        display: "flex",
+        alignItems: "flex-end",
+        flexFlow: "column nowrap",
+        width: "100%",
+        height: "50%"
+    },
+    gameBoxPlayer: {
+        display: "flex",
+        alignItems: "flex-start",
         flexFlow: "column nowrap",
         width: "100%",
         height: "50%"
     },
     beastImg: {
         display: "flex",
-        width: "60px",
-        height: "60px"
+        width: "100px",
+        height: "100px"
     },
     previewImg: {
         display: "flex",
-        width: "80px",
-        height: "80px"
+        width: "100px",
+        height: "100px"
     }
 }))
 
@@ -50,7 +67,7 @@ export default function BattleWindow(props) {
     if(props.inTeamPreview){
         return (
             <Container className={classes.container}>
-                <Box className={classes.teamPreviewBox}>
+                <Box className={classes.teamPreviewBoxOpponent}>
                     <img
                     className={classes.previewImg}
                     src={props.opponentTeamLineup.s1}
@@ -72,7 +89,7 @@ export default function BattleWindow(props) {
                     src={props.opponentTeamLineup.s5}
                     alt="opposing-slot5" />
                 </Box>
-                <Box className={classes.teamPreviewBox}>
+                <Box className={classes.teamPreviewBoxPlayer}>
                     <img
                     className={classes.previewImg}
                     src={props.playerTeamLineup.s1}
@@ -100,18 +117,22 @@ export default function BattleWindow(props) {
 
     return (
         <Container className={classes.container}>
-            <Box className={classes.gameBox}>
+            <Box className={classes.gameBoxOpponent}>
                 <h5>Health Bar Here</h5>
                 <img
                 className={classes.beastImg}
-                src={props.p1ActiveBeastImg}
+                src={props.opponent.player_num === 'player1' ?
+                    props.p1ActiveBeastImg :
+                    props.p2ActiveBeastImg}
                 alt="active-beast" />
             </Box>
-            <Box className={classes.gameBox}>
+            <Box className={classes.gameBoxPlayer}>
                 <h5>Health Bar Here</h5>
                 <img
                 className={classes.beastImg}
-                src={props.p2ActiveBeastImg}
+                src={props.player.player_num === 'player1' ?
+                    props.p1ActiveBeastImg :
+                    props.p2ActiveBeastImg}
                 alt="active-beast" />
             </Box>
         </Container>

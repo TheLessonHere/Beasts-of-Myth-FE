@@ -26,6 +26,15 @@ export default class Player {
         this.selected_action = null;
     }
 
+    selectStartingBeast(beast){
+        const startingBeastAction = {
+            actionType: 'starting-beast',
+            startingBeast: beast
+        }
+
+        return startingBeastAction;
+    }
+
     selectMove(move, superActivated){
         const selectMoveAction = {
             actionType: 'select-move',
@@ -44,6 +53,11 @@ export default class Player {
         }
 
         return changeBeastAction;
+    }
+
+    startBeast(beast){
+        console.log(beast)
+        this.team.makeActive(beast.slot);
     }
 
     changeBeast(activeBeast, benchedBeast){
