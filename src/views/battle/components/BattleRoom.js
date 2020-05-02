@@ -25,6 +25,7 @@ import { items } from '../../../data/libraries/ItemLibrary';
 import { moves } from '../../../data/libraries/MoveLibrary';
 // Functions
 import { getBeastImage } from '../../../utils/functions/getBeastImage';
+import BattleController from './BattleController';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -35,7 +36,6 @@ const useStyles = makeStyles(theme => ({
 
 function BattleRoom(props) {
     const classes = useStyles();
-    const [inTeamPreview, setInTeamPreview] = useState(true);
 
     // Images
     const [p1s1, setP1S1] = useState(null);
@@ -97,7 +97,6 @@ function BattleRoom(props) {
     }, [])
 
     useEffect(() => {
-        return;
     }, [ props.game ])
 
     if(props.game){
@@ -137,6 +136,7 @@ function BattleRoom(props) {
 
         let p1ActiveBeastImg = null;
         let p2ActiveBeastImg = null;
+
         if(props.game.player1.team.active_slot.slotNumber && props.game.player2.team.active_slot.slotNumber){
             switch(props.game.player1.team.active_slot.slotNumber){
                 case 'slot1':
@@ -181,13 +181,20 @@ function BattleRoom(props) {
         return (
             <Container className={classes.container}>
                 <BattleWindow
-                inTeamPreview={inTeamPreview}
-                setInTeamPreview={setInTeamPreview}
+                inTeamPreview={props.inTeamPreview}
                 opponentTeamLineup={opponentTeamLineup}
                 playerTeamLineup={playerTeamLineup}
                 p1ActiveBeastImg={p1ActiveBeastImg}
                 p2ActiveBeastImg={p2ActiveBeastImg}
+                player={props.player}
+                opponent={props.opponent}
                 game={props.game} />
+                <BattleController
+                inTeamPreview={props.inTeamPreview}
+                player={props.player}
+                sendAction={props.sendAction}
+                game={props.game}
+                logGame={props.logGame} />
             </Container>
         )
     }

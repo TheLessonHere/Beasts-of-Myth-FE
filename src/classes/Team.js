@@ -49,41 +49,52 @@ export default class Team {
         switch(slot){
             case 'slot1':
                 this.slot1.beast = beast;
+                this.slot1.beast.updateSlot('slot1');
                 break;
             case 'slot2':
                 this.slot2.beast = beast;
+                this.slot1.beast.updateSlot('slot2');
                 break;
             case 'slot3':
                 this.slot3.beast = beast;
+                this.slot1.beast.updateSlot('slot3');
                 break;
             case 'slot4':
                 this.slot4.beast = beast;
+                this.slot1.beast.updateSlot('slot4');
                 break;
             case 'slot5':
                 this.slot5.beast = beast;
+                this.slot1.beast.updateSlot('slot5');
                 break;
             default:
                 if(this.slot1.beast == null){
                     this.slot1.beast = beast;
+                    this.slot1.beast.updateSlot('slot1');
                     return;
                 }
                 else if(this.slot2.beast == null){
                     this.slot2.beast = beast;
+                    this.slot1.beast.updateSlot('slot2');
                     return;
                 }
                 else if(this.slot3.beast == null){
                     this.slot3.beast = beast;
+                    this.slot1.beast.updateSlot('slot3');
                     return;
                 }
                 else if(this.slot4.beast == null){
                     this.slot4.beast = beast;
+                    this.slot1.beast.updateSlot('slot4');
                     return;
                 }
                 else if(this.slot5.beast == null){
                     this.slot5.beast = beast;
+                    this.slot1.beast.updateSlot('slot5');
                     return;
                 } else {
                     this.slot1.beast = beast;
+                    this.slot1.beast.updateSlot('slot1');
                     return;
                 }
         }
@@ -291,6 +302,17 @@ export default class Team {
             console.log(err, "Team Datastring Formatted Incorrectly.")
             alert("TeamDatastring improperly formatted.")
         }
+        if(this.slot1.beast !== null &&
+            this.slot2.beast !== null &&
+            this.slot3.beast !== null &&
+            this.slot4.beast !== null &&
+            this.slot5.beast !== null){
+                this.slot1.beast.updateSlot('slot1');
+                this.slot2.beast.updateSlot('slot2');
+                this.slot3.beast.updateSlot('slot3');
+                this.slot4.beast.updateSlot('slot4');
+                this.slot5.beast.updateSlot('slot5');
+            }
     }
 
     convertToString(){
@@ -441,7 +463,7 @@ export default class Team {
                 this.active_slot.beast = this.slot1.beast;
                 this.active_slot.adjacentSlots = this.slot1.adjacentSlots;
                 this.active_slot.slotNumber = 'slot1';
-                if(this.active_slot.beast.item.type === 'static'){
+                if(this.active_slot.beast.item && this.active_slot.beast.item.type === 'static'){
                     this.active_slot.beast.item.effect(this.active_slot.beast);
                 }
                 this.active_slot.turnsActive = 0;
@@ -450,7 +472,7 @@ export default class Team {
                 this.active_slot.beast = this.slot2.beast;
                 this.active_slot.adjacentSlots = this.slot2.adjacentSlots;
                 this.active_slot.slotNumber = 'slot2';
-                if(this.active_slot.beast.item.type === 'static'){
+                if(this.active_slot.beast.item && this.active_slot.beast.item.type === 'static'){
                     this.active_slot.beast.item.effect(this.active_slot.beast);
                 }
                 this.active_slot.turnsActive = 0;
@@ -459,7 +481,7 @@ export default class Team {
                 this.active_slot.beast = this.slot3.beast;
                 this.active_slot.adjacentSlots = this.slot3.adjacentSlots;
                 this.active_slot.slotNumber = 'slot3';
-                if(this.active_slot.beast.item.type === 'static'){
+                if(this.active_slot.beast.item && this.active_slot.beast.item.type === 'static'){
                     this.active_slot.beast.item.effect(this.active_slot.beast);
                 }
                 this.active_slot.turnsActive = 0;
@@ -468,7 +490,7 @@ export default class Team {
                 this.active_slot.beast = this.slot4.beast;
                 this.active_slot.adjacentSlots = this.slot4.adjacentSlots;
                 this.active_slot.slotNumber = 'slot4';
-                if(this.active_slot.beast.item.type === 'static'){
+                if(this.active_slot.beast.item && this.active_slot.beast.item.type === 'static'){
                     this.active_slot.beast.item.effect(this.active_slot.beast);
                 }
                 this.active_slot.turnsActive = 0;
@@ -477,7 +499,7 @@ export default class Team {
                 this.active_slot.beast = this.slot5.beast;
                 this.active_slot.adjacentSlots = this.slot5.adjacentSlots;
                 this.active_slot.slotNumber = 'slot5';
-                if(this.active_slot.beast.item.type === 'static'){
+                if(this.active_slot.beast.item && this.active_slot.beast.item.type === 'static'){
                     this.active_slot.beast.item.effect(this.active_slot.beast);
                 }
                 this.active_slot.turnsActive = 0;
