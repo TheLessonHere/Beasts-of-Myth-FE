@@ -37,6 +37,7 @@ export default class Beast {
         this.disabled_moves = [];
         this.moveList = moveList;
         this.slot = null;
+        this.knocked_out = false;
     }
 
     addMove(move_slot, move){
@@ -235,5 +236,9 @@ export default class Beast {
 
     updateSlot(slot){
         this.slot = slot;
+    }
+
+    knockOutBeast(){
+        this.knocked_out = true;
     }
 }

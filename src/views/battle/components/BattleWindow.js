@@ -11,11 +11,13 @@ const useStyles = makeStyles(theme => ({
     container: {
         display: "flex",
         flexFlow: "column nowrap",
-        border: "10px solid darkgrey",
+        border: "2px solid darkgrey",
+        borderRadius: "5px",
         backgroundColor: "white",
         height: "400px",
         width: "600px",
-        padding: "20px"
+        padding: "20px",
+        marginBottom: "10px"
     },
     teamPreviewBoxOpponent: {
         display: "flex",
@@ -36,19 +38,21 @@ const useStyles = makeStyles(theme => ({
         alignItems: "flex-end",
         flexFlow: "column nowrap",
         width: "100%",
-        height: "50%"
+        height: "50%",
+        paddingRight: "20px"
     },
     gameBoxPlayer: {
         display: "flex",
         alignItems: "flex-start",
         flexFlow: "column nowrap",
         width: "100%",
-        height: "50%"
+        height: "50%",
+        paddingLeft: "20px"
     },
     beastImg: {
         display: "flex",
-        width: "100px",
-        height: "100px"
+        width: "120px",
+        height: "120px",
     },
     previewImg: {
         display: "flex",

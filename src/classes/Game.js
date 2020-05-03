@@ -81,13 +81,13 @@ export default class Game {
                 player2ActionCompleted = true;
             }
             if(this.player1_action.actionType == 'change-beast'){
-                this.player1.changeBeast(this.player1_action.activeBeast, this.player1_action.benchedBeast);
+                this.player1.changeBeast(this.player1_action.benchedBeastSlot);
                 this.compareFreshness();
                 this.compareSC();
                 player1ActionCompleted = true;
             }
             if(this.player2_action.actionType == 'change-beast'){
-                this.player2.changeBeast(this.player2_action.activeBeast, this.player2_action.benchedBeast);
+                this.player2.changeBeast(this.player2_action.benchedBeastSlot);
                 this.compareFreshness();
                 this.compareSC();
                 player2ActionCompleted = true;
@@ -311,6 +311,9 @@ export default class Game {
         }
 
         defendingBeast.updateHP(damage);
+        if(defendingBeast.curr_hp <= 0){
+            defendingBeast.knockOutBeast();
+        }
     }
 
     activateDomain(domain){
