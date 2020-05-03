@@ -225,10 +225,6 @@ function Battle(props) {
     setOpponent(opponent);
   }
 
-  const logGame = () => {
-    console.log(game);
-  }
-
   if(isBattling){
       return (
           <BattleRoom
@@ -242,8 +238,7 @@ function Battle(props) {
           seeSpectators={seeSpectators}
           sendAction={sendAction}
           forfeit={forfeit}
-          inTeamPreview={inTeamPreview}
-          logGame={logGame} />
+          inTeamPreview={inTeamPreview} />
       )
   }
 

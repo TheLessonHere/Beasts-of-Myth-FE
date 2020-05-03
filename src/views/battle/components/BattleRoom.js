@@ -97,6 +97,15 @@ function BattleRoom(props) {
     }, [])
 
     useEffect(() => {
+        if(props.game){
+            if(props.id === props.game.player1.player_id){
+                props.setPlayer(props.game.player1);
+                props.setOpponent(props.game.player2);
+            } else {
+                props.setPlayer(props.game.player2);
+                props.setOpponent(props.game.player1);
+            }
+        }
     }, [ props.game ])
 
     if(props.game){

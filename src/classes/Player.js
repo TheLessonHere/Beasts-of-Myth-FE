@@ -35,21 +35,21 @@ export default class Player {
         return startingBeastAction;
     }
 
-    selectMove(move, superActivated){
+    selectMove(move, superActivated, critRolls){
         const selectMoveAction = {
             actionType: 'select-move',
             move: move,
-            superActivated: superActivated
+            superActivated: superActivated,
+            critRolls: critRolls
         }
 
         return selectMoveAction;
     }
 
-    selectBeastChange(benchedBeast){
+    selectBeastChange(benchedBeastSlot){
         const changeBeastAction = {
             actionType: 'change-beast',
-            activeBeast: this.team.active_slot.beast,
-            benchedBeast: benchedBeast
+            benchedBeastSlot: benchedBeastSlot
         }
 
         return changeBeastAction;
@@ -60,10 +60,9 @@ export default class Player {
         this.team.makeActive(beast.slot);
     }
 
-    changeBeast(activeBeast, benchedBeast){
-        activeBeast.makeInactive();
-        benchedBeast.makeActive();
-        this.team.makeActive(benchedBeast.slot)
+    changeBeast(benchedBeastSlot){
+        this.team.active_slot.beast.makeInactive();
+        this.team.makeActive(benchedBeastSlot);
     }
 
     activateCritRoll(){
