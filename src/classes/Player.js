@@ -7,7 +7,6 @@ export default class Player {
         this.team = team;
         this.available_crit_rolls = 4;
         this.spent_crit_rolls = 0;
-        this.activated_crit_rolls = 0;
         this.connection = null;
         this.selected_action = null;
         this.hasWon = false;
@@ -65,12 +64,7 @@ export default class Player {
         this.team.makeActive(benchedBeastSlot);
     }
 
-    activateCritRoll(){
-        this.activated_crit_rolls = this.activated_crit_rolls + 1;
-    }
-
     updateCritRolls(spentRolls){
-        this.activated_crit_rolls = 0;
         this.available_crit_rolls = this.available_crit_rolls - spentRolls;
     }
 
