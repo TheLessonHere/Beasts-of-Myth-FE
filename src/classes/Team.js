@@ -529,6 +529,15 @@ export default class Team {
         }
     }
 
+    clearActiveSlot(){
+        this.active_slot = {
+            beast: null,
+            adjacentSlots: [],
+            turnsActive: 0,
+            slotNumber: null,
+        }
+    }
+
     incrementTurnsActive(){
         this.active_slot.turnsActive += 1;
     }

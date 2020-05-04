@@ -126,12 +126,23 @@ const useStyles = makeStyles(theme => ({
 
 export default function BattleController(props) {
     const classes = useStyles();
+    const {
+        inTeamPreview,
+        player,
+        sendAction,
+        game,
+        gameDidUpdate,
+        playerDidMove,
+        playerDidSwitch,
+        opponentDidMove,
+        opponentDidSwitch
+    } = props;
     const [critRollChances, setCritRollChances] = useState(['0%', '25%', '50%', '75%', '100%']);
     const [activatedRolls, setActivatedRolls] = useState(0);
     const [activatingSuper, setActivatingSuper] = useState(false);
 
     useEffect(() => {
-    }, [ props.gameDidUpdate ])
+    }, [ gameDidUpdate ])
 
     const startBeast = (slot) => {
         let action;
@@ -139,45 +150,59 @@ export default function BattleController(props) {
             case 'slot1':
                 action = {
                     actionType: 'starting-beast',
-                    startingBeast: props.player.team.slot1.beast
+                    startingBeast: player.team.slot1.beast
                 }
                 break;
             case 'slot2':
                 action = {
                     actionType: 'starting-beast',
-                    startingBeast: props.player.team.slot2.beast
+                    startingBeast: player.team.slot2.beast
                 }
                 break;
             case 'slot3':
                 action = {
                     actionType: 'starting-beast',
-                    startingBeast: props.player.team.slot3.beast
+                    startingBeast: player.team.slot3.beast
                 }
                 break;
             case 'slot4':
                 action = {
                     actionType: 'starting-beast',
-                    startingBeast: props.player.team.slot4.beast
+                    startingBeast: player.team.slot4.beast
                 }
                 break;
             case 'slot5':
                 action = {
                     actionType: 'starting-beast',
-                    startingBeast: props.player.team.slot5.beast
+                    startingBeast: player.team.slot5.beast
                 }
                 break;
             default:
                 action = null;
         }
-        props.sendAction(action);
+        sendAction(action);
     }
 
     const handleCritRolls = (event) => {
         setActivatedRolls(event.target.value);
     }
 
+    const handleMoveClick = (event) => {
+        const moveId = event.target.id;
+        if(event.target.innerHTML != "No Move"){
+            const move = player.team.active_slot.beast.moves.get(moveId);
+            sendAction({
+                actionType: 'select-move',
+                move: move,
+                moveSlot: moveId,
+                superActivated: activatingSuper,
+                critRolls: activatedRolls
+            });
+        }
+    }
+
     const calculatePossibleSwitches = () => {
-        switch(props.player.team.active_slot.slotNumber){
+        switch(player.team.active_slot.slotNumber){
             case 'slot1':
                 return (
                     <>
@@ -186,52 +211,52 @@ export default function BattleController(props) {
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot2.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot2.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot2'
                         })}
                         startIcon={<Filter2Icon />}>
-                            {props.player.team.slot2.beast.beast_name}
+                            {player.team.slot2.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot3.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot3.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot3'
                         })}
                         startIcon={<Filter3Icon />}>
-                            {props.player.team.slot3.beast.beast_name}
+                            {player.team.slot3.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot4.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot4.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot4'
                         })}
                         startIcon={<Filter4Icon />}>
-                            {props.player.team.slot4.beast.beast_name}
+                            {player.team.slot4.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot5.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot5.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot5'
                         })}
                         startIcon={<Filter5Icon />}>
-                            {props.player.team.slot5.beast.beast_name}
+                            {player.team.slot5.beast.beast_name}
                         </Button>
                     </>
                 );
@@ -243,52 +268,52 @@ export default function BattleController(props) {
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot1.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot1.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot1'
                         })}
                         startIcon={<Filter1Icon />}>
-                            {props.player.team.slot1.beast.beast_name}
+                            {player.team.slot1.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot3.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot3.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot3'
                         })}
                         startIcon={<Filter3Icon />}>
-                            {props.player.team.slot3.beast.beast_name}
+                            {player.team.slot3.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot4.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot4.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot4'
                         })}
                         startIcon={<Filter4Icon />}>
-                            {props.player.team.slot4.beast.beast_name}
+                            {player.team.slot4.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot5.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot5.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot5'
                         })}
                         startIcon={<Filter5Icon />}>
-                            {props.player.team.slot5.beast.beast_name}
+                            {player.team.slot5.beast.beast_name}
                         </Button>
                     </>
                 )
@@ -300,52 +325,52 @@ export default function BattleController(props) {
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot1.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot1.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot1'
                         })}
                         startIcon={<Filter1Icon />}>
-                            {props.player.team.slot1.beast.beast_name}
+                            {player.team.slot1.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot2.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot2.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot2'
                         })}
                         startIcon={<Filter2Icon />}>
-                            {props.player.team.slot2.beast.beast_name}
+                            {player.team.slot2.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot4.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot4.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot4'
                         })}
                         startIcon={<Filter4Icon />}>
-                            {props.player.team.slot4.beast.beast_name}
+                            {player.team.slot4.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot5.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot5.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot5'
                         })}
                         startIcon={<Filter5Icon />}>
-                            {props.player.team.slot5.beast.beast_name}
+                            {player.team.slot5.beast.beast_name}
                         </Button>
                     </>
                 )
@@ -357,52 +382,52 @@ export default function BattleController(props) {
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot1.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot1.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot1'
                         })}
                         startIcon={<Filter1Icon />}>
-                            {props.player.team.slot1.beast.beast_name}
+                            {player.team.slot1.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot2.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot2.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot2'
                         })}
                         startIcon={<Filter2Icon />}>
-                            {props.player.team.slot2.beast.beast_name}
+                            {player.team.slot2.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot3.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot3.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot3'
                         })}
                         startIcon={<Filter3Icon />}>
-                            {props.player.team.slot3.beast.beast_name}
+                            {player.team.slot3.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot5.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot5.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot5'
                         })}
                         startIcon={<Filter5Icon />}>
-                            {props.player.team.slot5.beast.beast_name}
+                            {player.team.slot5.beast.beast_name}
                         </Button>
                     </>
                 )
@@ -414,52 +439,52 @@ export default function BattleController(props) {
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot1.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot1.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot1'
                         })}
                         startIcon={<Filter1Icon />}>
-                            {props.player.team.slot1.beast.beast_name}
+                            {player.team.slot1.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot2.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot2.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot2'
                         })}
                         startIcon={<Filter2Icon />}>
-                            {props.player.team.slot2.beast.beast_name}
+                            {player.team.slot2.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot3.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot3.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot3'
                         })}
                         startIcon={<Filter3Icon />}>
-                            {props.player.team.slot3.beast.beast_name}
+                            {player.team.slot3.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot4.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot4.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot4'
                         })}
                         startIcon={<Filter4Icon />}>
-                            {props.player.team.slot4.beast.beast_name}
+                            {player.team.slot4.beast.beast_name}
                         </Button>
                     </>
                 )
@@ -471,72 +496,72 @@ export default function BattleController(props) {
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot1.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot1.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot1'
                         })}
                         startIcon={<Filter1Icon />}>
-                            {props.player.team.slot1.beast.beast_name}
+                            {player.team.slot1.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot2.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot2.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot2'
                         })}
                         startIcon={<Filter2Icon />}>
-                            {props.player.team.slot2.beast.beast_name}
+                            {player.team.slot2.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot3.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot3.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot3'
                         })}
                         startIcon={<Filter3Icon />}>
-                            {props.player.team.slot3.beast.beast_name}
+                            {player.team.slot3.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot4.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot4.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot4'
                         })}
                         startIcon={<Filter4Icon />}>
-                            {props.player.team.slot4.beast.beast_name}
+                            {player.team.slot4.beast.beast_name}
                         </Button>
                         <Button
                         variant="contained"
                         color="default"
                         size="large"
                         className={classes.switchButton}
-                        disabled={props.player.team.slot5.beast.knocked_out}
-                        onClick={() => props.sendAction({
+                        disabled={player.team.slot5.beast.knocked_out}
+                        onClick={() => sendAction({
                             actionType: 'change-beast',
                             benchedBeastSlot: 'slot5'
                         })}
                         startIcon={<Filter5Icon />}>
-                            {props.player.team.slot5.beast.beast_name}
+                            {player.team.slot5.beast.beast_name}
                         </Button>
                     </>
                 )
         }
     }
 
-    if(props.inTeamPreview){
+    if(inTeamPreview){
         // Add handlers to buttons that send a select starter action
         return (
             <Container className={classes.containerPreview}>
@@ -548,7 +573,7 @@ export default function BattleController(props) {
                     size="large"
                     onClick={() => startBeast('slot1')}
                     startIcon={<Filter1Icon />}>
-                        {props.player.team.slot1.beast.beast_name}
+                        {player.team.slot1.beast.beast_name}
                     </Button>
                     <Button
                     variant="contained"
@@ -556,7 +581,7 @@ export default function BattleController(props) {
                     size="large"
                     onClick={() => startBeast('slot2')}
                     startIcon={<Filter2Icon />}>
-                        {props.player.team.slot2.beast.beast_name}
+                        {player.team.slot2.beast.beast_name}
                     </Button>
                     <Button
                     variant="contained"
@@ -564,7 +589,7 @@ export default function BattleController(props) {
                     size="large"
                     onClick={() => startBeast('slot3')}
                     startIcon={<Filter3Icon />}>
-                        {props.player.team.slot3.beast.beast_name}
+                        {player.team.slot3.beast.beast_name}
                     </Button>
                     <Button
                     variant="contained"
@@ -572,7 +597,7 @@ export default function BattleController(props) {
                     size="large"
                     onClick={() => startBeast('slot4')}
                     startIcon={<Filter4Icon />}>
-                        {props.player.team.slot4.beast.beast_name}
+                        {player.team.slot4.beast.beast_name}
                     </Button>
                     <Button
                     variant="contained"
@@ -580,7 +605,7 @@ export default function BattleController(props) {
                     size="large"
                     onClick={() => startBeast('slot5')}
                     startIcon={<Filter5Icon />}>
-                        {props.player.team.slot5.beast.beast_name}
+                        {player.team.slot5.beast.beast_name}
                     </Button>
                 </Box>
             </Container>
@@ -599,8 +624,8 @@ export default function BattleController(props) {
                     color="default"
                     className={classes.move1}
                     size="large">
-                        {props.player.team.active_slot.beast.moves.get('move1') ?
-                        props.player.team.active_slot.beast.moves.get('move1').move_name :
+                        {player.team.active_slot.beast.moves.get('move1') ?
+                        player.team.active_slot.beast.moves.get('move1').move_name :
                         "No Move"}
                     </Button>
                     <Button
@@ -609,8 +634,8 @@ export default function BattleController(props) {
                     color="default"
                     className={classes.move2}
                     size="large">
-                        {props.player.team.active_slot.beast.moves.get('move2') ?
-                        props.player.team.active_slot.beast.moves.get('move2').move_name :
+                        {player.team.active_slot.beast.moves.get('move2') ?
+                        player.team.active_slot.beast.moves.get('move2').move_name :
                         "No Move"}
                     </Button>
                 </Box>
@@ -621,8 +646,8 @@ export default function BattleController(props) {
                     color="default"
                     className={classes.move3}
                     size="large">
-                        {props.player.team.active_slot.beast.moves.get('move3') ?
-                        props.player.team.active_slot.beast.moves.get('move3').move_name :
+                        {player.team.active_slot.beast.moves.get('move3') ?
+                        player.team.active_slot.beast.moves.get('move3').move_name :
                         "No Move"}
                     </Button>
                     <Button
@@ -631,8 +656,8 @@ export default function BattleController(props) {
                     color="default"
                     className={classes.move4}
                     size="large">
-                        {props.player.team.active_slot.beast.moves.get('move4') ?
-                        props.player.team.active_slot.beast.moves.get('move4').move_name :
+                        {player.team.active_slot.beast.moves.get('move4') ?
+                        player.team.active_slot.beast.moves.get('move4').move_name :
                         "No Move"}
                     </Button>
                 </Box>
@@ -675,8 +700,8 @@ export default function BattleController(props) {
                 className={classes.superButton}
                 onClick={() => setActivatingSuper(true)}
                 disabled={
-                    props.player.team.active_slot.beast.item &&
-                    props.player.team.active_slot.beast.item.item_name === "Super Crystal" ?
+                    player.team.active_slot.beast.item &&
+                    player.team.active_slot.beast.item.item_name === "Super Crystal" ?
                         false :
                         true}>
                     Activate Super
