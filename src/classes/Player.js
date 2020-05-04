@@ -35,10 +35,11 @@ export default class Player {
         return startingBeastAction;
     }
 
-    selectMove(move, superActivated, critRolls){
+    selectMove(move, moveSlot, superActivated, critRolls){
         const selectMoveAction = {
             actionType: 'select-move',
             move: move,
+            moveSlot: moveSlot,
             superActivated: superActivated,
             critRolls: critRolls
         }
@@ -56,7 +57,6 @@ export default class Player {
     }
 
     startBeast(beast){
-        console.log(beast)
         this.team.makeActive(beast.slot);
     }
 

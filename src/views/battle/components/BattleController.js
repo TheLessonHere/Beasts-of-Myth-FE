@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: "5px",
         backgroundColor: "lightgrey",
         height: "175px",
-        width: "1100px",
+        width: "1120px",
         justifyContent: "center",
         alignItems: "center",
         padding: "20px"
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
         borderRadius: "5px",
         backgroundColor: "lightgrey",
         height: "175px",
-        width: "1100px",
+        width: "1120px",
         justifyContent: "space-evenly",
         alignItems: "center",
         padding: "20px"
@@ -128,10 +128,10 @@ export default function BattleController(props) {
     const classes = useStyles();
     const [critRollChances, setCritRollChances] = useState(['0%', '25%', '50%', '75%', '100%']);
     const [activatedRolls, setActivatedRolls] = useState(0);
+    const [activatingSuper, setActivatingSuper] = useState(false);
 
     useEffect(() => {
-        console.log(props.game);
-    }, [ props ])
+    }, [ props.gameDidUpdate ])
 
     const startBeast = (slot) => {
         let action;
@@ -169,7 +169,6 @@ export default function BattleController(props) {
             default:
                 action = null;
         }
-        console.log(action);
         props.sendAction(action);
     }
 
@@ -595,34 +594,46 @@ export default function BattleController(props) {
             <Box className={classes.moveBox}>
                 <Box className={classes.move1_2}>
                     <Button
+                    id="move1"
                     variant="contained"
                     color="default"
                     className={classes.move1}
                     size="large">
-                        Move 1
+                        {props.player.team.active_slot.beast.moves.get('move1') ?
+                        props.player.team.active_slot.beast.moves.get('move1').move_name :
+                        "No Move"}
                     </Button>
                     <Button
+                    id="move2"
                     variant="contained"
                     color="default"
                     className={classes.move2}
                     size="large">
-                        Move 2
+                        {props.player.team.active_slot.beast.moves.get('move2') ?
+                        props.player.team.active_slot.beast.moves.get('move2').move_name :
+                        "No Move"}
                     </Button>
                 </Box>
                 <Box className={classes.move3_4}>
                     <Button
+                    id="move3"
                     variant="contained"
                     color="default"
                     className={classes.move3}
                     size="large">
-                        Move 3
+                        {props.player.team.active_slot.beast.moves.get('move3') ?
+                        props.player.team.active_slot.beast.moves.get('move3').move_name :
+                        "No Move"}
                     </Button>
                     <Button
+                    id="move4"
                     variant="contained"
                     color="default"
                     className={classes.move4}
                     size="large">
-                        Move 4
+                        {props.player.team.active_slot.beast.moves.get('move4') ?
+                        props.player.team.active_slot.beast.moves.get('move4').move_name :
+                        "No Move"}
                     </Button>
                 </Box>
             </Box>
@@ -662,6 +673,7 @@ export default function BattleController(props) {
                 color="default"
                 size="small"
                 className={classes.superButton}
+                onClick={() => setActivatingSuper(true)}
                 disabled={
                     props.player.team.active_slot.beast.item &&
                     props.player.team.active_slot.beast.item.item_name === "Super Crystal" ?

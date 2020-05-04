@@ -33,7 +33,7 @@ const initialState = {
   };
 
 export const reducer = (state = initialState, action) => {
-    console.log(action);
+    // console.log(action);
     switch (action.type) {
       case FETCH_USER_START:
         return {
