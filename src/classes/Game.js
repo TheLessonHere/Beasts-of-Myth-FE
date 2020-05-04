@@ -48,7 +48,7 @@ export default class Game {
         }
     }
 
-    executePlayer1Move(){
+    executePlayer1Move(moveSlot){
         if(this.player1_action.move.type == 'status'){
             this.player1_action.move.effect(this.player1, this.player2);
         } else {
@@ -56,15 +56,49 @@ export default class Game {
                                     this.player1.team.active_slot.beast,
                                     this.player2.team.active_slot.beast);
         }
+        // If the all abled moves' MEs hit 0 replace with Struggle or something similar.
+        switch(moveSlot){
+            case 'move1':
+                this.player1.team.active_slot.beast.moves.get('move1').decrementME();
+                break;
+            case 'move2':
+                this.player1.team.active_slot.beast.moves.get('move2').decrementME();
+                break;
+            case 'move3':
+                this.player1.team.active_slot.beast.moves.get('move3').decrementME();
+                break;
+            case 'move4':
+                this.player1.team.active_slot.beast.moves.get('move4').decrementME();
+                break;
+            default:
+                return;
+        }
     }
 
-    executePlayer2Move(){
+    executePlayer2Move(moveSlot){
         if(this.player2_action.move.type == 'status'){
             this.player2_action.move.effect(this.player2, this.player1);
         } else {
             this.damageCalculation(this.player2_action.move,
                                     this.player2.team.active_slot.beast,
                                     this.player1.team.active_slot.beast);
+        }
+        // If the all abled moves' MEs hit 0 replace with Struggle or something similar.
+        switch(moveSlot){
+            case 'move1':
+                this.player2.team.active_slot.beast.moves.get('move1').decrementME();
+                break;
+            case 'move2':
+                this.player2.team.active_slot.beast.moves.get('move2').decrementME();
+                break;
+            case 'move3':
+                this.player2.team.active_slot.beast.moves.get('move3').decrementME();
+                break;
+            case 'move4':
+                this.player2.team.active_slot.beast.moves.get('move4').decrementME();
+                break;
+            default:
+                return;
         }
     }
 
@@ -100,9 +134,9 @@ export default class Game {
                     if(this.player2_action.superActivated){
                         this.player2.activateSuper(this.player2.team.active_slot.beast);
                     }
-                    this.executePlayer1Move();
+                    this.executePlayer1Move(this.player1_action.moveSlot);
                     player1ActionCompleted = true;
-                    this.executePlayer2Move();
+                    this.executePlayer2Move(this.player2_action.moveSlot);
                     player2ActionCompleted = true;
                 }
                 else if(this.player1_action.move.priority < this.player2_action.move.priority){
@@ -112,9 +146,9 @@ export default class Game {
                     if(this.player1_action.superActivated){
                         this.player1.activateSuper(this.player1.team.active_slot.beast);
                     }
-                    this.executePlayer2Move();
+                    this.executePlayer2Move(this.player2_action.moveSlot);
                     player2ActionCompleted = true;
-                    this.executePlayer1Move();
+                    this.executePlayer1Move(this.player1_action.moveSlot);
                     player1ActionCompleted = true;
                 } else {
                     this.compareSC();
@@ -126,9 +160,9 @@ export default class Game {
                             if(this.player2_action.superActivated){
                                 this.player2.activateSuper(this.player2.team.active_slot.beast);
                             }
-                            this.executePlayer1Move();
+                            this.executePlayer1Move(this.player1_action.moveSlot);
                             player1ActionCompleted = true;
-                            this.executePlayer2Move();
+                            this.executePlayer2Move(this.player2_action.moveSlot);
                             player2ActionCompleted = true;
                             break;
                         case 'player2':
@@ -138,9 +172,9 @@ export default class Game {
                             if(this.player1_action.superActivated){
                                 this.player1.activateSuper(this.player1.team.active_slot.beast);
                             }
-                            this.executePlayer2Move();
+                            this.executePlayer2Move(this.player2_action.moveSlot);
                             player2ActionCompleted = true;
-                            this.executePlayer1Move();
+                            this.executePlayer1Move(this.player1_action.moveSlot);
                             player1ActionCompleted = true;
                             break;
                         case 'tie':
@@ -153,9 +187,9 @@ export default class Game {
                                     if(this.player2_action.superActivated){
                                         this.player2.activateSuper(this.player2.team.active_slot.beast);
                                     }
-                                    this.executePlayer1Move();
+                                    this.executePlayer1Move(this.player1_action.moveSlot);
                                     player1ActionCompleted = true;
-                                    this.executePlayer2Move();
+                                    this.executePlayer2Move(this.player2_action.moveSlot);
                                     player2ActionCompleted = true;
                                     break;
                                 case 'player2':
@@ -165,9 +199,9 @@ export default class Game {
                                     if(this.player1_action.superActivated){
                                         this.player1.activateSuper(this.player1.team.active_slot.beast);
                                     }
-                                    this.executePlayer2Move();
+                                    this.executePlayer2Move(this.player2_action.moveSlot);
                                     player2ActionCompleted = true;
-                                    this.executePlayer1Move();
+                                    this.executePlayer1Move(this.player1_action.moveSlot);
                                     player1ActionCompleted = true;
                                     break;
                                 case 'tie':
@@ -180,9 +214,9 @@ export default class Game {
                                         if(this.player2_action.superActivated){
                                             this.player2.activateSuper(this.player2.team.active_slot.beast);
                                         }
-                                        this.executePlayer1Move();
+                                        this.executePlayer1Move(this.player1_action.moveSlot);
                                         player1ActionCompleted = true;
-                                        this.executePlayer2Move();
+                                        this.executePlayer2Move(this.player2_action.moveSlot);
                                         player2ActionCompleted = true;
                                         break;
                                     }
@@ -193,9 +227,9 @@ export default class Game {
                                         if(this.player1_action.superActivated){
                                             this.player1.activateSuper(this.player1.team.active_slot.beast);
                                         }
-                                        this.executePlayer2Move();
+                                        this.executePlayer2Move(this.player2_action.moveSlot);
                                         player2ActionCompleted = true;
-                                        this.executePlayer1Move();
+                                        this.executePlayer1Move(this.player1_action.moveSlot);
                                         player1ActionCompleted = true;
                                         break;
                                     } else {
@@ -205,9 +239,9 @@ export default class Game {
                                         if(this.player2_action.superActivated){
                                             this.player2.activateSuper(this.player2.team.active_slot.beast);
                                         }
-                                        this.executePlayer1Move();
+                                        this.executePlayer1Move(this.player1_action.moveSlot);
                                         player1ActionCompleted = true;
-                                        this.executePlayer2Move();
+                                        this.executePlayer2Move(this.player2_action.moveSlot);
                                         player2ActionCompleted = true;
                                         break;
                                     }
@@ -223,14 +257,14 @@ export default class Game {
                 if(this.player1_action.superActivated){
                     this.player1.activateSuper(this.player1.team.active_slot.beast);
                 }
-                this.executePlayer1Move();
+                this.executePlayer1Move(this.player1_action.moveSlot);
                 player1ActionCompleted = true;
             }
             if(this.player2_action.actionType == 'select-move' && this.player1_action.actionType != 'select-move'){
                 if(this.player2_action.superActivated){
                     this.player2.activateSuper(this.player2.team.active_slot.beast);
                 }
-                this.executePlayer2Move();
+                this.executePlayer2Move(this.player2_action.moveSlot);
                 player2ActionCompleted = true;
             }
         }

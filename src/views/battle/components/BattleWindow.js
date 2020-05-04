@@ -17,7 +17,9 @@ const useStyles = makeStyles(theme => ({
         height: "400px",
         width: "600px",
         padding: "20px",
-        marginBottom: "10px"
+        marginBottom: "10px",
+        marginLeft: "10px",
+        marginRight: "10px"
     },
     teamPreviewBoxOpponent: {
         display: "flex",
@@ -63,57 +65,134 @@ const useStyles = makeStyles(theme => ({
 
 export default function BattleWindow(props) {
     const classes = useStyles();
+    const {
+        inTeamPreview,
+        opponentTeamLineup,
+        playerTeamLineup,
+        player,
+        opponent,
+        game,
+        gameDidUpdate,
+        playerDidMove,
+        playerDidSwitch,
+        opponentDidMove,
+        opponentDidSwitch  } = props;
+    const [playerActiveBeastImg, setPlayerActiveBeastImg] = useState(null);
+    const [opponentActiveBeastImg, setOpponentActiveBeastImg] = useState(null);
 
     useEffect(() => {
-        return;
-    }, [ props ])
+        if(inTeamPreview === false && player && opponent){
+                const pActiveSlot = player.team.active_slot.slotNumber;
+                const oActiveSlot = opponent.team.active_slot.slotNumber;
+                console.log(player.team, opponent.team);
+                switch(pActiveSlot){
+                    case 'slot1':
+                        setPlayerActiveBeastImg(playerTeamLineup.s1);
+                        break;
+                    case 'slot2':
+                        setPlayerActiveBeastImg(playerTeamLineup.s2);
+                        break;
+                    case 'slot3':
+                        setPlayerActiveBeastImg(playerTeamLineup.s3);
+                        break;
+                    case 'slot4':
+                        setPlayerActiveBeastImg(playerTeamLineup.s4);
+                        break;
+                    case 'slot5':
+                        setPlayerActiveBeastImg(playerTeamLineup.s5);
+                        break;
+                    default:
+                        console.log("Error setting playeractivebeastimg.")
+                }
+                switch(oActiveSlot){
+                    case 'slot1':
+                        setOpponentActiveBeastImg(opponentTeamLineup.s1);
+                        break;
+                    case 'slot2':
+                        setOpponentActiveBeastImg(opponentTeamLineup.s2);
+                        break;
+                    case 'slot3':
+                        setOpponentActiveBeastImg(opponentTeamLineup.s3);
+                        break;
+                    case 'slot4':
+                        setOpponentActiveBeastImg(opponentTeamLineup.s4);
+                        break;
+                    case 'slot5':
+                        setOpponentActiveBeastImg(opponentTeamLineup.s5);
+                        break;
+                    default:
+                        console.log("Error setting oppactivebeastimg.")
+                }
+        }
+    }, [ gameDidUpdate, inTeamPreview, playerDidSwitch, opponentDidSwitch ])
 
-    if(props.inTeamPreview){
+    if(inTeamPreview){
         return (
             <Container className={classes.container}>
                 <Box className={classes.teamPreviewBoxOpponent}>
                     <img
                     className={classes.previewImg}
-                    src={props.opponentTeamLineup.s1}
+                    src={opponentTeamLineup ? opponentTeamLineup.s1 : null}
                     alt="opposing-slot1" />
                     <img
                     className={classes.previewImg}
-                    src={props.opponentTeamLineup.s2}
+                    src={opponentTeamLineup ? opponentTeamLineup.s2 : null}
                     alt="opposing-slot2" />
                     <img
                     className={classes.previewImg}
-                    src={props.opponentTeamLineup.s3}
+                    src={opponentTeamLineup ? opponentTeamLineup.s3 : null}
                     alt="opposing-slot3" />
                     <img
                     className={classes.previewImg}
-                    src={props.opponentTeamLineup.s4}
+                    src={opponentTeamLineup ? opponentTeamLineup.s4 : null}
                     alt="opposing-slot4" />
                     <img
                     className={classes.previewImg}
-                    src={props.opponentTeamLineup.s5}
+                    src={opponentTeamLineup ? opponentTeamLineup.s5 : null}
                     alt="opposing-slot5" />
                 </Box>
                 <Box className={classes.teamPreviewBoxPlayer}>
                     <img
                     className={classes.previewImg}
-                    src={props.playerTeamLineup.s1}
+                    src={playerTeamLineup ? playerTeamLineup.s1 : null}
                     alt="player-slot1" />
                     <img
                     className={classes.previewImg}
-                    src={props.playerTeamLineup.s2}
+                    src={playerTeamLineup ? playerTeamLineup.s2 : null}
                     alt="player-slot2" />
                     <img
                     className={classes.previewImg}
-                    src={props.playerTeamLineup.s3}
+                    src={playerTeamLineup ? playerTeamLineup.s3 : null}
                     alt="player-slot3" />
                     <img
                     className={classes.previewImg}
-                    src={props.playerTeamLineup.s4}
+                    src={playerTeamLineup ? playerTeamLineup.s4 : null}
                     alt="player-slot4" />
                     <img
                     className={classes.previewImg}
-                    src={props.playerTeamLineup.s5}
+                    src={playerTeamLineup ? playerTeamLineup.s5 : null}
                     alt="player-slot5" />
+                </Box>
+            </Container>
+        )
+    }
+
+    if(opponentActiveBeastImg && playerActiveBeastImg){
+        return(
+            <Container className={classes.container}>
+                <Box className={classes.gameBoxOpponent}>
+                    <h5>Health Bar Here</h5>
+                    <img
+                    className={classes.beastImg}
+                    src={opponentActiveBeastImg}
+                    alt="active-beast-opponent" />
+                </Box>
+                <Box className={classes.gameBoxPlayer}>
+                    <h5>Health Bar Here</h5>
+                    <img
+                    className={classes.beastImg}
+                    src={playerActiveBeastImg}
+                    alt="active-beast-player" />
                 </Box>
             </Container>
         )
@@ -125,19 +204,15 @@ export default function BattleWindow(props) {
                 <h5>Health Bar Here</h5>
                 <img
                 className={classes.beastImg}
-                src={props.opponent.player_num === 'player1' ?
-                    props.p1ActiveBeastImg :
-                    props.p2ActiveBeastImg}
-                alt="active-beast" />
+                src={null}
+                alt="active-beast-opponent" />
             </Box>
             <Box className={classes.gameBoxPlayer}>
                 <h5>Health Bar Here</h5>
                 <img
                 className={classes.beastImg}
-                src={props.player.player_num === 'player1' ?
-                    props.p1ActiveBeastImg :
-                    props.p2ActiveBeastImg}
-                alt="active-beast" />
+                src={null}
+                alt="active-beast-player" />
             </Box>
         </Container>
     )

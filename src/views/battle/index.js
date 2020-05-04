@@ -61,14 +61,22 @@ function Battle(props) {
   const [teamSelectedId, setTeamSelectedId] = useState(null);
   const [room, setRoom] = useState(null);
   // Post connection state
+  const [gameDidUpdate, setGameDidUpdate] = useState(false);
   const [game, setGame] = useState(null);
   const [gameLog, setGameLog] = useState(null);
   const [player, setPlayer] = useState(null);
   const [opponent, setOpponent] = useState(null);
+  const [lastPlayerAction, setLastPlayerAction] = useState(null);
+  const [lastOpponentAction, setLastOpponentAction] = useState(null);
+  const [playerDidSwitch, setPlayerDidSwitch] = useState(false);
+  const [opponentDidSwitch, setOpponentDidSwitch] = useState(false);
+  const [playerDidMove, setPlayerDidMove] = useState(false);
+  const [opponentDidMove, setOpponentDidMove] = useState(false);
   const [inTeamPreview, setInTeamPreview] = useState(true);
 
   useEffect(() => {
     socket = io('localhost:8000');
+
     return () => {
       socket.emit('disconnect');
       socket.off();
@@ -96,6 +104,88 @@ function Battle(props) {
   }, [ room ])
 
   useEffect(() => {
+    if(game){
+      if(props.id === game.player1.player_id){
+          setPlayer(game.player1);
+          setOpponent(game.player2);
+      } else {
+          setPlayer(game.player2);
+          setOpponent(game.player1);
+      }
+
+      if(lastPlayerAction){
+        switch(lastPlayerAction.actionType){
+          case 'select-move':
+            console.log(lastPlayerAction, 'select')
+            setPlayerDidMove(!playerDidMove);
+            break;
+          case 'change-beast':
+            console.log(lastPlayerAction, 'switch')
+            setPlayerDidSwitch(!playerDidSwitch);
+            break;
+          default:
+            break;
+        }
+      }
+
+      if(lastOpponentAction){
+        switch(lastOpponentAction.actionType){
+          case 'select-move':
+            console.log(lastOpponentAction, 'select')
+            setOpponentDidMove(!opponentDidMove);
+            break;
+          case 'change-beast':
+            console.log(lastOpponentAction, 'switch')
+            setOpponentDidSwitch(!opponentDidSwitch);
+            break;
+          default:
+            break;
+        }
+      }
+  }
+  }, [ gameDidUpdate, lastPlayerAction, lastOpponentAction ])
+
+  useEffect(() => {
+    socket.on('room created', (room, callback) => {
+      props.addConnection();
+      setRoom(room);
+    });
+
+    socket.on('player exit', ({ player, action }, callback) => {
+      // Handle game loss for the player exiting.
+      console.log(`Player ${player.player_id} has forfeited.`);
+    });
+
+    if(game){
+      socket.on('opponent action', (action, callback) => {
+        console.log(action);
+        const gameCopy = game;
+        gameCopy.selectAction(action, opponent.player_id);
+        gameCopy.updateActions();
+        const result = gameCopy.actionsExecutable();
+        if(result){
+          setLastPlayerAction(action);
+          if(player.player_num === 'player1'){
+            setLastOpponentAction(game.player2.selected_action);
+          } else {
+            setLastOpponentAction(game.player1.selected_action);
+          }
+          gameCopy.executeActions();
+          console.log(gameCopy);
+          handleGameChange(gameCopy);
+          if(action.actionType === "starting-beast"){
+            setInTeamPreview(false);
+          }
+          setGameDidUpdate(!gameDidUpdate);
+        }
+      });
+    }
+
+    return () => {
+      socket.off('room created');
+      socket.off('player exit');
+      socket.off('opponent action');
+    }
   }, [ game ])
 
   const onMiniBoxClick = (team) => {
@@ -172,42 +262,26 @@ function Battle(props) {
   }
 
   const sendAction = (action) => {
+    console.log(action);
     socket.emit('player action', { room: room.room_id, action: action });
-    game.selectAction(action, player.player_id);
-    game.updateActions();
-    const result = game.actionsExecutable();
+    const gameCopy = game;
+    gameCopy.selectAction(action, player.player_id);
+    gameCopy.updateActions();
+    const result = gameCopy.actionsExecutable();
     if(result){
-      game.executeActions();
+      setLastPlayerAction(action);
+      if(player.player_num === 'player1'){
+        setLastOpponentAction(game.player2.selected_action);
+      } else {
+        setLastOpponentAction(game.player1.selected_action);
+      }
+      gameCopy.executeActions();
+      console.log(gameCopy);
+      handleGameChange(gameCopy);
       if(action.actionType === "starting-beast"){
         setInTeamPreview(false);
       }
-    }
-  }
-
-  if(socket){
-    socket.on('room created', (room, callback) => {
-      console.log(room);
-      props.addConnection();
-      setRoom(room);
-    })
-
-    if(game){
-      socket.on('opponent action', (action, callback) => {
-        game.selectAction(action, opponent.player_id);
-        game.updateActions();
-        const result = game.actionsExecutable();
-        if(result){
-          game.executeActions();
-          if(action.actionType === "starting-beast"){
-            setInTeamPreview(false);
-          }
-        }
-      })
-
-      socket.on('player exit', ({ player, action }, callback) => {
-        // Handle game loss for the player exiting.
-        console.log(`Player ${player.player_id} has forfeited.`);
-      })
+      setGameDidUpdate(!gameDidUpdate);
     }
   }
 
@@ -231,6 +305,7 @@ function Battle(props) {
           room={room}
           game={game}
           setGame={handleGameChange}
+          gameDidUpdate={gameDidUpdate}
           player={player}
           setPlayer={handlePlayerChange}
           opponent={opponent}
@@ -238,7 +313,11 @@ function Battle(props) {
           seeSpectators={seeSpectators}
           sendAction={sendAction}
           forfeit={forfeit}
-          inTeamPreview={inTeamPreview} />
+          inTeamPreview={inTeamPreview}
+          playerDidMove={playerDidMove}
+          playerDidSwitch={playerDidSwitch}
+          opponentDidMove={opponentDidMove}
+          opponentDidSwitch={opponentDidSwitch} />
       )
   }
 

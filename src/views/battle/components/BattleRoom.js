@@ -13,6 +13,9 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 // Components
 import BattleWindow from './BattleWindow';
+import PlayerHUD from './PlayerHUD';
+import OpponentHUD from './OpponentHUD';
+import BattleController from './BattleController';
 // Classes
 import Game from '../../../classes/Game';
 import GameLog from '../../../classes/GameLog';
@@ -25,17 +28,33 @@ import { items } from '../../../data/libraries/ItemLibrary';
 import { moves } from '../../../data/libraries/MoveLibrary';
 // Functions
 import { getBeastImage } from '../../../utils/functions/getBeastImage';
-import BattleController from './BattleController';
 
 const useStyles = makeStyles(theme => ({
     container: {
         maxWidth: "96%",
-        width: "100%"
+        width: "100%",
+        display: 'flex',
+        flexFlow: "column nowrap",
+        justifyContent: "center",
+        alignItems: 'center'
+    },
+    topBox: {
+        display: "flex",
+        flexFlow: "row nowrap",
+        maxWidth: "1120px",
+        width: '100%'
     }
 }));
 
 function BattleRoom(props) {
     const classes = useStyles();
+    const [moveHover, setMoveHover] = useState(false);
+    const [switchHover, setSwitchHover] = useState(false);
+    const [opponentHover, setOpponentHover] = useState(false);
+    const [playerHover, setPlayerHover] = useState(false);
+    const [hoverInfo, setHoverInfo] = useState(null);
+    const [opponentTeamLineup, setOpponentTeamLineup] = useState(null);
+    const [playerTeamLineup, setPlayerTeamLineup] = useState(null);
 
     // Images
     const [p1s1, setP1S1] = useState(null);
@@ -92,118 +111,138 @@ function BattleRoom(props) {
             props.setOpponent(player1);
         }
         const newGame = new Game(player1, player2);
-        console.log(newGame);
         props.setGame(newGame);
     }, [])
 
     useEffect(() => {
-        if(props.game){
-            if(props.id === props.game.player1.player_id){
-                props.setPlayer(props.game.player1);
-                props.setOpponent(props.game.player2);
-            } else {
-                props.setPlayer(props.game.player2);
-                props.setOpponent(props.game.player1);
-            }
+        if(props.player && props.player.player_num === "player1"){
+            setOpponentTeamLineup({
+                s1: p2s1,
+                s2: p2s2,
+                s3: p2s3,
+                s4: p2s4,
+                s5: p2s5
+            });
+            setPlayerTeamLineup({
+                s1: p1s1,
+                s2: p1s2,
+                s3: p1s3,
+                s4: p1s4,
+                s5: p1s5
+            });
         }
-    }, [ props.game ])
+        else if(props.player && props.player.player_num === "player2") {
+            setOpponentTeamLineup({
+                s1: p1s1,
+                s2: p1s2,
+                s3: p1s3,
+                s4: p1s4,
+                s5: p1s5
+            });
+            setPlayerTeamLineup({
+                s1: p2s1,
+                s2: p2s2,
+                s3: p2s3,
+                s4: p2s4,
+                s5: p2s5
+            });
+        }
+    }, [ props.player, props.opponent ])
+
+    const onMoveHover = (moveSlot) => {
+        setMoveHover(true);
+        const moveInfo = props.player.team.active_slot.beast.moves.get(moveSlot);
+        setHoverInfo(moveInfo);
+        console.log(moveInfo);
+    }
+
+    const onMoveLeave = () => {
+        setMoveHover(false);
+        setHoverInfo(null);
+    }
+
+    const onSwitchHover = (slot) => {
+        setSwitchHover(true);
+        switch(slot){
+            case 'slot1':
+                setHoverInfo(props.player.team.slot1.beast);
+                console.log(props.player.team.slot1.beast);
+                break;
+            case 'slot2':
+                setHoverInfo(props.player.team.slot2.beast);
+                console.log(props.player.team.slot2.beast);
+                break;
+            case 'slot3':
+                setHoverInfo(props.player.team.slot3.beast);
+                console.log(props.player.team.slot3.beast);
+                break;
+            case 'slot4':
+                setHoverInfo(props.player.team.slot4.beast);
+                console.log(props.player.team.slot4.beast);
+                break;
+            case 'slot5':
+                setHoverInfo(props.player.team.slot5.beast);
+                console.log(props.player.team.slot5.beast);
+                break;
+            default:
+                setHoverInfo(null);
+        }
+    }
+
+    const onSwitchLeave = () => {
+        setSwitchHover(false);
+        setHoverInfo(null);
+    }
+
+    const onOpponentHover = () => {
+        setOpponentHover(true);
+        setHoverInfo(props.opponent.team.active_slot.beast);
+    }
+
+    const onOpponentLeave = () => {
+        setOpponentHover(false);
+        setHoverInfo(null);
+    }
+
+    const onPlayerHover = () => {
+        setPlayerHover(true);
+        setHoverInfo(props.player.team.active_slot.beast);
+    }
+
+    const onPlayerLeave = () => {
+        setPlayerHover(false);
+        setHoverInfo(null);
+    }
 
     if(props.game){
-        let opponentTeamLineup;
-        let playerTeamLineup;
-        if(props.player.player_num === "player1"){
-            opponentTeamLineup = {
-                s1: p2s1,
-                s2: p2s2,
-                s3: p2s3,
-                s4: p2s4,
-                s5: p2s5
-            };
-            playerTeamLineup = {
-                s1: p1s1,
-                s2: p1s2,
-                s3: p1s3,
-                s4: p1s4,
-                s5: p1s5
-            };
-        } else {
-            opponentTeamLineup = {
-                s1: p1s1,
-                s2: p1s2,
-                s3: p1s3,
-                s4: p1s4,
-                s5: p1s5
-            };
-            playerTeamLineup = {
-                s1: p2s1,
-                s2: p2s2,
-                s3: p2s3,
-                s4: p2s4,
-                s5: p2s5
-            };
-        }
-
-        let p1ActiveBeastImg = null;
-        let p2ActiveBeastImg = null;
-
-        if(props.game.player1.team.active_slot.slotNumber && props.game.player2.team.active_slot.slotNumber){
-            switch(props.game.player1.team.active_slot.slotNumber){
-                case 'slot1':
-                    p1ActiveBeastImg = p1s1;
-                    break;
-                case 'slot2':
-                    p1ActiveBeastImg = p1s2;
-                    break;
-                case 'slot3':
-                    p1ActiveBeastImg = p1s3;
-                    break;
-                case 'slot4':
-                    p1ActiveBeastImg = p1s4;
-                    break;
-                case 'slot5':
-                    p1ActiveBeastImg = p1s5;
-                    break;
-                default:
-                    console.log("Error setting p1activebeastimg.")
-            }
-            switch(props.game.player2.team.active_slot.slotNumber){
-                case 'slot1':
-                    p2ActiveBeastImg = p2s1;
-                    break;
-                case 'slot2':
-                    p2ActiveBeastImg = p2s2;
-                    break;
-                case 'slot3':
-                    p2ActiveBeastImg = p2s3;
-                    break;
-                case 'slot4':
-                    p2ActiveBeastImg = p2s4;
-                    break;
-                case 'slot5':
-                    p2ActiveBeastImg = p2s5;
-                    break;
-                default:
-                    console.log("Error setting p2activebeastimg.")
-            }
-        }
-
         return (
             <Container className={classes.container}>
-                <BattleWindow
-                inTeamPreview={props.inTeamPreview}
-                opponentTeamLineup={opponentTeamLineup}
-                playerTeamLineup={playerTeamLineup}
-                p1ActiveBeastImg={p1ActiveBeastImg}
-                p2ActiveBeastImg={p2ActiveBeastImg}
-                player={props.player}
-                opponent={props.opponent}
-                game={props.game} />
+                <Box className={classes.topBox}>
+                    <PlayerHUD />
+                    <BattleWindow
+                    inTeamPreview={props.inTeamPreview}
+                    opponentTeamLineup={opponentTeamLineup}
+                    playerTeamLineup={playerTeamLineup}
+                    player={props.player}
+                    opponent={props.opponent}
+                    game={props.game}
+                    gameDidUpdate={props.gameDidUpdate}
+                    playerDidMove={props.playerDidMove}
+                    playerDidSwitch={props.playerDidSwitch}
+                    opponentDidMove={props.opponentDidMove}
+                    opponentDidSwitch={props.opponentDidSwitch} />
+                    <OpponentHUD />
+                </Box>
                 <BattleController
                 inTeamPreview={props.inTeamPreview}
                 player={props.player}
                 sendAction={props.sendAction}
                 game={props.game}
-                logGame={props.logGame} />
+                gameDidUpdate={props.gameDidUpdate}
+                playerDidMove={props.playerDidMove}
+                playerDidSwitch={props.playerDidSwitch}
+                opponentDidMove={props.opponentDidMove}
+                opponentDidSwitch={props.opponentDidSwitch} />
             </Container>
         )
     }

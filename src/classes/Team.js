@@ -50,51 +50,62 @@ export default class Team {
             case 'slot1':
                 this.slot1.beast = beast;
                 this.slot1.beast.updateSlot('slot1');
+                this.updateAdjacentSlots();
                 break;
             case 'slot2':
                 this.slot2.beast = beast;
                 this.slot1.beast.updateSlot('slot2');
+                this.updateAdjacentSlots();
                 break;
             case 'slot3':
                 this.slot3.beast = beast;
                 this.slot1.beast.updateSlot('slot3');
+                this.updateAdjacentSlots();
                 break;
             case 'slot4':
                 this.slot4.beast = beast;
                 this.slot1.beast.updateSlot('slot4');
+                this.updateAdjacentSlots();
                 break;
             case 'slot5':
                 this.slot5.beast = beast;
                 this.slot1.beast.updateSlot('slot5');
+                this.updateAdjacentSlots();
                 break;
             default:
                 if(this.slot1.beast == null){
                     this.slot1.beast = beast;
                     this.slot1.beast.updateSlot('slot1');
+                    this.updateAdjacentSlots();
                     return;
                 }
                 else if(this.slot2.beast == null){
                     this.slot2.beast = beast;
                     this.slot1.beast.updateSlot('slot2');
+                    this.updateAdjacentSlots();
                     return;
                 }
                 else if(this.slot3.beast == null){
                     this.slot3.beast = beast;
                     this.slot1.beast.updateSlot('slot3');
+                    this.updateAdjacentSlots();
                     return;
                 }
                 else if(this.slot4.beast == null){
                     this.slot4.beast = beast;
                     this.slot1.beast.updateSlot('slot4');
+                    this.updateAdjacentSlots();
                     return;
                 }
                 else if(this.slot5.beast == null){
                     this.slot5.beast = beast;
                     this.slot1.beast.updateSlot('slot5');
+                    this.updateAdjacentSlots();
                     return;
                 } else {
                     this.slot1.beast = beast;
                     this.slot1.beast.updateSlot('slot1');
+                    this.updateAdjacentSlots();
                     return;
                 }
         }
@@ -187,6 +198,14 @@ export default class Team {
             default:
                 console.log("Error activating Super.");
         }
+    }
+
+    updateAdjacentSlots(){
+        this.slot1.adjacentSlots = [this.slot2];
+        this.slot2.adjacentSlots = [this.slot1, this.slot3];
+        this.slot3.adjacentSlots = [this.slot2, this.slot4];
+        this.slot4.adjacentSlots = [this.slot3, this.slot5];
+        this.slot5.adjacentSlots = [this.slot4];
     }
 
     fillInTeamFromString(team_datastring){
@@ -295,6 +314,7 @@ export default class Team {
                     }
                 });
             });
+            this.updateAdjacentSlots();
             this.updateSuperSlot();
             console.log("Team successfully imported.")
         }

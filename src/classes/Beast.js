@@ -41,6 +41,7 @@ export default class Beast {
     }
 
     addMove(move_slot, move){
+        move.addMoveSlot(move_slot);
         this.moves.set(move_slot, move);
     }
 
