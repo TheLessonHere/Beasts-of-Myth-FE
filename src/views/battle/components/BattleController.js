@@ -18,6 +18,7 @@ import Filter2Icon from '@material-ui/icons/Filter2';
 import Filter3Icon from '@material-ui/icons/Filter3';
 import Filter4Icon from '@material-ui/icons/Filter4';
 import Filter5Icon from '@material-ui/icons/Filter5';
+import { createTeamObjects } from '../../../actions';
 
 const useStyles = makeStyles(theme => ({
     containerPreview: {
@@ -135,7 +136,11 @@ export default function BattleController(props) {
         playerDidMove,
         playerDidSwitch,
         opponentDidMove,
-        opponentDidSwitch
+        opponentDidSwitch,
+        onMoveButtonHover,
+        onMoveButtonLeave,
+        onSwitchButtonHover,
+        onSwitchButtonLeave
     } = props;
     const [critRollChances, setCritRollChances] = useState(['0%', '25%', '50%', '75%', '100%']);
     const [activatedRolls, setActivatedRolls] = useState(0);
@@ -191,6 +196,7 @@ export default function BattleController(props) {
         const moveId = event.target.id;
         if(event.target.innerHTML != "No Move"){
             const move = player.team.active_slot.beast.moves.get(moveId);
+            console.log(move);
             sendAction({
                 actionType: 'select-move',
                 move: move,
@@ -198,6 +204,43 @@ export default function BattleController(props) {
                 superActivated: activatingSuper,
                 critRolls: activatedRolls
             });
+        }
+        let tempCrc;
+        switch(activatedRolls){
+            case 0:
+                return;
+            case 1:
+                tempCrc = critRollChances;
+                tempCrc.pop();
+                setCritRollChances(tempCrc);
+                setActivatedRolls(0);
+                break;
+            case 2:
+                tempCrc = critRollChances;
+                tempCrc.pop();
+                tempCrc.pop();
+                setCritRollChances(tempCrc);
+                setActivatedRolls(0);
+                break;
+            case 3:
+                tempCrc = critRollChances;
+                tempCrc.pop();
+                tempCrc.pop();
+                tempCrc.pop();
+                setCritRollChances(tempCrc);
+                setActivatedRolls(0);
+                break;
+            case 4:
+                tempCrc = critRollChances;
+                tempCrc.pop();
+                tempCrc.pop();
+                tempCrc.pop();
+                tempCrc.pop();
+                setCritRollChances(tempCrc);
+                setActivatedRolls(0);
+                break;
+            default:
+                console.log('Error calculating remaining crit rolls.');
         }
     }
 
