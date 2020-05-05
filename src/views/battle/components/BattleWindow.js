@@ -76,7 +76,12 @@ export default function BattleWindow(props) {
         playerDidMove,
         playerDidSwitch,
         opponentDidMove,
-        opponentDidSwitch  } = props;
+        opponentDidSwitch,
+        onOpponentBeastHover,
+        onOpponentBeastLeave,
+        onPlayerBeastHover,
+        onPlayerBeastLeave
+    } = props;
     const [playerActiveBeastImg, setPlayerActiveBeastImg] = useState(null);
     const [opponentActiveBeastImg, setOpponentActiveBeastImg] = useState(null);
 

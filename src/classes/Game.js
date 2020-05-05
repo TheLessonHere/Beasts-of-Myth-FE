@@ -308,7 +308,7 @@ export default class Game {
         return;
     }
 
-    damageCalculation(defendingPlayer, move, attackingBeast, defendingBeast, critRolls){
+    damageCalculation(attackingPlayer, defendingPlayer, move, attackingBeast, defendingBeast, critRolls){
         let domainModifier = 1;
         const moveType = move.type;
         const basePower = move.basePower;
@@ -379,6 +379,7 @@ export default class Game {
                 case 0:
                     return false;
                 case 1:
+                    attackingPlayer.updateCritRolls(1);
                     let randomInt25 = getRandomInt(1, 4);
                     if(randomInt25 === 1){
                         randomInt25 = true;
@@ -387,6 +388,7 @@ export default class Game {
                     };
                     return randomInt25;
                 case 2:
+                    attackingPlayer.updateCritRolls(2);
                     let randomInt50 = getRandomInt(1, 2);
                     if(randomInt50 === 1){
                         randomInt50 = true;
@@ -395,6 +397,7 @@ export default class Game {
                     };
                     return randomInt50;
                 case 3:
+                    attackingPlayer.updateCritRolls(3);
                     let randomInt75 = getRandomInt(1, 4);
                     if(randomInt75 === 1){
                         randomInt75 = false;
@@ -403,17 +406,27 @@ export default class Game {
                     };
                     return randomInt75;
                 case 4:
+                    attackingPlayer.updateCritRolls(4);
                     return true;
             }
         }
 
+        const critRoll = rollCrit(critRolls);
+
         move.decrementME();
 
         let damage = 0;
+
         if(moveType == 'physical'){
             damage = ((((basePower + sameTypeBonus) * domainModifier) + attackingBeast.curr_pa) - defendingBeast.curr_pd) * effectiveness;
+            if(critRoll){
+                damage = damage * 2;
+            }
         } else {
             damage = ((((basePower + sameTypeBonus) * domainModifier) + attackingBeast.curr_ma) - defendingBeast.curr_md) * effectiveness;
+            if(critRoll){
+                damage = damage * 2;
+            }
         }
 
         defendingBeast.updateHP(damage);

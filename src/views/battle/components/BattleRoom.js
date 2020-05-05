@@ -149,19 +149,19 @@ function BattleRoom(props) {
         }
     }, [ props.player, props.opponent ])
 
-    const onMoveHover = (moveSlot) => {
+    const onMoveButtonHover = (moveSlot) => {
         setMoveHover(true);
         const moveInfo = props.player.team.active_slot.beast.moves.get(moveSlot);
         setHoverInfo(moveInfo);
         console.log(moveInfo);
     }
 
-    const onMoveLeave = () => {
+    const onMoveButtonLeave = () => {
         setMoveHover(false);
         setHoverInfo(null);
     }
 
-    const onSwitchHover = (slot) => {
+    const onSwitchButtonHover = (slot) => {
         setSwitchHover(true);
         switch(slot){
             case 'slot1':
@@ -189,27 +189,27 @@ function BattleRoom(props) {
         }
     }
 
-    const onSwitchLeave = () => {
+    const onSwitchButtonLeave = () => {
         setSwitchHover(false);
         setHoverInfo(null);
     }
 
-    const onOpponentHover = () => {
+    const onOpponentBeastHover = () => {
         setOpponentHover(true);
         setHoverInfo(props.opponent.team.active_slot.beast);
     }
 
-    const onOpponentLeave = () => {
+    const onOpponentBeastLeave = () => {
         setOpponentHover(false);
         setHoverInfo(null);
     }
 
-    const onPlayerHover = () => {
+    const onPlayerBeastHover = () => {
         setPlayerHover(true);
         setHoverInfo(props.player.team.active_slot.beast);
     }
 
-    const onPlayerLeave = () => {
+    const onPlayerBeastLeave = () => {
         setPlayerHover(false);
         setHoverInfo(null);
     }
@@ -230,7 +230,11 @@ function BattleRoom(props) {
                     playerDidMove={props.playerDidMove}
                     playerDidSwitch={props.playerDidSwitch}
                     opponentDidMove={props.opponentDidMove}
-                    opponentDidSwitch={props.opponentDidSwitch} />
+                    opponentDidSwitch={props.opponentDidSwitch}
+                    onOpponentBeastHover={onOpponentBeastHover}
+                    onOpponentBeastLeave={onOpponentBeastLeave}
+                    onPlayerBeastHover={onPlayerBeastHover}
+                    onPlayerBeastLeave={onPlayerBeastLeave} />
                     <OpponentHUD />
                 </Box>
                 <BattleController
@@ -242,7 +246,11 @@ function BattleRoom(props) {
                 playerDidMove={props.playerDidMove}
                 playerDidSwitch={props.playerDidSwitch}
                 opponentDidMove={props.opponentDidMove}
-                opponentDidSwitch={props.opponentDidSwitch} />
+                opponentDidSwitch={props.opponentDidSwitch}
+                onMoveButtonHover={onMoveButtonHover}
+                onMoveButtonLeave={onMoveButtonLeave}
+                onSwitchButtonHover={onSwitchButtonHover}
+                onSwitchButtonLeave={onSwitchButtonLeave} />
             </Container>
         )
     }
