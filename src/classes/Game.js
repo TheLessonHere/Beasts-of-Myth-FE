@@ -456,6 +456,23 @@ export default class Game {
         defendingBeast.updateHP(damage);
         if(defendingBeast.curr_hp <= 0){
             defendingBeast.knockOutBeast();
+            if(defendingPlayer.player_num === 'player1'){
+                this.player1_active_beasts = this.player1_active_beasts - 1;
+                if(this.player1_active_beasts <= 0){
+                    this.winner = this.player2;
+                    this.player2.hasWon();
+                    this.loser = this.player1;
+                    this.player1.hasLost();
+                }
+            } else {
+                this.player2_active_beasts = this.player2_active_beasts - 1;
+                if(this.player2_active_beasts <= 0){
+                    this.winner = this.player1;
+                    this.player1.hasWon();
+                    this.loser = this.player2;
+                    this.player2.hasLost();
+                }
+            }
             defendingPlayer.team.active_slot.beast.makeInactive();
             defendingPlayer.team.clearActiveSlot();
         }

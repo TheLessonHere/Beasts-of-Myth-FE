@@ -47,6 +47,9 @@ const useStyles = makeStyles(theme => ({
         height: "100%",
         backgroundColor: "darkgrey",
         overflow: "scroll"
+    },
+    noTeams: {
+      marginTop: "20px"
     }
 }))
 
@@ -73,6 +76,8 @@ function Battle(props) {
   const [playerDidMove, setPlayerDidMove] = useState(false);
   const [opponentDidMove, setOpponentDidMove] = useState(false);
   const [beastDidGetKOd, setBeastDidGetKOd] = useState(false);
+  const [playerDidWin, setPlayerDidWin] = useState(false);
+  const [opponentDidWin, setOpponentDidWin] = useState(false);
   const [inTeamPreview, setInTeamPreview] = useState(true);
 
   useEffect(() => {
@@ -177,6 +182,12 @@ function Battle(props) {
               setBeastDidGetKOd(true);
             }
           console.log(gameCopy);
+          if(gameCopy.winner && gameCopy.winner.player_num === player.player_num){
+            setPlayerDidWin(true);
+          }
+          else if(gameCopy.winner && gameCopy.winner.player_num === opponent.player_num){
+            setOpponentDidWin(true);
+          }
           handleGameChange(gameCopy);
           if(action.actionType === "starting-beast"){
             setInTeamPreview(false);
@@ -297,6 +308,9 @@ function Battle(props) {
           setBeastDidGetKOd(true);
         }
       console.log(gameCopy);
+      if(gameCopy.winner){
+        setPlayerDidWin(true);
+      }
       handleGameChange(gameCopy);
       if(action.actionType === "starting-beast"){
         setInTeamPreview(false);
@@ -351,7 +365,9 @@ function Battle(props) {
           playerDidSwitch={playerDidSwitch}
           opponentDidMove={opponentDidMove}
           opponentDidSwitch={opponentDidSwitch}
-          beastDidGetKOd={beastDidGetKOd} />
+          beastDidGetKOd={beastDidGetKOd}
+          playerDidWin={playerDidWin}
+          opponentDidWin={opponentDidWin} />
       )
   }
 
@@ -373,7 +389,7 @@ function Battle(props) {
                         <TeamMiniBox team={team} />
                     </ListItem>
         }}) :
-          <Typography align="center">No Teams Found</Typography>}
+          <Typography className={classes.noTeams} align="center">No Teams Found</Typography>}
       </List>
     </Container>
   );

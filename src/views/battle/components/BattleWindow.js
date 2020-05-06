@@ -130,7 +130,7 @@ export default function BattleWindow(props) {
                         setOpponentActiveBeastImg(opponentTeamLineup.s5);
                         break;
                     case null:
-                        setPlayerActiveBeastImg(null);
+                        setOpponentActiveBeastImg(null);
                         break;
                     default:
                         console.log("Error setting oppactivebeastimg.")
@@ -221,6 +221,48 @@ export default function BattleWindow(props) {
                     className={classes.beastImg}
                     src={opponentActiveBeastImg}
                     alt="active-beast-opponent" />
+                </Box>
+                <Box
+                className={classes.gameBoxPlayer}
+                onMouseOver={onPlayerBeastHover}
+                onMouseOut={onHoverLeave}>
+                    <h5>Health Bar Here</h5>
+                    <img
+                    className={classes.beastImg}
+                    src={playerActiveBeastImg}
+                    alt="active-beast-player" />
+                </Box>
+            </Container>
+        )
+    }
+
+    if(opponentActiveBeastImg && !playerActiveBeastImg){
+        return(
+            <Container className={classes.container}>
+                <Box
+                className={classes.gameBoxOpponent}
+                onMouseOver={onOpponentBeastHover}
+                onMouseOut={onHoverLeave}>
+                    <h5>Health Bar Here</h5>
+                    <img
+                    className={classes.beastImg}
+                    src={opponentActiveBeastImg}
+                    alt="active-beast-opponent" />
+                </Box>
+                <Box
+                className={classes.gameBoxPlayer}
+                onMouseOut={onHoverLeave}>
+                </Box>
+            </Container>
+        )
+    }
+
+    if(!opponentActiveBeastImg && playerActiveBeastImg){
+        return(
+            <Container className={classes.container}>
+                <Box
+                className={classes.gameBoxOpponent}
+                onMouseOut={onHoverLeave}>
                 </Box>
                 <Box
                 className={classes.gameBoxPlayer}

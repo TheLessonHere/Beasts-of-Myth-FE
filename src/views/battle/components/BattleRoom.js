@@ -295,7 +295,9 @@ function BattleRoom(props) {
                     onPlayerBeastHover={onPlayerBeastHover}
                     onOpponentPreviewHover={onOpponentPreviewHover}
                     onSwitchButtonHover={onSwitchButtonHover}
-                    onHoverLeave={onHoverLeave} />
+                    onHoverLeave={onHoverLeave}
+                    playerDidWin={props.playerDidWin}
+                    opponentDidWin={props.opponentDidWin} />
                     <OpponentHUD />
                 </Box>
                 <BattleController
@@ -312,7 +314,9 @@ function BattleRoom(props) {
                 beastDidGetKOd={props.beastDidGetKOd}
                 onMoveButtonHover={onMoveButtonHover}
                 onSwitchButtonHover={onSwitchButtonHover}
-                onHoverLeave={onHoverLeave} />
+                onHoverLeave={onHoverLeave}
+                playerDidWin={props.playerDidWin}
+                opponentDidWin={props.opponentDidWin} />
             </Container>
         )
     }
