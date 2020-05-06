@@ -22,10 +22,59 @@ const useStyles = makeStyles(theme => ({
 export default function PlayerHUD(props) {
     const classes = useStyles();
     const { hoverInfo } = props;
+    const [infoType, setInfoType] = useState(null);
+
+    useEffect(() => {
+        if(hoverInfo){
+            setInfoType(hoverInfo.infoType);
+        } else {
+            setInfoType(null);
+        }
+    }, [ hoverInfo, infoType ])
+
+    if(infoType === 'move'){
+        return (
+            <Container className={classes.container}>
+               <Typography variant="h6">Move</Typography>
+            </Container>
+        )
+    }
+
+    if(infoType === 'switch'){
+        return (
+            <Container className={classes.container}>
+               <Typography variant="h6">Swtich</Typography>
+            </Container>
+        )
+    }
+
+    if(infoType === 'opponent'){
+        return (
+            <Container className={classes.container}>
+               <Typography variant="h6">Opponent</Typography>
+            </Container>
+        )
+    }
+
+    if(infoType === 'player'){
+        return (
+            <Container className={classes.container}>
+               <Typography variant="h6">Player</Typography>
+            </Container>
+        )
+    }
+
+    if(infoType === 'preview'){
+        return (
+            <Container className={classes.container}>
+               <Typography variant="h6">Preview</Typography>
+            </Container>
+        )
+    }
 
     return (
         <Container className={classes.container}>
-            PlayerHUD
+            <Typography variant="h6">No info</Typography>
         </Container>
     )
 }

@@ -131,6 +131,7 @@ export default function BattleController(props) {
         inTeamPreview,
         player,
         sendAction,
+        sendPostKOAction,
         game,
         gameDidUpdate,
         playerDidMove,
@@ -138,16 +139,27 @@ export default function BattleController(props) {
         opponentDidMove,
         opponentDidSwitch,
         onMoveButtonHover,
-        onMoveButtonLeave,
         onSwitchButtonHover,
-        onSwitchButtonLeave
+        onHoverLeave,
+        beastDidGetKOd
     } = props;
     const [critRollChances, setCritRollChances] = useState(['0%', '25%', '50%', '75%', '100%']);
     const [activatedRolls, setActivatedRolls] = useState(0);
     const [activatingSuper, setActivatingSuper] = useState(false);
+    const [switchAfterKO, setSwitchAfterKO] = useState(false);
 
     useEffect(() => {
-    }, [ gameDidUpdate ])
+    }, [ gameDidUpdate, switchAfterKO ])
+
+    useEffect(() => {
+        if(player && inTeamPreview === false && player.team.active_slot.beast === null){
+            console.log('Beast got kod')
+            setSwitchAfterKO(true);
+        } else {
+            console.log('no beast kod')
+            setSwitchAfterKO(false);
+        }
+    }, [ inTeamPreview, beastDidGetKOd ])
 
     const startBeast = (slot) => {
         let action;
@@ -188,59 +200,65 @@ export default function BattleController(props) {
         sendAction(action);
     }
 
+    const nextBeastPostKO = (slot) => {
+        const action = {
+            playerNum: player.player_num,
+            slot: slot
+        };
+        sendPostKOAction(action);
+    }
+
     const handleCritRolls = (event) => {
         setActivatedRolls(event.target.value);
     }
 
-    const handleMoveClick = (event) => {
-        const moveId = event.target.id;
+    const handleMoveClick = (event, moveSlot) => {
+        event.preventDefault();
         if(event.target.innerHTML != "No Move"){
-            const move = player.team.active_slot.beast.moves.get(moveId);
-            console.log(move);
             sendAction({
                 actionType: 'select-move',
-                move: move,
-                moveSlot: moveId,
+                moveSlot: moveSlot,
                 superActivated: activatingSuper,
                 critRolls: activatedRolls
             });
-        }
-        let tempCrc;
-        switch(activatedRolls){
-            case 0:
-                return;
-            case 1:
-                tempCrc = critRollChances;
-                tempCrc.pop();
-                setCritRollChances(tempCrc);
-                setActivatedRolls(0);
-                break;
-            case 2:
-                tempCrc = critRollChances;
-                tempCrc.pop();
-                tempCrc.pop();
-                setCritRollChances(tempCrc);
-                setActivatedRolls(0);
-                break;
-            case 3:
-                tempCrc = critRollChances;
-                tempCrc.pop();
-                tempCrc.pop();
-                tempCrc.pop();
-                setCritRollChances(tempCrc);
-                setActivatedRolls(0);
-                break;
-            case 4:
-                tempCrc = critRollChances;
-                tempCrc.pop();
-                tempCrc.pop();
-                tempCrc.pop();
-                tempCrc.pop();
-                setCritRollChances(tempCrc);
-                setActivatedRolls(0);
-                break;
-            default:
-                console.log('Error calculating remaining crit rolls.');
+
+            let tempCrc;
+            switch(activatedRolls){
+                case 0:
+                    return;
+                case 1:
+                    tempCrc = critRollChances;
+                    tempCrc.pop();
+                    setCritRollChances(tempCrc);
+                    setActivatedRolls(0);
+                    break;
+                case 2:
+                    tempCrc = critRollChances;
+                    tempCrc.pop();
+                    tempCrc.pop();
+                    setCritRollChances(tempCrc);
+                    setActivatedRolls(0);
+                    break;
+                case 3:
+                    tempCrc = critRollChances;
+                    tempCrc.pop();
+                    tempCrc.pop();
+                    tempCrc.pop();
+                    setCritRollChances(tempCrc);
+                    setActivatedRolls(0);
+                    break;
+                case 4:
+                    tempCrc = critRollChances;
+                    tempCrc.pop();
+                    tempCrc.pop();
+                    tempCrc.pop();
+                    tempCrc.pop();
+                    setCritRollChances(tempCrc);
+                    setActivatedRolls(0);
+                    break;
+                default:
+                    console.log('Error calculating remaining crit rolls.');
+            }
         }
     }
 
@@ -253,6 +271,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot2')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot2.beast.knocked_out}
                         onClick={() => sendAction({
@@ -266,6 +286,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot3')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot3.beast.knocked_out}
                         onClick={() => sendAction({
@@ -279,6 +301,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot4')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot4.beast.knocked_out}
                         onClick={() => sendAction({
@@ -292,6 +316,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot5')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot5.beast.knocked_out}
                         onClick={() => sendAction({
@@ -310,6 +336,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot1')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot1.beast.knocked_out}
                         onClick={() => sendAction({
@@ -323,6 +351,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot3')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot3.beast.knocked_out}
                         onClick={() => sendAction({
@@ -336,6 +366,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot4')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot4.beast.knocked_out}
                         onClick={() => sendAction({
@@ -349,6 +381,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot5')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot5.beast.knocked_out}
                         onClick={() => sendAction({
@@ -367,6 +401,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot1')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot1.beast.knocked_out}
                         onClick={() => sendAction({
@@ -380,6 +416,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot2')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot2.beast.knocked_out}
                         onClick={() => sendAction({
@@ -393,6 +431,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot4')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot4.beast.knocked_out}
                         onClick={() => sendAction({
@@ -406,6 +446,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot5')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot5.beast.knocked_out}
                         onClick={() => sendAction({
@@ -424,6 +466,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot1')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot1.beast.knocked_out}
                         onClick={() => sendAction({
@@ -437,6 +481,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot2')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot2.beast.knocked_out}
                         onClick={() => sendAction({
@@ -450,6 +496,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot3')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot3.beast.knocked_out}
                         onClick={() => sendAction({
@@ -463,6 +511,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot5')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot5.beast.knocked_out}
                         onClick={() => sendAction({
@@ -481,6 +531,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot1')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot1.beast.knocked_out}
                         onClick={() => sendAction({
@@ -494,6 +546,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot2')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot2.beast.knocked_out}
                         onClick={() => sendAction({
@@ -507,6 +561,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot3')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot3.beast.knocked_out}
                         onClick={() => sendAction({
@@ -520,6 +576,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot4')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot4.beast.knocked_out}
                         onClick={() => sendAction({
@@ -538,6 +596,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot1')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot1.beast.knocked_out}
                         onClick={() => sendAction({
@@ -551,6 +611,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot2')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot2.beast.knocked_out}
                         onClick={() => sendAction({
@@ -564,6 +626,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot3')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot3.beast.knocked_out}
                         onClick={() => sendAction({
@@ -577,6 +641,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot4')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot4.beast.knocked_out}
                         onClick={() => sendAction({
@@ -590,6 +656,8 @@ export default function BattleController(props) {
                         variant="contained"
                         color="default"
                         size="large"
+                        onMouseOver={() => onSwitchButtonHover('slot5')}
+                        onMouseOut={onHoverLeave}
                         className={classes.switchButton}
                         disabled={player.team.slot5.beast.knocked_out}
                         onClick={() => sendAction({
@@ -605,15 +673,17 @@ export default function BattleController(props) {
     }
 
     if(inTeamPreview){
-        // Add handlers to buttons that send a select starter action
         return (
             <Container className={classes.containerPreview}>
-                <Typography variant="h6">Choose your starter:</Typography>
+                <Typography variant="h6">Choose your starting Beast:</Typography>
                 <Box className={classes.buttonBox}>
                     <Button
                     variant="contained"
                     color="default"
                     size="large"
+                    disabled={player.team.slot1.beast.knocked_out}
+                    onMouseOver={() => onSwitchButtonHover('slot1')}
+                    onMouseOut={onHoverLeave}
                     onClick={() => startBeast('slot1')}
                     startIcon={<Filter1Icon />}>
                         {player.team.slot1.beast.beast_name}
@@ -622,6 +692,9 @@ export default function BattleController(props) {
                     variant="contained"
                     color="default"
                     size="large"
+                    disabled={player.team.slot2.beast.knocked_out}
+                    onMouseOver={() => onSwitchButtonHover('slot2')}
+                    onMouseOut={onHoverLeave}
                     onClick={() => startBeast('slot2')}
                     startIcon={<Filter2Icon />}>
                         {player.team.slot2.beast.beast_name}
@@ -630,6 +703,9 @@ export default function BattleController(props) {
                     variant="contained"
                     color="default"
                     size="large"
+                    disabled={player.team.slot3.beast.knocked_out}
+                    onMouseOver={() => onSwitchButtonHover('slot3')}
+                    onMouseOut={onHoverLeave}
                     onClick={() => startBeast('slot3')}
                     startIcon={<Filter3Icon />}>
                         {player.team.slot3.beast.beast_name}
@@ -638,6 +714,9 @@ export default function BattleController(props) {
                     variant="contained"
                     color="default"
                     size="large"
+                    disabled={player.team.slot4.beast.knocked_out}
+                    onMouseOver={() => onSwitchButtonHover('slot4')}
+                    onMouseOut={onHoverLeave}
                     onClick={() => startBeast('slot4')}
                     startIcon={<Filter4Icon />}>
                         {player.team.slot4.beast.beast_name}
@@ -646,7 +725,75 @@ export default function BattleController(props) {
                     variant="contained"
                     color="default"
                     size="large"
+                    disabled={player.team.slot5.beast.knocked_out}
+                    onMouseOver={() => onSwitchButtonHover('slot5')}
+                    onMouseOut={onHoverLeave}
                     onClick={() => startBeast('slot5')}
+                    startIcon={<Filter5Icon />}>
+                        {player.team.slot5.beast.beast_name}
+                    </Button>
+                </Box>
+            </Container>
+        )
+    }
+
+    if(switchAfterKO){
+        return (
+            <Container className={classes.containerPreview}>
+                <Typography variant="h6">Choose your next Beast:</Typography>
+                <Box className={classes.buttonBox}>
+                    <Button
+                    variant="contained"
+                    color="default"
+                    size="large"
+                    disabled={player.team.slot1.beast.knocked_out}
+                    onMouseOver={() => onSwitchButtonHover('slot1')}
+                    onMouseOut={onHoverLeave}
+                    onClick={() => nextBeastPostKO('slot1')}
+                    startIcon={<Filter1Icon />}>
+                        {player.team.slot1.beast.beast_name}
+                    </Button>
+                    <Button
+                    variant="contained"
+                    color="default"
+                    size="large"
+                    disabled={player.team.slot2.beast.knocked_out}
+                    onMouseOver={() => onSwitchButtonHover('slot2')}
+                    onMouseOut={onHoverLeave}
+                    onClick={() => nextBeastPostKO('slot2')}
+                    startIcon={<Filter2Icon />}>
+                        {player.team.slot2.beast.beast_name}
+                    </Button>
+                    <Button
+                    variant="contained"
+                    color="default"
+                    size="large"
+                    disabled={player.team.slot3.beast.knocked_out}
+                    onMouseOver={() => onSwitchButtonHover('slot3')}
+                    onMouseOut={onHoverLeave}
+                    onClick={() => nextBeastPostKO('slot3')}
+                    startIcon={<Filter3Icon />}>
+                        {player.team.slot3.beast.beast_name}
+                    </Button>
+                    <Button
+                    variant="contained"
+                    color="default"
+                    size="large"
+                    disabled={player.team.slot4.beast.knocked_out}
+                    onMouseOver={() => onSwitchButtonHover('slot4')}
+                    onMouseOut={onHoverLeave}
+                    onClick={() => nextBeastPostKO('slot4')}
+                    startIcon={<Filter4Icon />}>
+                        {player.team.slot4.beast.beast_name}
+                    </Button>
+                    <Button
+                    variant="contained"
+                    color="default"
+                    size="large"
+                    disabled={player.team.slot5.beast.knocked_out}
+                    onMouseOver={() => onSwitchButtonHover('slot5')}
+                    onMouseOut={onHoverLeave}
+                    onClick={() => nextBeastPostKO('slot5')}
                     startIcon={<Filter5Icon />}>
                         {player.team.slot5.beast.beast_name}
                     </Button>
@@ -662,44 +809,52 @@ export default function BattleController(props) {
             <Box className={classes.moveBox}>
                 <Box className={classes.move1_2}>
                     <Button
-                    id="move1"
                     variant="contained"
                     color="default"
                     className={classes.move1}
-                    size="large">
-                        {player.team.active_slot.beast.moves.get('move1') ?
+                    size="large"
+                    onMouseOver={() => onMoveButtonHover('move1')}
+                    onMouseOut={onHoverLeave}
+                    onClick={(event) => handleMoveClick(event, 'move1')}>
+                        {player.team.active_slot.beast && player.team.active_slot.beast.moves.get('move1') ?
                         player.team.active_slot.beast.moves.get('move1').move_name :
                         "No Move"}
                     </Button>
                     <Button
-                    id="move2"
                     variant="contained"
                     color="default"
                     className={classes.move2}
-                    size="large">
-                        {player.team.active_slot.beast.moves.get('move2') ?
+                    size="large"
+                    onMouseOver={() => onMoveButtonHover('move2')}
+                    onMouseOut={onHoverLeave}
+                    onClick={(event) => handleMoveClick(event, 'move2')}>
+                        {player.team.active_slot.beast && player.team.active_slot.beast.moves.get('move2') ?
                         player.team.active_slot.beast.moves.get('move2').move_name :
                         "No Move"}
                     </Button>
                 </Box>
                 <Box className={classes.move3_4}>
                     <Button
-                    id="move3"
                     variant="contained"
                     color="default"
                     className={classes.move3}
-                    size="large">
-                        {player.team.active_slot.beast.moves.get('move3') ?
+                    size="large"
+                    onMouseOver={() => onMoveButtonHover('move3')}
+                    onMouseOut={onHoverLeave}
+                    onClick={(event) => handleMoveClick(event, 'move3')}>
+                        {player.team.active_slot.beast && player.team.active_slot.beast.moves.get('move3') ?
                         player.team.active_slot.beast.moves.get('move3').move_name :
                         "No Move"}
                     </Button>
                     <Button
-                    id="move4"
                     variant="contained"
                     color="default"
                     className={classes.move4}
-                    size="large">
-                        {player.team.active_slot.beast.moves.get('move4') ?
+                    size="large"
+                    onMouseOver={() => onMoveButtonHover('move4')}
+                    onMouseOut={onHoverLeave}
+                    onClick={(event) => handleMoveClick(event, 'move4')}>
+                        {player.team.active_slot.beast && player.team.active_slot.beast.moves.get('move4') ?
                         player.team.active_slot.beast.moves.get('move4').move_name :
                         "No Move"}
                     </Button>
@@ -743,6 +898,7 @@ export default function BattleController(props) {
                 className={classes.superButton}
                 onClick={() => setActivatingSuper(true)}
                 disabled={
+                    player.team.active_slot.beast &&
                     player.team.active_slot.beast.item &&
                     player.team.active_slot.beast.item.item_name === "Super Crystal" ?
                         false :

@@ -48,10 +48,6 @@ const useStyles = makeStyles(theme => ({
 
 function BattleRoom(props) {
     const classes = useStyles();
-    const [moveHover, setMoveHover] = useState(false);
-    const [switchHover, setSwitchHover] = useState(false);
-    const [opponentHover, setOpponentHover] = useState(false);
-    const [playerHover, setPlayerHover] = useState(false);
     const [hoverInfo, setHoverInfo] = useState(null);
     const [opponentTeamLineup, setOpponentTeamLineup] = useState(null);
     const [playerTeamLineup, setPlayerTeamLineup] = useState(null);
@@ -150,67 +146,129 @@ function BattleRoom(props) {
     }, [ props.player, props.opponent ])
 
     const onMoveButtonHover = (moveSlot) => {
-        setMoveHover(true);
         const moveInfo = props.player.team.active_slot.beast.moves.get(moveSlot);
-        setHoverInfo(moveInfo);
-        console.log(moveInfo);
-    }
-
-    const onMoveButtonLeave = () => {
-        setMoveHover(false);
-        setHoverInfo(null);
+        const info = {
+            infoType: 'move',
+            moveInfo: moveInfo
+        };
+        setHoverInfo(info);
     }
 
     const onSwitchButtonHover = (slot) => {
-        setSwitchHover(true);
+        let beastInfo;
         switch(slot){
             case 'slot1':
-                setHoverInfo(props.player.team.slot1.beast);
-                console.log(props.player.team.slot1.beast);
+                beastInfo = props.player.team.slot1.beast;
+                const info1 = {
+                    infoType: 'switch',
+                    beastInfo: beastInfo
+                };
+                setHoverInfo(info1);
                 break;
             case 'slot2':
-                setHoverInfo(props.player.team.slot2.beast);
-                console.log(props.player.team.slot2.beast);
+                beastInfo = props.player.team.slot2.beast;
+                const info2 = {
+                    infoType: 'switch',
+                    beastInfo: beastInfo
+                };
+                setHoverInfo(info2);
                 break;
             case 'slot3':
-                setHoverInfo(props.player.team.slot3.beast);
-                console.log(props.player.team.slot3.beast);
+                beastInfo = props.player.team.slot3.beast;
+                const info3 = {
+                    infoType: 'switch',
+                    beastInfo: beastInfo
+                };
+                setHoverInfo(info3);
                 break;
             case 'slot4':
-                setHoverInfo(props.player.team.slot4.beast);
-                console.log(props.player.team.slot4.beast);
+                beastInfo = props.player.team.slot4.beast;
+                const info4 = {
+                    infoType: 'switch',
+                    beastInfo: beastInfo
+                };
+                setHoverInfo(info4);
                 break;
             case 'slot5':
-                setHoverInfo(props.player.team.slot5.beast);
-                console.log(props.player.team.slot5.beast);
+                beastInfo = props.player.team.slot5.beast;
+                const info5 = {
+                    infoType: 'switch',
+                    beastInfo: beastInfo
+                };
+                setHoverInfo(info5);
                 break;
             default:
                 setHoverInfo(null);
         }
     }
 
-    const onSwitchButtonLeave = () => {
-        setSwitchHover(false);
-        setHoverInfo(null);
+    const onOpponentPreviewHover = (slot) => {
+        let beastInfo;
+        switch(slot){
+            case 'slot1':
+                beastInfo = props.opponent.team.slot1.beast;
+                const info1 = {
+                    infoType: 'preview',
+                    beastInfo: beastInfo
+                };
+                setHoverInfo(info1);
+                break;
+            case 'slot2':
+                beastInfo = props.opponent.team.slot2.beast;
+                const info2 = {
+                    infoType: 'preview',
+                    beastInfo: beastInfo
+                };
+                setHoverInfo(info2);
+                break;
+            case 'slot3':
+                beastInfo = props.opponent.team.slot3.beast;
+                const info3 = {
+                    infoType: 'preview',
+                    beastInfo: beastInfo
+                };
+                setHoverInfo(info3);
+                break;
+            case 'slot4':
+                beastInfo = props.opponent.team.slot4.beast;
+                const info4 = {
+                    infoType: 'preview',
+                    beastInfo: beastInfo
+                };
+                setHoverInfo(info4);
+                break;
+            case 'slot5':
+                beastInfo = props.opponent.team.slot5.beast;
+                const info5 = {
+                    infoType: 'preview',
+                    beastInfo: beastInfo
+                };
+                setHoverInfo(info5);
+                break;
+            default:
+                setHoverInfo(null);
+        }
     }
 
     const onOpponentBeastHover = () => {
-        setOpponentHover(true);
-        setHoverInfo(props.opponent.team.active_slot.beast);
-    }
-
-    const onOpponentBeastLeave = () => {
-        setOpponentHover(false);
-        setHoverInfo(null);
+        const beastInfo = props.opponent.team.active_slot.beast;
+        const info = {
+            infoType: 'opponent',
+            beastInfo: beastInfo
+        };
+        setHoverInfo(info);
     }
 
     const onPlayerBeastHover = () => {
-        setPlayerHover(true);
-        setHoverInfo(props.player.team.active_slot.beast);
+        const beastInfo = props.player.team.active_slot.beast;
+        const info = {
+            infoType: 'player',
+            beastInfo: beastInfo
+        };
+        setHoverInfo(info);
     }
 
-    const onPlayerBeastLeave = () => {
-        setPlayerHover(false);
+    const onHoverLeave = () => {
         setHoverInfo(null);
     }
 
@@ -218,7 +276,8 @@ function BattleRoom(props) {
         return (
             <Container className={classes.container}>
                 <Box className={classes.topBox}>
-                    <PlayerHUD />
+                    <PlayerHUD
+                    hoverInfo={hoverInfo} />
                     <BattleWindow
                     inTeamPreview={props.inTeamPreview}
                     opponentTeamLineup={opponentTeamLineup}
@@ -231,26 +290,29 @@ function BattleRoom(props) {
                     playerDidSwitch={props.playerDidSwitch}
                     opponentDidMove={props.opponentDidMove}
                     opponentDidSwitch={props.opponentDidSwitch}
+                    beastDidGetKOd={props.beastDidGetKOd}
                     onOpponentBeastHover={onOpponentBeastHover}
-                    onOpponentBeastLeave={onOpponentBeastLeave}
                     onPlayerBeastHover={onPlayerBeastHover}
-                    onPlayerBeastLeave={onPlayerBeastLeave} />
+                    onOpponentPreviewHover={onOpponentPreviewHover}
+                    onSwitchButtonHover={onSwitchButtonHover}
+                    onHoverLeave={onHoverLeave} />
                     <OpponentHUD />
                 </Box>
                 <BattleController
                 inTeamPreview={props.inTeamPreview}
                 player={props.player}
                 sendAction={props.sendAction}
+                sendPostKOAction={props.sendPostKOAction}
                 game={props.game}
                 gameDidUpdate={props.gameDidUpdate}
                 playerDidMove={props.playerDidMove}
                 playerDidSwitch={props.playerDidSwitch}
                 opponentDidMove={props.opponentDidMove}
                 opponentDidSwitch={props.opponentDidSwitch}
+                beastDidGetKOd={props.beastDidGetKOd}
                 onMoveButtonHover={onMoveButtonHover}
-                onMoveButtonLeave={onMoveButtonLeave}
                 onSwitchButtonHover={onSwitchButtonHover}
-                onSwitchButtonLeave={onSwitchButtonLeave} />
+                onHoverLeave={onHoverLeave} />
             </Container>
         )
     }

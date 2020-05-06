@@ -77,10 +77,12 @@ export default function BattleWindow(props) {
         playerDidSwitch,
         opponentDidMove,
         opponentDidSwitch,
+        beastDidGetKOd,
         onOpponentBeastHover,
-        onOpponentBeastLeave,
         onPlayerBeastHover,
-        onPlayerBeastLeave
+        onOpponentPreviewHover,
+        onSwitchButtonHover,
+        onHoverLeave
     } = props;
     const [playerActiveBeastImg, setPlayerActiveBeastImg] = useState(null);
     const [opponentActiveBeastImg, setOpponentActiveBeastImg] = useState(null);
@@ -89,7 +91,6 @@ export default function BattleWindow(props) {
         if(inTeamPreview === false && player && opponent){
                 const pActiveSlot = player.team.active_slot.slotNumber;
                 const oActiveSlot = opponent.team.active_slot.slotNumber;
-                console.log(player.team, opponent.team);
                 switch(pActiveSlot){
                     case 'slot1':
                         setPlayerActiveBeastImg(playerTeamLineup.s1);
@@ -105,6 +106,9 @@ export default function BattleWindow(props) {
                         break;
                     case 'slot5':
                         setPlayerActiveBeastImg(playerTeamLineup.s5);
+                        break;
+                    case null:
+                        setPlayerActiveBeastImg(null);
                         break;
                     default:
                         console.log("Error setting playeractivebeastimg.")
@@ -125,6 +129,9 @@ export default function BattleWindow(props) {
                     case 'slot5':
                         setOpponentActiveBeastImg(opponentTeamLineup.s5);
                         break;
+                    case null:
+                        setPlayerActiveBeastImg(null);
+                        break;
                     default:
                         console.log("Error setting oppactivebeastimg.")
                 }
@@ -137,44 +144,64 @@ export default function BattleWindow(props) {
                 <Box className={classes.teamPreviewBoxOpponent}>
                     <img
                     className={classes.previewImg}
+                    onMouseOver={() => onOpponentPreviewHover('slot1')}
+                    onMouseOut={onHoverLeave}
                     src={opponentTeamLineup ? opponentTeamLineup.s1 : null}
                     alt="opposing-slot1" />
                     <img
                     className={classes.previewImg}
+                    onMouseOver={() => onOpponentPreviewHover('slot2')}
+                    onMouseOut={onHoverLeave}
                     src={opponentTeamLineup ? opponentTeamLineup.s2 : null}
                     alt="opposing-slot2" />
                     <img
                     className={classes.previewImg}
+                    onMouseOver={() => onOpponentPreviewHover('slot3')}
+                    onMouseOut={onHoverLeave}
                     src={opponentTeamLineup ? opponentTeamLineup.s3 : null}
                     alt="opposing-slot3" />
                     <img
                     className={classes.previewImg}
+                    onMouseOver={() => onOpponentPreviewHover('slot4')}
+                    onMouseOut={onHoverLeave}
                     src={opponentTeamLineup ? opponentTeamLineup.s4 : null}
                     alt="opposing-slot4" />
                     <img
                     className={classes.previewImg}
+                    onMouseOver={() => onOpponentPreviewHover('slot5')}
+                    onMouseOut={onHoverLeave}
                     src={opponentTeamLineup ? opponentTeamLineup.s5 : null}
                     alt="opposing-slot5" />
                 </Box>
                 <Box className={classes.teamPreviewBoxPlayer}>
                     <img
                     className={classes.previewImg}
+                    onMouseOver={() => onSwitchButtonHover('slot1')}
+                    onMouseOut={onHoverLeave}
                     src={playerTeamLineup ? playerTeamLineup.s1 : null}
                     alt="player-slot1" />
                     <img
                     className={classes.previewImg}
+                    onMouseOver={() => onSwitchButtonHover('slot2')}
+                    onMouseOut={onHoverLeave}
                     src={playerTeamLineup ? playerTeamLineup.s2 : null}
                     alt="player-slot2" />
                     <img
                     className={classes.previewImg}
+                    onMouseOver={() => onSwitchButtonHover('slot3')}
+                    onMouseOut={onHoverLeave}
                     src={playerTeamLineup ? playerTeamLineup.s3 : null}
                     alt="player-slot3" />
                     <img
                     className={classes.previewImg}
+                    onMouseOver={() => onSwitchButtonHover('slot4')}
+                    onMouseOut={onHoverLeave}
                     src={playerTeamLineup ? playerTeamLineup.s4 : null}
                     alt="player-slot4" />
                     <img
                     className={classes.previewImg}
+                    onMouseOver={() => onSwitchButtonHover('slot5')}
+                    onMouseOut={onHoverLeave}
                     src={playerTeamLineup ? playerTeamLineup.s5 : null}
                     alt="player-slot5" />
                 </Box>
@@ -185,14 +212,20 @@ export default function BattleWindow(props) {
     if(opponentActiveBeastImg && playerActiveBeastImg){
         return(
             <Container className={classes.container}>
-                <Box className={classes.gameBoxOpponent}>
+                <Box
+                className={classes.gameBoxOpponent}
+                onMouseOver={onOpponentBeastHover}
+                onMouseOut={onHoverLeave}>
                     <h5>Health Bar Here</h5>
                     <img
                     className={classes.beastImg}
                     src={opponentActiveBeastImg}
                     alt="active-beast-opponent" />
                 </Box>
-                <Box className={classes.gameBoxPlayer}>
+                <Box
+                className={classes.gameBoxPlayer}
+                onMouseOver={onPlayerBeastHover}
+                onMouseOut={onHoverLeave}>
                     <h5>Health Bar Here</h5>
                     <img
                     className={classes.beastImg}
@@ -205,14 +238,20 @@ export default function BattleWindow(props) {
 
     return (
         <Container className={classes.container}>
-            <Box className={classes.gameBoxOpponent}>
+            <Box
+            className={classes.gameBoxOpponent}
+            onMouseOver={onOpponentBeastHover}
+            onMouseOut={onHoverLeave}>
                 <h5>Health Bar Here</h5>
                 <img
                 className={classes.beastImg}
                 src={null}
                 alt="active-beast-opponent" />
             </Box>
-            <Box className={classes.gameBoxPlayer}>
+            <Box
+            className={classes.gameBoxPlayer}
+            onMouseOver={onPlayerBeastHover}
+            onMouseOut={onHoverLeave}>
                 <h5>Health Bar Here</h5>
                 <img
                 className={classes.beastImg}
