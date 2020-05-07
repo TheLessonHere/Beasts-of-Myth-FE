@@ -78,6 +78,7 @@ function Battle(props) {
   const [beastDidGetKOd, setBeastDidGetKOd] = useState(false);
   const [playerDidWin, setPlayerDidWin] = useState(false);
   const [opponentDidWin, setOpponentDidWin] = useState(false);
+  const [playersHaveTied, setPlayersHaveTied] = useState(false);
   const [inTeamPreview, setInTeamPreview] = useState(true);
 
   useEffect(() => {
@@ -187,6 +188,9 @@ function Battle(props) {
           }
           else if(gameCopy.winner && gameCopy.winner.player_num === opponent.player_num){
             setOpponentDidWin(true);
+          }
+          else if(gameCopy.draw){
+            setPlayersHaveTied(true);
           }
           handleGameChange(gameCopy);
           if(action.actionType === "starting-beast"){
@@ -308,8 +312,14 @@ function Battle(props) {
           setBeastDidGetKOd(true);
         }
       console.log(gameCopy);
-      if(gameCopy.winner){
+      if(gameCopy.winner && gameCopy.winner.player_num === player.player_num){
         setPlayerDidWin(true);
+      }
+      else if(gameCopy.winner && gameCopy.winner.player_num === opponent.player_num){
+        setOpponentDidWin(true);
+      }
+      else if(gameCopy.draw){
+        setPlayersHaveTied(true);
       }
       handleGameChange(gameCopy);
       if(action.actionType === "starting-beast"){
@@ -367,7 +377,8 @@ function Battle(props) {
           opponentDidSwitch={opponentDidSwitch}
           beastDidGetKOd={beastDidGetKOd}
           playerDidWin={playerDidWin}
-          opponentDidWin={opponentDidWin} />
+          opponentDidWin={opponentDidWin}
+          playersHaveTied={playersHaveTied} />
       )
   }
 

@@ -11,6 +11,7 @@ export default class Player {
         this.selected_action = null;
         this.has_won = false;
         this.has_lost = false;
+        this.has_tied = false;
     }
 
     connectToGame(gameId){
@@ -23,6 +24,10 @@ export default class Player {
 
     hasLost(){
         this.has_lost = true;
+    }
+
+    hasTied(){
+        this.has_tied = true;
     }
 
     selectAction(action){

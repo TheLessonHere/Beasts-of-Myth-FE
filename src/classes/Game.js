@@ -6,8 +6,8 @@ export default class Game {
         this.player2 = player2;
         this.player1_id = this.player1.player_id;
         this.player2_id = this.player2.player_id;
-        this.player1_active_beasts = this.player1.team.total_beasts;
-        this.player2_active_beasts = this.player2.team.total_beasts;
+        this.player1_active_beasts = 5;
+        this.player2_active_beasts = 5;
         this.player1_action = this.player1.selected_action;
         this.player2_action = this.player2.selected_action;
         this.fresher_active_beast = null;
@@ -18,6 +18,7 @@ export default class Game {
         this.player2_hazards = [];
         this.winner = null;
         this.loser = null;
+        this.draw = false;
     }
 
     updateTurnCounter(){
@@ -458,6 +459,11 @@ export default class Game {
             defendingBeast.knockOutBeast();
             if(defendingPlayer.player_num === 'player1'){
                 this.player1_active_beasts = this.player1_active_beasts - 1;
+                if(this.player1_active_beasts <= 0 && this.player2_active_beasts <= 0){
+                    this.draw = true;
+                    this.player1.hasTied();
+                    this.player2.hasTied();
+                }
                 if(this.player1_active_beasts <= 0){
                     this.winner = this.player2;
                     this.player2.hasWon();
@@ -466,6 +472,11 @@ export default class Game {
                 }
             } else {
                 this.player2_active_beasts = this.player2_active_beasts - 1;
+                if(this.player1_active_beasts <= 0 && this.player2_active_beasts <= 0){
+                    this.draw = true;
+                    this.player1.hasTied();
+                    this.player2.hasTied();
+                }
                 if(this.player2_active_beasts <= 0){
                     this.winner = this.player1;
                     this.player1.hasWon();

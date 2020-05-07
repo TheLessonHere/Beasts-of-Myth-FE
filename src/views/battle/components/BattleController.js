@@ -141,7 +141,10 @@ export default function BattleController(props) {
         onMoveButtonHover,
         onSwitchButtonHover,
         onHoverLeave,
-        beastDidGetKOd
+        beastDidGetKOd,
+        playerDidWin,
+        opponentDidWin,
+        playersHaveTied
     } = props;
     const [critRollChances, setCritRollChances] = useState(['0%', '25%', '50%', '75%', '100%']);
     const [activatedRolls, setActivatedRolls] = useState(0);
@@ -149,7 +152,7 @@ export default function BattleController(props) {
     const [switchAfterKO, setSwitchAfterKO] = useState(false);
 
     useEffect(() => {
-    }, [ gameDidUpdate, switchAfterKO ])
+    }, [ gameDidUpdate, switchAfterKO, playerDidWin, opponentDidWin ])
 
     useEffect(() => {
         if(player && inTeamPreview === false && player.team.active_slot.beast === null){
@@ -670,6 +673,36 @@ export default function BattleController(props) {
                     </>
                 )
         }
+    }
+
+    if(opponentDidWin){
+        let winner;
+        if(player.player_num === 'player1'){
+            winner = game.player2.username;
+        } else {
+            winner = game.player1.username;
+        }
+        return (
+            <Container className={classes.containerGame}>
+                <Typography variant="h5">Game has ended.</Typography>
+                <Typography variant="h6">{winner} has won the game.</Typography>
+            </Container>
+        )
+    }
+
+    if(playerDidWin){
+        let winner;
+        if(player.player_num === 'player1'){
+            winner = game.player1.username;
+        } else {
+            winner = game.player2.username;
+        }
+        return (
+            <Container className={classes.containerGame}>
+                <Typography variant="h5">Game has ended.</Typography>
+                <Typography variant="h6">{winner} has won the game.</Typography>
+            </Container>
+        )
     }
 
     if(inTeamPreview){
