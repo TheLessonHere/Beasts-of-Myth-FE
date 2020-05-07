@@ -9,12 +9,25 @@ export default class Player {
         this.spent_crit_rolls = 0;
         this.connection = null;
         this.selected_action = null;
-        this.hasWon = false;
-        this.hasLost = false;
+        this.has_won = false;
+        this.has_lost = false;
+        this.has_tied = false;
     }
 
     connectToGame(gameId){
         this.connection = gameId;
+    }
+
+    hasWon(){
+        this.has_won = true;
+    }
+
+    hasLost(){
+        this.has_lost = true;
+    }
+
+    hasTied(){
+        this.has_tied = true;
     }
 
     selectAction(action){

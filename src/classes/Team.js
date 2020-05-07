@@ -41,7 +41,6 @@ export default class Team {
             turnsActive: 0,
             slotNumber: null,
         }
-        this.total_beasts = 0;
         this.isValid = false;
     }
 

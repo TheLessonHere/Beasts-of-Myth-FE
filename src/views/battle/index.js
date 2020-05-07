@@ -47,6 +47,9 @@ const useStyles = makeStyles(theme => ({
         height: "100%",
         backgroundColor: "darkgrey",
         overflow: "scroll"
+    },
+    noTeams: {
+      marginTop: "20px"
     }
 }))
 
@@ -72,6 +75,10 @@ function Battle(props) {
   const [opponentDidSwitch, setOpponentDidSwitch] = useState(false);
   const [playerDidMove, setPlayerDidMove] = useState(false);
   const [opponentDidMove, setOpponentDidMove] = useState(false);
+  const [beastDidGetKOd, setBeastDidGetKOd] = useState(false);
+  const [playerDidWin, setPlayerDidWin] = useState(false);
+  const [opponentDidWin, setOpponentDidWin] = useState(false);
+  const [playersHaveTied, setPlayersHaveTied] = useState(false);
   const [inTeamPreview, setInTeamPreview] = useState(true);
 
   useEffect(() => {
@@ -171,7 +178,20 @@ function Battle(props) {
             setLastOpponentAction(game.player1.selected_action);
           }
           gameCopy.executeActions();
+          if(gameCopy.player1.team.active_slot.beast === null ||
+            gameCopy.player2.team.active_slot.beast === null){
+              setBeastDidGetKOd(true);
+            }
           console.log(gameCopy);
+          if(gameCopy.winner && gameCopy.winner.player_num === player.player_num){
+            setPlayerDidWin(true);
+          }
+          else if(gameCopy.winner && gameCopy.winner.player_num === opponent.player_num){
+            setOpponentDidWin(true);
+          }
+          else if(gameCopy.draw){
+            setPlayersHaveTied(true);
+          }
           handleGameChange(gameCopy);
           if(action.actionType === "starting-beast"){
             setInTeamPreview(false);
@@ -179,6 +199,17 @@ function Battle(props) {
           setGameDidUpdate(!gameDidUpdate);
         }
       });
+
+      socket.on('opponent post ko', (action, callback) => {
+        console.log(action);
+        const gameCopy = game;
+        gameCopy.postKOSwitch(action.playerNum, action.slot);
+        setLastOpponentAction(action);
+        setBeastDidGetKOd(false);
+        console.log(gameCopy);
+        handleGameChange(gameCopy);
+        setGameDidUpdate(!gameDidUpdate);
+      })
     }
 
     return () => {
@@ -276,13 +307,38 @@ function Battle(props) {
         setLastOpponentAction(game.player1.selected_action);
       }
       gameCopy.executeActions();
+      if(gameCopy.player1.team.active_slot.beast === null ||
+        gameCopy.player2.team.active_slot.beast === null){
+          setBeastDidGetKOd(true);
+        }
       console.log(gameCopy);
+      if(gameCopy.winner && gameCopy.winner.player_num === player.player_num){
+        setPlayerDidWin(true);
+      }
+      else if(gameCopy.winner && gameCopy.winner.player_num === opponent.player_num){
+        setOpponentDidWin(true);
+      }
+      else if(gameCopy.draw){
+        setPlayersHaveTied(true);
+      }
       handleGameChange(gameCopy);
       if(action.actionType === "starting-beast"){
         setInTeamPreview(false);
       }
       setGameDidUpdate(!gameDidUpdate);
     }
+  }
+
+  const sendPostKOAction = (action) => {
+    console.log(action);
+    socket.emit('post ko switch', { room: room.room_id, action: action });
+    const gameCopy = game;
+    gameCopy.postKOSwitch(action.playerNum, action.slot);
+    setLastPlayerAction(action);
+    setBeastDidGetKOd(false);
+    console.log(gameCopy);
+    handleGameChange(gameCopy);
+    setGameDidUpdate(!gameDidUpdate);
   }
 
   // State handlers
@@ -312,12 +368,17 @@ function Battle(props) {
           setOpponent={handleOpponentChange}
           seeSpectators={seeSpectators}
           sendAction={sendAction}
+          sendPostKOAction={sendPostKOAction}
           forfeit={forfeit}
           inTeamPreview={inTeamPreview}
           playerDidMove={playerDidMove}
           playerDidSwitch={playerDidSwitch}
           opponentDidMove={opponentDidMove}
-          opponentDidSwitch={opponentDidSwitch} />
+          opponentDidSwitch={opponentDidSwitch}
+          beastDidGetKOd={beastDidGetKOd}
+          playerDidWin={playerDidWin}
+          opponentDidWin={opponentDidWin}
+          playersHaveTied={playersHaveTied} />
       )
   }
 
@@ -339,7 +400,7 @@ function Battle(props) {
                         <TeamMiniBox team={team} />
                     </ListItem>
         }}) :
-          <Typography align="center">No Teams Found</Typography>}
+          <Typography className={classes.noTeams} align="center">No Teams Found</Typography>}
       </List>
     </Container>
   );
