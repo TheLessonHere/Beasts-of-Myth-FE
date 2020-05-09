@@ -435,8 +435,6 @@ export default class Game {
 
         const critRoll = rollCrit(critRolls);
 
-        move.decrementME();
-
         let damage = 0;
 
         if(moveType == 'physical'){

@@ -123,11 +123,9 @@ function Battle(props) {
       if(lastPlayerAction){
         switch(lastPlayerAction.actionType){
           case 'select-move':
-            console.log(lastPlayerAction, 'select')
             setPlayerDidMove(!playerDidMove);
             break;
           case 'change-beast':
-            console.log(lastPlayerAction, 'switch')
             setPlayerDidSwitch(!playerDidSwitch);
             break;
           default:
@@ -138,11 +136,9 @@ function Battle(props) {
       if(lastOpponentAction){
         switch(lastOpponentAction.actionType){
           case 'select-move':
-            console.log(lastOpponentAction, 'select')
             setOpponentDidMove(!opponentDidMove);
             break;
           case 'change-beast':
-            console.log(lastOpponentAction, 'switch')
             setOpponentDidSwitch(!opponentDidSwitch);
             break;
           default:
@@ -165,7 +161,7 @@ function Battle(props) {
 
     if(game){
       socket.on('opponent action', (action, callback) => {
-        console.log(action);
+        console.log("Opponent action received", action);
         const gameCopy = game;
         gameCopy.selectAction(action, opponent.player_id);
         gameCopy.updateActions();
@@ -293,7 +289,7 @@ function Battle(props) {
   }
 
   const sendAction = (action) => {
-    console.log(action);
+    console.log("Action sent", action);
     socket.emit('player action', { room: room.room_id, action: action });
     const gameCopy = game;
     gameCopy.selectAction(action, player.player_id);
