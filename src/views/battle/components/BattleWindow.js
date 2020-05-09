@@ -136,7 +136,7 @@ export default function BattleWindow(props) {
                         console.log("Error setting oppactivebeastimg.")
                 }
         }
-    }, [ gameDidUpdate, inTeamPreview, playerDidSwitch, opponentDidSwitch ])
+    }, [ gameDidUpdate, inTeamPreview, playerDidSwitch, opponentDidSwitch, beastDidGetKOd ])
 
     if(inTeamPreview){
         return (
