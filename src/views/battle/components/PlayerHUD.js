@@ -342,8 +342,8 @@ export default function PlayerHUD(props) {
                         hoverInfo.beastInfo.curr_hp :
                         ""}/{hoverInfo && hoverInfo.beastInfo ?
                         hoverInfo.beastInfo.init_hp :
-                        ""}({hoverInfo && hoverInfo.beastInfo ?
-                        hoverInfo.beastInfo.hp_percentage :
+                        ""}{" "}({hoverInfo && hoverInfo.beastInfo ?
+                        `${hoverInfo.beastInfo.hp_percentage}%` :
                         ""})
                         </Typography>
                         <Typography className={classes.beastStat}>
@@ -497,12 +497,8 @@ export default function PlayerHUD(props) {
                         </Typography>
                         <Typography className={classes.beastStat}>
                             HP: {hoverInfo && hoverInfo.beastInfo ?
-                        hoverInfo.beastInfo.curr_hp :
-                        ""}/{hoverInfo && hoverInfo.beastInfo ?
-                        hoverInfo.beastInfo.init_hp :
-                        ""}({hoverInfo && hoverInfo.beastInfo ?
-                        hoverInfo.beastInfo.hp_percentage :
-                        ""})
+                        `${hoverInfo.beastInfo.hp_percentage}%` :
+                        ""}
                         </Typography>
                         <Typography className={classes.beastStat}>
                             PA: {hoverInfo && hoverInfo.beastInfo ?
