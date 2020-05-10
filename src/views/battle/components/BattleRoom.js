@@ -147,9 +147,11 @@ function BattleRoom(props) {
 
     const onMoveButtonHover = (moveSlot) => {
         const moveInfo = props.player.team.active_slot.beast.moves.get(moveSlot);
+        const calcedDamage = props.calcMoveDamage(moveInfo);
         const info = {
             infoType: 'move',
-            moveInfo: moveInfo
+            moveInfo: moveInfo,
+            calcedDamage: calcedDamage
         };
         setHoverInfo(info);
     }

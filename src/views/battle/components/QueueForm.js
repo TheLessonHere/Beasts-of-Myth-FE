@@ -62,7 +62,15 @@ const useStyles = makeStyles(theme => ({
   }));
 
 export default function QueueForm(props) {
-    const { format, handleFormatChange, team, teamId, isSearching, queueTeam, cancelQueue } = props;
+    const {
+    format,
+    handleFormatChange,
+    team,
+    teamId,
+    isSearching,
+    queueTeam,
+    cancelQueue
+    } = props;
     const classes = useStyles();
 
     return (
@@ -86,8 +94,15 @@ export default function QueueForm(props) {
                     <TeamMicroBox team={team} teamId={teamId}/> :
                     <Typography variant="subtitle2" className={classes.noTeamText} align="center">No Team Selected</Typography>}
                 </Box>
-                <SubmitButton style={{display: `${isSearching ? "none" : "flex"}`}} onClick={queueTeam}>Search</SubmitButton>
-                <SubmitButton style={{display: `${isSearching ? "flex" : "none"}`}} onClick={cancelQueue}>Cancel</SubmitButton>
+                <SubmitButton
+                style={{display: `${isSearching ? "none" : "flex"}`}}
+                onClick={queueTeam}
+                disabled={!team}>
+                    Search
+                </SubmitButton>
+                <SubmitButton style={{display: `${isSearching ? "flex" : "none"}`}} onClick={cancelQueue}>
+                    Cancel
+                </SubmitButton>
             </Box>
         </Container>
     )
