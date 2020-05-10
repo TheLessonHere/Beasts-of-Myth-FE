@@ -4,6 +4,8 @@ import {
     ListItemText
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+// Functions
+import { capitalizeString } from '../../../utils/functions/capitalizeString';
 
 const useStyles = makeStyles(theme => ({
     listItem: {
@@ -57,8 +59,8 @@ export default function MoveRow(props){
     return (
         <ListItem className={classes.listItem} divider={true} onClick={() => onMoveClick(move)}>
             <ListItemText className={classes.name} primary={`${move.move_name}`} />
-            <ListItemText className={classes.domain} primary={`${move.domain}`} />
-            <ListItemText className={classes.type} primary={`${move.type}`} />
+            <ListItemText className={classes.domain} primary={`${capitalizeString(move.domain)}`} />
+            <ListItemText className={classes.type} primary={`${capitalizeString(move.type)}`} />
             <ListItemText className={classes.basePower} primary={`${move.base_power}`} />
             <ListItemText className={classes.me} primary={`${move.me}`} />
             <ListItemText className={classes.description} primary={`${move.description}`} />

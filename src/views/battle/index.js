@@ -17,6 +17,8 @@ import {
 import TeamMiniBox from '../../utils/components/TeamMiniBox';
 import QueueForm from './components/QueueForm';
 import BattleRoom from './components/BattleRoom';
+// Functions
+import { domainEffectivenessMap } from '../../utils/functions/domainEffectivenessMap';
 // Socket
 import io from 'socket.io-client';
 // Classes
@@ -337,6 +339,81 @@ function Battle(props) {
     setGameDidUpdate(!gameDidUpdate);
   }
 
+  const calcMoveDamage = (move) => {
+    if(move && player.team.active_slot.beast && opponent.team.active_slot.beast){
+      let domainModifier = 1;
+      const moveType = move.type;
+      const basePower = move.base_power;
+      const moveDomain = move.domain;
+      const attackingDomain1 = player.team.active_slot.beast.domain1;
+      const attackingDomain2 = player.team.active_slot.beast.domain2;
+      const defendingDomain = `${opponent.team.active_slot.beast.domain1}-${opponent.team.active_slot.beast.domain2}`;
+      const effectiveness = domainEffectivenessMap.get(moveDomain)[defendingDomain];
+      let sameTypeBonus = 0;
+      if(attackingDomain1 == moveDomain || attackingDomain2 == moveDomain){
+          sameTypeBonus = Math.round(basePower / 2);
+      }
+      switch(game.curr_domain){
+          case 'Lightfield':
+              if(moveDomain == 'light'){
+                  domainModifier = 1.5;
+              }
+              break;
+          case 'Darkfield':
+              if(moveDomain == 'dark'){
+                  domainModifier = 1.5;
+              }
+              break;
+          case 'Mindfield':
+              if(moveDomain == 'mind'){
+                  domainModifier = 1.5;
+              }
+              break;
+          case 'Chaosfield':
+              if(moveDomain == 'chaos'){
+                  domainModifier = 1.5;
+              }
+              break;
+          case 'Flamefield':
+              if(moveDomain == 'flame'){
+                  domainModifier = 1.5;
+              }
+              break;
+          case 'Terrafield':
+              if(moveDomain == 'terra'){
+                  domainModifier = 1.5;
+              }
+              break;
+          case 'Seafield':
+              if(moveDomain == 'sea'){
+                  domainModifier = 1.5;
+              }
+              break;
+          case 'Skyfield':
+              if(moveDomain == 'sky'){
+                  domainModifier = 1.5;
+              }
+              break;
+          case 'Neutral':
+              break;
+          default:
+              console.log('Error calculating domain modifier.');
+      }
+
+      let damage = 0;
+
+      if(moveType == 'physical'){
+        damage = ((((basePower + sameTypeBonus) * domainModifier) + player.team.active_slot.beast.curr_pa) - opponent.team.active_slot.beast.curr_pd) * effectiveness;
+      } else {
+          damage = ((((basePower + sameTypeBonus) * domainModifier) + player.team.active_slot.beast.curr_ma) - opponent.team.active_slot.beast.curr_md) * effectiveness;
+      }
+
+      return {damage: damage, damageWithCrit: damage * 2};
+    } else {
+      return null;
+    }
+  }
+
   // State handlers
 
   const handleGameChange = (game) => {
@@ -374,7 +451,8 @@ function Battle(props) {
           beastDidGetKOd={beastDidGetKOd}
           playerDidWin={playerDidWin}
           opponentDidWin={opponentDidWin}
-          playersHaveTied={playersHaveTied} />
+          playersHaveTied={playersHaveTied}
+          calcMoveDamage={calcMoveDamage} />
       )
   }
 

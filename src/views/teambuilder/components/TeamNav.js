@@ -17,6 +17,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 // Functions
 import validateTeam from '../../../utils/functions/validateTeam';
+import { capitalizeString } from '../../../utils/functions/capitalizeString';
 // Components
 import LibrarySearchbar from './LibrarySearchbar';
 import ItemSearchSuggestions from './ItemSearchSuggestions';
@@ -594,11 +595,11 @@ function TeamNav(props) {
 
     const returnDomains = (domain1, domain2) => {
       if(domain2){
-          const capDomain1 = domain1.charAt(0).toUpperCase() + domain1.slice(1);
-          const capDomain2 = domain2.charAt(0).toUpperCase() + domain2.slice(1);
-          return `${capDomain1}-${capDomain2}`;
+          const capDomain1 = capitalizeString(domain1);
+          const capDomain2 = capitalizeString(domain2);
+          return `${capDomain1}/${capDomain2}`;
       } else {
-          const capDomain1 = domain1.charAt(0).toUpperCase() + domain1.slice(1);
+          const capDomain1 = capitalizeString(domain1);
           return `${capDomain1}`;
       }
     }
