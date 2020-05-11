@@ -107,6 +107,8 @@ function BattleRoom(props) {
             props.setOpponent(player1);
         }
         const newGame = new Game(player1, player2);
+        newGame.compareFreshness();
+        newGame.compareSC();
         props.setGame(newGame);
     }, [])
 
@@ -298,7 +300,13 @@ function BattleRoom(props) {
                     onOpponentPreviewHover={onOpponentPreviewHover}
                     onSwitchButtonHover={onSwitchButtonHover}
                     onHoverLeave={onHoverLeave} />
-                    <OpponentHUD />
+                    <OpponentHUD
+                    opponentTeamLineup={opponentTeamLineup}
+                    gameDidUpdate={props.gameDidUpdate}
+                    beastDidGetKOd={props.beastDidGetKOd}
+                    opponent={props.opponent}
+                    onOpponentPreviewHover={onOpponentPreviewHover}
+                    onHoverLeave={onHoverLeave} />
                 </Box>
                 <BattleController
                 inTeamPreview={props.inTeamPreview}

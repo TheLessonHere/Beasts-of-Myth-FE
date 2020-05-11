@@ -195,6 +195,8 @@ function Battle(props) {
             setInTeamPreview(false);
           }
           setGameDidUpdate(!gameDidUpdate);
+        } else {
+          game.setFirstToAct(opponent.player_num);
         }
       });
 
@@ -324,6 +326,8 @@ function Battle(props) {
         setInTeamPreview(false);
       }
       setGameDidUpdate(!gameDidUpdate);
+    } else {
+      game.setFirstToAct(player.player_num);
     }
   }
 

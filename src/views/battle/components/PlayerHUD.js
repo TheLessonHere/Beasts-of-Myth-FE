@@ -300,7 +300,7 @@ export default function PlayerHUD(props) {
         return (
             <Container className={classes.container}>
                 <Box className={classes.topBeastBox}>
-                    <Typography variant="h5">Your Beast Info:</Typography>
+                    <Typography variant="h5">Beast Info:</Typography>
                 </Box>
                 <Box className={classes.centerBeastBox}>
                     <Box className={classes.centerBeastLeft}>
@@ -585,6 +585,8 @@ export default function PlayerHUD(props) {
     }
 
     return (
-        <Container className={classes.container} />
+        <Container className={classes.container}>
+            <Typography>{" "}</Typography>
+        </Container>
     )
 }
