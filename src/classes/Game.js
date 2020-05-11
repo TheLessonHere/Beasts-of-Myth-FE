@@ -12,6 +12,7 @@ export default class Game {
         this.player2_action = this.player2.selected_action;
         this.fresher_active_beast = null;
         this.faster_active_beast = null;
+        this.first_to_act = null;
         this.turn_counter = 0;
         this.curr_domain = 'Neutral';
         this.player1_hazards = [];
@@ -39,6 +40,10 @@ export default class Game {
     updateActions(){
         this.player1_action = this.player1.selected_action;
         this.player2_action = this.player2.selected_action;
+    }
+
+    setFirstToAct(playerNum){
+        this.first_to_act = playerNum;
     }
 
     actionsExecutable(){
@@ -244,9 +249,7 @@ export default class Game {
                                     }
                                     break;
                                 case 'tie':
-                                    const player1Roll = Math.random();
-                                    const player2Roll = Math.random();
-                                    if(player1Roll > player2Roll){
+                                    if(this.first_to_act === 'player1'){
                                         if(this.player1_action.superActivated){
                                             this.player1.activateSuper(this.player1.team.active_slot.beast);
                                         }
@@ -264,7 +267,7 @@ export default class Game {
                                         }
                                         break;
                                     }
-                                    else if(player2Roll > player1Roll){
+                                    else if(this.first_to_act === 'player2'){
                                         if(this.player2_action.superActivated){
                                             this.player2.activateSuper(this.player2.team.active_slot.beast);
                                         }
@@ -326,6 +329,8 @@ export default class Game {
         this.player1_action = null;
         this.player2.clearAction();
         this.player2_action = null;
+        this.first_to_act = null;
+        this.updateTurnCounter();
         return;
     }
 
