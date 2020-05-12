@@ -54,7 +54,7 @@ export default class Game {
         }
     }
 
-    executePlayer1Move(moveSlot, critRolls){
+    executePlayer1Move(moveSlot, critRolls, critRoll){
         if(this.player1.team.active_slot.beast.moves.get(moveSlot).type == 'status'){
             this.player1.team.active_slot.beast.moves.get(moveSlot).effect(this.player1, this.player2);
         } else {
@@ -63,7 +63,8 @@ export default class Game {
                                     this.player1.team.active_slot.beast.moves.get(moveSlot),
                                     this.player1.team.active_slot.beast,
                                     this.player2.team.active_slot.beast,
-                                    critRolls);
+                                    critRolls,
+                                    critRoll);
         }
         // If the all abled moves' MEs hit 0 replace with Struggle or something similar.
         switch(moveSlot){
@@ -84,7 +85,7 @@ export default class Game {
         }
     }
 
-    executePlayer2Move(moveSlot, critRolls){
+    executePlayer2Move(moveSlot, critRolls, critRoll){
         if(this.player2.team.active_slot.beast.moves.get(moveSlot).type == 'status'){
             this.player2.team.active_slot.beast.moves.get(moveSlot).effect(this.player2, this.player1);
         } else {
@@ -93,7 +94,8 @@ export default class Game {
                                     this.player2.team.active_slot.beast.moves.get(moveSlot),
                                     this.player2.team.active_slot.beast,
                                     this.player1.team.active_slot.beast,
-                                    critRolls);
+                                    critRolls,
+                                    critRoll);
         }
         // If the all abled moves' MEs hit 0 replace with Struggle or something similar.
         switch(moveSlot){
@@ -147,13 +149,14 @@ export default class Game {
                     if(this.player2_action.superActivated){
                         this.player2.activateSuper(this.player2.team.active_slot.beast);
                     }
-                    this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls);
+                    this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
                     player1ActionCompleted = true;
                     console.log(this.player2.team.active_slot.beast)
                     if(this.player2.team.active_slot.beast === null){
+                        this.player2.updateCritRolls(this.player2_action.critRolls);
                         player2ActionCompleted = true;
                     } else {
-                        this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls);
+                        this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
                         player2ActionCompleted = true;
                     }
                 }
@@ -165,13 +168,14 @@ export default class Game {
                     if(this.player1_action.superActivated){
                         this.player1.activateSuper(this.player1.team.active_slot.beast);
                     }
-                    this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls);
+                    this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
                     player2ActionCompleted = true;
                     console.log(this.player1.team.active_slot.beast)
                     if(this.player1.team.active_slot.beast === null){
+                        this.player1.updateCritRolls(this.player1_action.critRolls);
                         player1ActionCompleted = true;
                     } else {
-                        this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls);
+                        this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
                         player1ActionCompleted = true;
                     }
                 } else {
@@ -184,13 +188,14 @@ export default class Game {
                             if(this.player2_action.superActivated){
                                 this.player2.activateSuper(this.player2.team.active_slot.beast);
                             }
-                            this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls);
+                            this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
                             player1ActionCompleted = true;
                             console.log(this.player2.team.active_slot.beast)
                             if(this.player2.team.active_slot.beast === null){
+                                this.player2.updateCritRolls(this.player2_action.critRolls);
                                 player2ActionCompleted = true;
                             } else {
-                                this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls);
+                                this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
                                 player2ActionCompleted = true;
                             }
                             break;
@@ -201,13 +206,14 @@ export default class Game {
                             if(this.player1_action.superActivated){
                                 this.player1.activateSuper(this.player1.team.active_slot.beast);
                             }
-                            this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls);
+                            this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
                             player2ActionCompleted = true;
                             console.log(this.player1.team.active_slot.beast)
                             if(this.player1.team.active_slot.beast === null){
+                                this.player1.updateCritRolls(this.player1_action.critRolls);
                                 player1ActionCompleted = true;
                             } else {
-                                this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls);
+                                this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
                                 player1ActionCompleted = true;
                             }
                             break;
@@ -221,13 +227,14 @@ export default class Game {
                                     if(this.player2_action.superActivated){
                                         this.player2.activateSuper(this.player2.team.active_slot.beast);
                                     }
-                                    this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls);
+                                    this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
                                     player1ActionCompleted = true;
                                     console.log(this.player2.team.active_slot.beast)
                                     if(this.player2.team.active_slot.beast === null){
+                                        this.player2.updateCritRolls(this.player2_action.critRolls);
                                         player2ActionCompleted = true;
                                     } else {
-                                        this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls);
+                                        this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
                                         player2ActionCompleted = true;
                                     }
                                     break;
@@ -238,13 +245,14 @@ export default class Game {
                                     if(this.player1_action.superActivated){
                                         this.player1.activateSuper(this.player1.team.active_slot.beast);
                                     }
-                                    this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls);
+                                    this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
                                     player2ActionCompleted = true;
                                     console.log(this.player1.team.active_slot.beast)
                                     if(this.player1.team.active_slot.beast === null){
+                                        this.player1.updateCritRolls(this.player1_action.critRolls);
                                         player1ActionCompleted = true;
                                     } else {
-                                        this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls);
+                                        this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
                                         player1ActionCompleted = true;
                                     }
                                     break;
@@ -256,13 +264,14 @@ export default class Game {
                                         if(this.player2_action.superActivated){
                                             this.player2.activateSuper(this.player2.team.active_slot.beast);
                                         }
-                                        this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls);
+                                        this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
                                         player1ActionCompleted = true;
                                         console.log(this.player2.team.active_slot.beast)
                                         if(this.player2.team.active_slot.beast === null){
+                                            this.player2.updateCritRolls(this.player2_action.critRolls);
                                             player2ActionCompleted = true;
                                         } else {
-                                            this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls);
+                                            this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
                                             player2ActionCompleted = true;
                                         }
                                         break;
@@ -274,13 +283,14 @@ export default class Game {
                                         if(this.player1_action.superActivated){
                                             this.player1.activateSuper(this.player1.team.active_slot.beast);
                                         }
-                                        this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls);
+                                        this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
                                         player2ActionCompleted = true;
                                         console.log(this.player1.team.active_slot.beast)
                                         if(this.player1.team.active_slot.beast === null){
+                                            this.player1.updateCritRolls(this.player1_action.critRolls);
                                             player1ActionCompleted = true;
                                         } else {
-                                            this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls);
+                                            this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
                                             player1ActionCompleted = true;
                                         }
                                         break;
@@ -291,13 +301,14 @@ export default class Game {
                                         if(this.player2_action.superActivated){
                                             this.player2.activateSuper(this.player2.team.active_slot.beast);
                                         }
-                                        this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls);
+                                        this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
                                         player1ActionCompleted = true;
                                         console.log(this.player2.team.active_slot.beast)
                                         if(this.player2.team.active_slot.beast === null){
+                                            this.player2.updateCritRolls(this.player2_action.critRolls);
                                             player2ActionCompleted = true;
                                         } else {
-                                            this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls);
+                                            this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
                                             player2ActionCompleted = true;
                                         }
                                         break;
@@ -314,14 +325,14 @@ export default class Game {
                 if(this.player1_action.superActivated){
                     this.player1.activateSuper(this.player1.team.active_slot.beast);
                 }
-                this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls);
+                this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
                 player1ActionCompleted = true;
             }
             if(this.player2_action.actionType == 'select-move' && this.player1_action.actionType != 'select-move'){
                 if(this.player2_action.superActivated){
                     this.player2.activateSuper(this.player2.team.active_slot.beast);
                 }
-                this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls);
+                this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
                 player2ActionCompleted = true;
             }
         }
@@ -334,7 +345,51 @@ export default class Game {
         return;
     }
 
-    damageCalculation(attackingPlayer, defendingPlayer, move, attackingBeast, defendingBeast, critRolls){
+    critRoll(critRolls){
+        const rollCrit = (critRolls) => {
+            const getRandomInt = (min, max) => {
+                min = Math.ceil(min);
+                max = Math.floor(max);
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            switch(critRolls){
+                case 0:
+                    return false;
+                case 1:
+                    let randomInt25 = getRandomInt(1, 4);
+                    if(randomInt25 === 1){
+                        randomInt25 = true;
+                    } else {
+                    randomInt25 = false;
+                    };
+                    return randomInt25;
+                case 2:
+                    let randomInt50 = getRandomInt(1, 2);
+                    if(randomInt50 === 1){
+                        randomInt50 = true;
+                    } else {
+                    randomInt50 = false;
+                    };
+                    return randomInt50;
+                case 3:
+                    let randomInt75 = getRandomInt(1, 4);
+                    if(randomInt75 === 1){
+                        randomInt75 = false;
+                    } else {
+                    randomInt75 = true;
+                    };
+                    return randomInt75;
+                case 4:
+                    return true;
+            }
+          }
+
+          const critRoll = rollCrit(critRolls);
+          return critRoll;
+    }
+
+    damageCalculation(attackingPlayer, defendingPlayer, move, attackingBeast, defendingBeast, critRolls, critRoll){
         console.log(move)
         let domainModifier = 1;
         const moveType = move.type;
@@ -395,51 +450,6 @@ export default class Game {
                 console.log('Error calculating domain modifier.');
         }
 
-        const rollCrit = (critRolls) => {
-            const getRandomInt = (min, max) => {
-                min = Math.ceil(min);
-                max = Math.floor(max);
-                return Math.floor(Math.random() * (max - min + 1)) + min;
-            }
-
-            switch(critRolls){
-                case 0:
-                    return false;
-                case 1:
-                    attackingPlayer.updateCritRolls(1);
-                    let randomInt25 = getRandomInt(1, 4);
-                    if(randomInt25 === 1){
-                        randomInt25 = true;
-                    } else {
-                    randomInt25 = false;
-                    };
-                    return randomInt25;
-                case 2:
-                    attackingPlayer.updateCritRolls(2);
-                    let randomInt50 = getRandomInt(1, 2);
-                    if(randomInt50 === 1){
-                        randomInt50 = true;
-                    } else {
-                    randomInt50 = false;
-                    };
-                    return randomInt50;
-                case 3:
-                    attackingPlayer.updateCritRolls(3);
-                    let randomInt75 = getRandomInt(1, 4);
-                    if(randomInt75 === 1){
-                        randomInt75 = false;
-                    } else {
-                    randomInt75 = true;
-                    };
-                    return randomInt75;
-                case 4:
-                    attackingPlayer.updateCritRolls(4);
-                    return true;
-            }
-        }
-
-        const critRoll = rollCrit(critRolls);
-
         let damage = 0;
 
         if(moveType == 'physical'){
@@ -455,6 +465,8 @@ export default class Game {
                 damage = damage * 2;
             }
         }
+
+        attackingPlayer.updateCritRolls(critRolls);
 
         console.log(damage);
         defendingBeast.updateHP(damage);
@@ -532,6 +544,8 @@ export default class Game {
             default:
                 break;
         }
+        this.compareFreshness();
+        this.compareSC();
     }
 
     activateDomain(domain){
@@ -561,32 +575,40 @@ export default class Game {
     }
 
     compareSC(){
-        if(this.player1.team.active_slot.beast.curr_sc > this.player2.team.active_slot.beast.curr_sc){
-            this.faster_active_beast = 'player1';
-        }
-        else if(this.player2.team.active_slot.beast.curr_sc < this.player1.team.active_slot.beast.curr_sc){
-            this.faster_active_beast = 'player2';
-        } else {
-            this.faster_active_beast = 'tie';
+        if(this.player1.team.active_slot.beast && this.player2.team.active_slot.beast){
+            if(this.player1.team.active_slot.beast.curr_sc > this.player2.team.active_slot.beast.curr_sc){
+                this.faster_active_beast = 'player1';
+            }
+            else if(this.player2.team.active_slot.beast.curr_sc < this.player1.team.active_slot.beast.curr_sc){
+                this.faster_active_beast = 'player2';
+            } else {
+                this.faster_active_beast = 'tie';
+            }
         }
     }
 
 
     incrementFreshness(){
-        this.player1.team.active_slot.beast.incrementTurnsIn();
-        this.player2.team.active_slot.beast.incrementTurnsIn();
-        this.player1.team.incrementTurnsActive();
-        this.player2.team.incrementTurnsActive();
+        if(this.player1.team.active_slot.beast){
+            this.player1.team.active_slot.beast.incrementTurnsIn();
+            this.player1.team.incrementTurnsActive();
+        }
+        if(this.player2.team.active_slot.beast){
+            this.player2.team.active_slot.beast.incrementTurnsIn();
+            this.player2.team.incrementTurnsActive();
+        }
     }
 
     compareFreshness(){
-        if(this.player1.team.active_slot.beast.turnsIn < this.player2.team.active_slot.beast.turnsIn){
-            this.fresher_active_beast = 'player1';
-        }
-        else if(this.player2.team.active_slot.beast.turnsIn < this.player1.team.active_slot.beast.turnsIn){
-            this.fresher_active_beast = 'player2';
-        } else {
-            this.fresher_active_beast = 'tie';
+        if(this.player1.team.active_slot.beast && this.player2.team.active_slot.beast){
+            if(this.player1.team.active_slot.beast.turnsIn < this.player2.team.active_slot.beast.turnsIn){
+                this.fresher_active_beast = 'player1';
+            }
+            else if(this.player2.team.active_slot.beast.turnsIn < this.player1.team.active_slot.beast.turnsIn){
+                this.fresher_active_beast = 'player2';
+            } else {
+                this.fresher_active_beast = 'tie';
+            }
         }
     }
 }

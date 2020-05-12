@@ -294,9 +294,22 @@ function Battle(props) {
 
   const sendAction = (action) => {
     console.log("Action sent", action);
-    socket.emit('player action', { room: room.room_id, action: action });
     const gameCopy = game;
-    gameCopy.selectAction(action, player.player_id);
+    let completeAction;
+    if(action.actionType === "select-move"){
+      const critRoll = gameCopy.critRoll(action.critRolls);
+      completeAction = {
+        actionType: action.actionType,
+        moveSlot: action.moveSlot,
+        superActivated: action.superActivated,
+        critRolls: action.critRolls,
+        critRoll: critRoll
+      }
+    } else {
+      completeAction = action;
+    }
+    socket.emit('player action', { room: room.room_id, action: completeAction });
+    gameCopy.selectAction(completeAction, player.player_id);
     gameCopy.updateActions();
     const result = gameCopy.actionsExecutable();
     if(result){

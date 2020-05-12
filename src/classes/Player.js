@@ -47,13 +47,14 @@ export default class Player {
         return startingBeastAction;
     }
 
-    selectMove(move, moveSlot, superActivated, critRolls){
+    selectMove(move, moveSlot, superActivated, critRolls, critRoll){
         const selectMoveAction = {
             actionType: 'select-move',
             move: move,
             moveSlot: moveSlot,
             superActivated: superActivated,
-            critRolls: critRolls
+            critRolls: critRolls,
+            critRoll: critRoll
         }
 
         return selectMoveAction;
@@ -79,6 +80,7 @@ export default class Player {
 
     updateCritRolls(spentRolls){
         this.available_crit_rolls = this.available_crit_rolls - spentRolls;
+        this.spent_crit_rolls = this.spent_crit_rolls + spentRolls;
     }
 
     activateSuper(activeBeast){
