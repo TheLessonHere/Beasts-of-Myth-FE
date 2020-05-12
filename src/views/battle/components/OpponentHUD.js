@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
         maxWidth: "250px",
         width: "100%",
         height: "400px",
-        backgroundColor: "lightgrey",
+        backgroundColor: "white",
         border: "1px solid darkgrey",
         borderRadius: "5px"
     },

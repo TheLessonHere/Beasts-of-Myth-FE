@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
         maxWidth: "250px",
         width: "100%",
         height: "400px",
-        backgroundColor: "lightgrey",
+        backgroundColor: "white",
         border: "1px solid darkgrey",
         borderRadius: "5px",
         padding: "5px"
@@ -41,7 +41,7 @@ const useStyles = makeStyles(theme => ({
         borderBottom: "1px solid darkgrey",
         justifyContent: "center",
         alignItems: "center",
-        backgroundImage: "linear-gradient(to right, lightgrey, darkgrey, lightgrey)"
+        backgroundImage: "linear-gradient(to right, white, lightgrey, white)"
     },
     bottomMoveBox: {
         width: "100%",
@@ -52,7 +52,7 @@ const useStyles = makeStyles(theme => ({
         flexFlow: "column nowrap",
         justifyContent: "center",
         alignItems: "center",
-        backgroundImage: "linear-gradient(to right, lightgrey, darkgrey, lightgrey)"
+        backgroundImage: "linear-gradient(to right, white, lightgrey, white)"
     },
     moveName: {
         marginTop: "10px",
@@ -123,7 +123,7 @@ const useStyles = makeStyles(theme => ({
         justifyContent: "center",
         alignItems: "center",
         borderRight: "1px solid darkgrey",
-        backgroundImage: "linear-gradient(to right, lightgrey, darkgrey, lightgrey)"
+        backgroundImage: "linear-gradient(to right, white, lightgrey, white)"
     },
     beastName: {
         marginTop: "5px",
@@ -140,7 +140,7 @@ const useStyles = makeStyles(theme => ({
         flexFlow: "column nowrap",
         justifyContent: "center",
         alignItems: "center",
-        backgroundImage: "linear-gradient(to right, lightgrey, darkgrey, lightgrey)"
+        backgroundImage: "linear-gradient(to right, white, lightgrey, white)"
     },
     ability: {
         marginTop: "5px",
@@ -167,7 +167,7 @@ const useStyles = makeStyles(theme => ({
         justifyContent: "center",
         alignItems: "center",
         borderRight: "1px solid darkgrey",
-        backgroundImage: "linear-gradient(to right, lightgrey, darkgrey, lightgrey)"
+        backgroundImage: "linear-gradient(to right, white, lightgrey, white)"
     },
     beastStat: {
         marginTop: "5px",
@@ -184,7 +184,7 @@ const useStyles = makeStyles(theme => ({
         flexFlow: "column nowrap",
         justifyContent: "center",
         alignItems: "center",
-        backgroundImage: "linear-gradient(to right, lightgrey, darkgrey, lightgrey)"
+        backgroundImage: "linear-gradient(to right, white, lightgrey, white)"
     },
     beastMove: {
         marginTop: "5px",
@@ -458,7 +458,7 @@ export default function PlayerHUD(props) {
         return (
             <Container className={classes.container}>
                 <Box className={classes.topBeastBox}>
-                    <Typography variant="h5">Opponent Beast Info:</Typography>
+                    <Typography variant="h5">Opponent Beast:</Typography>
                 </Box>
                 <Box className={classes.centerBeastBox}>
                     <Box className={classes.centerBeastLeft}>
