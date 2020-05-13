@@ -7,6 +7,8 @@ import {
     CircularProgress
 } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
+// Components
+import GameChatLog from './GameChatLog';
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
@@ -14,6 +16,7 @@ const useStyles = makeStyles(theme => ({
         maxWidth: "250px",
         width: "100%",
         height: "400px",
+        padding: '0px',
         backgroundColor: "white",
         border: "1px solid darkgrey",
         borderRadius: "5px"
@@ -21,15 +24,29 @@ const useStyles = makeStyles(theme => ({
     opponentPrevBox: {
         width: '100%',
         height: '25%',
+        padding: '10px',
         display: 'flex',
         flexFlow: 'row wrap',
         justifyContent: 'space-evenly',
+        alignItems: 'center',
+    },
+    gameChatLog: {
+        width: '100%',
+        height: '73%',
+        paddingLeft: '5px',
+        paddingRight: '5px',
+        marginBottom: '1%',
+        marginTop: '1%',
+        display: 'flex',
+        flexFlow: 'column nowrap',
+        justifyContent: 'center',
         alignItems: 'center'
     },
     prevImg: {
-        height: '50px',
-        width: '50px',
-        padding: '5px'
+        height: '40px',
+        width: '40px',
+        marginLeft: '10px',
+        marginRight: '10px'
     },
     knockedOutIcon: {
         fontSize: '2.25rem',
@@ -45,7 +62,9 @@ export default function OpponentHUD(props) {
     beastDidGetKOd,
     opponent,
     onOpponentPreviewHover,
-    onHoverLeave
+    onHoverLeave,
+    sendMessage,
+    chatLog
     } = props;
 
     useEffect(() => {
@@ -110,6 +129,11 @@ export default function OpponentHUD(props) {
                     onMouseLeave={onHoverLeave}
                     src={opponentTeamLineup.s5}
                     alt="s5" />}
+                </Box>
+                <Box className={classes.gameChatLog}>
+                    <GameChatLog
+                    sendMessage={sendMessage}
+                    chatLog={chatLog} />
                 </Box>
             </Container>
         )
