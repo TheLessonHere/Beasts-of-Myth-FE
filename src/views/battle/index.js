@@ -69,6 +69,7 @@ function Battle(props) {
   const [gameDidUpdate, setGameDidUpdate] = useState(false);
   const [game, setGame] = useState(null);
   const [gameLog, setGameLog] = useState(null);
+  const [chatLog, setChatLog] = useState([]);
   const [player, setPlayer] = useState(null);
   const [opponent, setOpponent] = useState(null);
   const [lastPlayerAction, setLastPlayerAction] = useState(null);
@@ -91,6 +92,13 @@ function Battle(props) {
       socket.off();
     }
   }, [])
+
+  useEffect(() => {
+    socket.on('player message', (message, callback) => {
+      console.log("New message", message);
+      setChatLog([...chatLog, message]);
+    });
+  }, [ chatLog ])
 
   useEffect(() => {
     props.createTeamObjects(props.user_teams);
@@ -344,6 +352,17 @@ function Battle(props) {
     }
   }
 
+  const sendMessage = (message) => {
+    const messageObj = {
+      room: room.room_id,
+      message: message,
+      username: props.username
+    };
+
+    socket.emit('chat message', messageObj);
+    setChatLog([...chatLog, {message: message, username: props.username}]);
+  }
+
   const sendPostKOAction = (action) => {
     console.log(action);
     socket.emit('post ko switch', { room: room.room_id, action: action });
@@ -469,7 +488,9 @@ function Battle(props) {
           playerDidWin={playerDidWin}
           opponentDidWin={opponentDidWin}
           playersHaveTied={playersHaveTied}
-          calcMoveDamage={calcMoveDamage} />
+          calcMoveDamage={calcMoveDamage}
+          sendMessage={sendMessage}
+          chatLog={chatLog} />
       )
   }
 

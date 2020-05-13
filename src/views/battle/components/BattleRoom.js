@@ -306,7 +306,9 @@ function BattleRoom(props) {
                     beastDidGetKOd={props.beastDidGetKOd}
                     opponent={props.opponent}
                     onOpponentPreviewHover={onOpponentPreviewHover}
-                    onHoverLeave={onHoverLeave} />
+                    onHoverLeave={onHoverLeave}
+                    sendMessage={props.sendMessage}
+                    chatLog={props.chatLog} />
                 </Box>
                 <BattleController
                 inTeamPreview={props.inTeamPreview}
