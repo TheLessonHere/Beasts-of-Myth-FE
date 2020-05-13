@@ -209,12 +209,17 @@ const useStyles = makeStyles(theme => ({
         marginBottom: "5px",
         fontSize: "0.7rem",
         textAlign: 'center'
+    },
+    actionText: {
+        color: 'darkgrey',
+        textAlign: 'center',
+        marginTop: '10px'
     }
 }));
 
 export default function PlayerHUD(props) {
     const classes = useStyles();
-    const { hoverInfo } = props;
+    const { hoverInfo, player } = props;
     const [hoverInfoType, setHoverInfoType] = useState(null);
 
     useEffect(() => {
@@ -223,7 +228,36 @@ export default function PlayerHUD(props) {
         } else {
             setHoverInfoType(null);
         }
-    }, [ hoverInfo, hoverInfoType ])
+    }, [ hoverInfo, hoverInfoType, player ])
+
+    if(!hoverInfoType && player && player.selected_action){
+        if(player.selected_action.actionType === 'starting-beast'){
+            return (
+                <Container className={classes.container}>
+                    <Typography className={classes.actionText}>{player.username} will lead with {player.selected_action.startingBeast.beast_name}.</Typography>
+                </Container>
+            )
+        }
+        if(player.selected_action.actionType === 'select-move'){
+            return (
+                <Container className={classes.container}>
+                    <Typography className={classes.actionText}>{player.team.active_slot.beast.beast_name} will use {player.team.active_slot.beast.moves.get(player.selected_action.moveSlot).move_name}.</Typography>
+                </Container>
+            )
+        }
+        if(player.selected_action.actionType === 'change-beast'){
+            return (
+                <Container className={classes.container}>
+                    <Typography className={classes.actionText}>{player.username} will switch to {player.team.getSlot(player.selected_action.benchedBeastSlot).beast.beast_name}.</Typography>
+                </Container>
+            )
+        }
+        return (
+            <Container className={classes.container}>
+                <Typography>{" "}</Typography>
+            </Container>
+        )
+    }
 
     if(hoverInfoType === 'move' && hoverInfo){
         return (

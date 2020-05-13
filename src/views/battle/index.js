@@ -218,6 +218,10 @@ function Battle(props) {
         handleGameChange(gameCopy);
         setGameDidUpdate(!gameDidUpdate);
       })
+
+      setChatLog([...chatLog,
+      { message: `${game.player1.username} entered the room.`},
+      { message: `${game.player2.username} entered the room.`}])
     }
 
     return () => {
@@ -316,6 +320,9 @@ function Battle(props) {
     } else {
       completeAction = action;
     }
+    const playerCopy = player;
+    playerCopy.selectAction(completeAction);
+    setPlayer(playerCopy);
     socket.emit('player action', { room: room.room_id, action: completeAction });
     gameCopy.selectAction(completeAction, player.player_id);
     gameCopy.updateActions();

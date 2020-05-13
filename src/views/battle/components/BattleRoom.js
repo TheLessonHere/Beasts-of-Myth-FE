@@ -281,7 +281,8 @@ function BattleRoom(props) {
             <Container className={classes.container}>
                 <Box className={classes.topBox}>
                     <PlayerHUD
-                    hoverInfo={hoverInfo} />
+                    hoverInfo={hoverInfo}
+                    player={props.player} />
                     <BattleWindow
                     inTeamPreview={props.inTeamPreview}
                     opponentTeamLineup={opponentTeamLineup}

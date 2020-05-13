@@ -47,10 +47,9 @@ export default class Player {
         return startingBeastAction;
     }
 
-    selectMove(move, moveSlot, superActivated, critRolls, critRoll){
+    selectMove(moveSlot, superActivated, critRolls, critRoll){
         const selectMoveAction = {
             actionType: 'select-move',
-            move: move,
             moveSlot: moveSlot,
             superActivated: superActivated,
             critRolls: critRolls,

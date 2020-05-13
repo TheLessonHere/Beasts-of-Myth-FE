@@ -17,8 +17,7 @@ const useStyles = makeStyles(theme => ({
         height: "100%",
         padding: '0px',
         backgroundColor: "white",
-        borderLeft: "1px solid darkgrey",
-        borderRight: "1px solid darkgrey",
+        border: '1px solid darkgrey',
         display: 'flex',
         flexFlow: 'column nowrap'
     },
@@ -47,11 +46,18 @@ const useStyles = makeStyles(theme => ({
     },
     textField: {
         height: '30px',
-        width: '90%'
+        width: '90%',
+        paddingBottom: '0px',
+        borderBottom: '0px',
+        borderLeft: '0px',
+        borderTop: '1px solid darkgrey'
     },
     button: {
         height: '30px',
-        width: '10%'
+        width: '10%',
+        backgroundColor: 'lightgrey',
+        borderRadius: '0px',
+        fontSize: '0.7rem'
     },
     scrollBox: {
         padding: '5% 0',
@@ -62,12 +68,28 @@ const useStyles = makeStyles(theme => ({
         width: '98%',
         letterSpacing: '0',
         float: 'left',
-        fontSize: '1rem',
+        fontSize: '0.8rem',
         wordWrap: 'break-word',
         marginLeft: '1%',
         marginRight: '1%',
         marginBottom: '0px',
-        marginTop: '5px'
+        marginTop: '0px'
+    },
+    gameMessage: {
+        width: '98%',
+        letterSpacing: '0',
+        float: 'left',
+        fontSize: '0.8rem',
+        color: 'darkgrey',
+        wordWrap: 'break-word',
+        marginLeft: '1%',
+        marginRight: '1%',
+        marginBottom: '0px',
+        marginTop: '0px'
+    },
+    turnEnd: {
+        borderBottom: '1px solid darkgrey',
+        paddingBottom: '5px'
     }
 }));
 
@@ -93,10 +115,24 @@ export default function GameChatLog(props) {
                 <ScrollToBottom className={classes.scrollBox}>
                     {chatLog.length > 0 ?
                     chatLog.map((message, index) => {
+                        if(message.username){
+                            return (
+                                <div key={index}>
+                                    <p className={classes.messageText}>{message.username}: {message.message}</p>
+                                </div>
+                            )
+                        }
+                        if(message.turnDidEnd){
+                            return (
+                                <div key={index} className={classes.turnEnd}>
+                                    <p className={classes.messageText}>{message.username}: {message.message}</p>
+                                </div>
+                            )
+                        }
                         return (
-                        <div key={index}>
-                            <p className={classes.messageText}>{message.username}: {message.message}</p>
-                        </div>
+                            <div key={index}>
+                                <p className={classes.gameMessage}>{message.message}</p>
+                            </div>
                         )
                     }) :
                     null}
@@ -110,7 +146,6 @@ export default function GameChatLog(props) {
                                onChange={onMessageChange} />
                     <Button
                     type="submit"
-                    color="default"
                     variant="contained"
                     className={classes.button}
                     onClick={(e) => {
