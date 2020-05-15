@@ -5,7 +5,7 @@ const abilities = [
         search_id: "sacrifice",
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Angwool"]
+        beast_list: ["angwool"]
     },
     {
         data_type: "Ability",
@@ -13,7 +13,7 @@ const abilities = [
         search_id: "intimidate",
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Canight"]
+        beast_list: ["canight"]
     },
     {
         data_type: "Ability",
@@ -21,7 +21,7 @@ const abilities = [
         search_id: "foresight",
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Outfox"]
+        beast_list: ["outfox"]
     },
     {
         data_type: "Ability",
@@ -29,7 +29,7 @@ const abilities = [
         search_id: "blood mist",
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Impacabra"]
+        beast_list: ["impacabra"]
     },
     {
         data_type: "Ability",
@@ -37,7 +37,7 @@ const abilities = [
         search_id: "piercing stinger",
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Scorchion"]
+        beast_list: ["scorchion"]
     },
     {
         data_type: "Ability",
@@ -45,7 +45,7 @@ const abilities = [
         search_id: "camoflauge",
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Kore"]
+        beast_list: ["kore"]
     },
     {
         data_type: "Ability",
@@ -53,7 +53,7 @@ const abilities = [
         search_id: "echolocation",
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Surphin"]
+        beast_list: ["surphin"]
     },
     {
         data_type: "Ability",
@@ -61,7 +61,7 @@ const abilities = [
         search_id: "crushing talons",
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Empyreagle"]
+        beast_list: ["empyreagle"]
     },
     {
         data_type: "Ability",
@@ -69,7 +69,7 @@ const abilities = [
         search_id: "shadowcast",
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Vilefly"]
+        beast_list: ["vilefly"]
     },
     {
         data_type: "Ability",
@@ -77,7 +77,7 @@ const abilities = [
         search_id: "healing dust",
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Mothebo"]
+        beast_list: ["mothebo"]
     },
 ];
 

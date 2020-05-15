@@ -1,5 +1,5 @@
 export default class Move {
-    constructor(moveId, name, domain, type, basePower, me, priority, effect, description, shortDescription){
+    constructor(moveId, name, domain, type, basePower, me, priority, effect, description, shortDescription, actionStatement){
         this.move_id = moveId;
         this.move_name = name;
         this.domain = domain;
@@ -11,6 +11,7 @@ export default class Move {
         this.effect = effect;
         this.description = description;
         this.short_description = shortDescription;
+        this.action_statement = actionStatement;
         this.move_slot = null;
     }
 
@@ -20,5 +21,9 @@ export default class Move {
 
     addMoveSlot(slot){
         this.move_slot = slot;
+    }
+
+    getActionStatement(attacking, defending){
+        return this.action_statement(attacking, defending);
     }
 }

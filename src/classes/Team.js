@@ -133,63 +133,81 @@ export default class Team {
     }
 
     changeToSuper(superBeast, slot){
+        let nonSuper;
+        let nonSuperHPPercentage;
+        let prevStatStages;
         switch(slot){
             case 'slot1':
                 const makeSlot1Super = () => {
-                const nonSuper = this.slot1.beast;
+                nonSuper = this.slot1.beast;
+                nonSuper.moves.forEach((value, key, map) => {
+                    superBeast.moves.set(key, value);
+                });
                 superBeast.addStatus(nonSuper.status);
-                const prevStatStages = nonSuper.getStatStages();
+                prevStatStages = nonSuper.getStatStages();
                 superBeast.matchStatStages(prevStatStages);
                 superBeast.updateAllStats();
-                const nonSuperHPPercentage = nonSuper.getHPPercentage();
+                nonSuperHPPercentage = nonSuper.getHPPercentage();
                 superBeast.matchHPPercentage(nonSuperHPPercentage);
                 this.slot1.beast = superBeast;}
                 makeSlot1Super();
                 break;
             case 'slot2':
                 const makeSlot2Super = () => {
-                const nonSuper = this.slot2.beast;
+                nonSuper = this.slot2.beast;
+                nonSuper.moves.forEach((value, key, map) => {
+                    superBeast.moves.set(key, value);
+                });
                 superBeast.addStatus(nonSuper.status);
-                const prevStatStages = nonSuper.getStatStages();
+                prevStatStages = nonSuper.getStatStages();
                 superBeast.matchStatStages(prevStatStages);
                 superBeast.updateAllStats();
-                const nonSuperHPPercentage = nonSuper.getHPPercentage();
+                nonSuperHPPercentage = nonSuper.getHPPercentage();
                 superBeast.matchHPPercentage(nonSuperHPPercentage);
                 this.slot2.beast = superBeast;}
                 makeSlot2Super();
                 break;
             case 'slot3':
                 const makeSlot3Super = () => {
-                const nonSuper = this.slot3.beast;
+                nonSuper = this.slot3.beast;
+                nonSuper.moves.forEach((value, key, map) => {
+                    superBeast.moves.set(key, value);
+                });
                 superBeast.addStatus(nonSuper.status);
-                const prevStatStages = nonSuper.getStatStages();
+                prevStatStages = nonSuper.getStatStages();
                 superBeast.matchStatStages(prevStatStages);
                 superBeast.updateAllStats();
-                const nonSuperHPPercentage = nonSuper.getHPPercentage();
+                nonSuperHPPercentage = nonSuper.getHPPercentage();
                 superBeast.matchHPPercentage(nonSuperHPPercentage);
                 this.slot3.beast = superBeast;}
                 makeSlot3Super();
                 break;
             case 'slot4':
                 const makeSlot4Super = () => {
-                const nonSuper = this.slot4.beast;
+                nonSuper = this.slot4.beast;
+                nonSuper.moves.forEach((value, key, map) => {
+                    superBeast.moves.set(key, value);
+                });
                 superBeast.addStatus(nonSuper.status);
-                const prevStatStages = nonSuper.getStatStages();
+                prevStatStages = nonSuper.getStatStages();
                 superBeast.matchStatStages(prevStatStages);
                 superBeast.updateAllStats();
-                const nonSuperHPPercentage = nonSuper.getHPPercentage();
+                nonSuperHPPercentage = nonSuper.getHPPercentage();
                 superBeast.matchHPPercentage(nonSuperHPPercentage);
                 this.slot4.beast = superBeast;}
                 makeSlot4Super();
                 break;
             case 'slot5':
                 const makeSlot5Super = () => {
-                const nonSuper = this.slot5.beast;
+                nonSuper = this.slot5.beast;
+                nonSuper.moves.forEach((value, key, map) => {
+                    superBeast.moves.set(key, value);
+                });
                 superBeast.addStatus(nonSuper.status);
-                const prevStatStages = nonSuper.getStatStages();
+                prevStatStages = nonSuper.getStatStages();
                 superBeast.matchStatStages(prevStatStages);
                 superBeast.updateAllStats();
-                const nonSuperHPPercentage = nonSuper.getHPPercentage();
+                nonSuperHPPercentage = nonSuper.getHPPercentage();
                 superBeast.matchHPPercentage(nonSuperHPPercentage);
                 this.slot5.beast = superBeast;}
                 makeSlot5Super();
@@ -295,7 +313,8 @@ export default class Team {
                             move.effect,
                             move.status,
                             move.description,
-                            move.short_description);
+                            move.short_description,
+                            move.action_statement);
                         newMove.addMoveSlot(`move${slotCounter}`);
                         currSlot.beast.moves.set(`move${slotCounter}`, newMove);
                         if(slotCounter === 4){

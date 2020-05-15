@@ -58,10 +58,9 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-const allLibraries = beasts.concat(moves, abilities);
-
 function TeamBuilder(props) {
   const classes = useStyles();
+  const allLibraries = beasts.concat(moves, abilities);
   const [isBuilding, setIsBuilding] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
   const [isReturning, setIsReturning] = useState(false);
