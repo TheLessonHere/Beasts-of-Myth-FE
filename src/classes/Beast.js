@@ -241,5 +241,6 @@ export default class Beast {
 
     knockOutBeast(){
         this.knocked_out = true;
+        this.status = 'Knocked-Out'
     }
 }

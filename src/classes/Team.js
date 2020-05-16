@@ -41,6 +41,7 @@ export default class Team {
             turnsActive: 0,
             slotNumber: null,
         }
+        this.knocked_out_beasts = [];
         this.isValid = false;
     }
 
@@ -303,7 +304,8 @@ export default class Team {
                 let slotCounter = 1;
                 beastMoves.forEach(move => {
                     if(move !== null){
-                        const newMove = new Move(move.move_id,
+                        const newMove = new Move(
+                            move.move_id,
                             move.move_name,
                             move.domain,
                             move.type,
@@ -311,7 +313,6 @@ export default class Team {
                             move.me,
                             move.priority,
                             move.effect,
-                            move.status,
                             move.description,
                             move.short_description,
                             move.action_statement);
@@ -566,6 +567,17 @@ export default class Team {
 
     changeFormat(newFormat){
         this.format = newFormat;
+    }
+
+    knockOutBeast(slot){
+        const kodSlot = this.getSlot(slot);
+        this.knocked_out_beasts = [...this.knocked_out_beasts, kodSlot.beast];
+    }
+
+    getLastKnockedOutBeast(){
+        const knockedOutBeastIdx = this.knocked_out_beasts.length - 1;
+        const lastKnockedOutBeast = this.knocked_out_beasts[knockedOutBeastIdx];
+        return lastKnockedOutBeast;
     }
 
     // This might end up being unnecessary
