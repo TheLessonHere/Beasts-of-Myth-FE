@@ -63,6 +63,23 @@ export default function LibrarySearchbar(props){
         console.log(event.target);
     }
 
+    const onNonBeastRowClick = (beastArr) => {
+        let currSuggestions = [];
+        if(beastArr.length > 0){
+            beastArr.forEach(id => {
+                const regex = new RegExp(`${id}`, 'i');
+                const filterResult = allLibraries.sort().filter(obj => {
+                    const searchId = obj.search_id;
+                    return regex.test(searchId);
+                })
+                filterResult.forEach(result => {
+                    currSuggestions.push(result);
+                })
+            });
+        }
+        setSuggestions(currSuggestions);
+    }
+
     const renderResult = () => {
         if (suggestions.length > 0){
             let beastCounter = 0;
@@ -100,13 +117,21 @@ export default function LibrarySearchbar(props){
                             <ListItem key="move-header" className={classes.listItemHeader} divider={true}>
                                 <ListItemText primary="Moves" />
                             </ListItem>
-                            <ListItem key={obj.search_id} className={classes.listItem} divider={true}>
+                            <ListItem
+                            key={obj.search_id}
+                            onClick={() => onNonBeastRowClick(obj.beast_list)}
+                            className={classes.listItem}
+                            divider={true}>
                                 <ListItemText primary={obj.move_name} />
                             </ListItem>
                         </>
                         )} else {
                         return (
-                        <ListItem key={obj.search_id} className={classes.listItem} divider={true}>
+                        <ListItem
+                        key={obj.search_id}
+                        onClick={() => onNonBeastRowClick(obj.beast_list)}
+                        className={classes.listItem}
+                        divider={true}>
                             <ListItemText primary={obj.move_name} />
                         </ListItem>
                         )}}
@@ -118,13 +143,21 @@ export default function LibrarySearchbar(props){
                             <ListItem key="ability-header" className={classes.listItemHeader} divider={true}>
                                 <ListItemText primary="Abilities" />
                             </ListItem>
-                            <ListItem key={obj.search_id} className={classes.listItem} divider={true}>
+                            <ListItem
+                            key={obj.search_id}
+                            onClick={() => onNonBeastRowClick(obj.beast_list)}
+                            className={classes.listItem}
+                            divider={true}>
                                 <ListItemText primary={obj.ability_name} />
                             </ListItem>
                         </>
                         )} else {
                         return (
-                        <ListItem key={obj.search_id} className={classes.listItem} divider={true}>
+                        <ListItem
+                        key={obj.search_id}
+                        onClick={() => onNonBeastRowClick(obj.beast_list)}
+                        className={classes.listItem}
+                        divider={true}>
                             <ListItemText primary={obj.ability_name} />
                         </ListItem>
                         )}}
@@ -177,6 +210,7 @@ export default function LibrarySearchbar(props){
             <List className={classes.list}>
                 {renderResult()}
             </List>
+            <button onClick={() => {console.log(suggestions)}}>Log</button>
         </Container>
     )
 }

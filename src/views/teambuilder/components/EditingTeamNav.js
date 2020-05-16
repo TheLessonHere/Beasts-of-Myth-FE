@@ -508,7 +508,8 @@ function EditingTeamNav(props) {
         move.priority,
         move.effect,
         move.description,
-        move.short_description);
+        move.short_description,
+        move.action_statement);
 
       switch(activeSlot){
         case 'slot1':

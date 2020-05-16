@@ -12,7 +12,8 @@ const moves = [
         effect: (attacking, defending) => (null),
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Kore"]
+        action_statement: null,
+        beast_list: ["kore"]
     },
     {
         data_type: "Move",
@@ -27,7 +28,8 @@ const moves = [
         effect: (attacking, defending) => (null),
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Kore", "Impacabra", "Angwool"]
+        action_statement: null,
+        beast_list: ["kore", "impacabra", "angwool"]
     },
     {
         data_type: "Move",
@@ -42,7 +44,8 @@ const moves = [
         effect: (attacking, defending) => {defending.team.active_slot.beast.addStatus('Inflamed')},
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Scorchion"]
+        action_statement: (attacking, defending) => { return `${defending.team.active_slot.beast.beast_name} was Inflamed.`;},
+        beast_list: ["scorchion"]
     },
     {
         data_type: "Move",
@@ -57,7 +60,8 @@ const moves = [
         effect: (attacking, defending) => (null),
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Angwool", "Mothebo", "Vilefly"]
+        action_statement: null,
+        beast_list: ["angwool", "mothebo", "vilefly"]
     },
     {
         data_type: "Move",
@@ -72,7 +76,8 @@ const moves = [
         effect: (attacking, defending) => (null),
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Canight", "Impacabra", "Vilefly", "Scorchion"]
+        action_statement: null,
+        beast_list: ["canight", "impacabra", "vilefly", "scorchion"]
     },
     {
         data_type: "Move",
@@ -87,7 +92,8 @@ const moves = [
         effect: (attacking, defending) => (null),
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Outfox", "Surphin", "Mothebo"]
+        action_statement: null,
+        beast_list: ["outfox", "surphin", "mothebo"]
     },
     {
         data_type: "Move",
@@ -102,7 +108,8 @@ const moves = [
         effect: (attacking, defending) => (null),
         description: "Does something.",
         short_description: "Does thing.",
-        beast_list: ["Empyreagle", "Mothebo", "Vilefly"]
+        action_statement: null,
+        beast_list: ["empyreagle", "mothebo", "vilefly"]
     },
 ];
 
