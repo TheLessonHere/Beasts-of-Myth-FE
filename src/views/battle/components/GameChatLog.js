@@ -73,7 +73,8 @@ const useStyles = makeStyles(theme => ({
         marginLeft: '1%',
         marginRight: '1%',
         marginBottom: '0px',
-        marginTop: '0px'
+        marginTop: '0px',
+        paddingTop: '5px'
     },
     gameMessage: {
         width: '98%',
@@ -85,11 +86,23 @@ const useStyles = makeStyles(theme => ({
         marginLeft: '1%',
         marginRight: '1%',
         marginBottom: '0px',
-        marginTop: '0px'
+        marginTop: '0px',
+        paddingTop: '5px'
     },
-    turnEnd: {
-        borderBottom: '1px solid darkgrey',
-        paddingBottom: '5px'
+    gameMessageTurnEnd: {
+        width: '98%',
+        letterSpacing: '0',
+        float: 'left',
+        fontSize: '0.8rem',
+        color: 'darkgrey',
+        wordWrap: 'break-word',
+        marginLeft: '1%',
+        marginRight: '1%',
+        marginBottom: '0px',
+        marginTop: '0px',
+        paddingTop: '5px',
+        paddingBottom: '5px',
+        borderBottom: '1px solid darkgrey'
     }
 }));
 
@@ -103,8 +116,7 @@ export default function GameChatLog(props) {
     const [message, setMessage] = useState("");
 
     useEffect(() => {
-        console.log(chatLog);
-    }, [ chatLog ])
+    }, [ chatLog, game ])
 
     const onMessageChange = (event) => {
         setMessage(event.target.value);
@@ -125,8 +137,8 @@ export default function GameChatLog(props) {
                         }
                         if(message.turnDidEnd){
                             return (
-                                <div key={index} className={classes.turnEnd}>
-                                    <p className={classes.messageText}>{message.message}</p>
+                                <div key={index}>
+                                    <p className={classes.gameMessageTurnEnd}>{message.message}</p>
                                 </div>
                             )
                         }

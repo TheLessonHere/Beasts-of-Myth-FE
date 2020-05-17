@@ -373,10 +373,12 @@ export default class Game {
                                         player2ActionCompleted = true;
                                     } else {
                                         p2ActionStatement = this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
-                                        p1ActionStatement = {
-                                            beastKOd: true,
-                                            statement: `${this.player1.username}'s beast was knocked out!`
-                                        };
+                                        if(this.player1.team.active_slot.beast === null){
+                                            p1ActionStatement = {
+                                                beastKOd: true,
+                                                statement: `${this.player1.username}'s beast was knocked out!`
+                                            };
+                                        }
                                         player2ActionCompleted = true;
                                     }
                                     break;
@@ -404,10 +406,12 @@ export default class Game {
                                         player1ActionCompleted = true;
                                     } else {
                                         p1ActionStatement = this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
-                                        p2ActionStatement = {
-                                            beastKOd: true,
-                                            statement: `${this.player2.username}'s beast was knocked out!`
-                                        };
+                                        if(this.player2.team.active_slot.beast === null){
+                                            p2ActionStatement = {
+                                                beastKOd: true,
+                                                statement: `${this.player2.username}'s beast was knocked out!`
+                                            };
+                                        }
                                         player1ActionCompleted = true;
                                     }
                                     break;
@@ -436,10 +440,12 @@ export default class Game {
                                             player2ActionCompleted = true;
                                         } else {
                                             p2ActionStatement = this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
-                                            p1ActionStatement = {
-                                                beastKOd: true,
-                                                statement: `${this.player1.username}'s beast was knocked out!`
-                                            };
+                                            if(this.player1.team.active_slot.beast === null){
+                                                p1ActionStatement = {
+                                                    beastKOd: true,
+                                                    statement: `${this.player1.username}'s beast was knocked out!`
+                                                };
+                                            }
                                             player2ActionCompleted = true;
                                         }
                                         break;
@@ -468,10 +474,12 @@ export default class Game {
                                             player1ActionCompleted = true;
                                         } else {
                                             p1ActionStatement = this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
-                                            p2ActionStatement = {
-                                                beastKOd: true,
-                                                statement: `${this.player2.username}'s beast was knocked out!`
-                                            };
+                                            if(this.player2.team.active_slot.beast === null){
+                                                p2ActionStatement = {
+                                                    beastKOd: true,
+                                                    statement: `${this.player2.username}'s beast was knocked out!`
+                                                };
+                                            }
                                             player1ActionCompleted = true;
                                         }
                                         break;
@@ -499,10 +507,12 @@ export default class Game {
                                             player2ActionCompleted = true;
                                         } else {
                                             p2ActionStatement = this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
-                                            p1ActionStatement = {
-                                                beastKOd: true,
-                                                statement: `${this.player1.username}'s beast was knocked out!`
-                                            };
+                                            if(this.player1.team.active_slot.beast === null){
+                                                p1ActionStatement = {
+                                                    beastKOd: true,
+                                                    statement: `${this.player1.username}'s beast was knocked out!`
+                                                };
+                                            }
                                             player2ActionCompleted = true;
                                         }
                                         break;
@@ -521,10 +531,12 @@ export default class Game {
                     p1Super = true;
                 }
                 p1ActionStatement = this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
-                p2ActionStatement = {
-                    beastKOd: true,
-                    statement: `${this.player2.username}'s beast was knocked out!`
-                };
+                if(this.player2.team.active_slot.beast === null){
+                    p2ActionStatement = {
+                        beastKOd: true,
+                        statement: `${this.player2.username}'s beast was knocked out!`
+                    };
+                }
                 player1ActionCompleted = true;
             }
             if(this.player2_action.actionType == 'select-move' && this.player1_action.actionType !== 'select-move'){
@@ -533,10 +545,12 @@ export default class Game {
                     p2Super = true;
                 }
                 p2ActionStatement = this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
-                p1ActionStatement = {
-                    beastKOd: true,
-                    statement: `${this.player1.username}'s beast was knocked out!`
-                };
+                if(this.player1.team.active_slot.beast === null){
+                    p1ActionStatement = {
+                        beastKOd: true,
+                        statement: `${this.player1.username}'s beast was knocked out!`
+                    };
+                }
                 player2ActionCompleted = true;
             }
         }

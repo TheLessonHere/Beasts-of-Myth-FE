@@ -19,6 +19,7 @@ import QueueForm from './components/QueueForm';
 import BattleRoom from './components/BattleRoom';
 // Functions
 import { domainEffectivenessMap } from '../../utils/functions/domainEffectivenessMap';
+import createMessage from './functions/createMessage';
 // Socket
 import io from 'socket.io-client';
 // Classes
@@ -83,7 +84,7 @@ function Battle(props) {
   const [opponentDidWin, setOpponentDidWin] = useState(false);
   const [playersHaveTied, setPlayersHaveTied] = useState(false);
   const [inTeamPreview, setInTeamPreview] = useState(true);
-  const [actionReceivedFromOpponent, setActionReceivedFromOpponent] = useState({});
+  const [actionsReceivedFromOpponent, setActionsReceivedFromOpponent] = useState([]);
 
   useEffect(() => {
     socket = io('localhost:8000');
@@ -185,7 +186,14 @@ function Battle(props) {
             setLastOpponentAction(game.player1.selected_action);
           }
           const gameLogResult = gameCopy.executeActions();
-          setActionReceivedFromOpponent(gameLogResult);
+          const messageArr = createMessage(gameLogResult, gameCopy);
+          const chatLogArr = messageArr.map((message, index) => {
+            if(index === messageArr.length - 1){
+              return {message: message, turnDidEnd: true}
+            }
+            return {message: message}
+          });
+          setActionsReceivedFromOpponent([...chatLogArr]);
           if(gameCopy.player1.team.active_slot.beast === null ||
             gameCopy.player2.team.active_slot.beast === null){
               setBeastDidGetKOd(true);
@@ -234,10 +242,10 @@ function Battle(props) {
   }, [ game ])
 
   useEffect(() => {
-    if(actionReceivedFromOpponent){
-      setChatLog([...chatLog, actionReceivedFromOpponent])
+    if(actionsReceivedFromOpponent){
+      setChatLog([...chatLog, ...actionsReceivedFromOpponent])
     }
-  }, [ actionReceivedFromOpponent ])
+  }, [ actionsReceivedFromOpponent ])
 
   const onMiniBoxClick = (team) => {
     setTeamSelected(team.team_object);
@@ -343,8 +351,14 @@ function Battle(props) {
         setLastOpponentAction(game.player1.selected_action);
       }
       const gameLogResult = gameCopy.executeActions();
-      console.log(chatLog, gameLogResult)
-      setChatLog([...chatLog, gameLogResult]);
+      const messageArr = createMessage(gameLogResult, gameCopy);
+      const chatLogArr = messageArr.map((message, index) => {
+        if(index === messageArr.length - 1){
+          return {message: message, turnDidEnd: true}
+        }
+        return {message: message}
+      });
+      setChatLog([...chatLog, ...chatLogArr]);
       if(gameCopy.player1.team.active_slot.beast === null ||
         gameCopy.player2.team.active_slot.beast === null){
           setBeastDidGetKOd(true);
