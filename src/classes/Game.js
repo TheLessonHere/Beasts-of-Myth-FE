@@ -547,12 +547,12 @@ export default class Game {
         this.first_to_act = null;
         this.updateTurnCounter();
         return {
-            actions: true,
             firstAction: firstAction,
             p1ActionStatement: p1ActionStatement,
             p2ActionStatement: p2ActionStatement,
             p1Super: p1Super,
-            p2Super: p2Super
+            p2Super: p2Super,
+            hazardDeath: false
         };
     }
 
