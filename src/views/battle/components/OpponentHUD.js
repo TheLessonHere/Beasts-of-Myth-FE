@@ -64,7 +64,8 @@ export default function OpponentHUD(props) {
     onOpponentPreviewHover,
     onHoverLeave,
     sendMessage,
-    chatLog
+    chatLog,
+    game
     } = props;
 
     useEffect(() => {
@@ -133,7 +134,8 @@ export default function OpponentHUD(props) {
                 <Box className={classes.gameChatLog}>
                     <GameChatLog
                     sendMessage={sendMessage}
-                    chatLog={chatLog} />
+                    chatLog={chatLog}
+                    game={game} />
                 </Box>
             </Container>
         )

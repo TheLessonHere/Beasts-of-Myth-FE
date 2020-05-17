@@ -499,7 +499,8 @@ function EditingTeamNav(props) {
     }
 
     const onMoveClick = (move) => {
-      const newMove = new Move(move.move_id,
+      const newMove = new Move(
+        move.move_id,
         move.move_name,
         move.domain,
         move.type,

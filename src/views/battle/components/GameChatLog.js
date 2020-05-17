@@ -97,7 +97,8 @@ export default function GameChatLog(props) {
     const classes = useStyles();
     const {
     sendMessage,
-    chatLog
+    chatLog,
+    game
     } = props;
     const [message, setMessage] = useState("");
 
@@ -125,7 +126,7 @@ export default function GameChatLog(props) {
                         if(message.turnDidEnd){
                             return (
                                 <div key={index} className={classes.turnEnd}>
-                                    <p className={classes.messageText}>{message.username}: {message.message}</p>
+                                    <p className={classes.messageText}>{message.message}</p>
                                 </div>
                             )
                         }
