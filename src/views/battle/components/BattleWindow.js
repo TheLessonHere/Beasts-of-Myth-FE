@@ -6,6 +6,8 @@ import {
     Typography,
     CircularProgress
     } from "@material-ui/core";
+// Components
+import HealthBar from './HealthBar';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -14,7 +16,7 @@ const useStyles = makeStyles(theme => ({
         border: "2px solid darkgrey",
         borderRadius: "5px",
         backgroundColor: "white",
-        height: "400px",
+        height: "425px",
         width: "600px",
         padding: "20px",
         marginBottom: "10px",
@@ -216,7 +218,16 @@ export default function BattleWindow(props) {
                 className={classes.gameBoxOpponent}
                 onMouseOver={onOpponentBeastHover}
                 onMouseOut={onHoverLeave}>
-                    <h5>Health Bar Here</h5>
+                    <HealthBar
+                    gameDidUpdate={gameDidUpdate}
+                    game={game}
+                    player={player}
+                    opponent={opponent}
+                    isPlayer={false}
+                    isOpponent={true}
+                    onPlayerBeastHover={onPlayerBeastHover}
+                    onOpponentBeastHover={onOpponentBeastHover}
+                    onHoverLeave={onHoverLeave} />
                     <img
                     className={classes.beastImg}
                     src={opponentActiveBeastImg}
@@ -226,7 +237,16 @@ export default function BattleWindow(props) {
                 className={classes.gameBoxPlayer}
                 onMouseOver={onPlayerBeastHover}
                 onMouseOut={onHoverLeave}>
-                    <h5>Health Bar Here</h5>
+                    <HealthBar
+                    gameDidUpdate={gameDidUpdate}
+                    game={game}
+                    player={player}
+                    opponent={opponent}
+                    isPlayer={true}
+                    isOpponent={false}
+                    onPlayerBeastHover={onPlayerBeastHover}
+                    onOpponentBeastHover={onOpponentBeastHover}
+                    onHoverLeave={onHoverLeave} />
                     <img
                     className={classes.beastImg}
                     src={playerActiveBeastImg}
@@ -243,7 +263,16 @@ export default function BattleWindow(props) {
                 className={classes.gameBoxOpponent}
                 onMouseOver={onOpponentBeastHover}
                 onMouseOut={onHoverLeave}>
-                    <h5>Health Bar Here</h5>
+                    <HealthBar
+                    gameDidUpdate={gameDidUpdate}
+                    game={game}
+                    player={player}
+                    opponent={opponent}
+                    isPlayer={false}
+                    isOpponent={true}
+                    onPlayerBeastHover={onPlayerBeastHover}
+                    onOpponentBeastHover={onOpponentBeastHover}
+                    onHoverLeave={onHoverLeave} />
                     <img
                     className={classes.beastImg}
                     src={opponentActiveBeastImg}
@@ -268,7 +297,16 @@ export default function BattleWindow(props) {
                 className={classes.gameBoxPlayer}
                 onMouseOver={onPlayerBeastHover}
                 onMouseOut={onHoverLeave}>
-                    <h5>Health Bar Here</h5>
+                    <HealthBar
+                    gameDidUpdate={gameDidUpdate}
+                    game={game}
+                    player={player}
+                    opponent={opponent}
+                    isPlayer={true}
+                    isOpponent={false}
+                    onPlayerBeastHover={onPlayerBeastHover}
+                    onOpponentBeastHover={onOpponentBeastHover}
+                    onHoverLeave={onHoverLeave} />
                     <img
                     className={classes.beastImg}
                     src={playerActiveBeastImg}
@@ -284,7 +322,7 @@ export default function BattleWindow(props) {
             className={classes.gameBoxOpponent}
             onMouseOver={onOpponentBeastHover}
             onMouseOut={onHoverLeave}>
-                <h5>Health Bar Here</h5>
+                <h5>{" "}</h5>
                 <img
                 className={classes.beastImg}
                 src={null}
@@ -294,7 +332,7 @@ export default function BattleWindow(props) {
             className={classes.gameBoxPlayer}
             onMouseOver={onPlayerBeastHover}
             onMouseOut={onHoverLeave}>
-                <h5>Health Bar Here</h5>
+                <h5>{" "}</h5>
                 <img
                 className={classes.beastImg}
                 src={null}
