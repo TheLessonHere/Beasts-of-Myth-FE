@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     container: {
         maxWidth: "250px",
         width: "100%",
-        height: "400px",
+        height: "425px",
         padding: '0px',
         backgroundColor: "white",
         border: "1px solid darkgrey",

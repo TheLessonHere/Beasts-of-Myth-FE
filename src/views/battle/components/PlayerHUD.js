@@ -16,7 +16,7 @@ const useStyles = makeStyles(theme => ({
         flexFlow: "column nowrap",
         maxWidth: "250px",
         width: "100%",
-        height: "400px",
+        height: "425px",
         backgroundColor: "white",
         border: "1px solid darkgrey",
         borderRadius: "5px",
