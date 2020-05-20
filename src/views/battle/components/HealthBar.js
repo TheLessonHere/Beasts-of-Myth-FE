@@ -78,7 +78,34 @@ const useStyles = makeStyles({
         }),
         statStageBox: {
             height: '30%',
-            width: '100%'
+            width: '100%',
+            display: 'flex',
+            flexFlow: 'row nowrap',
+            justifyContent: 'space-evenly',
+            alignItems: 'center'
+        },
+        statStagePositive: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '25px',
+            width: '60px',
+            backgroundColor: '#99ff80',
+            borderRadius: '5px',
+            border: '1px solid #134008'
+        },
+        statStageNegative: {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '25px',
+            width: '60px',
+            backgroundColor: '#ff786b',
+            borderRadius: '5px',
+            border: '1px solid #730a00'
+        },
+        statStageText: {
+            fontSize: '0.7rem'
         }
     })
 
@@ -336,13 +363,13 @@ export default function HealthBar(props){
                             if(stat.positive){
                                 return (
                                     <div className={classes.statStagePositive}>
-                                        <Typography>x{stat.statStage} {stat.stat}</Typography>
+                                        <Typography className={statStageText}>x{stat.statStage} {stat.stat}</Typography>
                                     </div>
                                 )
                             } else {
                                 return (
                                     <div className={classes.statStageNegative}>
-                                        <Typography>x{stat.statStage} {stat.stat}</Typography>
+                                        <Typography className={statStageText}>x{stat.statStage} {stat.stat}</Typography>
                                     </div>
                                 )
                             }
@@ -393,13 +420,13 @@ export default function HealthBar(props){
                             if(stat.positive){
                                 return (
                                     <div className={classes.statStagePositive}>
-                                        <Typography>x{stat.statStage} {stat.stat}</Typography>
+                                        <Typography className={statStageText}>x{stat.statStage} {stat.stat}</Typography>
                                     </div>
                                 )
                             } else {
                                 return (
                                     <div className={classes.statStageNegative}>
-                                        <Typography>x{stat.statStage} {stat.stat}</Typography>
+                                        <Typography className={statStageText}>x{stat.statStage} {stat.stat}</Typography>
                                     </div>
                                 )
                             }
