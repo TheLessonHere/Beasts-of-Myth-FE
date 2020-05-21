@@ -363,13 +363,13 @@ export default function HealthBar(props){
                             if(stat.positive){
                                 return (
                                     <div className={classes.statStagePositive}>
-                                        <Typography className={statStageText}>x{stat.statStage} {stat.stat}</Typography>
+                                        <Typography className={classes.statStageText}>x{stat.statStage} {stat.stat}</Typography>
                                     </div>
                                 )
                             } else {
                                 return (
                                     <div className={classes.statStageNegative}>
-                                        <Typography className={statStageText}>x{stat.statStage} {stat.stat}</Typography>
+                                        <Typography className={classes.statStageText}>x{stat.statStage} {stat.stat}</Typography>
                                     </div>
                                 )
                             }
@@ -420,13 +420,13 @@ export default function HealthBar(props){
                             if(stat.positive){
                                 return (
                                     <div className={classes.statStagePositive}>
-                                        <Typography className={statStageText}>x{stat.statStage} {stat.stat}</Typography>
+                                        <Typography className={classes.statStageText}>x{stat.statStage} {stat.stat}</Typography>
                                     </div>
                                 )
                             } else {
                                 return (
                                     <div className={classes.statStageNegative}>
-                                        <Typography className={statStageText}>x{stat.statStage} {stat.stat}</Typography>
+                                        <Typography className={classes.statStageText}>x{stat.statStage} {stat.stat}</Typography>
                                     </div>
                                 )
                             }
