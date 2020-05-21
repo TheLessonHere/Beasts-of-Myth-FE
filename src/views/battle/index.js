@@ -469,10 +469,10 @@ function Battle(props) {
 
       let damage = 0;
 
-      if(moveType == 'physical'){
-        damage = ((((basePower + sameTypeBonus) * domainModifier) + player.team.active_slot.beast.curr_pa) - opponent.team.active_slot.beast.curr_pd) * effectiveness;
+        if(moveType == 'physical'){
+          damage = (((basePower + sameTypeBonus) * domainModifier) * (player.team.active_slot.beast.curr_pa / opponent.team.active_slot.beast.curr_pd)) * effectiveness;
       } else {
-          damage = ((((basePower + sameTypeBonus) * domainModifier) + player.team.active_slot.beast.curr_ma) - opponent.team.active_slot.beast.curr_md) * effectiveness;
+          damage = (((basePower + sameTypeBonus) * domainModifier) * (player.team.active_slot.beast.curr_ma / opponent.team.active_slot.beast.curr_md)) * effectiveness;
       }
 
       return {damage: damage, damageWithCrit: damage * 2};
