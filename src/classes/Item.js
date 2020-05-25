@@ -9,4 +9,8 @@ export default class Item {
         this.short_description = shortDescription;
         this.isRemovable = isRemovable;
     }
+
+    useItem(beast){
+        this.effect(beast);
+    }
 }

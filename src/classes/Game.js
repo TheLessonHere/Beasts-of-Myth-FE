@@ -784,7 +784,6 @@ export default class Game {
     }
 
     putUpHazards(hazard, defendingPlayer){
-        // Leave room in if statement for hazard reflecting move or ability
         if(defendingPlayer == 'player1'){
             this.player1_hazards.push(hazard);
         } else {

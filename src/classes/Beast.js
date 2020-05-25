@@ -177,6 +177,49 @@ export default class Beast {
         }
     }
 
+    modifyStat(stat, newStat, match){
+        switch(stat){
+            case 'hp':
+                this.init_hp = newStat;
+                if(match){
+                    this.curr_hp = newStat;
+                }
+                break;
+            case 'pa':
+                this.init_pa = newStat;
+                if(match){
+                    this.curr_pa = newStat;
+                }
+                break;
+            case 'pd':
+                this.init_pd = newStat;
+                if(match){
+                    this.curr_pd = newStat;
+                }
+                break;
+            case 'ma':
+                this.init_ma = newStat;
+                if(match){
+                    this.curr_ma = newStat;
+                }
+                break;
+            case 'md':
+                this.init_md = newStat;
+                if(match){
+                    this.curr_md = newStat;
+                }
+                break;
+            case 'sc':
+                this.init_sc = newStat;
+                if(match){
+                    this.curr_sc = newStat;
+                }
+                break;
+            default:
+                return;
+        }
+    }
+
     resetStats(){
         if(this.status != 'Blinded'){
             this.curr_pa = this.init_pa;
