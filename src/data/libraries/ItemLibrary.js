@@ -269,7 +269,7 @@ const items = [
         item_name: "Lead Boots",
         search_id: "lead boots",
         type: "static",
-        effect: (beast) => {return null;},
+        effect: (beast) => {beast.modifyStat('sc', 1, true)},
         description: "The wearer's Speed Class is reduced to 1.",
         short_description: "Reduces SC to 1.",
         removable: true,
