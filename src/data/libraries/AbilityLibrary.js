@@ -9,8 +9,8 @@ const abilities = [
     },
     {
         data_type: "Ability",
-        ability_name: "Intimidate",
-        search_id: "intimidate",
+        ability_name: "Snarl",
+        search_id: "snarl",
         description: "Does something.",
         short_description: "Does thing.",
         beast_list: ["canight"]
