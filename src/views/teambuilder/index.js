@@ -132,7 +132,7 @@ function TeamBuilder(props) {
       <Container className={classes.container}>
         <EditingTeamNav
         allLibraries={allLibraries}
-        item={items}
+        items={items}
         stopEditing={stopEditing}
         isReturning={isReturning}
         setIsReturning={setIsReturning}

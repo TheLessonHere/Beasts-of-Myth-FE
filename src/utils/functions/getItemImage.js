@@ -14,7 +14,7 @@ import assistbrace from '../../data/assets/assistbrace.png';
 import firstaidkit from '../../data/assets/firstaidkit.png';
 import evilcontract from '../../data/assets/evilcontract.png';
 import specialistamulet from '../../data/assets/specialistamulet.png';
-import challangecertificate from '../../data/assets/challangecertificate.png';
+import challengecertificate from '../../data/assets/challengecertificate.png';
 import perapberry from '../../data/assets/perapberry.png';
 import asayoberry from '../../data/assets/asayoberry.png';
 import blantoberry from '../../data/assets/blantoberry.png';
@@ -107,7 +107,7 @@ export const getItemImage = (item) => {
         case "specialist amulet":
             return specialistamulet;
         case "challenge certificate":
-            return challangecertificate;
+            return challengecertificate;
         case "perap berry":
             return perapberry;
         case "asayo berry":

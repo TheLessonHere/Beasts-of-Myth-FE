@@ -18,8 +18,6 @@ const useStyles = makeStyles(theme => ({
         height: "50%",
         width: "100%",
         margin: "auto",
-        paddingLeft: "2%",
-        paddingRight: "2%",
         display: "flex",
         flexFlow: "row nowrap",
         justifyContent: "center",
