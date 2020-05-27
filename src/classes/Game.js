@@ -37,7 +37,7 @@ export default class Game {
             if(this.player1.team.active_slot.beast.status === 'Inflamed'){
                 const burnDamage = Math.round(this.player1.team.active_slot.beast.init_hp * 0.12);
                 this.player1.team.active_slot.beast.updateHP(burnDamage);
-                if(this.player1.team.active_slot.beast.hp_percentage <= 0){
+                if(this.player1.team.active_slot.beast.curr_hp <= 0){
                     this.player1.team.knockOutBeast(this.player1.team.active_slot.slotNumber);
                     this.player1.team.active_slot.beast.knockOutBeast();
                     this.player1.team.active_slot.beast.makeInactive();
@@ -54,7 +54,12 @@ export default class Game {
                     case 'Evil Contract':
                         this.player1.team.active_slot.beast.item.effect(this.player1.team.active_slot.beast);
                         effects.p1itemeffect = 'Evil Contract';
-                        // Handle case for beast getting knocked out by contract
+                        if(this.player1.team.active_slot.beast.curr_hp <= 0){
+                            this.player1.team.knockOutBeast(this.player1.team.active_slot.slotNumber);
+                            this.player1.team.active_slot.beast.knockOutBeast();
+                            this.player1.team.active_slot.beast.makeInactive();
+                            this.player1.team.clearActiveSlot();
+                        }
                         break;
                     case 'Bright Stone':
                         if(this.player1.team.active_slot.beast.status === null){
@@ -118,7 +123,7 @@ export default class Game {
             if(this.player2.team.active_slot.beast.status === 'Inflamed'){
                 const burnDamage = Math.round(this.player2.team.active_slot.beast.init_hp * 0.12);
                 this.player2.team.active_slot.beast.updateHP(burnDamage);
-                if(this.player2.team.active_slot.beast.hp_percentage <= 0){
+                if(this.player2.team.active_slot.beast.curr_hp <= 0){
                     this.player2.team.knockOutBeast(this.player2.team.active_slot.slotNumber);
                     this.player2.team.active_slot.beast.knockOutBeast();
                     this.player2.team.active_slot.beast.makeInactive();
@@ -135,7 +140,12 @@ export default class Game {
                     case 'Evil Contract':
                         this.player2.team.active_slot.beast.item.effect(this.player2.team.active_slot.beast);
                         effects.p1itemeffect = 'Evil Contract';
-                        // Handle case for beast getting knocked out by contract
+                        if(this.player2.team.active_slot.beast.curr_hp <= 0){
+                            this.player2.team.knockOutBeast(this.player2.team.active_slot.slotNumber);
+                            this.player2.team.active_slot.beast.knockOutBeast();
+                            this.player2.team.active_slot.beast.makeInactive();
+                            this.player2.team.clearActiveSlot();
+                        }
                         break;
                     case 'Bright Stone':
                         if(this.player2.team.active_slot.beast.status === null){
