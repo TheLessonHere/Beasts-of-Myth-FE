@@ -27,6 +27,175 @@ export default class Game {
         this.incrementFreshness();
         this.compareFreshness();
         this.compareSC();
+        let effects = {
+            p1inflamed: false,
+            p2inflamed: false,
+            p1itemeffect: null,
+            p2itemeffect: null
+        };
+        if(this.player1.team.active_slot.beast){
+            if(this.player1.team.active_slot.beast.status === 'Inflamed'){
+                const burnDamage = Math.round(this.player1.team.active_slot.beast.init_hp * 0.12);
+                this.player1.team.active_slot.beast.updateHP(burnDamage);
+                if(this.player1.team.active_slot.beast.hp_percentage <= 0){
+                    this.player1.team.knockOutBeast(this.player1.team.active_slot.slotNumber);
+                    this.player1.team.active_slot.beast.knockOutBeast();
+                    this.player1.team.active_slot.beast.makeInactive();
+                    this.player1.team.clearActiveSlot();
+                }
+                effects.p1inflamed = true;
+            }
+            if(this.player1.team.active_slot.beast.item){
+                switch(this.player1.team.active_slot.beast.item.item_name){
+                    case 'First Aid Kit':
+                        this.player1.team.active_slot.beast.item.effect(this.player1.team.active_slot.beast);
+                        effects.p1itemeffect = 'First Aid Kit';
+                        break;
+                    case 'Evil Contract':
+                        this.player1.team.active_slot.beast.item.effect(this.player1.team.active_slot.beast);
+                        effects.p1itemeffect = 'Evil Contract';
+                        // Handle case for beast getting knocked out by contract
+                        break;
+                    case 'Bright Stone':
+                        if(this.player1.team.active_slot.beast.status === null){
+                            this.player1.team.active_slot.beast.addStatus('Blinded');
+                            this.player1.team.active_slot.beast.updateStatStage('pa', 0.5);
+                            effects.p1itemeffect = 'Bright Stone';
+                        }
+                        break;
+                    case 'Concussive Turbine':
+                        if(this.player1.team.active_slot.beast.status === null){
+                            this.player1.team.active_slot.beast.addStatus('Windwhipped');
+                            effects.p1itemeffect = 'Concussive Turbine';
+                        }
+                        break;
+                    case 'Entrancing Orb':
+                        if(this.player1.team.active_slot.beast.status === null){
+                            this.player1.team.active_slot.beast.addStatus('Hypnotized');
+                            this.player1.team.active_slot.beast.updateStatStage('md', 0.5);
+                            effects.p1itemeffect = 'Entrancing Orb';
+                        }
+                        break;
+                    case 'Flame Barb':
+                        if(this.player1.team.active_slot.beast.status === null){
+                            this.player1.team.active_slot.beast.addStatus('Inflamed');
+                            effects.p1itemeffect = 'Flame Barb';
+                        }
+                        break;
+                    case 'Impossible Object':
+                        if(this.player1.team.active_slot.beast.status === null){
+                            this.player1.team.active_slot.beast.addStatus('Frenzied');
+                            effects.p1itemeffect = 'Impossible Object';
+                        }
+                        break;
+                    case 'Mysterious Box':
+                        if(this.player1.team.active_slot.beast.status === null){
+                            this.player1.team.active_slot.beast.addStatus('Tormented');
+                            this.player1.team.active_slot.beast.updateStatStage('ma', 0.5);
+                            effects.p1itemeffect = 'Mysterious Box';
+                        }
+                        break;
+                    case 'Sprouting Seed':
+                        if(this.player1.team.active_slot.beast.status === null){
+                            this.player1.team.active_slot.beast.addStatus('Vinebound');
+                            this.player1.team.active_slot.beast.updateStatStage('pd', 0.5);
+                            effects.p1itemeffect = 'Sprouting Seed';
+                        }
+                        break;
+                    case 'Wet Blanket':
+                        if(this.player1.team.active_slot.beast.status === null){
+                            this.player1.team.active_slot.beast.addStatus('Inundated');
+                            this.player1.team.active_slot.beast.updateStatStage('sc', 0.5);
+                            effects.p1itemeffect = 'Wet Blanket';
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        if(this.player2.team.active_slot.beast){
+            if(this.player2.team.active_slot.beast.status === 'Inflamed'){
+                const burnDamage = Math.round(this.player2.team.active_slot.beast.init_hp * 0.12);
+                this.player2.team.active_slot.beast.updateHP(burnDamage);
+                if(this.player2.team.active_slot.beast.hp_percentage <= 0){
+                    this.player2.team.knockOutBeast(this.player2.team.active_slot.slotNumber);
+                    this.player2.team.active_slot.beast.knockOutBeast();
+                    this.player2.team.active_slot.beast.makeInactive();
+                    this.player2.team.clearActiveSlot();
+                }
+                effects.p2inflamed = true;
+            }
+            if(this.player2.team.active_slot.beast.item){
+                switch(this.player2.team.active_slot.beast.item.item_name){
+                    case 'First Aid Kit':
+                        this.player2.team.active_slot.beast.item.effect(this.player2.team.active_slot.beast);
+                        effects.p1itemeffect = 'First Aid Kit';
+                        break;
+                    case 'Evil Contract':
+                        this.player2.team.active_slot.beast.item.effect(this.player2.team.active_slot.beast);
+                        effects.p1itemeffect = 'Evil Contract';
+                        // Handle case for beast getting knocked out by contract
+                        break;
+                    case 'Bright Stone':
+                        if(this.player2.team.active_slot.beast.status === null){
+                            this.player2.team.active_slot.beast.addStatus('Blinded');
+                            this.player2.team.active_slot.beast.updateStatStage('pa', 0.5);
+                            effects.p1itemeffect = 'Bright Stone';
+                        }
+                        break;
+                    case 'Concussive Turbine':
+                        if(this.player2.team.active_slot.beast.status === null){
+                            this.player2.team.active_slot.beast.addStatus('Windwhipped');
+                            effects.p1itemeffect = 'Concussive Turbine';
+                        }
+                        break;
+                    case 'Entrancing Orb':
+                        if(this.player2.team.active_slot.beast.status === null){
+                            this.player2.team.active_slot.beast.addStatus('Hypnotized');
+                            this.player2.team.active_slot.beast.updateStatStage('md', 0.5);
+                            effects.p1itemeffect = 'Entrancing Orb';
+                        }
+                        break;
+                    case 'Flame Barb':
+                        if(this.player2.team.active_slot.beast.status === null){
+                            this.player2.team.active_slot.beast.addStatus('Inflamed');
+                            effects.p1itemeffect = 'Flame Barb';
+                        }
+                        break;
+                    case 'Impossible Object':
+                        if(this.player2.team.active_slot.beast.status === null){
+                            this.player2.team.active_slot.beast.addStatus('Frenzied');
+                            effects.p1itemeffect = 'Impossible Object';
+                        }
+                        break;
+                    case 'Mysterious Box':
+                        if(this.player2.team.active_slot.beast.status === null){
+                            this.player2.team.active_slot.beast.addStatus('Tormented');
+                            this.player2.team.active_slot.beast.updateStatStage('ma', 0.5);
+                            effects.p1itemeffect = 'Mysterious Box';
+                        }
+                        break;
+                    case 'Sprouting Seed':
+                        if(this.player2.team.active_slot.beast.status === null){
+                            this.player2.team.active_slot.beast.addStatus('Vinebound');
+                            this.player2.team.active_slot.beast.updateStatStage('pd', 0.5);
+                            effects.p1itemeffect = 'Sprouting Seed';
+                        }
+                        break;
+                    case 'Wet Blanket':
+                        if(this.player2.team.active_slot.beast.status === null){
+                            this.player2.team.active_slot.beast.addStatus('Inundated');
+                            this.player2.team.active_slot.beast.updateStatStage('sc', 0.5);
+                            effects.p1itemeffect = 'Wet Blanket';
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        return effects;
     }
 
     selectAction(action, player_id){
@@ -559,14 +728,15 @@ export default class Game {
         this.player2.clearAction();
         this.player2_action = null;
         this.first_to_act = null;
-        this.updateTurnCounter();
+        const eotEffects = this.updateTurnCounter();
         return {
             firstAction: firstAction,
             p1ActionStatement: p1ActionStatement,
             p2ActionStatement: p2ActionStatement,
             p1Super: p1Super,
             p2Super: p2Super,
-            hazardDeath: false
+            hazardDeath: false,
+            eotEffects: eotEffects
         };
     }
 

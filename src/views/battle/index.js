@@ -20,6 +20,7 @@ import BattleRoom from './components/BattleRoom';
 // Functions
 import { domainEffectivenessMap } from '../../utils/functions/domainEffectivenessMap';
 import createMessage from './functions/createMessage';
+import endOfTurn from './functions/createMessage';
 // Socket
 import io from 'socket.io-client';
 // Classes
@@ -187,13 +188,11 @@ function Battle(props) {
           }
           const gameLogResult = gameCopy.executeActions();
           const messageArr = createMessage(gameLogResult, gameCopy);
-          const chatLogArr = messageArr.map((message, index) => {
-            if(index === messageArr.length - 1){
-              return {message: message, turnDidEnd: true}
-            }
+          const chatLogArr = messageArr.map(message => {
             return {message: message}
           });
-          setActionsReceivedFromOpponent([...chatLogArr]);
+          const endOfTurnMessages = endOfTurn(gameLogResult.effects, game);
+          setActionsReceivedFromOpponent([...chatLogArr, ...endOfTurnMessages]);
           if(gameCopy.player1.team.active_slot.beast === null ||
             gameCopy.player2.team.active_slot.beast === null){
               setBeastDidGetKOd(true);
@@ -352,13 +351,11 @@ function Battle(props) {
       }
       const gameLogResult = gameCopy.executeActions();
       const messageArr = createMessage(gameLogResult, gameCopy);
-      const chatLogArr = messageArr.map((message, index) => {
-        if(index === messageArr.length - 1){
-          return {message: message, turnDidEnd: true}
-        }
+      const chatLogArr = messageArr.map(message => {
         return {message: message}
       });
-      setChatLog([...chatLog, ...chatLogArr]);
+      const endOfTurnMessages = endOfTurn(gameLogResult.effects, game);
+      setChatLog([...chatLog, ...chatLogArr, ...endOfTurnMessages]);
       if(gameCopy.player1.team.active_slot.beast === null ||
         gameCopy.player2.team.active_slot.beast === null){
           setBeastDidGetKOd(true);

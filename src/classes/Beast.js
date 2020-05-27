@@ -33,7 +33,6 @@ export default class Beast {
                         .set('move3', null)
                         .set('move4', null);
         this.status = null;
-        this.turnsInflamed = 0;
         this.disabled_moves = [];
         this.move_list = moveList;
         this.slot = null;
@@ -263,7 +262,6 @@ export default class Beast {
     makeInactive(){
         this.resetStats();
         this.resetTurnsIn();
-        this.resetTurnsInflamed();
     }
 
     incrementTurnsIn(){
@@ -272,10 +270,6 @@ export default class Beast {
 
     resetTurnsIn(){
         this.turnsIn = 0;
-    }
-
-    resetTurnsInflamed(){
-        this.turnsInflamed = 0;
     }
 
     updateSlot(slot){
