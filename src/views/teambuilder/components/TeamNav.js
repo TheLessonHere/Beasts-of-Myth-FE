@@ -32,6 +32,7 @@ import Item from '../../../classes/Item';
 // Libraries
 import { beasts } from '../../../data/libraries/BeastLibrary';
 import { moves } from '../../../data/libraries/MoveLibrary';
+import { items } from '../../../data/libraries/ItemLibrary';
 
 function TabPanel(props) {
     const { children, value, index, classes, ...other } = props;
@@ -245,6 +246,7 @@ function TeamNav(props) {
     const chooseItem = (event) => {
       setIsChoosingMove(false);
       setIsChoosingItem(true);
+      setItemSuggestions(items);
     }
 
     const onItemSearch = (event) => {
@@ -322,6 +324,28 @@ function TeamNav(props) {
       setActiveMoveSlot(event.target.id);
       setIsChoosingItem(false);
       setIsChoosingMove(true);
+      let beastMoveList;
+      switch(activeSlot){
+        case 'slot1':
+          beastMoveList = slot1.move_list;
+          break;
+        case 'slot2':
+          beastMoveList = slot2.move_list;
+          break;
+        case 'slot3':
+          beastMoveList = slot3.move_list;
+          break;
+        case 'slot4':
+          beastMoveList = slot4.move_list;
+          break;
+        case 'slot5':
+          beastMoveList = slot5.move_list;
+          break;
+        default:
+          console.log("Error getting beast movelist.");
+      }
+      const beastMoves = moves.filter(move => beastMoveList.includes(move.move_name));
+      setMoveSuggestions(beastMoves);
     }
 
     const onMoveSearch = (event) => {

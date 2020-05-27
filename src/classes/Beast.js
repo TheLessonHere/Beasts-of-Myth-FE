@@ -35,7 +35,7 @@ export default class Beast {
         this.status = null;
         this.turnsInflamed = 0;
         this.disabled_moves = [];
-        this.moveList = moveList;
+        this.move_list = moveList;
         this.slot = null;
         this.knocked_out = false;
     }

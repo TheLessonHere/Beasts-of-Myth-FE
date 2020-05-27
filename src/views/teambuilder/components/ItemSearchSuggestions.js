@@ -7,7 +7,8 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles(theme => ({
     container: {
-        height: "50%"
+        height: "50%",
+        overflow: 'auto'
     }
 }));
 
