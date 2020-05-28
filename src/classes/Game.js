@@ -879,17 +879,20 @@ export default class Game {
                 console.log('Error calculating domain modifier.');
         }
 
-        let damage = 0;
+        let rawDamage = 0;
+        let damage;
 
         if(moveType == 'physical'){
             console.log(basePower, sameTypeBonus, domainModifier, attackingBeast.curr_pa, defendingBeast.curr_pd, effectiveness, critRoll);
-            damage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_pa / defendingBeast.curr_pd)) * effectiveness;
+            rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_pa / defendingBeast.curr_pd)) * effectiveness;
+            damage = Math.round(rawDamage * 100) / 100;
             if(critRoll){
                 damage = damage * 2;
             }
         } else {
             console.log(basePower, sameTypeBonus, domainModifier, attackingBeast.curr_ma, defendingBeast.curr_md, effectiveness, critRoll);
-            damage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_ma / defendingBeast.curr_md)) * effectiveness;
+            rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_ma / defendingBeast.curr_md)) * effectiveness;
+            damage = Math.round(rawDamage * 100) / 100;
             if(critRoll){
                 damage = damage * 2;
             }

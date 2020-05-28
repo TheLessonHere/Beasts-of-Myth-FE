@@ -465,12 +465,15 @@ function Battle(props) {
               console.log('Error calculating domain modifier.');
       }
 
-      let damage = 0;
+      let rawDamage = 0;
+      let damage;
 
         if(moveType == 'physical'){
-          damage = (((basePower + sameTypeBonus) * domainModifier) * (player.team.active_slot.beast.curr_pa / opponent.team.active_slot.beast.curr_pd)) * effectiveness;
+          rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (player.team.active_slot.beast.curr_pa / opponent.team.active_slot.beast.curr_pd)) * effectiveness;
+          damage = Math.round(rawDamage * 100) / 100;
       } else {
-          damage = (((basePower + sameTypeBonus) * domainModifier) * (player.team.active_slot.beast.curr_ma / opponent.team.active_slot.beast.curr_md)) * effectiveness;
+          rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (player.team.active_slot.beast.curr_ma / opponent.team.active_slot.beast.curr_md)) * effectiveness;
+          damage = Math.round(rawDamage * 100) / 100;
       }
 
       return {damage: damage, damageWithCrit: damage * 2};

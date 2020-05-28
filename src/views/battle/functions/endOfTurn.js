@@ -90,7 +90,7 @@ export default function endOfTurn(effects, game){
         }
     }
 
-    if(messagesArr.length >= 0){
+    if(messagesArr.length > 0){
         const allMessages = messagesArr.map((message, idx) => {
             if(idx === messagesArr.length - 1){
                 return {
