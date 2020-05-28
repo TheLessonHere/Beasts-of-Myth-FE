@@ -20,7 +20,7 @@ import BattleRoom from './components/BattleRoom';
 // Functions
 import { domainEffectivenessMap } from '../../utils/functions/domainEffectivenessMap';
 import createMessage from './functions/createMessage';
-import endOfTurn from './functions/createMessage';
+import endOfTurn from './functions/endOfTurn';
 // Socket
 import io from 'socket.io-client';
 // Classes
@@ -191,7 +191,7 @@ function Battle(props) {
           const chatLogArr = messageArr.map(message => {
             return {message: message}
           });
-          const endOfTurnMessages = endOfTurn(gameLogResult.effects, game);
+          const endOfTurnMessages = endOfTurn(gameLogResult.eotEffects, game);
           setActionsReceivedFromOpponent([...chatLogArr, ...endOfTurnMessages]);
           if(gameCopy.player1.team.active_slot.beast === null ||
             gameCopy.player2.team.active_slot.beast === null){
@@ -354,7 +354,8 @@ function Battle(props) {
       const chatLogArr = messageArr.map(message => {
         return {message: message}
       });
-      const endOfTurnMessages = endOfTurn(gameLogResult.effects, game);
+      const endOfTurnMessages = endOfTurn(gameLogResult.eotEffects, game);
+      console.log("EOT:", endOfTurnMessages, "GLR:", gameLogResult, "CLA:", chatLogArr);
       setChatLog([...chatLog, ...chatLogArr, ...endOfTurnMessages]);
       if(gameCopy.player1.team.active_slot.beast === null ||
         gameCopy.player2.team.active_slot.beast === null){

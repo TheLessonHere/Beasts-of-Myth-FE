@@ -733,21 +733,45 @@ export default class Game {
                 player2ActionCompleted = true;
             }
         }
-        this.player1.clearAction();
-        this.player1_action = null;
-        this.player2.clearAction();
-        this.player2_action = null;
-        this.first_to_act = null;
-        const eotEffects = this.updateTurnCounter();
-        return {
-            firstAction: firstAction,
-            p1ActionStatement: p1ActionStatement,
-            p2ActionStatement: p2ActionStatement,
-            p1Super: p1Super,
-            p2Super: p2Super,
-            hazardDeath: false,
-            eotEffects: eotEffects
-        };
+        if(this.player1_action.actionType === 'starting-beast' &&
+        this.player2_action.actionType === 'starting-beast'){
+            let eotEffects = {
+                p1inflamed: false,
+                p2inflamed: false,
+                p1itemeffect: null,
+                p2itemeffect: null
+            };
+            this.player1.clearAction();
+            this.player1_action = null;
+            this.player2.clearAction();
+            this.player2_action = null;
+            this.first_to_act = null;
+            return {
+                firstAction: firstAction,
+                p1ActionStatement: p1ActionStatement,
+                p2ActionStatement: p2ActionStatement,
+                p1Super: p1Super,
+                p2Super: p2Super,
+                hazardDeath: false,
+                eotEffects: eotEffects
+            };
+        } else {
+            const eotEffects = this.updateTurnCounter();
+            this.player1.clearAction();
+            this.player1_action = null;
+            this.player2.clearAction();
+            this.player2_action = null;
+            this.first_to_act = null;
+            return {
+                firstAction: firstAction,
+                p1ActionStatement: p1ActionStatement,
+                p2ActionStatement: p2ActionStatement,
+                p1Super: p1Super,
+                p2Super: p2Super,
+                hazardDeath: false,
+                eotEffects: eotEffects
+            };
+        }
     }
 
     critRoll(critRolls){
@@ -985,7 +1009,7 @@ export default class Game {
             if(this.player1.team.active_slot.beast.curr_sc > this.player2.team.active_slot.beast.curr_sc){
                 this.faster_active_beast = 'player1';
             }
-            else if(this.player2.team.active_slot.beast.curr_sc < this.player1.team.active_slot.beast.curr_sc){
+            else if(this.player2.team.active_slot.beast.curr_sc > this.player1.team.active_slot.beast.curr_sc){
                 this.faster_active_beast = 'player2';
             } else {
                 this.faster_active_beast = 'tie';

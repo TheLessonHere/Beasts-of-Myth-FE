@@ -129,7 +129,6 @@ export default function HealthBar(props){
     useEffect(() => {
         if(isPlayer){
             if(player.team.active_slot.beast){
-                console.log('Player');
                 const percentage = player.team.active_slot.beast.hp_percentage / 100;
                 setHealthPercentage(1 * percentage);
                 const differingStats = [];
@@ -208,7 +207,6 @@ export default function HealthBar(props){
         }
         if(isOpponent){
             if(opponent.team.active_slot.beast){
-                console.log('Opponent');
                 const percentage = opponent.team.active_slot.beast.hp_percentage / 100;
                 setHealthPercentage(1 * percentage);
                 const differingStats = [];

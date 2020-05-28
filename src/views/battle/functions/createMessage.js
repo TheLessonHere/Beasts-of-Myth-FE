@@ -1835,8 +1835,7 @@ export default function createMessage(actionObject, game){
             }
         }
     } else {
-        return {
-            firstAction: 'Error processing first action.'
-        }
+        const firstAction = 'Error processing first action.'
+        return [firstAction];
     }
 }
