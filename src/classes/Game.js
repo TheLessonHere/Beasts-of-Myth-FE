@@ -37,7 +37,7 @@ export default class Game {
             if(this.player1.team.active_slot.beast.status === 'Inflamed'){
                 const burnDamage = Math.round(this.player1.team.active_slot.beast.init_hp * 0.12);
                 this.player1.team.active_slot.beast.updateHP(burnDamage);
-                if(this.player1.team.active_slot.beast.hp_percentage <= 0){
+                if(this.player1.team.active_slot.beast.curr_hp <= 0){
                     this.player1.team.knockOutBeast(this.player1.team.active_slot.slotNumber);
                     this.player1.team.active_slot.beast.knockOutBeast();
                     this.player1.team.active_slot.beast.makeInactive();
@@ -54,7 +54,12 @@ export default class Game {
                     case 'Evil Contract':
                         this.player1.team.active_slot.beast.item.effect(this.player1.team.active_slot.beast);
                         effects.p1itemeffect = 'Evil Contract';
-                        // Handle case for beast getting knocked out by contract
+                        if(this.player1.team.active_slot.beast.curr_hp <= 0){
+                            this.player1.team.knockOutBeast(this.player1.team.active_slot.slotNumber);
+                            this.player1.team.active_slot.beast.knockOutBeast();
+                            this.player1.team.active_slot.beast.makeInactive();
+                            this.player1.team.clearActiveSlot();
+                        }
                         break;
                     case 'Bright Stone':
                         if(this.player1.team.active_slot.beast.status === null){
@@ -118,7 +123,7 @@ export default class Game {
             if(this.player2.team.active_slot.beast.status === 'Inflamed'){
                 const burnDamage = Math.round(this.player2.team.active_slot.beast.init_hp * 0.12);
                 this.player2.team.active_slot.beast.updateHP(burnDamage);
-                if(this.player2.team.active_slot.beast.hp_percentage <= 0){
+                if(this.player2.team.active_slot.beast.curr_hp <= 0){
                     this.player2.team.knockOutBeast(this.player2.team.active_slot.slotNumber);
                     this.player2.team.active_slot.beast.knockOutBeast();
                     this.player2.team.active_slot.beast.makeInactive();
@@ -135,7 +140,12 @@ export default class Game {
                     case 'Evil Contract':
                         this.player2.team.active_slot.beast.item.effect(this.player2.team.active_slot.beast);
                         effects.p1itemeffect = 'Evil Contract';
-                        // Handle case for beast getting knocked out by contract
+                        if(this.player2.team.active_slot.beast.curr_hp <= 0){
+                            this.player2.team.knockOutBeast(this.player2.team.active_slot.slotNumber);
+                            this.player2.team.active_slot.beast.knockOutBeast();
+                            this.player2.team.active_slot.beast.makeInactive();
+                            this.player2.team.clearActiveSlot();
+                        }
                         break;
                     case 'Bright Stone':
                         if(this.player2.team.active_slot.beast.status === null){
@@ -723,21 +733,45 @@ export default class Game {
                 player2ActionCompleted = true;
             }
         }
-        this.player1.clearAction();
-        this.player1_action = null;
-        this.player2.clearAction();
-        this.player2_action = null;
-        this.first_to_act = null;
-        const eotEffects = this.updateTurnCounter();
-        return {
-            firstAction: firstAction,
-            p1ActionStatement: p1ActionStatement,
-            p2ActionStatement: p2ActionStatement,
-            p1Super: p1Super,
-            p2Super: p2Super,
-            hazardDeath: false,
-            eotEffects: eotEffects
-        };
+        if(this.player1_action.actionType === 'starting-beast' &&
+        this.player2_action.actionType === 'starting-beast'){
+            let eotEffects = {
+                p1inflamed: false,
+                p2inflamed: false,
+                p1itemeffect: null,
+                p2itemeffect: null
+            };
+            this.player1.clearAction();
+            this.player1_action = null;
+            this.player2.clearAction();
+            this.player2_action = null;
+            this.first_to_act = null;
+            return {
+                firstAction: firstAction,
+                p1ActionStatement: p1ActionStatement,
+                p2ActionStatement: p2ActionStatement,
+                p1Super: p1Super,
+                p2Super: p2Super,
+                hazardDeath: false,
+                eotEffects: eotEffects
+            };
+        } else {
+            const eotEffects = this.updateTurnCounter();
+            this.player1.clearAction();
+            this.player1_action = null;
+            this.player2.clearAction();
+            this.player2_action = null;
+            this.first_to_act = null;
+            return {
+                firstAction: firstAction,
+                p1ActionStatement: p1ActionStatement,
+                p2ActionStatement: p2ActionStatement,
+                p1Super: p1Super,
+                p2Super: p2Super,
+                hazardDeath: false,
+                eotEffects: eotEffects
+            };
+        }
     }
 
     critRoll(critRolls){
@@ -845,17 +879,20 @@ export default class Game {
                 console.log('Error calculating domain modifier.');
         }
 
-        let damage = 0;
+        let rawDamage = 0;
+        let damage;
 
         if(moveType == 'physical'){
             console.log(basePower, sameTypeBonus, domainModifier, attackingBeast.curr_pa, defendingBeast.curr_pd, effectiveness, critRoll);
-            damage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_pa / defendingBeast.curr_pd)) * effectiveness;
+            rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_pa / defendingBeast.curr_pd)) * effectiveness;
+            damage = Math.round(rawDamage * 100) / 100;
             if(critRoll){
                 damage = damage * 2;
             }
         } else {
             console.log(basePower, sameTypeBonus, domainModifier, attackingBeast.curr_ma, defendingBeast.curr_md, effectiveness, critRoll);
-            damage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_ma / defendingBeast.curr_md)) * effectiveness;
+            rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_ma / defendingBeast.curr_md)) * effectiveness;
+            damage = Math.round(rawDamage * 100) / 100;
             if(critRoll){
                 damage = damage * 2;
             }
@@ -975,7 +1012,7 @@ export default class Game {
             if(this.player1.team.active_slot.beast.curr_sc > this.player2.team.active_slot.beast.curr_sc){
                 this.faster_active_beast = 'player1';
             }
-            else if(this.player2.team.active_slot.beast.curr_sc < this.player1.team.active_slot.beast.curr_sc){
+            else if(this.player2.team.active_slot.beast.curr_sc > this.player1.team.active_slot.beast.curr_sc){
                 this.faster_active_beast = 'player2';
             } else {
                 this.faster_active_beast = 'tie';
