@@ -366,6 +366,12 @@ export default function PlayerHUD(props) {
                         ""}
                         </Typography>
                         <Typography className={classes.beastStat}>
+                            Item: {hoverInfo && hoverInfo.beastInfo &&
+                        hoverInfo.beastInfo.item ?
+                        hoverInfo.beastInfo.item.item_name :
+                        "None"}
+                        </Typography>
+                        <Typography className={classes.beastStat}>
                             Status: {hoverInfo && hoverInfo.beastInfo &&
                         hoverInfo.beastInfo.status ?
                         hoverInfo.beastInfo.status :

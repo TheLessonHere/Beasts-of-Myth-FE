@@ -289,6 +289,7 @@ export default function HealthBar(props){
                 setStyleProps({...styleProps, amount: 'red'})
             }
         }
+        console.log("Game Did Update")
     }, [ gameDidUpdate ])
 
     useEffect(() => {

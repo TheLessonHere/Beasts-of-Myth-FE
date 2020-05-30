@@ -16,11 +16,11 @@ export default function createMessage(actionObject, game){
                         if(actionObject.p1ActionStatement.statement){
                             // p1's action had an additional print statement
                             const fifthAction = actionObject.p1ActionStatement.statement;
-                            const sixthAction = actionObject.p2ActionStatement.statement;
+                            const sixthAction = actionObject.p2ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction];
                         } else {
                             // p1's action had no additional print statment
-                            const fifthAction = actionObject.p2ActionStatement.statement;
+                            const fifthAction = actionObject.p2ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction];
                         }
                     } else {
@@ -40,11 +40,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p2ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const eigthAction = actionObject.p2ActionStatement.statement;
-                                            const ninthAction = actionObject.p1ActionStatement.statement;
+                                            const ninthAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction, eigthAction, ninthAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const eigthAction = actionObject.p1ActionStatement.statement;
+                                            const eigthAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction, eigthAction]
                                         }
                                     } else {
@@ -78,11 +78,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p2ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const seventhAction = actionObject.p2ActionStatement.statement;
-                                            const eigthAction = actionObject.p1ActionStatement.statement;
+                                            const eigthAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction, eigthAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const seventhAction = actionObject.p1ActionStatement.statement;
+                                            const seventhAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction]
                                         }
                                     } else {
@@ -121,11 +121,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p2ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const seventhAction = actionObject.p2ActionStatement.statement;
-                                        const eigthAction = actionObject.p1ActionStatement.statement;
+                                        const eigthAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction, eigthAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const seventhAction = actionObject.p1ActionStatement.statement;
+                                        const seventhAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction]
                                     }
                                 } else {
@@ -160,11 +160,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p2ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const seventhAction = actionObject.p2ActionStatement.statement;
-                                        const eigthAction = actionObject.p1ActionStatement.statement;
+                                        const eigthAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction, eigthAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const seventhAction = actionObject.p1ActionStatement.statement;
+                                        const seventhAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction]
                                     }
                                 } else {
@@ -205,11 +205,11 @@ export default function createMessage(actionObject, game){
                             if(actionObject.p2ActionStatement.statement){
                                 // p2's action had an additional print statement
                                 const sixthAction = actionObject.p2ActionStatement.statement;
-                                const seventhAction = actionObject.p1ActionStatement.statement;
+                                const seventhAction = actionObject.p1ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                             } else {
                                 // p2's action had no additional print statement
-                                const sixthAction = actionObject.p1ActionStatement.statement;
+                                const sixthAction = actionObject.p1ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                             }
                         } else {
@@ -246,11 +246,11 @@ export default function createMessage(actionObject, game){
                         if(actionObject.p1ActionStatement.statement){
                             // p1's action had an additional print statement
                             const fourthAction = actionObject.p1ActionStatement.statement;
-                            const fifthAction = actionObject.p2ActionStatement.statement;
+                            const fifthAction = actionObject.p2ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction];
                         } else {
                             // p1's action had no additional print statment
-                            const fourthAction = actionObject.p2ActionStatement.statement;
+                            const fourthAction = actionObject.p2ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction, fourthAction];
                         }
                     } else {
@@ -270,11 +270,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p2ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const seventhAction = actionObject.p2ActionStatement.statement;
-                                            const eigthAction = actionObject.p1ActionStatement.statement;
+                                            const eigthAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction, eigthAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const seventhAction = actionObject.p1ActionStatement.statement;
+                                            const seventhAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction]
                                         }
                                     } else {
@@ -308,11 +308,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p2ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const sixthAction = actionObject.p2ActionStatement.statement;
-                                            const seventhAction = actionObject.p1ActionStatement.statement;
+                                            const seventhAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const sixthAction = actionObject.p1ActionStatement.statement;
+                                            const sixthAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                                         }
                                     } else {
@@ -351,11 +351,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p2ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const sixthAction = actionObject.p2ActionStatement.statement;
-                                        const seventhAction = actionObject.p1ActionStatement.statement;
+                                        const seventhAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const sixthAction = actionObject.p1ActionStatement.statement;
+                                        const sixthAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                                     }
                                 } else {
@@ -390,11 +390,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p2ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const sixthAction = actionObject.p2ActionStatement.statement;
-                                        const seventhAction = actionObject.p1ActionStatement.statement;
+                                        const seventhAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const sixthAction = actionObject.p1ActionStatement.statement;
+                                        const sixthAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                                     }
                                 } else {
@@ -434,11 +434,11 @@ export default function createMessage(actionObject, game){
                             if(actionObject.p2ActionStatement.statement){
                                 // p2's action had an additional print statement
                                 const fifthAction = actionObject.p2ActionStatement.statement;
-                                const sixthAction = actionObject.p1ActionStatement.statement;
+                                const sixthAction = actionObject.p1ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction];
                             } else {
                                 // p2's action had no additional print statement
-                                const fifthAction = actionObject.p1ActionStatement.statement;
+                                const fifthAction = actionObject.p1ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction, fifthAction]
                             }
                         } else {
@@ -475,11 +475,11 @@ export default function createMessage(actionObject, game){
                         if(actionObject.p1ActionStatement.statement){
                             // p1's action had an additional print statement
                             const fourthAction = actionObject.p1ActionStatement.statement;
-                            const fifthAction = actionObject.p2ActionStatement.statement;
+                            const fifthAction = actionObject.p2ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction];
                         } else {
                             // p1's action had no additional print statment
-                            const fourthAction = actionObject.p2ActionStatement.statement;
+                            const fourthAction = actionObject.p2ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction, fourthAction];
                         }
                     } else {
@@ -499,11 +499,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p2ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const seventhAction = actionObject.p2ActionStatement.statement;
-                                            const eigthAction = actionObject.p1ActionStatement.statement;
+                                            const eigthAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction, eigthAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const seventhAction = actionObject.p1ActionStatement.statement;
+                                            const seventhAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction]
                                         }
                                     } else {
@@ -537,11 +537,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p2ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const sixthAction = actionObject.p2ActionStatement.statement;
-                                            const seventhAction = actionObject.p1ActionStatement.statement;
+                                            const seventhAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const sixthAction = actionObject.p1ActionStatement.statement;
+                                            const sixthAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                                         }
                                     } else {
@@ -580,11 +580,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p2ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const sixthAction = actionObject.p2ActionStatement.statement;
-                                        const seventhAction = actionObject.p1ActionStatement.statement;
+                                        const seventhAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const sixthAction = actionObject.p1ActionStatement.statement;
+                                        const sixthAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                                     }
                                 } else {
@@ -619,11 +619,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p2ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const sixthAction = actionObject.p2ActionStatement.statement;
-                                        const seventhAction = actionObject.p1ActionStatement.statement;
+                                        const seventhAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const sixthAction = actionObject.p1ActionStatement.statement;
+                                        const sixthAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                                     }
                                 } else {
@@ -663,11 +663,11 @@ export default function createMessage(actionObject, game){
                             if(actionObject.p2ActionStatement.statement){
                                 // p2's action had an additional print statement
                                 const fifthAction = actionObject.p2ActionStatement.statement;
-                                const sixthAction = actionObject.p1ActionStatement.statement;
+                                const sixthAction = actionObject.p1ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction];
                             } else {
                                 // p2's action had no additional print statement
-                                const fifthAction = actionObject.p1ActionStatement.statement;
+                                const fifthAction = actionObject.p1ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction, fifthAction]
                             }
                         } else {
@@ -702,11 +702,11 @@ export default function createMessage(actionObject, game){
                         if(actionObject.p1ActionStatement.statement){
                             // p1's action had an additional print statement
                             const thirdAction = actionObject.p1ActionStatement.statement;
-                            const fourthAction = actionObject.p2ActionStatement.statement;
+                            const fourthAction = actionObject.p2ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction, fourthAction];
                         } else {
                             // p1's action had no additional print statment
-                            const thirdAction = actionObject.p2ActionStatement.statement;
+                            const thirdAction = actionObject.p2ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction];
                         }
                     } else {
@@ -726,11 +726,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p2ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const sixthAction = actionObject.p2ActionStatement.statement;
-                                            const seventhAction = actionObject.p1ActionStatement.statement;
+                                            const seventhAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const sixthAction = actionObject.p1ActionStatement.statement;
+                                            const sixthAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                                         }
                                     } else {
@@ -764,11 +764,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p2ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const fifthAction = actionObject.p2ActionStatement.statement;
-                                            const sixthAction = actionObject.p1ActionStatement.statement;
+                                            const sixthAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const fifthAction = actionObject.p1ActionStatement.statement;
+                                            const fifthAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction]
                                         }
                                     } else {
@@ -807,11 +807,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p2ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const fifthAction = actionObject.p2ActionStatement.statement;
-                                        const sixthAction = actionObject.p1ActionStatement.statement;
+                                        const sixthAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const fifthAction = actionObject.p1ActionStatement.statement;
+                                        const fifthAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction]
                                     }
                                 } else {
@@ -846,11 +846,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p2ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const fifthAction = actionObject.p2ActionStatement.statement;
-                                        const sixthAction = actionObject.p1ActionStatement.statement;
+                                        const sixthAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const fifthAction = actionObject.p1ActionStatement.statement;
+                                        const fifthAction = actionObject.p1ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction]
                                     }
                                 } else {
@@ -890,11 +890,11 @@ export default function createMessage(actionObject, game){
                             if(actionObject.p2ActionStatement.statement){
                                 // p2's action had an additional print statement
                                 const fourthAction = actionObject.p2ActionStatement.statement;
-                                const fifthAction = actionObject.p1ActionStatement.statement;
+                                const fifthAction = actionObject.p1ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction, fifthAction];
                             } else {
                                 // p2's action had no additional print statement
-                                const fourthAction = actionObject.p1ActionStatement.statement;
+                                const fourthAction = actionObject.p1ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction]
                             }
                         } else {
@@ -934,11 +934,11 @@ export default function createMessage(actionObject, game){
                         if(actionObject.p2ActionStatement.statement){
                             // p1's action had an additional print statement
                             const fifthAction = actionObject.p2ActionStatement.statement;
-                            const sixthAction = actionObject.p1ActionStatement.statement;
+                            const sixthAction = actionObject.p1ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction];
                         } else {
                             // p1's action had no additional print statment
-                            const fifthAction = actionObject.p1ActionStatement.statement;
+                            const fifthAction = actionObject.p1ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction];
                         }
                     } else {
@@ -958,11 +958,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p2ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const eigthAction = actionObject.p2ActionStatement.statement;
-                                            const ninthAction = actionObject.p1ActionStatement.statement;
+                                            const ninthAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction, eigthAction, ninthAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const eigthAction = actionObject.p1ActionStatement.statement;
+                                            const eigthAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction, eigthAction]
                                         }
                                     } else {
@@ -996,11 +996,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p2ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const seventhAction = actionObject.p2ActionStatement.statement;
-                                            const eigthAction = actionObject.p1ActionStatement.statement;
+                                            const eigthAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction, eigthAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const seventhAction = actionObject.p1ActionStatement.statement;
+                                            const seventhAction = actionObject.p1ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction]
                                         }
                                     } else {
@@ -1039,11 +1039,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p1ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const seventhAction = actionObject.p1ActionStatement.statement;
-                                        const eigthAction = actionObject.p2ActionStatement.statement;
+                                        const eigthAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction, eigthAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const seventhAction = actionObject.p2ActionStatement.statement;
+                                        const seventhAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction]
                                     }
                                 } else {
@@ -1078,11 +1078,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p1ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const seventhAction = actionObject.p1ActionStatement.statement;
-                                        const eigthAction = actionObject.p2ActionStatement.statement;
+                                        const eigthAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction, eigthAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const seventhAction = actionObject.p2ActionStatement.statement;
+                                        const seventhAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction]
                                     }
                                 } else {
@@ -1122,11 +1122,11 @@ export default function createMessage(actionObject, game){
                             if(actionObject.p1ActionStatement.statement){
                                 // p2's action had an additional print statement
                                 const sixthAction = actionObject.p1ActionStatement.statement;
-                                const seventhAction = actionObject.p2ActionStatement.statement;
+                                const seventhAction = actionObject.p2ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                             } else {
                                 // p2's action had no additional print statement
-                                const sixthAction = actionObject.p2ActionStatement.statement;
+                                const sixthAction = actionObject.p2ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                             }
                         } else {
@@ -1163,11 +1163,11 @@ export default function createMessage(actionObject, game){
                         if(actionObject.p2ActionStatement.statement){
                             // p1's action had an additional print statement
                             const fourthAction = actionObject.p2ActionStatement.statement;
-                            const fifthAction = actionObject.p1ActionStatement.statement;
+                            const fifthAction = actionObject.p1ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction];
                         } else {
                             // p1's action had no additional print statment
-                            const fourthAction = actionObject.p1ActionStatement.statement;
+                            const fourthAction = actionObject.p1ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction, fourthAction];
                         }
                     } else {
@@ -1187,11 +1187,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p1ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const seventhAction = actionObject.p1ActionStatement.statement;
-                                            const eigthAction = actionObject.p2ActionStatement.statement;
+                                            const eigthAction = actionObject.p2ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction, eigthAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const seventhAction = actionObject.p2ActionStatement.statement;
+                                            const seventhAction = actionObject.p2ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction]
                                         }
                                     } else {
@@ -1225,11 +1225,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p1ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const sixthAction = actionObject.p1ActionStatement.statement;
-                                            const seventhAction = actionObject.p2ActionStatement.statement;
+                                            const seventhAction = actionObject.p2ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const sixthAction = actionObject.p2ActionStatement.statement;
+                                            const sixthAction = actionObject.p2ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                                         }
                                     } else {
@@ -1268,11 +1268,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p1ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const sixthAction = actionObject.p1ActionStatement.statement;
-                                        const seventhAction = actionObject.p2ActionStatement.statement;
+                                        const seventhAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const sixthAction = actionObject.p2ActionStatement.statement;
+                                        const sixthAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                                     }
                                 } else {
@@ -1307,11 +1307,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p1ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const sixthAction = actionObject.p1ActionStatement.statement;
-                                        const seventhAction = actionObject.p2ActionStatement.statement;
+                                        const seventhAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const sixthAction = actionObject.p2ActionStatement.statement;
+                                        const sixthAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                                     }
                                 } else {
@@ -1351,11 +1351,11 @@ export default function createMessage(actionObject, game){
                             if(actionObject.p1ActionStatement.statement){
                                 // p2's action had an additional print statement
                                 const fifthAction = actionObject.p1ActionStatement.statement;
-                                const sixthAction = actionObject.p2ActionStatement.statement;
+                                const sixthAction = actionObject.p2ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction];
                             } else {
                                 // p2's action had no additional print statement
-                                const fifthAction = actionObject.p2ActionStatement.statement;
+                                const fifthAction = actionObject.p2ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction, fifthAction]
                             }
                         } else {
@@ -1392,11 +1392,11 @@ export default function createMessage(actionObject, game){
                         if(actionObject.p2ActionStatement.statement){
                             // p1's action had an additional print statement
                             const fourthAction = actionObject.p2ActionStatement.statement;
-                            const fifthAction = actionObject.p1ActionStatement.statement;
+                            const fifthAction = actionObject.p1ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction];
                         } else {
                             // p1's action had no additional print statment
-                            const fourthAction = actionObject.p1ActionStatement.statement;
+                            const fourthAction = actionObject.p1ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction, fourthAction];
                         }
                     } else {
@@ -1416,11 +1416,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p1ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const seventhAction = actionObject.p1ActionStatement.statement;
-                                            const eigthAction = actionObject.p2ActionStatement.statement;
+                                            const eigthAction = actionObject.p2ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction, eigthAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const seventhAction = actionObject.p2ActionStatement.statement;
+                                            const seventhAction = actionObject.p2ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction]
                                         }
                                     } else {
@@ -1454,11 +1454,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p1ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const sixthAction = actionObject.p1ActionStatement.statement;
-                                            const seventhAction = actionObject.p2ActionStatement.statement;
+                                            const seventhAction = actionObject.p2ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const sixthAction = actionObject.p2ActionStatement.statement;
+                                            const sixthAction = actionObject.p2ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                                         }
                                     } else {
@@ -1497,11 +1497,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p1ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const sixthAction = actionObject.p1ActionStatement.statement;
-                                        const seventhAction = actionObject.p2ActionStatement.statement;
+                                        const seventhAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const sixthAction = actionObject.p2ActionStatement.statement;
+                                        const sixthAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                                     }
                                 } else {
@@ -1536,11 +1536,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p1ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const sixthAction = actionObject.p1ActionStatement.statement;
-                                        const seventhAction = actionObject.p2ActionStatement.statement;
+                                        const seventhAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const sixthAction = actionObject.p2ActionStatement.statement;
+                                        const sixthAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                                     }
                                 } else {
@@ -1580,11 +1580,11 @@ export default function createMessage(actionObject, game){
                             if(actionObject.p1ActionStatement.statement){
                                 // p2's action had an additional print statement
                                 const fifthAction = actionObject.p1ActionStatement.statement;
-                                const sixthAction = actionObject.p2ActionStatement.statement;
+                                const sixthAction = actionObject.p2ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction];
                             } else {
                                 // p2's action had no additional print statement
-                                const fifthAction = actionObject.p2ActionStatement.statement;
+                                const fifthAction = actionObject.p2ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction, fifthAction]
                             }
                         } else {
@@ -1619,11 +1619,11 @@ export default function createMessage(actionObject, game){
                         if(actionObject.p2ActionStatement.statement){
                             // p1's action had an additional print statement
                             const thirdAction = actionObject.p2ActionStatement.statement;
-                            const fourthAction = actionObject.p1ActionStatement.statement;
+                            const fourthAction = actionObject.p1ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction, fourthAction];
                         } else {
                             // p1's action had no additional print statment
-                            const thirdAction = actionObject.p1ActionStatement.statement;
+                            const thirdAction = actionObject.p1ActionStatement.KOstatement;
                             return [firstAction, secondAction, thirdAction];
                         }
                     } else {
@@ -1643,11 +1643,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p1ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const sixthAction = actionObject.p1ActionStatement.statement;
-                                            const seventhAction = actionObject.p2ActionStatement.statement;
+                                            const seventhAction = actionObject.p2ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction, seventhAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const sixthAction = actionObject.p2ActionStatement.statement;
+                                            const sixthAction = actionObject.p2ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction]
                                         }
                                     } else {
@@ -1681,11 +1681,11 @@ export default function createMessage(actionObject, game){
                                         if(actionObject.p1ActionStatement.statement){
                                             // p2's action had an additional print statement
                                             const fifthAction = actionObject.p1ActionStatement.statement;
-                                            const sixthAction = actionObject.p2ActionStatement.statement;
+                                            const sixthAction = actionObject.p2ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction];
                                         } else {
                                             // p2's action had no additional print statement
-                                            const fifthAction = actionObject.p2ActionStatement.statement;
+                                            const fifthAction = actionObject.p2ActionStatement.KOstatement;
                                             return [firstAction, secondAction, thirdAction, fourthAction, fifthAction]
                                         }
                                     } else {
@@ -1724,11 +1724,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p1ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const fifthAction = actionObject.p1ActionStatement.statement;
-                                        const sixthAction = actionObject.p2ActionStatement.statement;
+                                        const sixthAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const fifthAction = actionObject.p2ActionStatement.statement;
+                                        const fifthAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction]
                                     }
                                 } else {
@@ -1763,11 +1763,11 @@ export default function createMessage(actionObject, game){
                                     if(actionObject.p1ActionStatement.statement){
                                         // p2's action had an additional print statement
                                         const fifthAction = actionObject.p1ActionStatement.statement;
-                                        const sixthAction = actionObject.p2ActionStatement.statement;
+                                        const sixthAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction, sixthAction];
                                     } else {
                                         // p2's action had no additional print statement
-                                        const fifthAction = actionObject.p2ActionStatement.statement;
+                                        const fifthAction = actionObject.p2ActionStatement.KOstatement;
                                         return [firstAction, secondAction, thirdAction, fourthAction, fifthAction]
                                     }
                                 } else {
@@ -1807,11 +1807,11 @@ export default function createMessage(actionObject, game){
                             if(actionObject.p1ActionStatement.statement){
                                 // p2's action had an additional print statement
                                 const fourthAction = actionObject.p1ActionStatement.statement;
-                                const fifthAction = actionObject.p2ActionStatement.statement;
+                                const fifthAction = actionObject.p2ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction, fifthAction];
                             } else {
                                 // p2's action had no additional print statement
-                                const fourthAction = actionObject.p2ActionStatement.statement;
+                                const fourthAction = actionObject.p2ActionStatement.KOstatement;
                                 return [firstAction, secondAction, thirdAction, fourthAction]
                             }
                         } else {

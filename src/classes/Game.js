@@ -411,7 +411,7 @@ export default class Game {
                         this.player2.updateCritRolls(this.player2_action.critRolls);
                         p2ActionStatement = {
                             beastKOd: true,
-                            statement: `${this.player2.username}'s beast was knocked out!`
+                            KOstatement: `${this.player2.username}'s beast was knocked out!`
                         };
                         player2ActionCompleted = true;
                     } else {
@@ -419,8 +419,11 @@ export default class Game {
                         if(this.player1.team.active_slot.beast === null){
                             p1ActionStatement = {
                                 beastKOd: true,
-                                statement: `${this.player1.username}'s beast was knocked out!`
-                            }
+                                statement: p1ActionStatement.statement,
+                                damage: p1ActionStatement.damage,
+                                moveName: p1ActionStatement.moveName,
+                                KOstatement: `${this.player1.username}'s beast was knocked out!`
+                            };
                         }
                         player2ActionCompleted = true;
                     }
@@ -445,7 +448,7 @@ export default class Game {
                         this.player1.updateCritRolls(this.player1_action.critRolls);
                         p1ActionStatement = {
                             beastKOd: true,
-                            statement: `${this.player1.username}'s beast was knocked out!`
+                            KOstatement: `${this.player1.username}'s beast was knocked out!`
                         };
                         player1ActionCompleted = true;
                     } else {
@@ -453,8 +456,11 @@ export default class Game {
                         if(this.player2.team.active_slot.beast === null){
                             p2ActionStatement = {
                                 beastKOd: true,
-                                statement: `${this.player2.username}'s beast was knocked out!`
-                            }
+                                statement: p2ActionStatement.statement,
+                                damage: p2ActionStatement.damage,
+                                moveName: p2ActionStatement.moveName,
+                                KOstatement: `${this.player2.username}'s beast was knocked out!`
+                            };
                         }
                         player1ActionCompleted = true;
                     }
@@ -475,12 +481,11 @@ export default class Game {
                             }
                             p1ActionStatement = this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
                             player1ActionCompleted = true;
-                            console.log(this.player2.team.active_slot.beast)
                             if(this.player2.team.active_slot.beast === null){
                                 this.player2.updateCritRolls(this.player2_action.critRolls);
                                 p2ActionStatement = {
                                     beastKOd: true,
-                                    statement: `${this.player2.username}'s beast was knocked out!`
+                                    KOstatement: `${this.player2.username}'s beast was knocked out!`
                                 };
                                 player2ActionCompleted = true;
                             } else {
@@ -488,8 +493,11 @@ export default class Game {
                                 if(this.player1.team.active_slot.beast === null){
                                     p1ActionStatement = {
                                         beastKOd: true,
-                                        statement: `${this.player1.username}'s beast was knocked out!`
-                                    }
+                                        statement: p1ActionStatement.statement,
+                                        damage: p1ActionStatement.damage,
+                                        moveName: p1ActionStatement.moveName,
+                                        KOstatement: `${this.player1.username}'s beast was knocked out!`
+                                    };
                                 }
                                 player2ActionCompleted = true;
                             }
@@ -513,14 +521,19 @@ export default class Game {
                                 this.player1.updateCritRolls(this.player1_action.critRolls);
                                 p1ActionStatement = {
                                     beastKOd: true,
-                                    statement: `${this.player1.username}'s beast was knocked out!`
+                                    KOstatement: `${this.player1.username}'s beast was knocked out!`
                                 };
                                 player1ActionCompleted = true;
                             } else {
                                 p1ActionStatement = this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
-                                p2ActionStatement = {
-                                    beastKOd: true,
-                                    statement: `${this.player2.username}'s beast was knocked out!`
+                                if(this.player2.team.active_slot.beast === null){
+                                    p2ActionStatement = {
+                                        beastKOd: true,
+                                        statement: p2ActionStatement.statement,
+                                        damage: p2ActionStatement.damage,
+                                        moveName: p2ActionStatement.moveName,
+                                        KOstatement: `${this.player2.username}'s beast was knocked out!`
+                                    };
                                 }
                                 player1ActionCompleted = true;
                             }
@@ -542,12 +555,11 @@ export default class Game {
                                     }
                                     p1ActionStatement = this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
                                     player1ActionCompleted = true;
-                                    console.log(this.player2.team.active_slot.beast)
                                     if(this.player2.team.active_slot.beast === null){
                                         this.player2.updateCritRolls(this.player2_action.critRolls);
                                         p2ActionStatement = {
                                             beastKOd: true,
-                                            statement: `${this.player2.username}'s beast was knocked out!`
+                                            KOstatement: `${this.player2.username}'s beast was knocked out!`
                                         };
                                         player2ActionCompleted = true;
                                     } else {
@@ -555,7 +567,10 @@ export default class Game {
                                         if(this.player1.team.active_slot.beast === null){
                                             p1ActionStatement = {
                                                 beastKOd: true,
-                                                statement: `${this.player1.username}'s beast was knocked out!`
+                                                statement: p1ActionStatement.statement,
+                                                damage: p1ActionStatement.damage,
+                                                moveName: p1ActionStatement.moveName,
+                                                KOstatement: `${this.player1.username}'s beast was knocked out!`
                                             };
                                         }
                                         player2ActionCompleted = true;
@@ -580,7 +595,7 @@ export default class Game {
                                         this.player1.updateCritRolls(this.player1_action.critRolls);
                                         p1ActionStatement = {
                                             beastKOd: true,
-                                            statement: `${this.player1.username}'s beast was knocked out!`
+                                            KOstatement: `${this.player1.username}'s beast was knocked out!`
                                         };
                                         player1ActionCompleted = true;
                                     } else {
@@ -588,7 +603,10 @@ export default class Game {
                                         if(this.player2.team.active_slot.beast === null){
                                             p2ActionStatement = {
                                                 beastKOd: true,
-                                                statement: `${this.player2.username}'s beast was knocked out!`
+                                                statement: p2ActionStatement.statement,
+                                                damage: p2ActionStatement.damage,
+                                                moveName: p2ActionStatement.moveName,
+                                                KOstatement: `${this.player2.username}'s beast was knocked out!`
                                             };
                                         }
                                         player1ActionCompleted = true;
@@ -609,12 +627,11 @@ export default class Game {
                                         }
                                         p1ActionStatement = this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
                                         player1ActionCompleted = true;
-                                        console.log(this.player2.team.active_slot.beast)
                                         if(this.player2.team.active_slot.beast === null){
                                             this.player2.updateCritRolls(this.player2_action.critRolls);
                                             p2ActionStatement = {
                                                 beastKOd: true,
-                                                statement: `${this.player2.username}'s beast was knocked out!`
+                                                KOstatement: `${this.player2.username}'s beast was knocked out!`
                                             };
                                             player2ActionCompleted = true;
                                         } else {
@@ -622,7 +639,10 @@ export default class Game {
                                             if(this.player1.team.active_slot.beast === null){
                                                 p1ActionStatement = {
                                                     beastKOd: true,
-                                                    statement: `${this.player1.username}'s beast was knocked out!`
+                                                    statement: p1ActionStatement.statement,
+                                                    damage: p1ActionStatement.damage,
+                                                    moveName: p1ActionStatement.moveName,
+                                                    KOstatement: `${this.player1.username}'s beast was knocked out!`
                                                 };
                                             }
                                             player2ActionCompleted = true;
@@ -643,12 +663,11 @@ export default class Game {
                                         }
                                         p2ActionStatement = this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
                                         player2ActionCompleted = true;
-                                        console.log(this.player1.team.active_slot.beast)
                                         if(this.player1.team.active_slot.beast === null){
                                             this.player1.updateCritRolls(this.player1_action.critRolls);
                                             p1ActionStatement = {
                                                 beastKOd: true,
-                                                statement: `${this.player1.username}'s beast was knocked out!`
+                                                KOstatement: `${this.player1.username}'s beast was knocked out!`
                                             };
                                             player1ActionCompleted = true;
                                         } else {
@@ -656,8 +675,11 @@ export default class Game {
                                             if(this.player2.team.active_slot.beast === null){
                                                 p2ActionStatement = {
                                                     beastKOd: true,
-                                                    statement: `${this.player2.username}'s beast was knocked out!`
-                                                };
+                                                    statement: p2ActionStatement.statement,
+                                                    damage: p2ActionStatement.damage,
+                                                    moveName: p2ActionStatement.moveName,
+                                                    KOstatement: `${this.player2.username}'s beast was knocked out!`
+                                                }
                                             }
                                             player1ActionCompleted = true;
                                         }
@@ -676,12 +698,11 @@ export default class Game {
                                         }
                                         p1ActionStatement = this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
                                         player1ActionCompleted = true;
-                                        console.log(this.player2.team.active_slot.beast)
                                         if(this.player2.team.active_slot.beast === null){
                                             this.player2.updateCritRolls(this.player2_action.critRolls);
                                             p2ActionStatement = {
                                                 beastKOd: true,
-                                                statement: `${this.player2.username}'s beast was knocked out!`
+                                                KOstatement: `${this.player2.username}'s beast was knocked out!`
                                             };
                                             player2ActionCompleted = true;
                                         } else {
@@ -689,7 +710,10 @@ export default class Game {
                                             if(this.player1.team.active_slot.beast === null){
                                                 p1ActionStatement = {
                                                     beastKOd: true,
-                                                    statement: `${this.player1.username}'s beast was knocked out!`
+                                                    statement: p1ActionStatement.statement,
+                                                    damage: p1ActionStatement.damage,
+                                                    moveName: p1ActionStatement.moveName,
+                                                    KOstatement: `${this.player1.username}'s beast was knocked out!`
                                                 };
                                             }
                                             player2ActionCompleted = true;
@@ -713,7 +737,8 @@ export default class Game {
                 if(this.player2.team.active_slot.beast === null){
                     p2ActionStatement = {
                         beastKOd: true,
-                        statement: `${this.player2.username}'s beast was knocked out!`
+                        statement: p2ActionStatement.statement,
+                        KOstatement: `${this.player2.username}'s beast was knocked out!`
                     };
                 }
                 player1ActionCompleted = true;
@@ -727,7 +752,8 @@ export default class Game {
                 if(this.player1.team.active_slot.beast === null){
                     p1ActionStatement = {
                         beastKOd: true,
-                        statement: `${this.player1.username}'s beast was knocked out!`
+                        statement: p1ActionStatement.statement,
+                        KOstatement: `${this.player1.username}'s beast was knocked out!`
                     };
                 }
                 player2ActionCompleted = true;
