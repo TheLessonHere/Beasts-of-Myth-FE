@@ -211,10 +211,10 @@ function Battle(props) {
           if(action.actionType === "starting-beast"){
             setInTeamPreview(false);
           }
-          setGameDidUpdate(!gameDidUpdate);
         } else {
           game.setFirstToAct(opponent.player_num);
         }
+        setGameDidUpdate(!gameDidUpdate);
       });
 
       socket.on('opponent post ko', (action, callback) => {
@@ -375,10 +375,10 @@ function Battle(props) {
       if(action.actionType === "starting-beast"){
         setInTeamPreview(false);
       }
-      setGameDidUpdate(!gameDidUpdate);
     } else {
       game.setFirstToAct(player.player_num);
     }
+    setGameDidUpdate(!gameDidUpdate);
   }
 
   const sendMessage = (message) => {
