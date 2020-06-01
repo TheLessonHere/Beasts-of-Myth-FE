@@ -343,6 +343,9 @@ export default class Game {
         let p1Super = false;
         let p2Super = false;
         let firstAction;
+        let p1Beast = this.player1.team.active_slot.beast;
+        let p2Beast = this.player2.team.active_slot.beast;
+        console.log(p1Beast, p2Beast);
         while(player1ActionCompleted == false || player2ActionCompleted == false){
             if(this.player1_action.actionType == 'starting-beast'){
                 if(player2ActionCompleted === false){
@@ -375,6 +378,7 @@ export default class Game {
                 this.player1.changeBeast(this.player1_action.benchedBeastSlot);
                 this.compareFreshness();
                 this.compareSC();
+                p1Beast = this.player1.team.active_slot.beast;
                 player1ActionCompleted = true;
             }
             if(this.player2_action.actionType == 'change-beast'){
@@ -388,6 +392,7 @@ export default class Game {
                 this.player2.changeBeast(this.player2_action.benchedBeastSlot);
                 this.compareFreshness();
                 this.compareSC();
+                p2Beast = this.player2.team.active_slot.beast;
                 player2ActionCompleted = true;
             }
             if(this.player1_action.actionType == 'select-move' && this.player2_action.actionType == 'select-move'){
@@ -772,12 +777,15 @@ export default class Game {
             this.player2.clearAction();
             this.player2_action = null;
             this.first_to_act = null;
+            console.log(p1Beast, p2Beast);
             return {
                 firstAction: firstAction,
                 p1ActionStatement: p1ActionStatement,
                 p2ActionStatement: p2ActionStatement,
                 p1Super: p1Super,
                 p2Super: p2Super,
+                p1Beast: p1Beast,
+                p2Beast: p2Beast,
                 hazardDeath: false,
                 eotEffects: eotEffects
             };
@@ -788,12 +796,15 @@ export default class Game {
             this.player2.clearAction();
             this.player2_action = null;
             this.first_to_act = null;
+            console.log(p1Beast, p2Beast);
             return {
                 firstAction: firstAction,
                 p1ActionStatement: p1ActionStatement,
                 p2ActionStatement: p2ActionStatement,
                 p1Super: p1Super,
                 p2Super: p2Super,
+                p1Beast: p1Beast,
+                p2Beast: p2Beast,
                 hazardDeath: false,
                 eotEffects: eotEffects
             };
