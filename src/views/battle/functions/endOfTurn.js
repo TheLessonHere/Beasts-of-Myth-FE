@@ -103,11 +103,9 @@ export default function endOfTurn(effects, game){
                 }
             }
         });
-        console.log(allMessages)
         return allMessages;
     } else {
         const allMessages = [{ message: "  ", turnDidEnd: true }];
-        console.log(allMessages);
         return allMessages;
     }
 }
