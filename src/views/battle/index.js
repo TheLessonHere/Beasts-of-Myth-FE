@@ -19,7 +19,7 @@ import QueueForm from './components/QueueForm';
 import BattleRoom from './components/BattleRoom';
 // Functions
 import { domainEffectivenessMap } from '../../utils/functions/domainEffectivenessMap';
-import createMessage from './functions/createMessage2';
+import createMessage from './functions/createMessage';
 import endOfTurn from './functions/endOfTurn';
 // Socket
 import io from 'socket.io-client';
