@@ -75,6 +75,10 @@ const useStyles = makeStyles({
             backgroundColor: props.amount,
             width: `${props.percentage}%`,
             borderRadius: '5px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            fontSize: '0.6rem'
         }),
         statStageBox: {
             height: '30%',
@@ -353,7 +357,11 @@ export default function HealthBar(props){
                             <div className={classes.health} style={{
                                 backgroundColor: styleProps.amount,
                                 width: `${styleProps.percentage}%`
-                                }}/>
+                                }}>
+                            {styleProps.percentage > 10 ?
+                            `${styleProps.percentage}%` :
+                            ""}
+                            </div>
                         </div>
                     </Box>
                     <Box className={classes.statStageBox}>
@@ -410,7 +418,15 @@ export default function HealthBar(props){
                     </Box>
                     <Box className={classes.healthBarBox}>
                         <div className={classes.healthBar}>
-                            <div className={classes.health}/>
+                            <div className={classes.health}
+                                style={{
+                                backgroundColor: styleProps.amount,
+                                width: `${styleProps.percentage}%`
+                                }}>
+                            {styleProps.percentage > 10 ?
+                            `${styleProps.percentage}%` :
+                            ""}
+                            </div>
                         </div>
                     </Box>
                     <Box className={classes.statStageBox}>

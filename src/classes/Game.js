@@ -345,7 +345,6 @@ export default class Game {
         let firstAction;
         let p1Beast = this.player1.team.active_slot.beast;
         let p2Beast = this.player2.team.active_slot.beast;
-        console.log(p1Beast, p2Beast);
         while(player1ActionCompleted == false || player2ActionCompleted == false){
             if(this.player1_action.actionType == 'starting-beast'){
                 if(player2ActionCompleted === false){
