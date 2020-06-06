@@ -65,6 +65,7 @@ export default class Game {
                         if(this.player1.team.active_slot.beast.status === null){
                             this.player1.team.active_slot.beast.addStatus('Blinded');
                             this.player1.team.active_slot.beast.updateStatStage('pa', 0.5);
+                            this.player1.team.active_slot.beast.updateAllStats();
                             effects.p1itemeffect = 'Bright Stone';
                         }
                         break;
@@ -78,6 +79,7 @@ export default class Game {
                         if(this.player1.team.active_slot.beast.status === null){
                             this.player1.team.active_slot.beast.addStatus('Hypnotized');
                             this.player1.team.active_slot.beast.updateStatStage('md', 0.5);
+                            this.player1.team.active_slot.beast.updateAllStats();
                             effects.p1itemeffect = 'Entrancing Orb';
                         }
                         break;
@@ -97,6 +99,7 @@ export default class Game {
                         if(this.player1.team.active_slot.beast.status === null){
                             this.player1.team.active_slot.beast.addStatus('Tormented');
                             this.player1.team.active_slot.beast.updateStatStage('ma', 0.5);
+                            this.player1.team.active_slot.beast.updateAllStats();
                             effects.p1itemeffect = 'Mysterious Box';
                         }
                         break;
@@ -104,6 +107,7 @@ export default class Game {
                         if(this.player1.team.active_slot.beast.status === null){
                             this.player1.team.active_slot.beast.addStatus('Vinebound');
                             this.player1.team.active_slot.beast.updateStatStage('pd', 0.5);
+                            this.player1.team.active_slot.beast.updateAllStats();
                             effects.p1itemeffect = 'Sprouting Seed';
                         }
                         break;
@@ -111,6 +115,7 @@ export default class Game {
                         if(this.player1.team.active_slot.beast.status === null){
                             this.player1.team.active_slot.beast.addStatus('Inundated');
                             this.player1.team.active_slot.beast.updateStatStage('sc', 0.5);
+                            this.player1.team.active_slot.beast.updateAllStats();
                             effects.p1itemeffect = 'Wet Blanket';
                         }
                         break;
@@ -151,6 +156,7 @@ export default class Game {
                         if(this.player2.team.active_slot.beast.status === null){
                             this.player2.team.active_slot.beast.addStatus('Blinded');
                             this.player2.team.active_slot.beast.updateStatStage('pa', 0.5);
+                            this.player2.team.active_slot.beast.updateAllStats();
                             effects.p1itemeffect = 'Bright Stone';
                         }
                         break;
@@ -164,6 +170,7 @@ export default class Game {
                         if(this.player2.team.active_slot.beast.status === null){
                             this.player2.team.active_slot.beast.addStatus('Hypnotized');
                             this.player2.team.active_slot.beast.updateStatStage('md', 0.5);
+                            this.player2.team.active_slot.beast.updateAllStats();
                             effects.p1itemeffect = 'Entrancing Orb';
                         }
                         break;
@@ -183,6 +190,7 @@ export default class Game {
                         if(this.player2.team.active_slot.beast.status === null){
                             this.player2.team.active_slot.beast.addStatus('Tormented');
                             this.player2.team.active_slot.beast.updateStatStage('ma', 0.5);
+                            this.player2.team.active_slot.beast.updateAllStats();
                             effects.p1itemeffect = 'Mysterious Box';
                         }
                         break;
@@ -190,6 +198,7 @@ export default class Game {
                         if(this.player2.team.active_slot.beast.status === null){
                             this.player2.team.active_slot.beast.addStatus('Vinebound');
                             this.player2.team.active_slot.beast.updateStatStage('pd', 0.5);
+                            this.player2.team.active_slot.beast.updateAllStats();
                             effects.p1itemeffect = 'Sprouting Seed';
                         }
                         break;
@@ -197,6 +206,7 @@ export default class Game {
                         if(this.player2.team.active_slot.beast.status === null){
                             this.player2.team.active_slot.beast.addStatus('Inundated');
                             this.player2.team.active_slot.beast.updateStatStage('sc', 0.5);
+                            this.player2.team.active_slot.beast.updateAllStats();
                             effects.p1itemeffect = 'Wet Blanket';
                         }
                         break;

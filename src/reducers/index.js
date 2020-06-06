@@ -8,6 +8,9 @@ import {
     POST_TEAM_START,
     POST_TEAM_SUCCESS,
     POST_TEAM_FAILURE,
+    EDIT_TEAM_START,
+    EDIT_TEAM_SUCCESS,
+    EDIT_TEAM_FAILURE,
     DELETE_TEAM_START,
     DELETE_TEAM_SUCCESS,
     DELETE_TEAM_FAILURE,
@@ -91,6 +94,24 @@ export const reducer = (state = initialState, action) => {
           isFetching: false,
         };
       case POST_TEAM_FAILURE:
+        return {
+          ...state,
+          isFetching: false,
+          error: action.payload
+        };
+      case EDIT_TEAM_START:
+        return {
+          ...state,
+          error: '',
+          isFetching: true
+        };
+      case EDIT_TEAM_SUCCESS:
+        return {
+          ...state,
+          last_created_team: action.payload,
+          isFetching: false,
+        };
+      case EDIT_TEAM_FAILURE:
         return {
           ...state,
           isFetching: false,

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { postTeam } from '../../../actions';
+import { editTeam } from '../../../actions';
 import { connect } from 'react-redux';
 import {
   Container,
@@ -846,7 +846,7 @@ function EditingTeamNav(props) {
         team.addBeast(slot5, 'slot5');
         const teamDatastring = team.convertToString();
         console.log(teamDatastring);
-        props.postTeam(props.id, teamDatastring);
+        props.editTeam(props.teamId, teamDatastring);
         props.stopEditing();
         props.setIsReturning(!props.isReturning)
       }
@@ -1174,4 +1174,4 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps, { postTeam })(EditingTeamNav)
+export default connect(mapStateToProps, { editTeam })(EditingTeamNav)

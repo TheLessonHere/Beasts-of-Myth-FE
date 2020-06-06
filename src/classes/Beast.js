@@ -100,15 +100,15 @@ export default class Beast {
     }
 
     updateAllStats(){
-        const roundedPA = Math.round(this.curr_pa * this.stat_stages.pa);
+        const roundedPA = Math.round((this.curr_pa * this.stat_stages.pa) * 10) / 10;
         this.curr_pa = roundedPA;
-        const roundedPD = Math.round(this.curr_pd * this.stat_stages.pd);
+        const roundedPD = Math.round((this.curr_pd * this.stat_stages.pd) * 10) / 10;
         this.curr_pd = roundedPD;
-        const roundedMA = Math.round(this.curr_ma * this.stat_stages.ma);
+        const roundedMA = Math.round((this.curr_ma * this.stat_stages.ma) * 10) / 10;
         this.curr_ma = roundedMA;
-        const roundedMD = Math.round(this.curr_md * this.stat_stages.md);
+        const roundedMD = Math.round((this.curr_md * this.stat_stages.md) * 10) / 10;
         this.curr_md = roundedMD;
-        const roundedSC = Math.round(this.curr_sc * this.stat_stages.sc);
+        const roundedSC = Math.round((this.curr_sc * this.stat_stages.sc) * 10) / 10;
         this.curr_sc = roundedSC;
     }
 
@@ -116,35 +116,35 @@ export default class Beast {
         switch(stat){
             case 'pa':
                 const computeStatPA = () => {
-                    const roundedStat = Math.round(this.curr_pa * this.stat_stages.pa);
+                    const roundedStat = Math.round((this.curr_pa * this.stat_stages.pa) * 10) / 10;
                     this.curr_pa = roundedStat;
                 }
                 computeStatPA();
                 break;
             case 'pd':
                 const computeStatPD = () => {
-                const roundedStat = Math.round(this.curr_pd * this.stat_stages.pd);
+                const roundedStat = Math.round((this.curr_pa * this.stat_stages.pd) * 10) / 10;
                 this.curr_pd = roundedStat;
                 }
                 computeStatPD();
                 break;
             case 'ma':
                 const computeStatMA = () => {
-                const roundedStat = Math.round(this.curr_ma * this.stat_stages.ma);
+                const roundedStat = Math.round((this.curr_pa * this.stat_stages.ma) * 10) / 10;
                 this.curr_ma = roundedStat;
                 }
                 computeStatMA();
                 break;
             case 'md':
                 const computeStatMD = () => {
-                const roundedStat = Math.round(this.curr_md * this.stat_stages.md);
+                const roundedStat = Math.round((this.curr_pa * this.stat_stages.md) * 10) / 10;
                 this.curr_md = roundedStat;
                 }
                 computeStatMD();
                 break;
             case 'sc':
                 const computeStatSC = () => {
-                const roundedStat = Math.round(this.curr_sc * this.stat_stages.sc);
+                const roundedStat = Math.round((this.curr_pa * this.stat_stages.sc) * 10) / 10;
                 this.curr_sc = roundedStat;
                 }
                 computeStatSC();
