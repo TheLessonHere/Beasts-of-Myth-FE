@@ -92,8 +92,8 @@ const useStyles = makeStyles({
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '25px',
-            width: '60px',
+            height: '20px',
+            width: '55px',
             backgroundColor: '#99ff80',
             borderRadius: '5px',
             border: '1px solid #134008'
@@ -102,8 +102,8 @@ const useStyles = makeStyles({
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '25px',
-            width: '60px',
+            height: '20px',
+            width: '55px',
             backgroundColor: '#ff786b',
             borderRadius: '5px',
             border: '1px solid #730a00'

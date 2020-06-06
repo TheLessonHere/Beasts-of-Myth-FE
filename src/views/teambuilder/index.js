@@ -66,6 +66,7 @@ function TeamBuilder(props) {
   const [isReturning, setIsReturning] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [teamToEdit, setTeamToEdit] = useState(null);
+  const [teamToEditId, setTeamToEditId] = useState(null);
   const [teamSelected, setTeamSelected] = useState(null);
   const [teamSelectedId, setTeamSelectedId] = useState(null);
 
@@ -98,6 +99,7 @@ function TeamBuilder(props) {
   const startEditing = (team) => {
     if(team === null){
       setTeamToEdit(teamSelected);
+      setTeamToEditId(teamSelectedId);
     } else {
       setTeamToEdit(team);
     }
@@ -136,7 +138,8 @@ function TeamBuilder(props) {
         stopEditing={stopEditing}
         isReturning={isReturning}
         setIsReturning={setIsReturning}
-        team={teamToEdit} />
+        team={teamToEdit}
+        teamId={teamToEditId} />
       </Container>
     )
   }

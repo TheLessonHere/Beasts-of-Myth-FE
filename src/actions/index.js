@@ -53,6 +53,24 @@ export const postTeam = (user_id, teamDatastring) => dispatch => {
     });
 }
 
+export const EDIT_TEAM_START = 'EDIT_TEAM_START';
+export const EDIT_TEAM_SUCCESS = 'EDIT_TEAM_SUCCESS';
+export const EDIT_TEAM_FAILURE = 'EDIT_TEAM_FAILURE';
+
+export const editTeam = (team_id, teamDatastring) => dispatch => {
+  dispatch({ type: EDIT_TEAM_START });
+  const teamDS = JSON.stringify({ team_datastring: teamDatastring });
+  axiosWithAuth()
+    .put(`http://localhost:8000/api/teams/${team_id}`, teamDS)
+    .then(res => {
+      console.log(res);
+      dispatch({ type: EDIT_TEAM_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      dispatch({ type: EDIT_TEAM_FAILURE, payload: 'Unable to save edited team.' });
+    });
+}
+
 export const DELETE_TEAM_START = 'DELETE_TEAM_START';
 export const DELETE_TEAM_SUCCESS = 'DELETE_TEAM_SUCCESS';
 export const DELETE_TEAM_FAILURE = 'DELETE_TEAM_FAILURE';
