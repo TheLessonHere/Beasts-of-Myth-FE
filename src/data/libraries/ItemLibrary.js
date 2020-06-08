@@ -148,7 +148,7 @@ const items = [
         item_id: 12,
         format: "Unrestricted",
         item_name: "Citrum Berry",
-        search_id: "Citrum berry",
+        search_id: "citrum berry",
         type: "consumable",
         effect: (beast) => {beast.removeItem();},
         description: "Prevents extra damage from an opponent's super effective hit.",

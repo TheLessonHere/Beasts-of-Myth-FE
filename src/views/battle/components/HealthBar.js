@@ -116,6 +116,7 @@ const useStyles = makeStyles({
 export default function HealthBar(props){
     const {
         gameDidUpdate,
+        beastDidGetKOd,
         game,
         player,
         opponent,
@@ -134,7 +135,7 @@ export default function HealthBar(props){
         if(isPlayer){
             if(player.team.active_slot.beast){
                 const percentage = player.team.active_slot.beast.hp_percentage / 100;
-                setHealthPercentage(1 * percentage);
+                setHealthPercentage(percentage);
                 const differingStats = [];
                 if(player.team.active_slot.beast.stat_stages.pa < 1){
                     differingStats.push({
@@ -212,7 +213,7 @@ export default function HealthBar(props){
         if(isOpponent){
             if(opponent.team.active_slot.beast){
                 const percentage = opponent.team.active_slot.beast.hp_percentage / 100;
-                setHealthPercentage(1 * percentage);
+                setHealthPercentage(percentage);
                 const differingStats = [];
                 if(opponent.team.active_slot.beast.stat_stages.pa < 1){
                     differingStats.push({
@@ -221,7 +222,8 @@ export default function HealthBar(props){
                         stat: 'PA'
                     })
                 }
-                else if(opponent.team.active_slot.beast.stat_stages.pa > 1){
+                else if(opponent.team.active_slot.beast.stat_stages.pa > 1 &&
+                    opponent.team.active_slot.beast.item.item_name !== "Focus Vest"){
                     differingStats.push({
                         positive: true,
                         statStage: opponent.team.active_slot.beast.stat_stages.pa.toString(),
@@ -235,7 +237,8 @@ export default function HealthBar(props){
                         stat: 'PD'
                     })
                 }
-                else if(opponent.team.active_slot.beast.stat_stages.pd > 1){
+                else if(opponent.team.active_slot.beast.stat_stages.pd > 1 &&
+                    opponent.team.active_slot.beast.item.item_name !== "Bulky Vest"){
                     differingStats.push({
                         positive: true,
                         statStage: opponent.team.active_slot.beast.stat_stages.pd.toString(),
@@ -249,7 +252,8 @@ export default function HealthBar(props){
                         stat: 'MA'
                     })
                 }
-                else if(opponent.team.active_slot.beast.stat_stages.ma > 1){
+                else if(opponent.team.active_slot.beast.stat_stages.ma > 1 &&
+                    opponent.team.active_slot.beast.item.item_name !== "Focus Cap"){
                     differingStats.push({
                         positive: true,
                         statStage: opponent.team.active_slot.beast.stat_stages.ma.toString(),
@@ -263,7 +267,8 @@ export default function HealthBar(props){
                         stat: 'MD'
                     })
                 }
-                else if(opponent.team.active_slot.beast.stat_stages.md > 1){
+                else if(opponent.team.active_slot.beast.stat_stages.md > 1 &&
+                    opponent.team.active_slot.beast.item.item_name !== "Bulky Cap"){
                     differingStats.push({
                         positive: true,
                         statStage: opponent.team.active_slot.beast.stat_stages.md.toString(),
@@ -277,7 +282,8 @@ export default function HealthBar(props){
                         stat: 'SC'
                     })
                 }
-                else if(opponent.team.active_slot.beast.stat_stages.sc > 1){
+                else if(opponent.team.active_slot.beast.stat_stages.sc > 1 &&
+                    opponent.team.active_slot.beast.item.item_name !== "Focus Brace"){
                     differingStats.push({
                         positive: true,
                         statStage: opponent.team.active_slot.beast.stat_stages.sc.toString(),
@@ -294,7 +300,7 @@ export default function HealthBar(props){
             }
         }
         console.log("Game Did Update")
-    }, [ gameDidUpdate ])
+    }, [ gameDidUpdate, player, opponent, beastDidGetKOd ])
 
     useEffect(() => {
         let amount = 'green';
@@ -304,7 +310,7 @@ export default function HealthBar(props){
                 amount = 'red';
             }
         }
-        setStyleProps({...styleProps, amount: amount, percentage: healthPercentage * 100})
+        setStyleProps({...styleProps, amount: amount, percentage: Math.round(healthPercentage * 100)})
     }, [ healthPercentage ])
 
     const determineStatus = (status) => {
@@ -366,16 +372,16 @@ export default function HealthBar(props){
                     </Box>
                     <Box className={classes.statStageBox}>
                         {differingStatsPlayer.length > 0 ?
-                        differingStatsPlayer.map(stat => {
+                        differingStatsPlayer.map((stat, index) => {
                             if(stat.positive){
                                 return (
-                                    <div className={classes.statStagePositive}>
+                                    <div className={classes.statStagePositive} key={index}>
                                         <Typography className={classes.statStageText}>x{stat.statStage} {stat.stat}</Typography>
                                     </div>
                                 )
                             } else {
                                 return (
-                                    <div className={classes.statStageNegative}>
+                                    <div className={classes.statStageNegative} key={index}>
                                         <Typography className={classes.statStageText}>x{stat.statStage} {stat.stat}</Typography>
                                     </div>
                                 )
@@ -431,16 +437,16 @@ export default function HealthBar(props){
                     </Box>
                     <Box className={classes.statStageBox}>
                         {differingStatsOpponent.length > 0 ?
-                        differingStatsOpponent.map(stat => {
+                        differingStatsOpponent.map((stat, index) => {
                             if(stat.positive){
                                 return (
-                                    <div className={classes.statStagePositive}>
+                                    <div className={classes.statStagePositive} key={index}>
                                         <Typography className={classes.statStageText}>x{stat.statStage} {stat.stat}</Typography>
                                     </div>
                                 )
                             } else {
                                 return (
-                                    <div className={classes.statStageNegative}>
+                                    <div className={classes.statStageNegative} key={index}>
                                         <Typography className={classes.statStageText}>x{stat.statStage} {stat.stat}</Typography>
                                     </div>
                                 )

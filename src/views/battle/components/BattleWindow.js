@@ -220,6 +220,7 @@ export default function BattleWindow(props) {
                 onMouseOut={onHoverLeave}>
                     <HealthBar
                     gameDidUpdate={gameDidUpdate}
+                    beastDidGetKOd={beastDidGetKOd}
                     game={game}
                     player={player}
                     opponent={opponent}
@@ -239,6 +240,7 @@ export default function BattleWindow(props) {
                 onMouseOut={onHoverLeave}>
                     <HealthBar
                     gameDidUpdate={gameDidUpdate}
+                    beastDidGetKOd={beastDidGetKOd}
                     game={game}
                     player={player}
                     opponent={opponent}
@@ -265,6 +267,7 @@ export default function BattleWindow(props) {
                 onMouseOut={onHoverLeave}>
                     <HealthBar
                     gameDidUpdate={gameDidUpdate}
+                    beastDidGetKOd={beastDidGetKOd}
                     game={game}
                     player={player}
                     opponent={opponent}
@@ -299,6 +302,7 @@ export default function BattleWindow(props) {
                 onMouseOut={onHoverLeave}>
                     <HealthBar
                     gameDidUpdate={gameDidUpdate}
+                    beastDidGetKOd={beastDidGetKOd}
                     game={game}
                     player={player}
                     opponent={opponent}
