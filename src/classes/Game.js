@@ -530,7 +530,6 @@ export default class Game {
                             }
                             p2ActionStatement = this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
                             player2ActionCompleted = true;
-                            console.log(this.player1.team.active_slot.beast)
                             if(this.player1.team.active_slot.beast === null){
                                 this.player1.updateCritRolls(this.player1_action.critRolls);
                                 p1ActionStatement = {
@@ -604,7 +603,6 @@ export default class Game {
                                     }
                                     p2ActionStatement = this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
                                     player2ActionCompleted = true;
-                                    console.log(this.player1.team.active_slot.beast)
                                     if(this.player1.team.active_slot.beast === null){
                                         this.player1.updateCritRolls(this.player1_action.critRolls);
                                         p1ActionStatement = {
@@ -786,7 +784,6 @@ export default class Game {
             this.player2.clearAction();
             this.player2_action = null;
             this.first_to_act = null;
-            console.log(p1Beast, p2Beast);
             return {
                 firstAction: firstAction,
                 p1ActionStatement: p1ActionStatement,
@@ -805,7 +802,6 @@ export default class Game {
             this.player2.clearAction();
             this.player2_action = null;
             this.first_to_act = null;
-            console.log(p1Beast, p2Beast);
             return {
                 firstAction: firstAction,
                 p1ActionStatement: p1ActionStatement,

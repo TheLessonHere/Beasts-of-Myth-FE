@@ -173,6 +173,8 @@ function Battle(props) {
     });
 
     if(game){
+      console.log(game);
+
       socket.on('opponent action', (action, callback) => {
         console.log("Opponent action received", action);
         const gameCopy = game;
@@ -193,6 +195,7 @@ function Battle(props) {
           });
           const endOfTurnMessages = endOfTurn(gameLogResult.eotEffects, game);
           setActionsReceivedFromOpponent([...chatLogArr, ...endOfTurnMessages]);
+          updateGame();
           if(gameCopy.player1.team.active_slot.beast === null ||
             gameCopy.player2.team.active_slot.beast === null){
               setBeastDidGetKOd(true);
@@ -214,7 +217,7 @@ function Battle(props) {
         } else {
           game.setFirstToAct(opponent.player_num);
         }
-        setGameDidUpdate(!gameDidUpdate);
+        updateGame();
       });
 
       socket.on('opponent post ko', (action, callback) => {
@@ -225,7 +228,7 @@ function Battle(props) {
         setBeastDidGetKOd(false);
         console.log(gameCopy);
         handleGameChange(gameCopy);
-        setGameDidUpdate(!gameDidUpdate);
+        updateGame();
       })
 
       setChatLog([...chatLog,
@@ -355,8 +358,8 @@ function Battle(props) {
         return {message: message}
       });
       const endOfTurnMessages = endOfTurn(gameLogResult.eotEffects, game);
-      console.log("EOT:", endOfTurnMessages, "GLR:", gameLogResult, "CLA:", chatLogArr);
       setChatLog([...chatLog, ...chatLogArr, ...endOfTurnMessages]);
+      updateGame();
       if(gameCopy.player1.team.active_slot.beast === null ||
         gameCopy.player2.team.active_slot.beast === null){
           setBeastDidGetKOd(true);
@@ -378,7 +381,7 @@ function Battle(props) {
     } else {
       game.setFirstToAct(player.player_num);
     }
-    setGameDidUpdate(!gameDidUpdate);
+    updateGame();
   }
 
   const sendMessage = (message) => {
@@ -401,6 +404,10 @@ function Battle(props) {
     setBeastDidGetKOd(false);
     console.log(gameCopy);
     handleGameChange(gameCopy);
+    updateGame();
+  }
+
+  const updateGame = () => {
     setGameDidUpdate(!gameDidUpdate);
   }
 

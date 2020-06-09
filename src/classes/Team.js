@@ -277,9 +277,11 @@ export default class Team {
                     equippedItem = new Item(itemData.format,
                         itemData.item_id,
                         itemData.item_name,
+                        itemData.type,
                         itemData.effect,
                         itemData.description,
-                        itemData.short_description);
+                        itemData.short_description,
+                        itemData.removable);
                     currSlot.beast.addItem(equippedItem);
                 } else {
                     currSlot.beast.addItem(equippedItem);
@@ -496,51 +498,54 @@ export default class Team {
         }
     }
 
+    switchItemEffect(){
+        if(this.active_slot.beast.item){
+            if(this.active_slot.beast.item.item_name === 'Focus Vest' ||
+            this.active_slot.beast.item.item_name === 'Focus Cap' ||
+            this.active_slot.beast.item.item_name === 'Focus Brace' ||
+            this.active_slot.beast.item.item_name === 'Bulky Vest' ||
+            this.active_slot.beast.item.item_name === 'Bulky Cap' ||
+            this.active_slot.beast.item.item_name === 'Lead Boots'){
+                this.active_slot.beast.item.effect(this.active_slot.beast);
+            }
+        }
+    }
+
     makeActive(slot){
         switch(slot){
             case 'slot1':
                 this.active_slot.beast = this.slot1.beast;
                 this.active_slot.adjacentSlots = this.slot1.adjacentSlots;
                 this.active_slot.slotNumber = 'slot1';
-                if(this.active_slot.beast.item && this.active_slot.beast.item.type === 'static'){
-                    this.active_slot.beast.item.effect(this.active_slot.beast);
-                }
+                this.switchItemEffect();
                 this.active_slot.turnsActive = 0;
                 break;
             case 'slot2':
                 this.active_slot.beast = this.slot2.beast;
                 this.active_slot.adjacentSlots = this.slot2.adjacentSlots;
                 this.active_slot.slotNumber = 'slot2';
-                if(this.active_slot.beast.item && this.active_slot.beast.item.type === 'static'){
-                    this.active_slot.beast.item.effect(this.active_slot.beast);
-                }
+                this.switchItemEffect();
                 this.active_slot.turnsActive = 0;
                 break;
             case 'slot3':
                 this.active_slot.beast = this.slot3.beast;
                 this.active_slot.adjacentSlots = this.slot3.adjacentSlots;
                 this.active_slot.slotNumber = 'slot3';
-                if(this.active_slot.beast.item && this.active_slot.beast.item.type === 'static'){
-                    this.active_slot.beast.item.effect(this.active_slot.beast);
-                }
+                this.switchItemEffect();
                 this.active_slot.turnsActive = 0;
                 break;
             case 'slot4':
                 this.active_slot.beast = this.slot4.beast;
                 this.active_slot.adjacentSlots = this.slot4.adjacentSlots;
                 this.active_slot.slotNumber = 'slot4';
-                if(this.active_slot.beast.item && this.active_slot.beast.item.type === 'static'){
-                    this.active_slot.beast.item.effect(this.active_slot.beast);
-                }
+                this.switchItemEffect();
                 this.active_slot.turnsActive = 0;
                 break;
             case 'slot5':
                 this.active_slot.beast = this.slot5.beast;
                 this.active_slot.adjacentSlots = this.slot5.adjacentSlots;
                 this.active_slot.slotNumber = 'slot5';
-                if(this.active_slot.beast.item && this.active_slot.beast.item.type === 'static'){
-                    this.active_slot.beast.item.effect(this.active_slot.beast);
-                }
+                this.switchItemEffect();
                 this.active_slot.turnsActive = 0;
                 break;
             default:
