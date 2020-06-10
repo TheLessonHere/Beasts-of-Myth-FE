@@ -17,6 +17,8 @@ import ImportFromText from './components/ImportFromText';
 import EditingTeamNav from './components/EditingTeamNav';
 import TeamMiniBox from "../../utils/components/TeamMiniBox";
 import { SubmitButton } from '../../utils/components/SubmitButton';
+// Functions
+import copyToClipboard from '../../utils/functions/copyToClipboard';
 // Libraries
 import { beasts } from '../../data/libraries/BeastLibrary';
 import { moves } from '../../data/libraries/MoveLibrary';
@@ -168,6 +170,7 @@ function TeamBuilder(props) {
       <Box className={classes.buttonBox}>
         <SubmitButton className={classes.button} onClick={startBuilding}>Build New Team</SubmitButton>
         <SubmitButton className={classes.button} onClick={startImporting}>Import From Text</SubmitButton>
+        <SubmitButton className={classes.button} disabled={!teamSelected} onClick={() => {copyToClipboard(teamSelected)}}>Copy Team</SubmitButton>
         <SubmitButton className={classes.button} disabled={!teamSelected} onClick={() => {startEditing(teamToEdit)}}>Edit Team</SubmitButton>
         <SubmitButton className={classes.button} disabled={!teamSelected} onClick={() => {props.deleteTeam(teamSelectedId)}}>Delete Team</SubmitButton>
       </Box>
