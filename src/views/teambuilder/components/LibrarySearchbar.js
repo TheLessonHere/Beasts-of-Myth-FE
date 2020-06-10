@@ -60,6 +60,7 @@ export default function LibrarySearchbar(props){
     }
 
     const fakeFunction = (event) => {
+        // This should be replaced by functions that sort the rows based on the stat clicked
         console.log(event.target);
     }
 
@@ -82,6 +83,7 @@ export default function LibrarySearchbar(props){
 
     const renderResult = () => {
         if (suggestions.length > 0){
+            // These counters add a seperating border to the first item rendered of each type
             let beastCounter = 0;
             let moveCounter = 0;
             let abilityCounter = 0;

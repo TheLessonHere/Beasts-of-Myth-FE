@@ -201,6 +201,7 @@ function TeamNav(props) {
     };
 
     const onBeastClick = (beast) => {
+      // Selects beast from suggestions and adds it to the active slot
       const data = beasts.find(beastData => beastData.search_id === beast);
       const currBeast = new Beast(data.format,
                                   data.beast_id,
@@ -250,6 +251,7 @@ function TeamNav(props) {
     }
 
     const onItemSearch = (event) => {
+      // Filters item suggestions based on search terms.
       const value = event.target.value;
       switch(activeSlot){
         case 'slot1':
