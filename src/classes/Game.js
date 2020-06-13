@@ -23,6 +23,7 @@ export default class Game {
     }
 
     updateTurnCounter(){
+        // Updates turn counter, activates end of turn effects
         this.turn_counter = this.turn_counter + 1;
         this.incrementFreshness();
         this.compareFreshness();
@@ -236,6 +237,7 @@ export default class Game {
     }
 
     actionsExecutable(){
+        // Checks if both players have selected an action
         if(this.player1_action != null && this.player2_action != null){
             return true;
         } else {
@@ -923,6 +925,7 @@ export default class Game {
 
         let rawDamage = 0;
         let damage;
+        let assistBrace = false;
 
         if(moveType == 'physical'){
             console.log(basePower, sameTypeBonus, domainModifier, attackingBeast.curr_pa, defendingBeast.curr_pd, effectiveness, critRoll);
@@ -942,7 +945,13 @@ export default class Game {
 
         attackingPlayer.updateCritRolls(critRolls);
 
-        console.log(damage);
+        if(defendingBeast.hp_percentage === 100 &&
+            defendingBeast.item.item_name === "Assist Brace" &&
+            damage >= defendingBeast.curr_hp){
+                damage = defendingBeast.curr_hp - 1;
+                assistBrace = true;
+        }
+
         defendingBeast.updateHP(damage);
         if(defendingBeast.curr_hp <= 0){
             defendingPlayer.team.knockOutBeast(defendingPlayer.team.active_slot.slotNumber);
@@ -977,7 +986,10 @@ export default class Game {
             defendingPlayer.team.active_slot.beast.makeInactive();
             defendingPlayer.team.clearActiveSlot();
         }
-        return damage;
+        return {
+            damage: damage,
+            assistBrace: assistBrace
+        }
     }
 
     postKOSwitch(playerNum, slot){

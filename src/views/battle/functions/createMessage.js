@@ -49,6 +49,10 @@ export default function createMessage(actionObject, game){
                 // player 2's move dealt damage
                 messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
 
+                if(actionObject.p2ActionStatement.damage.assistBrace){
+                    messageArr.push(`${game.player1.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
+                }
+
                 if(actionObject.p1ActionStatement.beastKOd){
                     // player 1's beast was KOd by the damage
                     messageArr.push(actionObject.p1ActionStatement.KOstatement);
@@ -75,6 +79,10 @@ export default function createMessage(actionObject, game){
                     // player 1's move dealt damage
                     messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
 
+                    if(actionObject.p1ActionStatement.damage.assistBrace){
+                        messageArr.push(`${game.player2.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
+                    }
+
                     if(actionObject.p2ActionStatement.beastKOd){
                         // player 2's beast was KOd by the damage, and therefore didn't get to attack
                         messageArr.push(actionObject.p2ActionStatement.KOstatement);
@@ -93,6 +101,10 @@ export default function createMessage(actionObject, game){
                 if(actionObject.p2ActionStatement.damage){
                     // player 2's move dealt damage
                     messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
+
+                    if(actionObject.p2ActionStatement.damage.assistBrace){
+                        messageArr.push(`${game.player1.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
+                    }
 
                     if(actionObject.p1ActionStatement.beastKOd){
                         // player 1's beast was KOd by the damage
@@ -118,6 +130,10 @@ export default function createMessage(actionObject, game){
                 if(actionObject.p1ActionStatement.damage){
                     // player 1's move dealt damage
                     messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
+
+                    if(actionObject.p1ActionStatement.damage.assistBrace){
+                        messageArr.push(`${game.player2.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
+                    }
 
                     if(actionObject.p2ActionStatement.beastKOd){
                         // player 2's beast was KOd by the damage
@@ -166,6 +182,10 @@ export default function createMessage(actionObject, game){
                 // player 1's move dealt damage
                 messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
 
+                if(actionObject.p1ActionStatement.damage.assistBrace){
+                    messageArr.push(`${game.player2.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
+                }
+
                 if(actionObject.p2ActionStatement.beastKOd){
                     // player 2's beast was KOd by the damage
                     messageArr.push(actionObject.p2ActionStatement.KOstatement);
@@ -192,6 +212,10 @@ export default function createMessage(actionObject, game){
                     // player 2's move dealt damage
                     messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
 
+                    if(actionObject.p2ActionStatement.damage.assistBrace){
+                        messageArr.push(`${game.player1.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
+                    }
+
                     if(actionObject.p1ActionStatement.beastKOd){
                         // player 1's beast was KOd by the damage, and therefore didn't get to attack
                         messageArr.push(actionObject.p1ActionStatement.KOstatement);
@@ -200,7 +224,7 @@ export default function createMessage(actionObject, game){
                 }
 
                 // player 1's beast was not KOd by the damage and gets to use its move
-                messageArr.push(`${actionObject.p1Beast.beast_name} used ${actionObject.p1ActionStatement.moveName}.`)
+                messageArr.push(`${actionObject.p1Beast.beast_name} used ${actionObject.p1ActionStatement.moveName}.`);
 
                 if(actionObject.p1ActionStatement.statement){
                     // player 1's move had a secondary effect
@@ -210,6 +234,10 @@ export default function createMessage(actionObject, game){
                 if(actionObject.p1ActionStatement.damage){
                     // player 1's move dealt damage
                     messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
+
+                    if(actionObject.p1ActionStatement.damage.assistBrace){
+                        messageArr.push(`${game.player2.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
+                    }
 
                     if(actionObject.p2ActionStatement.beastKOd){
                         // player 2's beast was KOd by the damage
@@ -235,6 +263,10 @@ export default function createMessage(actionObject, game){
                 if(actionObject.p2ActionStatement.damage){
                     // player 2's move dealt damage
                     messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
+
+                    if(actionObject.p2ActionStatement.damage.assistBrace){
+                        messageArr.push(`${game.player1.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
+                    }
 
                     if(actionObject.p1ActionStatement.beastKOd){
                         // player 1's beast was KOd by the damage
