@@ -155,6 +155,7 @@ export default class Beast {
     }
 
     updateStatStage(stat, multiplier){
+        // Applies stat stage multipliers
         switch(stat){
             case 'pa':
                 this.stat_stages.pa = this.stat_stages.pa * multiplier;
@@ -177,6 +178,7 @@ export default class Beast {
     }
 
     modifyStat(stat, newStat, match){
+        // Modifies an individual stat to be a specific amount
         switch(stat){
             case 'hp':
                 this.init_hp = newStat;
@@ -253,6 +255,12 @@ export default class Beast {
     disableMove(move){
         const disabledMove = this.moves.get(move);
         this.disabled_moves.push(disabledMove);
+    }
+
+    disableMoves(moveArr){
+        moveArr.forEach(move => {
+            this.disabled_moves.push(move);
+        });
     }
 
     resetMoves(){
