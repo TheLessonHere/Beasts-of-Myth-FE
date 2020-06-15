@@ -862,6 +862,54 @@ export default class Game {
           return critRoll;
     }
 
+    amuletCalculation(item_name, moveDomain){
+        switch(item_name){
+            case 'Chaos Amulet':
+                if(moveDomain === 'chaos'){
+                    return 1.2;
+                }
+                break;
+            case 'Dark Amulet':
+                if(moveDomain === 'dark'){
+                    return 1.2;
+                }
+                break;
+            case 'Light Amulet':
+                if(moveDomain === 'light'){
+                    return 1.2;
+                }
+                break;
+            case 'Mind Amulet':
+                if(moveDomain === 'mind'){
+                    return 1.2;
+                }
+                break;
+            case 'Terra Amulet':
+                if(moveDomain === 'terra'){
+                    return 1.2;
+                }
+                break;
+            case 'Flame Amulet':
+                if(moveDomain === 'flame'){
+                    return 1.2;
+                }
+                break;
+            case 'Sea Amulet':
+                if(moveDomain === 'sea'){
+                    return 1.2;
+                }
+                break;
+            case 'Sky Amulet':
+                if(moveDomain === 'sky'){
+                    return 1.2;
+                }
+                break;
+            default:
+                return 1;
+        }
+        return 1;
+    }
+
     damageCalculation(attackingPlayer, defendingPlayer, move, attackingBeast, defendingBeast, critRolls, critRoll){
         console.log(move)
         let domainModifier = 1;
@@ -872,6 +920,10 @@ export default class Game {
         const attackingDomain2 = attackingBeast.domain2;
         const defendingDomain = `${defendingBeast.domain1}-${defendingBeast.domain2}`;
         const effectiveness = domainEffectivenessMap.get(moveDomain)[defendingDomain];
+        let amuletModifier;
+        if(attackingBeast.item){
+            amuletModifier = this.amuletCalculation(attackingBeast.item.item_name, moveDomain);
+        }
         let sameTypeBonus = 0;
         if(attackingDomain1 == moveDomain || attackingDomain2 == moveDomain){
             sameTypeBonus = Math.round(basePower / 2);
@@ -929,14 +981,14 @@ export default class Game {
 
         if(moveType == 'physical'){
             console.log(basePower, sameTypeBonus, domainModifier, attackingBeast.curr_pa, defendingBeast.curr_pd, effectiveness, critRoll);
-            rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_pa / defendingBeast.curr_pd)) * effectiveness;
+            rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_pa / defendingBeast.curr_pd)) * amuletModifier * effectiveness;
             damage = Math.round(rawDamage * 100) / 100;
             if(critRoll){
                 damage = damage * 2;
             }
         } else {
             console.log(basePower, sameTypeBonus, domainModifier, attackingBeast.curr_ma, defendingBeast.curr_md, effectiveness, critRoll);
-            rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_ma / defendingBeast.curr_md)) * effectiveness;
+            rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_ma / defendingBeast.curr_md)) * amuletModifier * effectiveness;
             damage = Math.round(rawDamage * 100) / 100;
             if(critRoll){
                 damage = damage * 2;

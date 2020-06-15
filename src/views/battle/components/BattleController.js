@@ -156,10 +156,8 @@ export default function BattleController(props) {
 
     useEffect(() => {
         if(player && inTeamPreview === false && player.team.active_slot.beast === null){
-            console.log('Beast got kod')
             setSwitchAfterKO(true);
         } else {
-            console.log('no beast kod')
             setSwitchAfterKO(false);
         }
     }, [ inTeamPreview, beastDidGetKOd ])

@@ -411,6 +411,54 @@ function Battle(props) {
     setGameDidUpdate(!gameDidUpdate);
   }
 
+  const amuletCalculation = (item_name, moveDomain) => {
+    switch(item_name){
+        case 'Chaos Amulet':
+            if(moveDomain === 'chaos'){
+                return 1.2;
+            }
+            break;
+        case 'Dark Amulet':
+            if(moveDomain === 'dark'){
+                return 1.2;
+            }
+            break;
+        case 'Light Amulet':
+            if(moveDomain === 'light'){
+                return 1.2;
+            }
+            break;
+        case 'Mind Amulet':
+            if(moveDomain === 'mind'){
+                return 1.2;
+            }
+            break;
+        case 'Terra Amulet':
+            if(moveDomain === 'terra'){
+                return 1.2;
+            }
+            break;
+        case 'Flame Amulet':
+            if(moveDomain === 'flame'){
+                return 1.2;
+            }
+            break;
+        case 'Sea Amulet':
+            if(moveDomain === 'sea'){
+                return 1.2;
+            }
+            break;
+        case 'Sky Amulet':
+            if(moveDomain === 'sky'){
+                return 1.2;
+            }
+            break;
+        default:
+            return 1;
+    }
+    return 1;
+}
+
   const calcMoveDamage = (move) => {
     if(move && player.team.active_slot.beast && opponent.team.active_slot.beast){
       let domainModifier = 1;
@@ -421,6 +469,10 @@ function Battle(props) {
       const attackingDomain2 = player.team.active_slot.beast.domain2;
       const defendingDomain = `${opponent.team.active_slot.beast.domain1}-${opponent.team.active_slot.beast.domain2}`;
       const effectiveness = domainEffectivenessMap.get(moveDomain)[defendingDomain];
+      let amuletModifier;
+      if(player.team.active_slot.beast.item){
+          amuletModifier = amuletCalculation(player.team.active_slot.beast.item.item_name, moveDomain);
+      }
       let sameTypeBonus = 0;
       if(attackingDomain1 == moveDomain || attackingDomain2 == moveDomain){
           sameTypeBonus = Math.round(basePower / 2);
@@ -476,10 +528,10 @@ function Battle(props) {
       let damage;
 
         if(moveType == 'physical'){
-          rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (player.team.active_slot.beast.curr_pa / opponent.team.active_slot.beast.curr_pd)) * effectiveness;
+          rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (player.team.active_slot.beast.curr_pa / opponent.team.active_slot.beast.curr_pd)) * amuletModifier * effectiveness;
           damage = Math.round(rawDamage * 100) / 100;
       } else {
-          rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (player.team.active_slot.beast.curr_ma / opponent.team.active_slot.beast.curr_md)) * effectiveness;
+          rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (player.team.active_slot.beast.curr_ma / opponent.team.active_slot.beast.curr_md)) * amuletModifier * effectiveness;
           damage = Math.round(rawDamage * 100) / 100;
       }
 
