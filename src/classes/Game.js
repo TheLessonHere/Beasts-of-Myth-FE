@@ -32,7 +32,11 @@ export default class Game {
             p1inflamed: false,
             p2inflamed: false,
             p1itemeffect: null,
-            p2itemeffect: null
+            p2itemeffect: null,
+            p1diedToBurn: false,
+            p1diedToContract: false,
+            p2diedToBurn: false,
+            p2diedToContract: false
         };
         if(this.player1.team.active_slot.beast){
             if(this.player1.team.active_slot.beast.status === 'Inflamed'){
@@ -43,6 +47,7 @@ export default class Game {
                     this.player1.team.active_slot.beast.knockOutBeast();
                     this.player1.team.active_slot.beast.makeInactive();
                     this.player1.team.clearActiveSlot();
+                    effects.p1diedToBurn = true;
                 }
                 effects.p1inflamed = true;
             }
@@ -60,6 +65,7 @@ export default class Game {
                             this.player1.team.active_slot.beast.knockOutBeast();
                             this.player1.team.active_slot.beast.makeInactive();
                             this.player1.team.clearActiveSlot();
+                            effects.p1diedToContract = true;
                         }
                         break;
                     case 'Bright Stone':
@@ -134,6 +140,7 @@ export default class Game {
                     this.player2.team.active_slot.beast.knockOutBeast();
                     this.player2.team.active_slot.beast.makeInactive();
                     this.player2.team.clearActiveSlot();
+                    effects.p2diedToBurn = true;
                 }
                 effects.p2inflamed = true;
             }
@@ -151,6 +158,7 @@ export default class Game {
                             this.player2.team.active_slot.beast.knockOutBeast();
                             this.player2.team.active_slot.beast.makeInactive();
                             this.player2.team.clearActiveSlot();
+                            effects.p2diedToContract = true;
                         }
                         break;
                     case 'Bright Stone':
@@ -911,7 +919,6 @@ export default class Game {
     }
 
     damageCalculation(attackingPlayer, defendingPlayer, move, attackingBeast, defendingBeast, critRolls, critRoll){
-        console.log(move)
         let domainModifier = 1;
         const moveType = move.type;
         const basePower = move.base_power;
@@ -978,17 +985,27 @@ export default class Game {
         let rawDamage = 0;
         let damage;
         let assistBrace = false;
+        let spikyCap = false;
+        let spikyVest = false;
+        let spikyDamage = 0;
+        let diedToRecoil = false;
 
         if(moveType == 'physical'){
-            console.log(basePower, sameTypeBonus, domainModifier, attackingBeast.curr_pa, defendingBeast.curr_pd, effectiveness, critRoll);
             rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_pa / defendingBeast.curr_pd)) * amuletModifier * effectiveness;
+            if(defendingBeast.item && defendingBeast.item.item_name === "Spiky Vest"){
+                spikyVest = true;
+                spikyDamage = Math.round(defendingBeast.init_hp / 8);
+            }
             damage = Math.round(rawDamage * 100) / 100;
             if(critRoll){
                 damage = damage * 2;
             }
         } else {
-            console.log(basePower, sameTypeBonus, domainModifier, attackingBeast.curr_ma, defendingBeast.curr_md, effectiveness, critRoll);
             rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_ma / defendingBeast.curr_md)) * amuletModifier * effectiveness;
+            if(defendingBeast.item && defendingBeast.item.item_name === "Spiky Cap"){
+                spikyCap = true;
+                spikyDamage = Math.round(defendingBeast.init_hp / 8);
+            }
             damage = Math.round(rawDamage * 100) / 100;
             if(critRoll){
                 damage = damage * 2;
@@ -1005,11 +1022,22 @@ export default class Game {
         }
 
         defendingBeast.updateHP(damage);
+        if(spikyDamage > 0){
+            attackingBeast.updateHP(spikyDamage);
+        }
         if(defendingBeast.curr_hp <= 0){
             defendingPlayer.team.knockOutBeast(defendingPlayer.team.active_slot.slotNumber);
             defendingBeast.knockOutBeast();
+            if(attackingBeast.curr_hp <= 0){
+                attackingPlayer.team.knockOutBeast(attackingPlayer.team.active_slot.slotNumber);
+                attackingBeast.knockOutBeast();
+                diedToRecoil = true;
+            }
             if(defendingPlayer.player_num === 'player1'){
                 this.player1_active_beasts = this.player1_active_beasts - 1;
+                if(diedToRecoil){
+                    this.player2_active_beasts = this.player2_active_beasts - 1;
+                }
                 if(this.player1_active_beasts <= 0 && this.player2_active_beasts <= 0){
                     this.draw = true;
                     this.player1.hasTied();
@@ -1023,6 +1051,9 @@ export default class Game {
                 }
             } else {
                 this.player2_active_beasts = this.player2_active_beasts - 1;
+                if(diedToRecoil){
+                    this.player1_active_beasts = this.player1_active_beasts - 1;
+                }
                 if(this.player1_active_beasts <= 0 && this.player2_active_beasts <= 0){
                     this.draw = true;
                     this.player1.hasTied();
@@ -1037,10 +1068,18 @@ export default class Game {
             }
             defendingPlayer.team.active_slot.beast.makeInactive();
             defendingPlayer.team.clearActiveSlot();
+            if(diedToRecoil){
+                attackingPlayer.team.active_slot.beast.makeInactive();
+                attackingPlayer.team.clearActiveSlot();
+            }
         }
         return {
             damage: damage,
-            assistBrace: assistBrace
+            assistBrace: assistBrace,
+            spikyVest: spikyVest,
+            spikyCap: spikyCap,
+            critRoll: critRoll,
+            diedToRecoil: diedToRecoil
         }
     }
 
