@@ -45,20 +45,37 @@ export default function createMessage(actionObject, game){
                 messageArr.push(actionObject.p2ActionStatement.statement);
             }
 
-            if(actionObject.p2ActionStatement.damage){
+            if(actionObject.p2ActionStatement.damage.damage){
                 // player 2's move dealt damage
-                messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
+                if(actionObject.p2ActionStatement.damage.critRoll){
+                    messageArr.push('It was a critical strike!');
+                }
+                messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
 
                 if(actionObject.p2ActionStatement.damage.assistBrace){
                     messageArr.push(`${game.player1.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
                 }
 
+                if(actionObject.p2ActionStatement.damage.spikyVest){
+                    messageArr.push(`${actionObject.p2Beast.beast_name} took damage due to ${actionObject.p1Beast.beast_name}'s Spiky Vest.`)
+                }
+
+                if(actionObject.p2ActionStatement.damage.spikyCap){
+                    messageArr.push(`${actionObject.p2Beast.beast_name} took damage due to ${actionObject.p1Beast.beast_name}'s Spiky Cap.`)
+                }
+
                 if(actionObject.p1ActionStatement.beastKOd){
                     // player 1's beast was KOd by the damage
                     messageArr.push(actionObject.p1ActionStatement.KOstatement);
+                    if(actionObject.p2ActionStatement.damage.diedToRecoil){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} was knocked out by recoil!`)
+                    }
                     return messageArr;
                 }
                 // player 1's beast was not KOd by the damage
+                if(actionObject.p2ActionStatement.damage.diedToRecoil){
+                    messageArr.push(`${actionObject.p2Beast.beast_name} was knocked out by recoil!`)
+                }
                 return messageArr;
             }
             // player 2's move dealt no damage
@@ -75,17 +92,31 @@ export default function createMessage(actionObject, game){
                     messageArr.push(actionObject.p1ActionStatement.statement);
                 }
 
-                if(actionObject.p1ActionStatement.damage){
+                if(actionObject.p1ActionStatement.damage.damage){
                     // player 1's move dealt damage
-                    messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
+                    if(actionObject.p1ActionStatement.damage.critRoll){
+                        messageArr.push('It was a critical strike!');
+                    }
+                    messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
 
                     if(actionObject.p1ActionStatement.damage.assistBrace){
                         messageArr.push(`${game.player2.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
                     }
 
+                    if(actionObject.p1ActionStatement.damage.spikyVest){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} took damage due to ${actionObject.p2Beast.beast_name}'s Spiky Vest.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.spikyCap){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} took damage due to ${actionObject.p2Beast.beast_name}'s Spiky Cap.`)
+                    }
+
                     if(actionObject.p2ActionStatement.beastKOd){
                         // player 2's beast was KOd by the damage, and therefore didn't get to attack
                         messageArr.push(actionObject.p2ActionStatement.KOstatement);
+                        if(actionObject.p1ActionStatement.damage.diedToRecoil){
+                            messageArr.push(`${actionObject.p1Beast.beast_name} was knocked out by recoil!`)
+                        }
                         return messageArr;
                     }
                 }
@@ -98,20 +129,37 @@ export default function createMessage(actionObject, game){
                     messageArr.push(actionObject.p2ActionStatement.statement);
                 }
 
-                if(actionObject.p2ActionStatement.damage){
+                if(actionObject.p2ActionStatement.damage.damage){
                     // player 2's move dealt damage
-                    messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
+                    if(actionObject.p2ActionStatement.damage.critRoll){
+                        messageArr.push('It was a critical strike!');
+                    }
+                    messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
 
                     if(actionObject.p2ActionStatement.damage.assistBrace){
                         messageArr.push(`${game.player1.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
                     }
 
+                    if(actionObject.p2ActionStatement.damage.spikyVest){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} took damage due to ${actionObject.p1Beast.beast_name}'s Spiky Vest.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.spikyCap){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} took damage due to ${actionObject.p1Beast.beast_name}'s Spiky Cap.`)
+                    }
+
                     if(actionObject.p1ActionStatement.beastKOd){
                         // player 1's beast was KOd by the damage
                         messageArr.push(actionObject.p1ActionStatement.KOstatement);
+                        if(actionObject.p2ActionStatement.damage.diedToRecoil){
+                            messageArr.push(`${actionObject.p2Beast.beast_name} was knocked out by recoil!`)
+                        }
                         return messageArr;
                     }
                     // player 1's beast was not KOd by the damage
+                    if(actionObject.p2ActionStatement.damage.diedToRecoil){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} was knocked out by recoil!`)
+                    }
                     return messageArr;
                 }
                 // player 2's move dealt no damage
@@ -127,20 +175,37 @@ export default function createMessage(actionObject, game){
                     messageArr.push(actionObject.p1ActionStatement.statement);
                 }
 
-                if(actionObject.p1ActionStatement.damage){
+                if(actionObject.p1ActionStatement.damage.damage){
                     // player 1's move dealt damage
-                    messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
+                    if(actionObject.p1ActionStatement.damage.critRoll){
+                        messageArr.push('It was a critical strike!');
+                    }
+                    messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
 
                     if(actionObject.p1ActionStatement.damage.assistBrace){
                         messageArr.push(`${game.player2.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
                     }
 
+                    if(actionObject.p1ActionStatement.damage.spikyVest){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} took damage due to ${actionObject.p2Beast.beast_name}'s Spiky Vest.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.spikyCap){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} took damage due to ${actionObject.p2Beast.beast_name}'s Spiky Cap.`)
+                    }
+
                     if(actionObject.p2ActionStatement.beastKOd){
                         // player 2's beast was KOd by the damage
                         messageArr.push(actionObject.p2ActionStatement.KOstatement);
+                        if(actionObject.p1ActionStatement.damage.diedToRecoil){
+                            messageArr.push(`${actionObject.p1Beast.beast_name} was knocked out by recoil!`)
+                        }
                         return messageArr;
                     }
                     // player 2's beast was not KOd by the damage
+                    if(actionObject.p1ActionStatement.damage.diedToRecoil){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} was knocked out by recoil!`)
+                    }
                     return messageArr;
                 }
                 // player 1's move dealt no damage
@@ -178,20 +243,37 @@ export default function createMessage(actionObject, game){
                 messageArr.push(actionObject.p1ActionStatement.statement);
             }
 
-            if(actionObject.p1ActionStatement.damage){
+            if(actionObject.p1ActionStatement.damage.damage){
                 // player 1's move dealt damage
-                messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
+                if(actionObject.p1ActionStatement.damage.critRoll){
+                    messageArr.push('It was a critical strike!');
+                }
+                messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
 
                 if(actionObject.p1ActionStatement.damage.assistBrace){
                     messageArr.push(`${game.player2.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
                 }
 
+                if(actionObject.p1ActionStatement.damage.spikyVest){
+                    messageArr.push(`${actionObject.p1Beast.beast_name} took damage due to ${actionObject.p2Beast.beast_name}'s Spiky Vest.`)
+                }
+
+                if(actionObject.p1ActionStatement.damage.spikyCap){
+                    messageArr.push(`${actionObject.p1Beast.beast_name} took damage due to ${actionObject.p2Beast.beast_name}'s Spiky Cap.`)
+                }
+
                 if(actionObject.p2ActionStatement.beastKOd){
                     // player 2's beast was KOd by the damage
                     messageArr.push(actionObject.p2ActionStatement.KOstatement);
+                    if(actionObject.p1ActionStatement.damage.diedToRecoil){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} was knocked out by recoil!`)
+                    }
                     return messageArr;
                 }
                 // player 2's beast was not KOd by the damage
+                if(actionObject.p1ActionStatement.damage.diedToRecoil){
+                    messageArr.push(`${actionObject.p1Beast.beast_name} was knocked out by recoil!`)
+                }
                 return messageArr;
             }
             // player 1's move dealt no damage
@@ -208,17 +290,31 @@ export default function createMessage(actionObject, game){
                     messageArr.push(actionObject.p2ActionStatement.statement);
                 }
 
-                if(actionObject.p2ActionStatement.damage){
+                if(actionObject.p2ActionStatement.damage.damage){
                     // player 2's move dealt damage
-                    messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
+                    if(actionObject.p2ActionStatement.damage.critRoll){
+                        messageArr.push('It was a critical strike!');
+                    }
+                    messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
 
                     if(actionObject.p2ActionStatement.damage.assistBrace){
                         messageArr.push(`${game.player1.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
                     }
 
+                    if(actionObject.p2ActionStatement.damage.spikyVest){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} took damage due to ${actionObject.p1Beast.beast_name}'s Spiky Vest.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.spikyCap){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} took damage due to ${actionObject.p1Beast.beast_name}'s Spiky Cap.`)
+                    }
+
                     if(actionObject.p1ActionStatement.beastKOd){
                         // player 1's beast was KOd by the damage, and therefore didn't get to attack
                         messageArr.push(actionObject.p1ActionStatement.KOstatement);
+                        if(actionObject.p2ActionStatement.damage.diedToRecoil){
+                            messageArr.push(`${actionObject.p2Beast.beast_name} was knocked out by recoil!`)
+                        }
                         return messageArr;
                     }
                 }
@@ -231,21 +327,38 @@ export default function createMessage(actionObject, game){
                     messageArr.push(actionObject.p1ActionStatement.statement);
                 }
 
-                if(actionObject.p1ActionStatement.damage){
+                if(actionObject.p1ActionStatement.damage.damage){
                     // player 1's move dealt damage
-                    messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
+                    if(actionObject.p1ActionStatement.damage.critRoll){
+                        messageArr.push('It was a critical strike!');
+                    }
+                    messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
 
                     if(actionObject.p1ActionStatement.damage.assistBrace){
                         messageArr.push(`${game.player2.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
                     }
 
+                    if(actionObject.p1ActionStatement.damage.spikyVest){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} took damage due to ${actionObject.p2Beast.beast_name}'s Spiky Vest.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.spikyCap){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} took damage due to ${actionObject.p2Beast.beast_name}'s Spiky Cap.`)
+                    }
+
                     if(actionObject.p2ActionStatement.beastKOd){
                         // player 2's beast was KOd by the damage
                         messageArr.push(actionObject.p2ActionStatement.KOstatement);
+                        if(actionObject.p1ActionStatement.damage.diedToRecoil){
+                            messageArr.push(`${actionObject.p1Beast.beast_name} was knocked out by recoil!`)
+                        }
                         return messageArr;
                     }
                     // player 2's beast was not KOd by the damage
-                    return messageArr
+                    if(actionObject.p1ActionStatement.damage.diedToRecoil){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} was knocked out by recoil!`)
+                    }
+                    return messageArr;
                 }
                 // player 1's move dealt no damage
                 return messageArr;
@@ -260,20 +373,37 @@ export default function createMessage(actionObject, game){
                     messageArr.push(actionObject.p2ActionStatement.statement);
                 }
 
-                if(actionObject.p2ActionStatement.damage){
+                if(actionObject.p2ActionStatement.damage.damage){
                     // player 2's move dealt damage
-                    messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
+                    if(actionObject.p2ActionStatement.damage.critRoll){
+                        messageArr.push('It was a critical strike!');
+                    }
+                    messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
 
                     if(actionObject.p2ActionStatement.damage.assistBrace){
                         messageArr.push(`${game.player1.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
                     }
 
+                    if(actionObject.p2ActionStatement.damage.spikyVest){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} took damage due to ${actionObject.p1Beast.beast_name}'s Spiky Vest.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.spikyCap){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} took damage due to ${actionObject.p1Beast.beast_name}'s Spiky Cap.`)
+                    }
+
                     if(actionObject.p1ActionStatement.beastKOd){
                         // player 1's beast was KOd by the damage
                         messageArr.push(actionObject.p1ActionStatement.KOstatement);
+                        if(actionObject.p2ActionStatement.damage.diedToRecoil){
+                            messageArr.push(`${actionObject.p2Beast.beast_name} was knocked out by recoil!`)
+                        }
                         return messageArr;
                     }
                     // player 1's beast was not KOd by the damage
+                    if(actionObject.p2ActionStatement.damage.diedToRecoil){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} was knocked out by recoil!`)
+                    }
                     return messageArr;
                 }
                 // player 2's move dealt no damage

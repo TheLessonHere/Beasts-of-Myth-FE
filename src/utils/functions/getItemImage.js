@@ -4,8 +4,8 @@ import focuscap from '../../data/assets/focuscap.png';
 import focusbrace from '../../data/assets/focusbrace.png';
 import bulkyvest from '../../data/assets/bulkyvest.png';
 import bulkycap from '../../data/assets/bulkycap.png';
-import spikeyvest from '../../data/assets/spikeyvest.png';
-import spikeycap from '../../data/assets/spikeycap.png';
+import spikyvest from '../../data/assets/spikyvest.png';
+import spikycap from '../../data/assets/spikycap.png';
 import protectiveboots from '../../data/assets/protectiveboots.png';
 import leadboots from '../../data/assets/leadboots.png';
 import repellentcoat from '../../data/assets/repellentcoat.png';
@@ -86,10 +86,10 @@ export const getItemImage = (item) => {
             return bulkyvest;
         case "bulky cap":
             return bulkycap;
-        case "spikey vest":
-            return spikeyvest;
-        case "spikey cap":
-            return spikeycap;
+        case "spiky vest":
+            return spikyvest;
+        case "spiky cap":
+            return spikycap;
         case "protective boots":
             return protectiveboots;
         case "lead boots":
