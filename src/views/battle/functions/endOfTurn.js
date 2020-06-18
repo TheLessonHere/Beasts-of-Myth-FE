@@ -1,4 +1,5 @@
 export default function endOfTurn(effects, game){
+    // Creates an array of chat log messages to display at the end of the turn.
     console.log(effects);
     let messagesArr = [];
     if(effects.p1inflamed){

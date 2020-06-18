@@ -1,4 +1,5 @@
 export default function createMessage(actionObject, game){
+    // Creates an array of chat log messages to detail what events happened in the turn.
     const superStatements = {
         p1Super: `${game.player1.username} activated their Super-Crystal!`,
         p2Super: `${game.player2.username} activated their Super-Crystal!`
