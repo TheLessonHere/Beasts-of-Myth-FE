@@ -367,6 +367,55 @@ export default class Team {
         return teamDatastring;
     }
 
+    generateRandomSlot(){
+        const currentSlotNumber = this.active_slot.slotNumber;
+        let nextSlotNumber = Math.floor(Math.random() * 6)
+        while(nextSlotNumber === currentSlotNumber){
+            nextSlotNumber = Math.floor(Math.random() * 6)
+        }
+        return nextSlotNumber;
+    }
+
+    forceChange(){
+        // Forces active slot change into a random slot
+        const nextSlotNumber = this.generateRandomSlot();
+        switch(nextSlotNumber){
+            case 1:
+                if(!this.slot1.beast.knocked_out){
+                    this.clearActiveSlot();
+                    this.makeActive('slot1');
+                }
+                break;
+            case 2:
+                if(!this.slot2.beast.knocked_out){
+                    this.clearActiveSlot();
+                    this.makeActive('slot2');
+                }
+                break;
+            case 3:
+                if(!this.slot3.beast.knocked_out){
+                    this.clearActiveSlot();
+                    this.makeActive('slot3');
+                }
+                break;
+            case 4:
+                if(!this.slot4.beast.knocked_out){
+                    this.clearActiveSlot();
+                    this.makeActive('slot4');
+                }
+                break;
+            case 5:
+                if(!this.slot5.beast.knocked_out){
+                    this.clearActiveSlot();
+                    this.makeActive('slot5');
+                }
+                break;
+            default:
+                return;
+        }
+        return;
+    }
+
     updateSuperSlot(){
         if(this.slot1.beast.item !== null &&
             this.slot1.beast.item.item_name === 'Super Crystal'){
