@@ -870,7 +870,7 @@ export default class Game {
           return critRoll;
     }
 
-    amuletCalculation(item_name, moveDomain){
+    amuletCalculation(item_name, moveDomain, effectiveness){
         switch(item_name){
             case 'Chaos Amulet':
                 if(moveDomain === 'chaos'){
@@ -912,6 +912,11 @@ export default class Game {
                     return 1.2;
                 }
                 break;
+            case 'Specialist Amulet':
+                if(effectiveness >= 2){
+                    return 1.2;
+                }
+                break;
             default:
                 return 1;
         }
@@ -929,7 +934,7 @@ export default class Game {
         const effectiveness = domainEffectivenessMap.get(moveDomain)[defendingDomain];
         let amuletModifier;
         if(attackingBeast.item){
-            amuletModifier = this.amuletCalculation(attackingBeast.item.item_name, moveDomain);
+            amuletModifier = this.amuletCalculation(attackingBeast.item.item_name, moveDomain, effectiveness);
         }
         let sameTypeBonus = 0;
         if(attackingDomain1 == moveDomain || attackingDomain2 == moveDomain){
@@ -989,6 +994,8 @@ export default class Game {
         let spikyVest = false;
         let spikyDamage = 0;
         let diedToRecoil = false;
+        let repellentCoat = false;
+        let slickCoat = false;
 
         if(moveType == 'physical'){
             rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_pa / defendingBeast.curr_pd)) * amuletModifier * effectiveness;
@@ -1072,6 +1079,27 @@ export default class Game {
                 attackingPlayer.team.active_slot.beast.makeInactive();
                 attackingPlayer.team.clearActiveSlot();
             }
+        } else {
+            if(defendingBeast.item){
+                if(defendingBeast.item.item_name === "Repellent Coat"){
+                    defendingBeast.item.effect();
+                    repellentCoat = true;
+                    if(defendingPlayer.player_num === 'player1'){
+                        this.player2.team.forceChange();
+                    } else {
+                        this.player1.team.forceChange();
+                    }
+                }
+                else if(defendingBeast.item.item_name === "Slick Coat"){
+                    defendingBeast.item.effect();
+                    slickCoat = true;
+                    if(defendingPlayer.player_num === 'player1'){
+                        this.player1.team.forceChange();
+                    } else {
+                        this.player2.team.forceChange();
+                    }
+                }
+            }
         }
         return {
             damage: damage,
@@ -1079,7 +1107,9 @@ export default class Game {
             spikyVest: spikyVest,
             spikyCap: spikyCap,
             critRoll: critRoll,
-            diedToRecoil: diedToRecoil
+            diedToRecoil: diedToRecoil,
+            repellentCoat: repellentCoat,
+            slickCoat: slickCoat
         }
     }
 

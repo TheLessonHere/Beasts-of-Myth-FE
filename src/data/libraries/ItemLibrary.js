@@ -220,6 +220,8 @@ const items = [
         type: "consumable",
         effect: (beast) => {beast.updateStatStage('pa', 2);
                             beast.updateStatStage('ma', 2);
+                            beast.updateStat('pa');
+                            beast.updateStat('ma');
                             beast.removeItem();},
         description: "If Beast survives a super effective move, raises its attack stats by two stages.",
         short_description: "Doubles a Beast's attack stats if hit by super effective damage.",
