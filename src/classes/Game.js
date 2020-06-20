@@ -1022,6 +1022,7 @@ export default class Game {
         attackingPlayer.updateCritRolls(critRolls);
 
         if(defendingBeast.hp_percentage === 100 &&
+            defendingBeast.item &&
             defendingBeast.item.item_name === "Assist Brace" &&
             damage >= defendingBeast.curr_hp){
                 damage = defendingBeast.curr_hp - 1;
