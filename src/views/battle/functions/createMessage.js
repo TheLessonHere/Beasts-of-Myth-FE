@@ -57,6 +57,14 @@ export default function createMessage(actionObject, game){
                     messageArr.push(`${game.player1.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
                 }
 
+                if(actionObject.p2ActionStatement.damage.repellentCoat){
+                    messageArr.push(`${actionObject.p1Beast.beast_name}'s Repellent Coat activated and switched out ${game.player2.username}'s beast!`);
+                }
+
+                if(actionObject.p2ActionStatement.damage.slickCoat){
+                    messageArr.push(`${actionObject.p1Beast.beast_name}'s Slick Coat activated and switched out ${game.player1.username}'s beast!`);
+                }
+
                 if(actionObject.p2ActionStatement.damage.spikyVest){
                     messageArr.push(`${actionObject.p2Beast.beast_name} took damage due to ${actionObject.p1Beast.beast_name}'s Spiky Vest.`)
                 }
@@ -104,6 +112,14 @@ export default function createMessage(actionObject, game){
                         messageArr.push(`${game.player2.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
                     }
 
+                    if(actionObject.p1ActionStatement.damage.repellentCoat){
+                        messageArr.push(`${actionObject.p2Beast.beast_name}'s Repellent Coat activated and switched out ${game.player1.username}'s beast!`);
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.slickCoat){
+                        messageArr.push(`${actionObject.p2Beast.beast_name}'s Slick Coat activated and switched out ${game.player2.username}'s beast!`);
+                    }
+
                     if(actionObject.p1ActionStatement.damage.spikyVest){
                         messageArr.push(`${actionObject.p1Beast.beast_name} took damage due to ${actionObject.p2Beast.beast_name}'s Spiky Vest.`)
                     }
@@ -139,6 +155,14 @@ export default function createMessage(actionObject, game){
 
                     if(actionObject.p2ActionStatement.damage.assistBrace){
                         messageArr.push(`${game.player1.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.repellentCoat){
+                        messageArr.push(`${actionObject.p1Beast.beast_name}'s Repellent Coat activated and switched out ${game.player2.username}'s beast!`);
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.slickCoat){
+                        messageArr.push(`${actionObject.p1Beast.beast_name}'s Slick Coat activated and switched out ${game.player1.username}'s beast!`);
                     }
 
                     if(actionObject.p2ActionStatement.damage.spikyVest){
@@ -185,6 +209,14 @@ export default function createMessage(actionObject, game){
 
                     if(actionObject.p1ActionStatement.damage.assistBrace){
                         messageArr.push(`${game.player2.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.repellentCoat){
+                        messageArr.push(`${actionObject.p2Beast.beast_name}'s Repellent Coat activated and switched out ${game.player1.username}'s beast!`);
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.slickCoat){
+                        messageArr.push(`${actionObject.p2Beast.beast_name}'s Slick Coat activated and switched out ${game.player2.username}'s beast!`);
                     }
 
                     if(actionObject.p1ActionStatement.damage.spikyVest){
@@ -255,6 +287,14 @@ export default function createMessage(actionObject, game){
                     messageArr.push(`${game.player2.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
                 }
 
+                if(actionObject.p1ActionStatement.damage.repellentCoat){
+                    messageArr.push(`${actionObject.p2Beast.beast_name}'s Repellent Coat activated and switched out ${game.player1.username}'s beast!`);
+                }
+
+                if(actionObject.p1ActionStatement.damage.slickCoat){
+                    messageArr.push(`${actionObject.p2Beast.beast_name}'s Slick Coat activated and switched out ${game.player2.username}'s beast!`);
+                }
+
                 if(actionObject.p1ActionStatement.damage.spikyVest){
                     messageArr.push(`${actionObject.p1Beast.beast_name} took damage due to ${actionObject.p2Beast.beast_name}'s Spiky Vest.`)
                 }
@@ -302,6 +342,14 @@ export default function createMessage(actionObject, game){
                         messageArr.push(`${game.player1.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
                     }
 
+                    if(actionObject.p2ActionStatement.damage.repellentCoat){
+                        messageArr.push(`${actionObject.p1Beast.beast_name}'s Repellent Coat activated and switched out ${game.player2.username}'s beast!`);
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.slickCoat){
+                        messageArr.push(`${actionObject.p1Beast.beast_name}'s Slick Coat activated and switched out ${game.player1.username}'s beast!`);
+                    }
+
                     if(actionObject.p2ActionStatement.damage.spikyVest){
                         messageArr.push(`${actionObject.p2Beast.beast_name} took damage due to ${actionObject.p1Beast.beast_name}'s Spiky Vest.`)
                     }
@@ -337,6 +385,14 @@ export default function createMessage(actionObject, game){
 
                     if(actionObject.p1ActionStatement.damage.assistBrace){
                         messageArr.push(`${game.player2.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.repellentCoat){
+                        messageArr.push(`${actionObject.p2Beast.beast_name}'s Repellent Coat activated and switched out ${game.player1.username}'s beast!`);
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.slickCoat){
+                        messageArr.push(`${actionObject.p2Beast.beast_name}'s Slick Coat activated and switched out ${game.player2.username}'s beast!`);
                     }
 
                     if(actionObject.p1ActionStatement.damage.spikyVest){
@@ -383,6 +439,14 @@ export default function createMessage(actionObject, game){
 
                     if(actionObject.p2ActionStatement.damage.assistBrace){
                         messageArr.push(`${game.player1.username}'s beast held on at 1 HP thanks to its Assist Brace!`);
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.repellentCoat){
+                        messageArr.push(`${actionObject.p1Beast.beast_name}'s Repellent Coat activated and switched out ${game.player2.username}'s beast!`);
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.slickCoat){
+                        messageArr.push(`${actionObject.p1Beast.beast_name}'s Slick Coat activated and switched out ${game.player1.username}'s beast!`);
                     }
 
                     if(actionObject.p2ActionStatement.damage.spikyVest){
