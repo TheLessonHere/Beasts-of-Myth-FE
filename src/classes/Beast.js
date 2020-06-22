@@ -123,28 +123,28 @@ export default class Beast {
                 break;
             case 'pd':
                 const computeStatPD = () => {
-                const roundedStat = Math.round((this.curr_pa * this.stat_stages.pd) * 10) / 10;
+                const roundedStat = Math.round((this.curr_pd * this.stat_stages.pd) * 10) / 10;
                 this.curr_pd = roundedStat;
                 }
                 computeStatPD();
                 break;
             case 'ma':
                 const computeStatMA = () => {
-                const roundedStat = Math.round((this.curr_pa * this.stat_stages.ma) * 10) / 10;
+                const roundedStat = Math.round((this.curr_ma * this.stat_stages.ma) * 10) / 10;
                 this.curr_ma = roundedStat;
                 }
                 computeStatMA();
                 break;
             case 'md':
                 const computeStatMD = () => {
-                const roundedStat = Math.round((this.curr_pa * this.stat_stages.md) * 10) / 10;
+                const roundedStat = Math.round((this.curr_md * this.stat_stages.md) * 10) / 10;
                 this.curr_md = roundedStat;
                 }
                 computeStatMD();
                 break;
             case 'sc':
                 const computeStatSC = () => {
-                const roundedStat = Math.round((this.curr_pa * this.stat_stages.sc) * 10) / 10;
+                const roundedStat = Math.round((this.curr_sc * this.stat_stages.sc) * 10) / 10;
                 this.curr_sc = roundedStat;
                 }
                 computeStatSC();
@@ -270,6 +270,7 @@ export default class Beast {
     makeInactive(){
         this.resetStats();
         this.resetTurnsIn();
+        this.resetMoves();
     }
 
     incrementTurnsIn(){

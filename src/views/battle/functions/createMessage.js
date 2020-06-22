@@ -51,6 +51,7 @@ export default function createMessage(actionObject, game){
                 if(actionObject.p2ActionStatement.damage.critRoll){
                     messageArr.push('It was a critical strike!');
                 }
+
                 messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
 
                 if(actionObject.p2ActionStatement.damage.assistBrace){
@@ -106,6 +107,7 @@ export default function createMessage(actionObject, game){
                     if(actionObject.p1ActionStatement.damage.critRoll){
                         messageArr.push('It was a critical strike!');
                     }
+
                     messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
 
                     if(actionObject.p1ActionStatement.damage.assistBrace){
@@ -151,6 +153,7 @@ export default function createMessage(actionObject, game){
                     if(actionObject.p2ActionStatement.damage.critRoll){
                         messageArr.push('It was a critical strike!');
                     }
+
                     messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
 
                     if(actionObject.p2ActionStatement.damage.assistBrace){
@@ -205,6 +208,7 @@ export default function createMessage(actionObject, game){
                     if(actionObject.p1ActionStatement.damage.critRoll){
                         messageArr.push('It was a critical strike!');
                     }
+
                     messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
 
                     if(actionObject.p1ActionStatement.damage.assistBrace){
@@ -281,6 +285,7 @@ export default function createMessage(actionObject, game){
                 if(actionObject.p1ActionStatement.damage.critRoll){
                     messageArr.push('It was a critical strike!');
                 }
+
                 messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
 
                 if(actionObject.p1ActionStatement.damage.assistBrace){
@@ -336,6 +341,7 @@ export default function createMessage(actionObject, game){
                     if(actionObject.p2ActionStatement.damage.critRoll){
                         messageArr.push('It was a critical strike!');
                     }
+
                     messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
 
                     if(actionObject.p2ActionStatement.damage.assistBrace){
@@ -381,6 +387,7 @@ export default function createMessage(actionObject, game){
                     if(actionObject.p1ActionStatement.damage.critRoll){
                         messageArr.push('It was a critical strike!');
                     }
+
                     messageArr.push(`It dealt ${Math.round((actionObject.p1ActionStatement.damage.damage / actionObject.p2Beast.init_hp) * 100)}%!`);
 
                     if(actionObject.p1ActionStatement.damage.assistBrace){
@@ -435,6 +442,7 @@ export default function createMessage(actionObject, game){
                     if(actionObject.p2ActionStatement.damage.critRoll){
                         messageArr.push('It was a critical strike!');
                     }
+
                     messageArr.push(`It dealt ${Math.round((actionObject.p2ActionStatement.damage.damage / actionObject.p1Beast.init_hp) * 100)}%!`);
 
                     if(actionObject.p2ActionStatement.damage.assistBrace){
