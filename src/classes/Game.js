@@ -285,6 +285,36 @@ export default class Game {
         }
         actionStatement.damage = damage;
         // If the all abled moves' MEs hit 0 replace with Struggle or something similar.
+
+        if(this.player1.team.active_slot.beast &&
+            this.player1.team.active_slot.beast.item){
+                const itemName = this.player1.team.active_slot.beast.item.item_name;
+                const focusRegex = new RegExp('focus', 'i');
+                if(focusRegex.test(itemName)){
+                    let moveArr = [];
+                    switch(moveSlot){
+                        case 'move1':
+                            moveArr = ['move2', 'move3', 'move4'];
+                            this.player1.team.active_slot.beast.disableMoves(moveArr);
+                            break;
+                        case 'move2':
+                            moveArr = ['move1', 'move3', 'move4'];
+                            this.player1.team.active_slot.beast.disableMoves(moveArr);
+                            break;
+                        case 'move3':
+                            moveArr = ['move1', 'move2', 'move4'];
+                            this.player1.team.active_slot.beast.disableMoves(moveArr);
+                            break;
+                        case 'move4':
+                            moveArr = ['move1', 'move2', 'move3'];
+                            this.player1.team.active_slot.beast.disableMoves(moveArr);
+                            break;
+                        default:
+                            return;
+                    }
+                }
+            }
+
         switch(moveSlot){
             case 'move1':
                 this.player1.team.active_slot.beast.moves.get('move1').decrementME();
@@ -336,6 +366,36 @@ export default class Game {
         }
         actionStatement.damage = damage;
         // If the all abled moves' MEs hit 0 replace with Struggle or something similar.
+
+        if(this.player2.team.active_slot.beast &&
+            this.player2.team.active_slot.beast.item){
+                const itemName = this.player2.team.active_slot.beast.item.item_name;
+                const focusRegex = new RegExp('focus', 'i');
+                if(focusRegex.test(itemName)){
+                    let moveArr = [];
+                    switch(moveSlot){
+                        case 'move1':
+                            moveArr = ['move2', 'move3', 'move4'];
+                            this.player2.team.active_slot.beast.disableMoves(moveArr);
+                            break;
+                        case 'move2':
+                            moveArr = ['move1', 'move3', 'move4'];
+                            this.player2.team.active_slot.beast.disableMoves(moveArr);
+                            break;
+                        case 'move3':
+                            moveArr = ['move1', 'move2', 'move4'];
+                            this.player2.team.active_slot.beast.disableMoves(moveArr);
+                            break;
+                        case 'move4':
+                            moveArr = ['move1', 'move2', 'move3'];
+                            this.player2.team.active_slot.beast.disableMoves(moveArr);
+                            break;
+                        default:
+                            return;
+                    }
+                }
+            }
+
         switch(moveSlot){
             case 'move1':
                 this.player2.team.active_slot.beast.moves.get('move1').decrementME();

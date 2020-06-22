@@ -253,8 +253,7 @@ export default class Beast {
     }
 
     disableMove(move){
-        const disabledMove = this.moves.get(move);
-        this.disabled_moves.push(disabledMove);
+        this.disabled_moves.push(move);
     }
 
     disableMoves(moveArr){
