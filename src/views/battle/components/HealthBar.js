@@ -124,7 +124,9 @@ export default function HealthBar(props){
         isOpponent,
         onPlayerBeastHover,
         onOpponentBeastHover,
-        onHoverLeave } = props;
+        onHoverLeave,
+        chatLog
+    } = props;
     const [healthPercentage, setHealthPercentage] = useState(1);
     const [differingStatsPlayer, setDifferingStatsPlayer] = useState([]);
     const [differingStatsOpponent, setDifferingStatsOpponent] = useState([]);
@@ -300,7 +302,7 @@ export default function HealthBar(props){
             }
         }
         console.log("Game Did Update")
-    }, [ gameDidUpdate, player, opponent, beastDidGetKOd ])
+    }, [ gameDidUpdate, player, opponent, beastDidGetKOd, chatLog ])
 
     useEffect(() => {
         let amount = 'green';

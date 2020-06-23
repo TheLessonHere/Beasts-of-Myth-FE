@@ -469,7 +469,7 @@ function Battle(props) {
       const attackingDomain2 = player.team.active_slot.beast.domain2;
       const defendingDomain = `${opponent.team.active_slot.beast.domain1}-${opponent.team.active_slot.beast.domain2}`;
       const effectiveness = domainEffectivenessMap.get(moveDomain)[defendingDomain];
-      let amuletModifier;
+      let amuletModifier = 1;
       if(player.team.active_slot.beast.item){
           amuletModifier = amuletCalculation(player.team.active_slot.beast.item.item_name, moveDomain);
       }

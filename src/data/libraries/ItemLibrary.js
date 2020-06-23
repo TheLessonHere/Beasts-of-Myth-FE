@@ -233,10 +233,21 @@ const items = [
         item_name: "First Aid Kit",
         search_id: "first aid kit",
         type: "static",
-        effect: (beast) => {const maxHP = beast.init_hp;
-                            const healAmount = Math.round(maxHP * 0.0625);
-                            const healPoints = healAmount * -1;
-                            beast.updateHP(healPoints);},
+        effect: (beast) => {if(beast.curr_hp < beast.init_hp){
+                            const maxHP = beast.init_hp;
+                            let healAmount = Math.round(maxHP * 0.0625);
+                            let healPoints = healAmount * -1;
+                            if(healAmount > beast.init_hp - beast.curr_hp){
+                                healAmount = beast.init_hp - beast.curr_hp;
+                                healPoints = healAmount * -1;
+                                beast.updateHP(healPoints);
+                                return true;
+                            } else {
+                                beast.updateHP(healPoints);
+                                return true;
+                            }
+                            return false;
+                        }},
         description: "Heals a Beast for 1/16th it's max health at the end of every turn.",
         short_description: "Heals a bit of HP at the end of every turn.",
         removable: true,
@@ -271,7 +282,7 @@ const items = [
         item_name: "Lead Boots",
         search_id: "lead boots",
         type: "static",
-        effect: (beast) => {beast.modifyStat('sc', 1, true)},
+        effect: (beast) => {beast.modifyStat('sc', 1, false)},
         description: "The wearer's Speed Class is reduced to 1.",
         short_description: "Reduces SC to 1.",
         removable: true,

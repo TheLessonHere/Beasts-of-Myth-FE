@@ -84,7 +84,8 @@ export default function BattleWindow(props) {
         onPlayerBeastHover,
         onOpponentPreviewHover,
         onSwitchButtonHover,
-        onHoverLeave
+        onHoverLeave,
+        chatLog
     } = props;
     const [playerActiveBeastImg, setPlayerActiveBeastImg] = useState(null);
     const [opponentActiveBeastImg, setOpponentActiveBeastImg] = useState(null);
@@ -221,6 +222,7 @@ export default function BattleWindow(props) {
                     <HealthBar
                     gameDidUpdate={gameDidUpdate}
                     beastDidGetKOd={beastDidGetKOd}
+                    chatLog={chatLog}
                     game={game}
                     player={player}
                     opponent={opponent}
@@ -241,6 +243,7 @@ export default function BattleWindow(props) {
                     <HealthBar
                     gameDidUpdate={gameDidUpdate}
                     beastDidGetKOd={beastDidGetKOd}
+                    chatLog={chatLog}
                     game={game}
                     player={player}
                     opponent={opponent}
@@ -268,6 +271,7 @@ export default function BattleWindow(props) {
                     <HealthBar
                     gameDidUpdate={gameDidUpdate}
                     beastDidGetKOd={beastDidGetKOd}
+                    chatLog={chatLog}
                     game={game}
                     player={player}
                     opponent={opponent}
@@ -303,6 +307,7 @@ export default function BattleWindow(props) {
                     <HealthBar
                     gameDidUpdate={gameDidUpdate}
                     beastDidGetKOd={beastDidGetKOd}
+                    chatLog={chatLog}
                     game={game}
                     player={player}
                     opponent={opponent}

@@ -304,7 +304,8 @@ function BattleRoom(props) {
                     onPlayerBeastHover={onPlayerBeastHover}
                     onOpponentPreviewHover={onOpponentPreviewHover}
                     onSwitchButtonHover={onSwitchButtonHover}
-                    onHoverLeave={onHoverLeave} />
+                    onHoverLeave={onHoverLeave}
+                    chatLog={props.chatLog} />
                     <OpponentHUD
                     opponentTeamLineup={opponentTeamLineup}
                     gameDidUpdate={props.gameDidUpdate}
