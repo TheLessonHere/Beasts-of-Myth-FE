@@ -177,43 +177,43 @@ export default class Beast {
         }
     }
 
-    modifyStat(stat, newStat, match){
+    modifyStat(stat, newStat, changeInit){
         // Modifies an individual stat to be a specific amount
         switch(stat){
             case 'hp':
-                this.init_hp = newStat;
-                if(match){
-                    this.curr_hp = newStat;
+                this.curr_hp = newStat;
+                if(changeInit){
+                    this.init_hp = newStat;
                 }
                 break;
             case 'pa':
-                this.init_pa = newStat;
-                if(match){
-                    this.curr_pa = newStat;
+                this.curr_pa = newStat;
+                if(changeInit){
+                    this.init_pa = newStat;
                 }
                 break;
             case 'pd':
-                this.init_pd = newStat;
-                if(match){
-                    this.curr_pd = newStat;
+                this.curr_pd = newStat;
+                if(changeInit){
+                    this.init_pd = newStat;
                 }
                 break;
             case 'ma':
-                this.init_ma = newStat;
-                if(match){
-                    this.curr_ma = newStat;
+                this.curr_ma = newStat;
+                if(changeInit){
+                    this.init_ma = newStat;
                 }
                 break;
             case 'md':
-                this.init_md = newStat;
-                if(match){
-                    this.curr_md = newStat;
+                this.curr_md = newStat;
+                if(changeInit){
+                    this.init_md = newStat;
                 }
                 break;
             case 'sc':
-                this.init_sc = newStat;
-                if(match){
-                    this.curr_sc = newStat;
+                this.curr_sc = newStat;
+                if(changeInit){
+                    this.init_sc = newStat;
                 }
                 break;
             default:

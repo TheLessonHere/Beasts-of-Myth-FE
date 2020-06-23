@@ -844,7 +844,9 @@ export default function BattleController(props) {
                     color="default"
                     className={classes.move1}
                     size="large"
-                    disabled={player.team.active_slot.beast.disabled_moves.includes('move1')}
+                    disabled={player.team.active_slot.beast ?
+                        player.team.active_slot.beast.disabled_moves.includes('move1') :
+                        false}
                     onMouseOver={() => onMoveButtonHover('move1')}
                     onMouseOut={onHoverLeave}
                     onClick={(event) => handleMoveClick(event, 'move1')}>
@@ -857,7 +859,9 @@ export default function BattleController(props) {
                     color="default"
                     className={classes.move2}
                     size="large"
-                    disabled={player.team.active_slot.beast.disabled_moves.includes('move2')}
+                    disabled={player.team.active_slot.beast ?
+                        player.team.active_slot.beast.disabled_moves.includes('move2') :
+                        false}
                     onMouseOver={() => onMoveButtonHover('move2')}
                     onMouseOut={onHoverLeave}
                     onClick={(event) => handleMoveClick(event, 'move2')}>
@@ -872,7 +876,9 @@ export default function BattleController(props) {
                     color="default"
                     className={classes.move3}
                     size="large"
-                    disabled={player.team.active_slot.beast.disabled_moves.includes('move3')}
+                    disabled={player.team.active_slot.beast ?
+                        player.team.active_slot.beast.disabled_moves.includes('move3') :
+                        false}
                     onMouseOver={() => onMoveButtonHover('move3')}
                     onMouseOut={onHoverLeave}
                     onClick={(event) => handleMoveClick(event, 'move3')}>
@@ -885,7 +891,9 @@ export default function BattleController(props) {
                     color="default"
                     className={classes.move4}
                     size="large"
-                    disabled={player.team.active_slot.beast.disabled_moves.includes('move4')}
+                    disabled={player.team.active_slot.beast ?
+                        player.team.active_slot.beast.disabled_moves.includes('move4') :
+                        false}
                     onMouseOver={() => onMoveButtonHover('move4')}
                     onMouseOut={onHoverLeave}
                     onClick={(event) => handleMoveClick(event, 'move4')}>

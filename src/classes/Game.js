@@ -54,8 +54,10 @@ export default class Game {
             if(this.player1.team.active_slot.beast.item){
                 switch(this.player1.team.active_slot.beast.item.item_name){
                     case 'First Aid Kit':
-                        this.player1.team.active_slot.beast.item.effect(this.player1.team.active_slot.beast);
-                        effects.p1itemeffect = 'First Aid Kit';
+                        const healed = this.player1.team.active_slot.beast.item.effect(this.player1.team.active_slot.beast);
+                        if(healed){
+                            effects.p1itemeffect = 'First Aid Kit';
+                        }
                         break;
                     case 'Evil Contract':
                         this.player1.team.active_slot.beast.item.effect(this.player1.team.active_slot.beast);
@@ -147,8 +149,10 @@ export default class Game {
             if(this.player2.team.active_slot.beast.item){
                 switch(this.player2.team.active_slot.beast.item.item_name){
                     case 'First Aid Kit':
-                        this.player2.team.active_slot.beast.item.effect(this.player2.team.active_slot.beast);
-                        effects.p1itemeffect = 'First Aid Kit';
+                        const healed = this.player2.team.active_slot.beast.item.effect(this.player2.team.active_slot.beast);
+                        if(healed){
+                            effects.p2itemeffect = 'First Aid Kit';
+                        }
                         break;
                     case 'Evil Contract':
                         this.player2.team.active_slot.beast.item.effect(this.player2.team.active_slot.beast);
@@ -992,7 +996,7 @@ export default class Game {
         const attackingDomain2 = attackingBeast.domain2;
         const defendingDomain = `${defendingBeast.domain1}-${defendingBeast.domain2}`;
         const effectiveness = domainEffectivenessMap.get(moveDomain)[defendingDomain];
-        let amuletModifier;
+        let amuletModifier = 1;
         if(attackingBeast.item){
             amuletModifier = this.amuletCalculation(attackingBeast.item.item_name, moveDomain, effectiveness);
         }
@@ -1056,6 +1060,7 @@ export default class Game {
         let diedToRecoil = false;
         let repellentCoat = false;
         let slickCoat = false;
+        let challengeCertificate = false;
 
         if(moveType == 'physical'){
             rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_pa / defendingBeast.curr_pd)) * amuletModifier * effectiveness;
@@ -1142,23 +1147,10 @@ export default class Game {
             }
         } else {
             if(defendingBeast.item){
-                if(defendingBeast.item.item_name === "Repellent Coat"){
-                    defendingBeast.item.effect();
-                    repellentCoat = true;
-                    if(defendingPlayer.player_num === 'player1'){
-                        this.player2.team.forceChange();
-                    } else {
-                        this.player1.team.forceChange();
-                    }
-                }
-                else if(defendingBeast.item.item_name === "Slick Coat"){
-                    defendingBeast.item.effect();
-                    slickCoat = true;
-                    if(defendingPlayer.player_num === 'player1'){
-                        this.player1.team.forceChange();
-                    } else {
-                        this.player2.team.forceChange();
-                    }
+                if(defendingBeast.item.item_name === "Challenge Certificate" &&
+                        effectiveness > 1){
+                    defendingBeast.item.effect(defendingBeast);
+                    challengeCertificate = true;
                 }
             }
         }
@@ -1169,8 +1161,7 @@ export default class Game {
             spikyCap: spikyCap,
             critRoll: critRoll,
             diedToRecoil: diedToRecoil,
-            repellentCoat: repellentCoat,
-            slickCoat: slickCoat
+            challengeCertificate: challengeCertificate
         }
     }
 

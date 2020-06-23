@@ -69,7 +69,7 @@ export default function endOfTurn(effects, game){
         }
     }
     if(effects.p2itemeffect){
-        switch(effects.p1itemeffect){
+        switch(effects.p2itemeffect){
             case 'First Aid Kit':
                 messagesArr.push(`${game.player2.team.active_slot.beast.beast_name} was healed a bit by its First Aid Kit.`);
                 break;
