@@ -292,6 +292,7 @@ export default class Game {
 
         if(this.player1.team.active_slot.beast &&
             this.player1.team.active_slot.beast.item){
+                // checks to see if the user has a Focus item and disables its other moves if so.
                 const itemName = this.player1.team.active_slot.beast.item.item_name;
                 const focusRegex = new RegExp('focus', 'i');
                 if(focusRegex.test(itemName)){
@@ -373,6 +374,7 @@ export default class Game {
 
         if(this.player2.team.active_slot.beast &&
             this.player2.team.active_slot.beast.item){
+                // checks to see if the user has a Focus item and disables its other moves if so.
                 const itemName = this.player2.team.active_slot.beast.item.item_name;
                 const focusRegex = new RegExp('focus', 'i');
                 if(focusRegex.test(itemName)){
@@ -1058,28 +1060,68 @@ export default class Game {
         let spikyVest = false;
         let spikyDamage = 0;
         let diedToRecoil = false;
-        let repellentCoat = false;
-        let slickCoat = false;
         let challengeCertificate = false;
+        let perapBerry = false;
+        let gomaBerry = false;
+        let graniteBerry = false;
+        let plumeBerry = false;
+        let spinapBerry = false;
+        let citrumBerry = false;
+        let checkedCritRoll = critRoll;
+        let checkedEffectiveness = effectiveness;
 
         if(moveType == 'physical'){
-            rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_pa / defendingBeast.curr_pd)) * amuletModifier * effectiveness;
-            if(defendingBeast.item && defendingBeast.item.item_name === "Spiky Vest"){
-                spikyVest = true;
-                spikyDamage = Math.round(defendingBeast.init_hp / 8);
+            rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_pa / defendingBeast.curr_pd)) * amuletModifier;
+            if(defendingBeast.item){
+                if(defendingBeast.item.item_name === "Spiky Vest"){
+                    spikyVest = true;
+                    spikyDamage = Math.round(defendingBeast.init_hp / 8);
+                }
+                else if(defendingBeast.item.item_name === "Spinap Berry"){
+                    if(critRoll){
+                        checkedCritRoll = false;
+                        defendingBeast.item.effect(defendingBeast);
+                        spinapBerry = true;
+                    }
+                }
+                else if(defendingBeast.item.item_name === "Citrum Berry"){
+                    if(effectiveness > 1){
+                        checkedEffectiveness = 1;
+                        defendingBeast.item.effect(defendingBeast);
+                        citrumBerry = true;
+                    }
+                }
             }
+            rawDamage = rawDamage * checkedEffectiveness;
             damage = Math.round(rawDamage * 100) / 100;
-            if(critRoll){
+            if(checkedCritRoll){
                 damage = damage * 2;
             }
         } else {
-            rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_ma / defendingBeast.curr_md)) * amuletModifier * effectiveness;
-            if(defendingBeast.item && defendingBeast.item.item_name === "Spiky Cap"){
-                spikyCap = true;
-                spikyDamage = Math.round(defendingBeast.init_hp / 8);
+            rawDamage = (((basePower + sameTypeBonus) * domainModifier) * (attackingBeast.curr_ma / defendingBeast.curr_md)) * amuletModifier;
+            if(defendingBeast.item){
+                if(defendingBeast.item.item_name === "Spiky Cap"){
+                    spikyCap = true;
+                    spikyDamage = Math.round(defendingBeast.init_hp / 8);
+                }
+                else if(defendingBeast.item.item_name === "Spinap Berry"){
+                    if(critRoll){
+                        checkedCritRoll = false;
+                        defendingBeast.item.effect(defendingBeast);
+                        spinapBerry = true;
+                    }
+                }
+                else if(defendingBeast.item.item_name === "Citrum Berry"){
+                    if(effectiveness > 1){
+                        checkedEffectiveness = 1;
+                        defendingBeast.item.effect(defendingBeast);
+                        citrumBerry = true;
+                    }
+                }
             }
+            rawDamage = rawDamage * checkedEffectiveness;
             damage = Math.round(rawDamage * 100) / 100;
-            if(critRoll){
+            if(checkedCritRoll){
                 damage = damage * 2;
             }
         }
@@ -1148,9 +1190,29 @@ export default class Game {
         } else {
             if(defendingBeast.item){
                 if(defendingBeast.item.item_name === "Challenge Certificate" &&
-                        effectiveness > 1){
+                    effectiveness > 1){
                     defendingBeast.item.effect(defendingBeast);
                     challengeCertificate = true;
+                }
+                else if(defendingBeast.item.item_name === "Perap Berry" &&
+                    defendingBeast.curr_hp >= defendingBeast.init_hp / 2){
+                    defendingBeast.item.effect(defendingBeast);
+                    perapBerry = true;
+                }
+                else if(defendingBeast.item.item_name === "Goma Berry" &&
+                    defendingBeast.curr_hp >= defendingBeast.init_hp / 4){
+                    defendingBeast.item.effect(defendingBeast);
+                    gomaBerry = true;
+                }
+                else if(defendingBeast.item.item_name === "Granite Berry" &&
+                    defendingBeast.curr_hp >= defendingBeast.init_hp / 4){
+                    defendingBeast.item.effect(defendingBeast);
+                    graniteBerry = true;
+                }
+                else if(defendingBeast.item.item_name === "Plume Berry" &&
+                    defendingBeast.curr_hp >= defendingBeast.init_hp / 4){
+                    defendingBeast.item.effect(defendingBeast);
+                    plumeBerry = true;
                 }
             }
         }
@@ -1161,7 +1223,13 @@ export default class Game {
             spikyCap: spikyCap,
             critRoll: critRoll,
             diedToRecoil: diedToRecoil,
-            challengeCertificate: challengeCertificate
+            challengeCertificate: challengeCertificate,
+            perapBerry: perapBerry,
+            gomaBerry: gomaBerry,
+            graniteBerry: graniteBerry,
+            plumeBerry: plumeBerry,
+            spinapBerry: spinapBerry,
+            citrumBerry: citrumBerry
         }
     }
 
