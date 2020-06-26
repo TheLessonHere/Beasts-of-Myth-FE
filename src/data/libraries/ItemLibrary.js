@@ -81,7 +81,7 @@ const items = [
         type: "consumable",
         effect: (beast) => {beast.resetStats();
                             beast.removeItem();},
-        description: "Resets a Beast's stat stages if they are lowered by an opponent.",
+        description: "Resets a Beast's stat stages if they are lowered.",
         short_description: "Resets a Beast's lowered stat stages.",
         removable: true,
     },
