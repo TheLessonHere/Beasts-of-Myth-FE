@@ -71,6 +71,30 @@ export default function createMessage(actionObject, game){
                     messageArr.push(`${actionObject.p2Beast.beast_name} took damage due to ${actionObject.p1Beast.beast_name}'s Spiky Cap.`)
                 }
 
+                if(actionObject.p2ActionStatement.damage.perapBerry){
+                    messageArr.push(`${actionObject.p1Beast.beast_name} ate its Perap Berry and restored some health.`)
+                }
+
+                if(actionObject.p2ActionStatement.damage.gomaBerry){
+                    messageArr.push(`${actionObject.p1Beast.beast_name} ate its Goma Berry and raised its Mental Attack.`)
+                }
+
+                if(actionObject.p2ActionStatement.damage.graniteBerry){
+                    messageArr.push(`${actionObject.p1Beast.beast_name} ate its Granite Berry and raised its Physical Attack.`)
+                }
+
+                if(actionObject.p2ActionStatement.damage.plumeBerry){
+                    messageArr.push(`${actionObject.p1Beast.beast_name} ate its Plume Berry and raised its Speed Class.`)
+                }
+
+                if(actionObject.p2ActionStatement.damage.spinapBerry){
+                    messageArr.push(`${actionObject.p1Beast.beast_name} ate its Spinap Berry and prevented the Critical Hit.`)
+                }
+
+                if(actionObject.p2ActionStatement.damage.citrumBerry){
+                    messageArr.push(`${actionObject.p1Beast.beast_name} ate its Citrum Berry and prevented the Super-Effective Damage.`)
+                }
+
                 if(actionObject.p1ActionStatement.beastKOd){
                     // player 1's beast was KOd by the damage
                     messageArr.push(actionObject.p1ActionStatement.KOstatement);
@@ -123,6 +147,30 @@ export default function createMessage(actionObject, game){
                         messageArr.push(`${actionObject.p1Beast.beast_name} took damage due to ${actionObject.p2Beast.beast_name}'s Spiky Cap.`)
                     }
 
+                    if(actionObject.p1ActionStatement.damage.perapBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Perap Berry and restored some health.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.gomaBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Goma Berry and raised its Mental Attack.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.graniteBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Granite Berry and raised its Physical Attack.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.plumeBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Plume Berry and raised its Speed Class.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.spinapBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Spinap Berry and prevented the Critical Hit.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.citrumBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Citrum Berry and prevented the Super-Effective Damage.`)
+                    }
+
                     if(actionObject.p2ActionStatement.beastKOd){
                         // player 2's beast was KOd by the damage, and therefore didn't get to attack
                         messageArr.push(actionObject.p2ActionStatement.KOstatement);
@@ -163,6 +211,30 @@ export default function createMessage(actionObject, game){
 
                     if(actionObject.p2ActionStatement.damage.spikyCap){
                         messageArr.push(`${actionObject.p2Beast.beast_name} took damage due to ${actionObject.p1Beast.beast_name}'s Spiky Cap.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.perapBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Perap Berry and restored some health.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.gomaBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Goma Berry and raised its Mental Attack.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.graniteBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Granite Berry and raised its Physical Attack.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.plumeBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Plume Berry and raised its Speed Class.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.spinapBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Spinap Berry and prevented the Critical Hit.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.citrumBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Citrum Berry and prevented the Super-Effective Damage.`)
                     }
 
                     if(actionObject.p1ActionStatement.beastKOd){
@@ -214,6 +286,30 @@ export default function createMessage(actionObject, game){
 
                     if(actionObject.p1ActionStatement.damage.spikyCap){
                         messageArr.push(`${actionObject.p1Beast.beast_name} took damage due to ${actionObject.p2Beast.beast_name}'s Spiky Cap.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.perapBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Perap Berry and restored some health.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.gomaBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Goma Berry and raised its Mental Attack.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.graniteBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Granite Berry and raised its Physical Attack.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.plumeBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Plume Berry and raised its Speed Class.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.spinapBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Spinap Berry and prevented the Critical Hit.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.citrumBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Citrum Berry and prevented the Super-Effective Damage.`)
                     }
 
                     if(actionObject.p2ActionStatement.beastKOd){
@@ -289,6 +385,30 @@ export default function createMessage(actionObject, game){
                     messageArr.push(`${actionObject.p1Beast.beast_name} took damage due to ${actionObject.p2Beast.beast_name}'s Spiky Cap.`)
                 }
 
+                if(actionObject.p1ActionStatement.damage.perapBerry){
+                    messageArr.push(`${actionObject.p2Beast.beast_name} ate its Perap Berry and restored some health.`)
+                }
+
+                if(actionObject.p1ActionStatement.damage.gomaBerry){
+                    messageArr.push(`${actionObject.p2Beast.beast_name} ate its Goma Berry and raised its Mental Attack.`)
+                }
+
+                if(actionObject.p1ActionStatement.damage.graniteBerry){
+                    messageArr.push(`${actionObject.p2Beast.beast_name} ate its Granite Berry and raised its Physical Attack.`)
+                }
+
+                if(actionObject.p1ActionStatement.damage.plumeBerry){
+                    messageArr.push(`${actionObject.p2Beast.beast_name} ate its Plume Berry and raised its Speed Class.`)
+                }
+
+                if(actionObject.p1ActionStatement.damage.spinapBerry){
+                    messageArr.push(`${actionObject.p2Beast.beast_name} ate its Spinap Berry and prevented the Critical Hit.`)
+                }
+
+                if(actionObject.p1ActionStatement.damage.citrumBerry){
+                    messageArr.push(`${actionObject.p2Beast.beast_name} ate its Citrum Berry and prevented the Super-Effective Damage.`)
+                }
+
                 if(actionObject.p2ActionStatement.beastKOd){
                     // player 2's beast was KOd by the damage
                     messageArr.push(actionObject.p2ActionStatement.KOstatement);
@@ -341,6 +461,30 @@ export default function createMessage(actionObject, game){
                         messageArr.push(`${actionObject.p2Beast.beast_name} took damage due to ${actionObject.p1Beast.beast_name}'s Spiky Cap.`)
                     }
 
+                    if(actionObject.p2ActionStatement.damage.perapBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Perap Berry and restored some health.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.gomaBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Goma Berry and raised its Mental Attack.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.graniteBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Granite Berry and raised its Physical Attack.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.plumeBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Plume Berry and raised its Speed Class.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.spinapBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Spinap Berry and prevented the Critical Hit.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.citrumBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Citrum Berry and prevented the Super-Effective Damage.`)
+                    }
+
                     if(actionObject.p1ActionStatement.beastKOd){
                         // player 1's beast was KOd by the damage, and therefore didn't get to attack
                         messageArr.push(actionObject.p1ActionStatement.KOstatement);
@@ -381,6 +525,30 @@ export default function createMessage(actionObject, game){
 
                     if(actionObject.p1ActionStatement.damage.spikyCap){
                         messageArr.push(`${actionObject.p1Beast.beast_name} took damage due to ${actionObject.p2Beast.beast_name}'s Spiky Cap.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.perapBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Perap Berry and restored some health.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.gomaBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Goma Berry and raised its Mental Attack.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.graniteBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Granite Berry and raised its Physical Attack.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.plumeBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Plume Berry and raised its Speed Class.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.spinapBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Spinap Berry and prevented the Critical Hit.`)
+                    }
+
+                    if(actionObject.p1ActionStatement.damage.citrumBerry){
+                        messageArr.push(`${actionObject.p2Beast.beast_name} ate its Citrum Berry and prevented the Super-Effective Damage.`)
                     }
 
                     if(actionObject.p2ActionStatement.beastKOd){
@@ -432,6 +600,30 @@ export default function createMessage(actionObject, game){
 
                     if(actionObject.p2ActionStatement.damage.spikyCap){
                         messageArr.push(`${actionObject.p2Beast.beast_name} took damage due to ${actionObject.p1Beast.beast_name}'s Spiky Cap.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.perapBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Perap Berry and restored some health.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.gomaBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Goma Berry and raised its Mental Attack.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.graniteBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Granite Berry and raised its Physical Attack.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.plumeBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Plume Berry and raised its Speed Class.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.spinapBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Spinap Berry and prevented the Critical Hit.`)
+                    }
+
+                    if(actionObject.p2ActionStatement.damage.citrumBerry){
+                        messageArr.push(`${actionObject.p1Beast.beast_name} ate its Citrum Berry and prevented the Super-Effective Damage.`)
                     }
 
                     if(actionObject.p1ActionStatement.beastKOd){
