@@ -167,13 +167,39 @@ function Battle(props) {
       setRoom(room);
     });
 
-    socket.on('player exit', ({ player, action }, callback) => {
-      // Handle game loss for the player exiting.
-      console.log(`Player ${player.player_id} has forfeited.`);
-    });
-
     if(game){
       console.log(game);
+
+      socket.on('player exit', ({ playerInfo, action }, callback) => {
+        // Handle game loss for the player exiting.
+        console.log(`${playerInfo.username} has forfeited.`);
+        const gameCopy = game;
+        if(playerInfo.player_id === gameCopy.player1.player_id){
+          gameCopy.winner = gameCopy.player2;
+          gameCopy.player2.hasWon();
+          gameCopy.loser = gameCopy.player1;
+          gameCopy.player1.hasLost();
+          handleGameChange(gameCopy);
+          if(player.player_id === playerInfo.player_id){
+            setOpponentDidWin(true);
+          } else {
+            setPlayerDidWin(true);
+          }
+          updateGame();
+        } else {
+          gameCopy.winner = gameCopy.player1;
+          gameCopy.player1.hasWon();
+          gameCopy.loser = gameCopy.player2;
+          gameCopy.player2.hasLost();
+          handleGameChange(gameCopy);
+          if(player.player_id === playerInfo.player_id){
+            setOpponentDidWin(true);
+          } else {
+            setPlayerDidWin(true);
+          }
+          updateGame();
+        }
+      });
 
       socket.on('opponent action', (action, callback) => {
         console.log("Opponent action received", action);

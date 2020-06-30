@@ -24,7 +24,8 @@ const useStyles = makeStyles(theme => ({
     opponentPrevBox: {
         width: '100%',
         height: '25%',
-        padding: '10px',
+        paddingLeft: '10px',
+        paddingRight: '10px',
         display: 'flex',
         flexFlow: 'row wrap',
         justifyContent: 'space-evenly',
@@ -32,11 +33,11 @@ const useStyles = makeStyles(theme => ({
     },
     gameChatLog: {
         width: '100%',
-        height: '73%',
+        height: '69%',
         paddingLeft: '5px',
         paddingRight: '5px',
-        marginBottom: '1%',
-        marginTop: '1%',
+        marginBottom: '0',
+        marginTop: '0',
         display: 'flex',
         flexFlow: 'column nowrap',
         justifyContent: 'center',
@@ -74,6 +75,7 @@ export default function OpponentHUD(props) {
     if(opponent && opponentTeamLineup){
         return (
             <Container className={classes.container}>
+                <Typography variant="subtitle2" align="center">{opponent.username}</Typography>
                 <Box className={classes.opponentPrevBox}>
                     {opponent.team.slot1.beast.knocked_out ?
                     <CloseIcon
