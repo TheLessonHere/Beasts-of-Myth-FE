@@ -134,7 +134,6 @@ export default function BattleController(props) {
         sendPostKOAction,
         game,
         gameDidUpdate,
-        forfeit,
         playerDidMove,
         playerDidSwitch,
         opponentDidMove,
@@ -153,7 +152,7 @@ export default function BattleController(props) {
     const [switchAfterKO, setSwitchAfterKO] = useState(false);
 
     useEffect(() => {
-    }, [ gameDidUpdate, switchAfterKO, playerDidWin, opponentDidWin ])
+    }, [ gameDidUpdate, switchAfterKO, playerDidWin, playersHaveTied, opponentDidWin ])
 
     useEffect(() => {
         if(player && inTeamPreview === false && player.team.active_slot.beast === null){
@@ -685,6 +684,13 @@ export default function BattleController(props) {
             <Container className={classes.containerGame}>
                 <Typography variant="h5">Game has ended.</Typography>
                 <Typography variant="h6">{winner} has won the game.</Typography>
+                <Button
+                variant="contained"
+                color="default"
+                size="large"
+                onClick={() => {window.location.reload(false)}}>
+                    Return to Battle Queue
+                </Button>
             </Container>
         )
     }
@@ -700,6 +706,22 @@ export default function BattleController(props) {
             <Container className={classes.containerGame}>
                 <Typography variant="h5">Game has ended.</Typography>
                 <Typography variant="h6">{winner} has won the game.</Typography>
+                <Button
+                variant="contained"
+                color="default"
+                size="large"
+                onClick={() => {window.location.reload(false)}}>
+                    Return to Battle Queue
+                </Button>
+            </Container>
+        )
+    }
+
+    if(playersHaveTied){
+        return (
+            <Container className={classes.containerGame}>
+                <Typography variant="h5">Game has ended.</Typography>
+                <Typography variant="h6">Result was a draw.</Typography>
                 <Button
                 variant="contained"
                 color="default"

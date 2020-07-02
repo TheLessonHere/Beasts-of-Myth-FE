@@ -9,12 +9,11 @@ import {
     Container,
     List,
     ListItem,
-    Box,
     Typography,
-    CircularProgress
     } from "@material-ui/core";
 // Components
 import TeamMiniBox from '../../utils/components/TeamMiniBox';
+import { SubmitButton } from '../../utils/components/SubmitButton';
 import QueueForm from './components/QueueForm';
 import BattleRoom from './components/BattleRoom';
 // Functions
@@ -23,19 +22,6 @@ import createMessage from './functions/createMessage';
 import endOfTurn from './functions/endOfTurn';
 // Socket
 import io from 'socket.io-client';
-// Classes
-import Game from '../../classes/Game';
-import GameLog from '../../classes/GameLog';
-import Player from '../../classes/Player';
-import Team from '../../classes/Team';
-import Beast from '../../classes/Beast';
-import Move from '../../classes/Move';
-import Item from '../../classes/Item';
-// Libraries
-import { beasts } from '../../data/libraries/BeastLibrary';
-import { abilities } from '../../data/libraries/AbilityLibrary';
-import { items } from '../../data/libraries/ItemLibrary';
-import { moves } from '../../data/libraries/MoveLibrary';
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -333,18 +319,35 @@ function Battle(props) {
     let credentials = {};
     if(room.player1.player_id === props.id){
       credentials = {
-        playerNum: "player1",
         player: room.player1,
         room_id: room.room_id
       }
     } else {
       credentials = {
-        playerNum: "player2",
         player: room.player2,
         room_id: room.room_id
       }
     }
+    console.log(credentials, "Forfeited");
     socket.emit('forfeit', credentials);
+    if(game){
+      const gameCopy = game;
+      if(credentials.player = room.player1){
+        gameCopy.winner = gameCopy.player2;
+        gameCopy.player2.hasWon()
+        gameCopy.loser = gameCopy.player1;
+        gameCopy.player1.hasLost()
+        handleGameChange(gameCopy);
+      } else {
+        gameCopy.winner = gameCopy.player1;
+        gameCopy.player1.hasWon()
+        gameCopy.loser = gameCopy.player2;
+        gameCopy.player2.hasLost()
+        handleGameChange(gameCopy);
+      }
+    }
+    setOpponentDidWin(true);
+    updateGame();
   }
 
   const sendAction = (action) => {
@@ -582,6 +585,7 @@ function Battle(props) {
 
   if(isBattling){
       return (
+        <>
           <BattleRoom
           room={room}
           game={game}
@@ -594,7 +598,6 @@ function Battle(props) {
           seeSpectators={seeSpectators}
           sendAction={sendAction}
           sendPostKOAction={sendPostKOAction}
-          forfeit={forfeit}
           inTeamPreview={inTeamPreview}
           playerDidMove={playerDidMove}
           playerDidSwitch={playerDidSwitch}
@@ -607,6 +610,11 @@ function Battle(props) {
           calcMoveDamage={calcMoveDamage}
           sendMessage={sendMessage}
           chatLog={chatLog} />
+          <SubmitButton
+          onClick={forfeit}>
+            Forfeit
+          </SubmitButton>
+        </>
       )
   }
 

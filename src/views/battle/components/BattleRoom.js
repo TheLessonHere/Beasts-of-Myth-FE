@@ -5,10 +5,7 @@ import {
 } from '../../../actions';
 import {
     Container,
-    Typography,
-    Box,
-    Select,
-    CircularProgress
+    Box
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // Components
@@ -16,16 +13,12 @@ import BattleWindow from './BattleWindow';
 import PlayerHUD from './PlayerHUD';
 import OpponentHUD from './OpponentHUD';
 import BattleController from './BattleController';
+import { SubmitButton } from '../../../utils/components/SubmitButton';
 // Classes
 import Game from '../../../classes/Game';
 import GameLog from '../../../classes/GameLog';
 import Player from '../../../classes/Player';
 import Team from '../../../classes/Team';
-// Libraries
-import { beasts } from '../../../data/libraries/BeastLibrary';
-import { abilities } from '../../../data/libraries/AbilityLibrary';
-import { items } from '../../../data/libraries/ItemLibrary';
-import { moves } from '../../../data/libraries/MoveLibrary';
 // Functions
 import { getBeastImage } from '../../../utils/functions/getBeastImage';
 
@@ -36,13 +29,19 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexFlow: "column nowrap",
         justifyContent: "center",
-        alignItems: 'center'
+        alignItems: 'center',
+        position: 'relative'
     },
     topBox: {
         display: "flex",
         flexFlow: "row nowrap",
         maxWidth: "1120px",
         width: '100%'
+    },
+    forfeitButton: {
+        position: "absolute",
+        top: '0px',
+        right: '225px'
     }
 }));
 
@@ -324,7 +323,6 @@ function BattleRoom(props) {
                 sendPostKOAction={props.sendPostKOAction}
                 game={props.game}
                 gameDidUpdate={props.gameDidUpdate}
-                forfeit={props.forfeit}
                 playerDidMove={props.playerDidMove}
                 playerDidSwitch={props.playerDidSwitch}
                 opponentDidMove={props.opponentDidMove}
