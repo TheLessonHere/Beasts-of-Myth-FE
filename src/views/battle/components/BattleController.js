@@ -134,6 +134,7 @@ export default function BattleController(props) {
         sendPostKOAction,
         game,
         gameDidUpdate,
+        forfeit,
         playerDidMove,
         playerDidSwitch,
         opponentDidMove,

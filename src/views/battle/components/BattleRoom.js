@@ -324,6 +324,7 @@ function BattleRoom(props) {
                 sendPostKOAction={props.sendPostKOAction}
                 game={props.game}
                 gameDidUpdate={props.gameDidUpdate}
+                forfeit={props.forfeit}
                 playerDidMove={props.playerDidMove}
                 playerDidSwitch={props.playerDidSwitch}
                 opponentDidMove={props.opponentDidMove}

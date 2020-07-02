@@ -171,7 +171,6 @@ function Battle(props) {
       console.log(game);
 
       socket.on('player exit', ({ playerInfo, action }, callback) => {
-        // Handle game loss for the player exiting.
         console.log(`${playerInfo.username} has forfeited.`);
         const gameCopy = game;
         if(playerInfo.player_id === gameCopy.player1.player_id){
