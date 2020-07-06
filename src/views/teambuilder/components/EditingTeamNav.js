@@ -257,6 +257,23 @@ function EditingTeamNav(props) {
                                   data.move_list);
       currBeast.updateSlot(activeSlot);
 
+      // Checks for Super and adds Super-Crystal
+      const regex = RegExp('super', 'i');
+      if(regex.test(currBeast.beast_name)){
+        const scData = items.find(item => item.item_name === "Super Crystal")
+        const superCrystal = new Item(
+                                  scData.format,
+                                  scData.item_id,
+                                  scData.item_name,
+                                  scData.type,
+                                  scData.effect,
+                                  scData.description,
+                                  scData.short_description,
+                                  scData.removable
+                                  )
+        currBeast.addItem(superCrystal);
+      }
+
       switch(activeSlot){
         case 'slot1':
           setSlot1(currBeast);

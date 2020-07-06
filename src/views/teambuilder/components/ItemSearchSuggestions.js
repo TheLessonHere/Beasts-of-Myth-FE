@@ -18,8 +18,11 @@ export default function ItemSearchSuggestions(props){
 
     return (
         <Container className={classes.container}>
-            {suggestions.map(suggestion =>
-                <ItemRow key={suggestion.item_id} item={suggestion} onItemClick={onItemClick} />
+            {suggestions.map((suggestion) => {
+                    if(suggestion.item_name !== "Super Crystal"){
+                        return <ItemRow key={suggestion.item_id} item={suggestion} onItemClick={onItemClick} />
+                    }
+                }
             )}
         </Container>
     )
