@@ -37,6 +37,11 @@ const useStyles = makeStyles(theme => ({
         marginBottom: "10px",
         background: "whitesmoke"
     },
+    disabledItem: {
+        marginTop: "10px",
+        marginBottom: "10px",
+        background: "grey"
+    },
     statBox: {
         display: "flex",
         flexFlow: "column nowrap"
@@ -73,6 +78,12 @@ const useStyles = makeStyles(theme => ({
             background: "darkred",
             cursor: "pointer"
         }
+    },
+    disabledClearButton: {
+        color: "grey",
+        border: "1px solid grey",
+        borderRadius: "5px",
+        marginLeft: "5px"
     }
 }))
 
@@ -97,6 +108,14 @@ export default function SlotForm(props){
 
     const beastImage = getBeastImage(searchId);
 
+    let disableItemRemove = false;
+    let disableItemSearch = false;
+
+    if(beast.item && beast.item.item_name === "Super Crystal"){
+        disableItemRemove = true;
+        disableItemSearch = true;
+    }
+
     return (
         <Container className={classes.container}>
             <Box className={classes.formColumn}>
@@ -109,14 +128,17 @@ export default function SlotForm(props){
                     <Box className={classes.stats}>
                         <FormControl autoComplete="new-password">
                         <TextField
-                        className={classes.item}
-                        value={item}
+                        className={disableItemSearch ? classes.disabledItem : classes.item}
+                        value={beast.item ? beast.item.item_name : item}
                         autoComplete="off"
+                        disabled={disableItemSearch}
                         onClick={chooseItem}
                         onChange={onItemSearch}
                         label="Item"/>
                         </FormControl>
-                        <ClearIcon className={classes.clearButton} onClick={clearItem} />
+                        <ClearIcon
+                        className={disableItemRemove ? classes.disabledClearButton : classes.clearButton}
+                        disabled={disableItemRemove} onClick={clearItem} />
                     </Box>
                     {/* Add info window on hover for the ability */}
                     <Typography className={classes.text} variant="h6">Ability: {beast.ability}</Typography>

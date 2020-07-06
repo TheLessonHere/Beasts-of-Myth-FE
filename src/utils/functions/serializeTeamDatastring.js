@@ -1,6 +1,8 @@
 export default function serializeTeamDatastring(format, team_name, slot1, slot2, slot3, slot4, slot5){
     const beastsArr = [slot1.beast, slot2.beast, slot3.beast, slot4.beast, slot5.beast];
 
+    // Check for supers, split the string and save as the regular beast with the super crystal
+
     const moveArr = [];
     const addToMoveArray = (arr) => {
         arr.forEach(beast => {
