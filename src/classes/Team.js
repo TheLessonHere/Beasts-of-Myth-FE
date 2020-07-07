@@ -150,7 +150,8 @@ export default class Team {
                 superBeast.updateAllStats();
                 nonSuperHPPercentage = nonSuper.getHPPercentage();
                 superBeast.matchHPPercentage(nonSuperHPPercentage);
-                this.slot1.beast = superBeast;}
+                this.slot1.beast = superBeast;
+                this.makeActive("slot1");}
                 makeSlot1Super();
                 break;
             case 'slot2':
@@ -165,7 +166,8 @@ export default class Team {
                 superBeast.updateAllStats();
                 nonSuperHPPercentage = nonSuper.getHPPercentage();
                 superBeast.matchHPPercentage(nonSuperHPPercentage);
-                this.slot2.beast = superBeast;}
+                this.slot2.beast = superBeast;
+                this.makeActive("slot2");}
                 makeSlot2Super();
                 break;
             case 'slot3':
@@ -180,7 +182,8 @@ export default class Team {
                 superBeast.updateAllStats();
                 nonSuperHPPercentage = nonSuper.getHPPercentage();
                 superBeast.matchHPPercentage(nonSuperHPPercentage);
-                this.slot3.beast = superBeast;}
+                this.slot3.beast = superBeast;
+                this.makeActive("slot3");}
                 makeSlot3Super();
                 break;
             case 'slot4':
@@ -195,7 +198,8 @@ export default class Team {
                 superBeast.updateAllStats();
                 nonSuperHPPercentage = nonSuper.getHPPercentage();
                 superBeast.matchHPPercentage(nonSuperHPPercentage);
-                this.slot4.beast = superBeast;}
+                this.slot4.beast = superBeast;
+                this.makeActive("slot4");}
                 makeSlot4Super();
                 break;
             case 'slot5':
@@ -210,7 +214,8 @@ export default class Team {
                 superBeast.updateAllStats();
                 nonSuperHPPercentage = nonSuper.getHPPercentage();
                 superBeast.matchHPPercentage(nonSuperHPPercentage);
-                this.slot5.beast = superBeast;}
+                this.slot5.beast = superBeast;
+                this.makeActive("slot5");}
                 makeSlot5Super();
                 break;
             default:
@@ -441,7 +446,7 @@ export default class Team {
         else if(this.slot2.beast.item !== null &&
             this.slot2.beast.item.item_name === 'Super Crystal'){
             const superBeastData = beasts.find(beast =>
-                beast.beast_name === `${this.slot1.beast.beast_name}-Super`
+                beast.beast_name === `${this.slot2.beast.beast_name}-Super`
             );
             const superBeast = new Beast(superBeastData.format,
                                         superBeastData.beast_id,
@@ -462,7 +467,7 @@ export default class Team {
         else if(this.slot3.beast.item !== null &&
             this.slot3.beast.item.item_name === 'Super Crystal'){
             const superBeastData = beasts.find(beast =>
-                beast.beast_name === `${this.slot1.beast.beast_name}-Super`
+                beast.beast_name === `${this.slot3.beast.beast_name}-Super`
             );
             const superBeast = new Beast(superBeastData.format,
                                         superBeastData.beast_id,
@@ -483,7 +488,7 @@ export default class Team {
         else if(this.slot4.beast.item !== null &&
             this.slot4.beast.item.item_name === 'Super Crystal'){
             const superBeastData = beasts.find(beast =>
-                beast.beast_name === `${this.slot1.beast.beast_name}-Super`
+                beast.beast_name === `${this.slot4.beast.beast_name}-Super`
             );
             const superBeast = new Beast(superBeastData.format,
                                         superBeastData.beast_id,
@@ -504,7 +509,7 @@ export default class Team {
         else if(this.slot5.beast.item !== null &&
             this.slot5.beast.item.item_name === 'Super Crystal'){
             const superBeastData = beasts.find(beast =>
-                beast.beast_name === `${this.slot1.beast.beast_name}-Super`
+                beast.beast_name === `${this.slot5.beast.beast_name}-Super`
             );
             const superBeast = new Beast(superBeastData.format,
                                         superBeastData.beast_id,
@@ -527,6 +532,7 @@ export default class Team {
     }
 
     getSuperBeastInfo(){
+        console.log(this.super_beast);
         return this.super_beast;
     }
 

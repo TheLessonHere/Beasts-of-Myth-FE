@@ -347,7 +347,7 @@ export default function HealthBar(props){
                 onMouseOut={onHoverLeave}>
                     <Box className={classes.nameBox}>
                         <div className={classes.name}>
-                            <Typography>
+                            <Typography style={{fontSize: `${player.team.active_slot.beast.beast_name.length >= 10 ? '0.7rem' : '1rem'}`}}>
                                 {player.team.active_slot.beast.beast_name}
                             </Typography>
                         </div>
@@ -411,7 +411,7 @@ export default function HealthBar(props){
                 onMouseOut={onHoverLeave}>
                     <Box className={classes.nameBox}>
                         <div className={classes.name}>
-                            <Typography>
+                            <Typography style={{fontSize: `${opponent.team.active_slot.beast.beast_name.length >= 10 ? '0.7rem' : '1rem'}`}}>
                                 {opponent.team.active_slot.beast.beast_name}
                             </Typography>
                         </div>

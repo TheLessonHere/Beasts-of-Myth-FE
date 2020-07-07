@@ -2,6 +2,18 @@ export default function serializeTeamDatastring(format, team_name, slot1, slot2,
     const beastsArr = [slot1.beast, slot2.beast, slot3.beast, slot4.beast, slot5.beast];
 
     // Check for supers, split the string and save as the regular beast with the super crystal
+    const beastArr = [];
+    const addToBeastArray = (arr) => {
+        arr.forEach(beast => {
+            if(beast.beast_name.includes("Super")){
+                const endIndex = beast.beast_name.indexOf("-Super");
+                const nonSuperBeastName = beast.beast_name.slice(0, endIndex);
+                beastArr.push(nonSuperBeastName);
+            } else {
+                beastArr.push(beast.beast_name);
+            }
+        })
+    }
 
     const moveArr = [];
     const addToMoveArray = (arr) => {
@@ -33,9 +45,10 @@ export default function serializeTeamDatastring(format, team_name, slot1, slot2,
         })
     }
 
+    addToBeastArray(beastsArr);
     addToMoveArray(beastsArr);
     addToItemArray(beastsArr);
 
-    const teamDatastring = `${format}]f]${team_name}/tn/${slot1.beast.beast_name}>bn>${itemArr[0]})i)${moveArr[0]},${moveArr[1]},${moveArr[2]},${moveArr[3]}|s|${slot2.beast.beast_name}>bn>${itemArr[1]})i)${moveArr[4]},${moveArr[5]},${moveArr[6]},${moveArr[7]}|s|${slot3.beast.beast_name}>bn>${itemArr[2]})i)${moveArr[8]},${moveArr[9]},${moveArr[10]},${moveArr[11]}|s|${slot4.beast.beast_name}>bn>${itemArr[3]})i)${moveArr[12]},${moveArr[13]},${moveArr[14]},${moveArr[15]}|s|${slot5.beast.beast_name}>bn>${itemArr[4]})i)${moveArr[16]},${moveArr[17]},${moveArr[18]},${moveArr[19]}`
+    const teamDatastring = `${format}]f]${team_name}/tn/${beastArr[0]}>bn>${itemArr[0]})i)${moveArr[0]},${moveArr[1]},${moveArr[2]},${moveArr[3]}|s|${beastArr[1]}>bn>${itemArr[1]})i)${moveArr[4]},${moveArr[5]},${moveArr[6]},${moveArr[7]}|s|${beastArr[2]}>bn>${itemArr[2]})i)${moveArr[8]},${moveArr[9]},${moveArr[10]},${moveArr[11]}|s|${beastArr[3]}>bn>${itemArr[3]})i)${moveArr[12]},${moveArr[13]},${moveArr[14]},${moveArr[15]}|s|${beastArr[4]}>bn>${itemArr[4]})i)${moveArr[16]},${moveArr[17]},${moveArr[18]},${moveArr[19]}`
     return teamDatastring;
 }

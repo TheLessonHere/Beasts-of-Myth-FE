@@ -82,10 +82,10 @@ export default class Player {
         this.spent_crit_rolls = this.spent_crit_rolls + spentRolls;
     }
 
-    activateSuper(activeBeast){
+    activateSuper(){
         const superBeast = this.team.getSuperBeastInfo();
+        console.log(superBeast);
         this.team.changeToSuper(superBeast, superBeast.slot);
-        this.changeBeast(activeBeast, superBeast);
     }
 
     forfeitGame(updateRecords){

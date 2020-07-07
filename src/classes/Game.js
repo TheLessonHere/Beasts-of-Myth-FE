@@ -488,10 +488,12 @@ export default class Game {
                     }
                     if(this.player1_action.superActivated){
                         this.player1.activateSuper(this.player1.team.active_slot.beast);
+                        p1Beast = this.player1.team.active_slot.beast;
                         p1Super = true;
                     }
                     if(this.player2_action.superActivated){
                         this.player2.activateSuper(this.player2.team.active_slot.beast);
+                        p2Beast = this.player2.team.active_slot.beast;
                         p2Super = true;
                     }
                     p1ActionStatement = this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
@@ -525,10 +527,12 @@ export default class Game {
                     }
                     if(this.player2_action.superActivated){
                         this.player2.activateSuper(this.player2.team.active_slot.beast);
+                        p2Beast = this.player2.team.active_slot.beast;
                         p2Super = true;
                     }
                     if(this.player1_action.superActivated){
                         this.player1.activateSuper(this.player1.team.active_slot.beast);
+                        p1Beast = this.player1.team.active_slot.beast;
                         p1Super = true;
                     }
                     p2ActionStatement = this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
@@ -563,10 +567,12 @@ export default class Game {
                             }
                             if(this.player1_action.superActivated){
                                 this.player1.activateSuper(this.player1.team.active_slot.beast);
+                                p1Beast = this.player1.team.active_slot.beast;
                                 p1Super = true;
                             }
                             if(this.player2_action.superActivated){
                                 this.player2.activateSuper(this.player2.team.active_slot.beast);
+                                p2Beast = this.player2.team.active_slot.beast;
                                 p2Super = true;
                             }
                             p1ActionStatement = this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
@@ -598,10 +604,12 @@ export default class Game {
                             }
                             if(this.player2_action.superActivated){
                                 this.player2.activateSuper(this.player2.team.active_slot.beast);
+                                p2Beast = this.player2.team.active_slot.beast;
                                 p2Super = true;
                             }
                             if(this.player1_action.superActivated){
                                 this.player1.activateSuper(this.player1.team.active_slot.beast);
+                                p1Beast = this.player1.team.active_slot.beast;
                                 p1Super = true;
                             }
                             p2ActionStatement = this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
@@ -636,10 +644,12 @@ export default class Game {
                                     }
                                     if(this.player1_action.superActivated){
                                         this.player1.activateSuper(this.player1.team.active_slot.beast);
+                                        p1Beast = this.player1.team.active_slot.beast;
                                         p1Super = true;
                                     }
                                     if(this.player2_action.superActivated){
                                         this.player2.activateSuper(this.player2.team.active_slot.beast);
+                                        p2Beast = this.player2.team.active_slot.beast;
                                         p2Super = true;
                                     }
                                     p1ActionStatement = this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
@@ -671,10 +681,12 @@ export default class Game {
                                     }
                                     if(this.player2_action.superActivated){
                                         this.player2.activateSuper(this.player2.team.active_slot.beast);
+                                        p2Beast = this.player2.team.active_slot.beast;
                                         p2Super = true;
                                     }
                                     if(this.player1_action.superActivated){
                                         this.player1.activateSuper(this.player1.team.active_slot.beast);
+                                        p1Beast = this.player1.team.active_slot.beast;
                                         p1Super = true;
                                     }
                                     p2ActionStatement = this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
@@ -707,10 +719,12 @@ export default class Game {
                                         }
                                         if(this.player1_action.superActivated){
                                             this.player1.activateSuper(this.player1.team.active_slot.beast);
+                                            p1Beast = this.player1.team.active_slot.beast;
                                             p1Super = true;
                                         }
                                         if(this.player2_action.superActivated){
                                             this.player2.activateSuper(this.player2.team.active_slot.beast);
+                                            p2Beast = this.player2.team.active_slot.beast;
                                             p2Super = true;
                                         }
                                         p1ActionStatement = this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
@@ -743,10 +757,12 @@ export default class Game {
                                         }
                                         if(this.player2_action.superActivated){
                                             this.player2.activateSuper(this.player2.team.active_slot.beast);
+                                            p2Beast = this.player2.team.active_slot.beast;
                                             p2Super = true;
                                         }
                                         if(this.player1_action.superActivated){
                                             this.player1.activateSuper(this.player1.team.active_slot.beast);
+                                            p1Beast = this.player1.team.active_slot.beast;
                                             p1Super = true;
                                         }
                                         p2ActionStatement = this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
@@ -778,10 +794,12 @@ export default class Game {
                                         }
                                         if(this.player1_action.superActivated){
                                             this.player1.activateSuper(this.player1.team.active_slot.beast);
+                                            p1Beast = this.player1.team.active_slot.beast;
                                             p1Super = true;
                                         }
                                         if(this.player2_action.superActivated){
                                             this.player2.activateSuper(this.player2.team.active_slot.beast);
+                                            p2Beast = this.player2.team.active_slot.beast;
                                             p2Super = true;
                                         }
                                         p1ActionStatement = this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
@@ -819,6 +837,7 @@ export default class Game {
             if(this.player1_action.actionType == 'select-move' && this.player2_action.actionType !== 'select-move'){
                 if(this.player1_action.superActivated){
                     this.player1.activateSuper(this.player1.team.active_slot.beast);
+                    p1Beast = this.player1.team.active_slot.beast;
                     p1Super = true;
                 }
                 p1ActionStatement = this.executePlayer1Move(this.player1_action.moveSlot, this.player1_action.critRolls, this.player1_action.critRoll);
@@ -834,6 +853,7 @@ export default class Game {
             if(this.player2_action.actionType == 'select-move' && this.player1_action.actionType !== 'select-move'){
                 if(this.player2_action.superActivated){
                     this.player2.activateSuper(this.player2.team.active_slot.beast);
+                    p2Beast = this.player2.team.active_slot.beast;
                     p2Super = true;
                 }
                 p2ActionStatement = this.executePlayer2Move(this.player2_action.moveSlot, this.player2_action.critRolls, this.player2_action.critRoll);
