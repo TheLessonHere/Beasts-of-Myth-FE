@@ -91,8 +91,8 @@ export default class Beast {
     }
 
     matchHPPercentage(hp_percentage){
-        this.curr_hp = Math.round(this.curr_hp * hp_percentage);
-        this.hp_percentage = Math.round((this.curr_hp / this.init_hp) * 100);
+        this.curr_hp = Math.round(this.init_hp * hp_percentage / 100);
+        this.hp_percentage = hp_percentage;
     }
 
     getHPPercentage(){

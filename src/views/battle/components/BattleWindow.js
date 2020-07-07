@@ -92,8 +92,14 @@ export default function BattleWindow(props) {
 
     useEffect(() => {
         if(inTeamPreview === false && player && opponent){
-                const pActiveSlot = player.team.active_slot.slotNumber;
-                const oActiveSlot = opponent.team.active_slot.slotNumber;
+                let pActiveSlot = player.team.active_slot.slotNumber;
+                let oActiveSlot = opponent.team.active_slot.slotNumber;
+                if(player.team.active_slot.beast.beast_name.includes("Super")){
+                    pActiveSlot = "super"
+                }
+                if(opponent.team.active_slot.beast.beast_name.includes("Super")){
+                    oActiveSlot = "super"
+                }
                 switch(pActiveSlot){
                     case 'slot1':
                         setPlayerActiveBeastImg(playerTeamLineup.s1);
@@ -109,6 +115,9 @@ export default function BattleWindow(props) {
                         break;
                     case 'slot5':
                         setPlayerActiveBeastImg(playerTeamLineup.s5);
+                        break;
+                    case 'super':
+                        setPlayerActiveBeastImg(playerTeamLineup.super);
                         break;
                     case null:
                         setPlayerActiveBeastImg(null);
@@ -131,6 +140,9 @@ export default function BattleWindow(props) {
                         break;
                     case 'slot5':
                         setOpponentActiveBeastImg(opponentTeamLineup.s5);
+                        break;
+                    case 'super':
+                        setOpponentActiveBeastImg(opponentTeamLineup.super);
                         break;
                     case null:
                         setOpponentActiveBeastImg(null);

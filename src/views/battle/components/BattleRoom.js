@@ -57,11 +57,13 @@ function BattleRoom(props) {
     const [p1s3, setP1S3] = useState(null);
     const [p1s4, setP1S4] = useState(null);
     const [p1s5, setP1S5] = useState(null);
+    const [p1Super, setP1Super] = useState(null);
     const [p2s1, setP2S1] = useState(null);
     const [p2s2, setP2S2] = useState(null);
     const [p2s3, setP2S3] = useState(null);
     const [p2s4, setP2S4] = useState(null);
     const [p2s5, setP2S5] = useState(null);
+    const [p2Super, setP2Super] = useState(null);
 
     useEffect(() => {
         let p1Team = new Team('Unrestricted', 'Team1');
@@ -83,11 +85,19 @@ function BattleRoom(props) {
         setP1S3(getBeastImage(p1s3Search));
         setP1S4(getBeastImage(p1s4Search));
         setP1S5(getBeastImage(p1s5Search));
+        if(p1Team.super_beast){
+            const p1SuperSearch = p1Team.super_beast.beast_name.toLowerCase();
+            setP1Super(getBeastImage(p1SuperSearch));
+        }
         setP2S1(getBeastImage(p2s1Search));
         setP2S2(getBeastImage(p2s2Search));
         setP2S3(getBeastImage(p2s3Search));
         setP2S4(getBeastImage(p2s4Search));
         setP2S5(getBeastImage(p2s5Search));
+        if(p2Team.super_beast){
+            const p2SuperSearch = p2Team.super_beast.beast_name.toLowerCase();
+            setP2Super(getBeastImage(p2SuperSearch));
+        }
         let player1 = new Player(props.room.player1.player_id,
                                 props.room.player1.username,
                                 "player1",
@@ -118,14 +128,16 @@ function BattleRoom(props) {
                 s2: p2s2,
                 s3: p2s3,
                 s4: p2s4,
-                s5: p2s5
+                s5: p2s5,
+                super: p2Super
             });
             setPlayerTeamLineup({
                 s1: p1s1,
                 s2: p1s2,
                 s3: p1s3,
                 s4: p1s4,
-                s5: p1s5
+                s5: p1s5,
+                super: p1Super
             });
         }
         else if(props.player && props.player.player_num === "player2") {
@@ -134,20 +146,21 @@ function BattleRoom(props) {
                 s2: p1s2,
                 s3: p1s3,
                 s4: p1s4,
-                s5: p1s5
+                s5: p1s5,
+                super: p1Super
             });
             setPlayerTeamLineup({
                 s1: p2s1,
                 s2: p2s2,
                 s3: p2s3,
                 s4: p2s4,
-                s5: p2s5
+                s5: p2s5,
+                super: p2Super
             });
         }
     }, [ props.player, props.opponent ])
 
     useEffect(() => {
-        return;
     }, [ props.gameDidUpdate ])
 
     const onMoveButtonHover = (moveSlot) => {
