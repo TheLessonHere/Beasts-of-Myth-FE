@@ -424,7 +424,7 @@ function Battle(props) {
   }
 
   const sendPostKOAction = (action) => {
-    console.log(action);
+    // Gives player whose beast was knocked out a new action opportunity to pick the next beast
     socket.emit('post ko switch', { room: room.room_id, action: action });
     const gameCopy = game;
     gameCopy.postKOSwitch(action.playerNum, action.slot);
